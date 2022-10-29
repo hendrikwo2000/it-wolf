@@ -1,0 +1,43 @@
+.masonryholder{
+    column-count: 4;
+    column-gap: 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+    }
+ 
+  .masonryblocks{
+    display: inline-block;
+    background: #D2D2D2;
+    padding: 20px;
+    margin: 0 0 20px;
+    width: 100%;
+    box-sizing: border-box;
+    }
+ 
+  .masonryblocks img{
+    width: 100%;
+    }
+ 
+  @media screen and (max-width:768px){
+    .masonryholder{
+      column-count: 1;
+    }
+    }
+ 
+  @media screen and (min-width:769px){
+    .masonryholder{
+      column-count: 2;
+    }
+    }
+ 
+  @media screen and (min-width:1080px){
+    .masonryholder{
+      column-count: 3;
+    }
+    }
+ 
+  @media screen and (min-width:1200px){
+    .masonryholder{
+      column-count: 4;
+    }
+    }
