@@ -49,17 +49,13 @@ function dark(){
 	document.getElementById("body").className = "dark-mode";
 	document.getElementById("link1").className = "dark-mode";
 	document.getElementById("link2").className = "dark-mode";
-	
 	document.getElementById("card1").style.background = "#202020";
 	document.getElementById("card2").style.background = "#202020";
 	document.getElementById("card3").style.background = "#202020";
 	document.getElementById("nav1").style.color = "white";
 	document.getElementById("nav2").style.color = "white";
 	document.getElementById("nav3").style.color = "white";
-	document.getElementById("drop1").style.color = "white";
-	document.getElementById("drop2").style.color = "white";
-	document.getElementById("drop3").style.color = "white";
-	document.getElementById("drop").style.background ="#202020";
+	
 	
 
 }
@@ -78,10 +74,7 @@ function light(){
 	document.getElementById("nav1").style.color = "black";
 	document.getElementById("nav2").style.color = "black";
 	document.getElementById("nav3").style.color = "black";
-	document.getElementById("drop1").style.color = "black";
-	document.getElementById("drop2").style.color = "black";
-	document.getElementById("drop3").style.color = "black";
-	document.getElementById("drop").style.background ="white";
+	
 	
 
 }
