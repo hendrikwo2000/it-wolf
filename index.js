@@ -1,8 +1,30 @@
+
+
+const halt = new Audio('Sounds/halt_stop.mp3');
+const hurt = new Audio('Sounds/hurt.mp3');
+const na = new Audio('Sounds/na.mp3');
+
+
+document.onkeydown = function (event) {
+	if (event.keyCode == 32) {
+		halt.play();
+	}
+
+	if (event.keyCode == 46) {
+		hurt.play();
+	}
+	if(event.keyCode == 8) {
+		hurt.play();
+	}
+	if (event.keyCode == 13) {
+		na.play();
+	}
+};
+
+
 var modee = "false";
 modee = window.localStorage.getItem("thema");
 console.log(modee);
-
-
 
 
 function switchmode(){ 
@@ -33,6 +55,7 @@ function dark(){
 	document.getElementById("body").className = "dark-mode";
 	document.getElementById("link1").className = "dark-mode";
 	document.getElementById("link2").className = "dark-mode";
+	
 	document.getElementById("card1").style.background = "#202020";
 	document.getElementById("card2").style.background = "#202020";
 	document.getElementById("card3").style.background = "#202020";
@@ -62,3 +85,25 @@ function light(){
 
 };
 
+function card_1 (){
+	const thud = new Audio('Sounds/thud.mp3');
+	thud.play();
+	
+};
+
+function card_2() {
+	const entscheidung = new Audio('Sounds/entscheidung.mp3');
+	entscheidung.play();
+
+};
+
+function card_3() {
+	const moment = new Audio('Sounds/moment.mp3');
+	moment.play();
+
+};
+
+function rick(){
+	const rick = new Audio('Sounds/rick.mp3');
+	rick.play();
+}
