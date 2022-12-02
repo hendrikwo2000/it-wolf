@@ -1,25 +1,9 @@
-
-
-
-
 var modee = "false";
 modee = window.localStorage.getItem("thema");
 console.log(modee);
-test();
 
 
 
-
-function test(){
-if(modee == "true"){
-	console.log(modee + " true");
-	dark();
-}else{ (modee == "false")
-	console.log(modee + " false");
-	lightmode();
-}
-
-};
 
 function switchmode(){ 
 	
@@ -56,9 +40,8 @@ function dark(){
 	document.getElementById("nav2").style.color = "white";
 	document.getElementById("nav3").style.color = "white";
 	
-	
 
-}
+};
 
 
 function light(){
@@ -74,8 +57,8 @@ function light(){
 	document.getElementById("nav1").style.color = "black";
 	document.getElementById("nav2").style.color = "black";
 	document.getElementById("nav3").style.color = "black";
-	
+
 	
 
-}
+};
 
