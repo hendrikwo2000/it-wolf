@@ -1,27 +1,4 @@
 
-let imphover = "false";
-let tip = "false";
-function imp(){
-	imphover = "true";
-if(tip == "true"){
-	location.href = 'secret.html';
-
-}
-	imphover = "false";
-	tip = "false";
-
-};
-
-function tippen(){
-	tip = "true";
-};
-
-
-
-
-
-
-
 
 var modee = "false";
 modee = window.localStorage.getItem("thema");
