@@ -76,10 +76,6 @@ function light(){
 	document.getElementById("card1").style.background = "white";
 	document.getElementById("card2").style.background = "white";
 	document.getElementById("card3").style.background = "white";
-	document.getElementById("nav1").style.color = "black";
-	document.getElementById("nav2").style.color = "black";
-	document.getElementById("nav3").style.color = "black";
-	document.getElementById("nav4").style.color = "black";
-
+	
 };
 
