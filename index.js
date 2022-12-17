@@ -18,7 +18,7 @@ function modestart() {
 
 function dark2() {
 	console.log("dark2 ausgelöst");
-	switchmode();
+	dark();
 
 
 }
@@ -46,6 +46,10 @@ localStorage.setItem("thema" , modee);
 
 function dark(){
 	document.getElementById("nav").className = "navbar navbar-expand-lg bg-dark";
+	document.getElementById("nav1").style.color = "white";
+	document.getElementById("nav2").style.color = "white";
+	document.getElementById("nav3").style.color = "white";
+	document.getElementById("nav4").style.color = "white";
 	document.getElementById("it-wolf").src = "Bilder/it-wolf-weis.svg";
 	document.getElementById("mode").src = "Bilder/mode-sun.svg";
 	document.getElementById("body").className = "dark-mode";
@@ -54,14 +58,16 @@ function dark(){
 	document.getElementById("card1").style.background = "#202020";
 	document.getElementById("card2").style.background = "#202020";
 	document.getElementById("card3").style.background = "#202020";
-	document.getElementById("nav1").style.color = "white";
-	document.getElementById("nav2").style.color = "white";
-	document.getElementById("nav3").style.color = "white";
+	
 
 };
 
 function light(){
 	document.getElementById("nav").className = "navbar navbar-expand-lg bg-light";
+	document.getElementById("nav1").style.color = "black";
+	document.getElementById("nav2").style.color = "black";
+	document.getElementById("nav3").style.color = "black";
+	document.getElementById("nav4").style.color = "black";
 	document.getElementById("it-wolf").src = "Bilder/it-wolf-schwarz.svg";
 	document.getElementById("mode").src = "Bilder/mode-moon.svg";
 	document.getElementById("body").className = "light-mode";
@@ -73,6 +79,7 @@ function light(){
 	document.getElementById("nav1").style.color = "black";
 	document.getElementById("nav2").style.color = "black";
 	document.getElementById("nav3").style.color = "black";
+	document.getElementById("nav4").style.color = "black";
 
 };
 
