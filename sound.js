@@ -63,25 +63,13 @@ document.onkeydown = function (event) {
 };
 
 
-function card_1() {
-    const thud = new Audio('Sounds/thud.mp3');
-    thud.play();
-
+function fehler(){
+    const fehler = new Audio('Sounds/error.mp3');
+    fehler.play();
 };
 
-function card_2() {
-    const entscheidung = new Audio('Sounds/entscheidung.mp3');
-    entscheidung.play();
-
-};
-
-function card_3() {
-    const moment = new Audio('Sounds/moment.mp3');
-    moment.play();
-
-};
 
 function rick() {
     const rick = new Audio('Sounds/rick.mp3');
     rick.play();
-}
+};
