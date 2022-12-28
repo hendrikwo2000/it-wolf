@@ -1,25 +1,41 @@
 
+:root{
+	--schirf: black;
+	--hintergrund: white;
+}
+
+.dark_mode{
+	--schirf: white;
+		--hintergrund: rgb(56, 56, 56);
+}
+
+
+body{
+	background-color: var(--hintergrund);
+	color: var(--schirf);
+}
+
+
+
+
+
+
+
+
 .Logo{
 
 	width: 100px;
 	height: 50px;
 }
 
-#drop1:hover{
-background: gray;
-}
-#drop2:hover{
-background: gray;
-}
-#drop3:hover{
-background: gray;
-}
+
 
 .mode{
 height: 50px;
 width: 50px;
 border-radius: 10px;
 transition: 0.5ms;
+
 
 
 float: left;
@@ -59,10 +75,12 @@ margin: 20px 20px
 	transition: 0.5s;
 	text-decoration: none;
 }
+
 #link2{
 	transition: 0.5s;
 	text-decoration: none;
 }
+
 #link1:hover{
 	transition: 0.5s;
 	color: gray;
@@ -90,7 +108,7 @@ margin: 20px 20px
 }
 
 .dark-mode {
-	transition: 0.5s;
+  transition: 0.5s;
   background-color: #202020;
   color: white;
 }
