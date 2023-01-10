@@ -1,0 +1,163 @@
+:root {
+    --text-light: black;
+    --back-light: white;
+
+    --text-dark: white;
+    --back-dark: #202020;
+}
+
+
+.dark-mode {
+    color: white;
+}
+
+.light-mode {
+    color: black;
+}
+
+.link {
+    text-decoration: none;
+    color: gray;
+
+
+}
+
+.link:hover {
+    color: rgba(128, 128, 128, 0.527);
+    transition: 0.5s;
+}
+
+
+.Logo {
+
+    width: 100px;
+    height: 50px;
+}
+
+.mode {
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    transition: 0.5s;
+}
+
+.mode:hover {
+    background: rgba(116, 116, 116, 0.342);
+    transition: 0.5ms;
+
+
+}
+
+
+#body {
+    align-items: center;
+    margin-left: 5%;
+    margin-right: 5%;
+
+
+}
+
+.text{
+    padding-top: 10%;
+    padding-bottom: 10%;
+    align-items: center;
+    text-align: center;
+}
+
+
+.text2 {
+    padding-top: 10%;
+    padding-bottom: 90%;
+    align-items: center;
+    text-align: center;
+    
+}
+
+.text3 {
+    padding-top: 10%;
+    
+    align-items: center;
+    text-align: center;
+    padding-bottom: 60%;
+   
+}
+
+
+
+
+odY {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.center {
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 60%;
+   
+}
+
+.wave {
+    width: 5px;
+    height: 100px;
+    background: linear-gradient(45deg, rgb(133, 14, 212), rgb(158, 17, 17));
+    margin: 10px;
+    animation: wave 1s linear infinite;
+    border-radius: 20px;
+}
+
+.wave:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.wave:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.wave:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.wave:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+.wave:nth-child(6) {
+    animation-delay: 0.5s;
+}
+
+.wave:nth-child(7) {
+    animation-delay: 0.6s;
+}
+
+.wave:nth-child(8) {
+    animation-delay: 0.7s;
+}
+
+.wave:nth-child(9) {
+    animation-delay: 0.8s;
+}
+
+.wave:nth-child(10) {
+    animation-delay: 0.9s;
+}
+
+@keyframes wave {
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(0);
+    }
+}
+
+
+
