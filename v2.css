@@ -1,0 +1,116 @@
+
+:root{
+	--text-light: black;
+	--back-light: white;
+
+	--text-dark: white;
+	--back-dark: #202020;
+}
+
+
+a{
+text-decoration: none;
+color: white;
+}
+
+a:hover{
+	color: white;
+}
+
+.light-mode {
+	transition: 0.5s;
+	background-color: var(--back-light);
+	color: var(--text-light)
+}
+
+.dark-mode {
+	transition: 0.5s;
+	background-color: var(--back-dark);
+	color: var(--text-dark);
+}
+
+
+
+
+
+.Logo{
+
+	width: 100px;
+	height: 50px;
+}
+
+
+
+.mode{
+height: 50px;
+width: 50px;
+border-radius: 10px;
+transition: 0.5ms;
+
+
+
+float: left;
+
+margin: 20px 20px 
+
+}
+
+.mode:hover{
+	background: gray;
+	transition: 0.5ms;
+
+	
+}
+	#hov:hover{
+		transition: 0.5s;
+		border-color: rgb(53, 30, 182);
+		
+	}
+
+	.mail{
+		border-style: solid;
+		border-radius: 20px;
+		border-color: gray;
+		padding: 10px;
+		margin: 20px;;
+
+	}
+
+	.mail:hover{
+		transition: 0.5s;
+		border-color: rgb(26, 14, 184);
+	}
+
+
+#link1{
+	transition: 0.5s;
+	text-decoration: none;
+}
+
+#link2{
+	transition: 0.5s;
+	text-decoration: none;
+}
+
+#link1:hover{
+	transition: 0.5s;
+	color: gray;
+}
+#link2:hover{
+	transition: 0.5s;
+	color: gray;
+}
+
+
+#navbarlight{
+	transition: 0.5s;
+	color: black;
+}
+
+#navbardark{
+	transition: 0.5s;
+	color: white;
+}
+
+
+
