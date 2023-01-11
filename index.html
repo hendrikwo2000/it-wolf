@@ -18,8 +18,8 @@
 
 <body>
 
-
-    <nav class="navbar bg-body-tertiary">
+<div class="body">
+    <nav class="navbar bg-body-tertiary" id="nav">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html"><img id="it-wolf" class="Logo" src="Bilder/it-wolf-schwarz.svg"
                 alt="IT Wolf Logo"></a>
@@ -29,7 +29,7 @@
         </div>
     </nav>
 
-    <div class="p-4" id="body">
+    
         <h2 class="text">Seite wird verbessert</h2>
 
 
@@ -46,36 +46,39 @@
     <div class="wave"></div>
     </div>
 
-    <h2 class="text2">Wieso scrollst du weiter?</h2>
-    <h2 class="text2">Es kommt doch bald ein Uptate...</h2>
-    <h2 class="text3" onmouseover="topFunction()">Hast du Langeweile?</h2>
 
-    <p class="rick" on>
-
+    <p class="unten">
+        3. Version der Seite bald verfügbar...<br>
+        <a onClick="location.href='v2.html'" style="cursor: pointer;">Hier kommst du zur 2. Version der Seite</a><br>
+        <a onClick="location.href='v1.html'" style="cursor: pointer;">Hier kommst du zur 1. Version der Seite</a><br>
     </p>
+   
 
+   
 
 
     </div>
 
+<div class="body">
+   <h2 class="text2">Suchst du etwas?</h2>
+</div>
+<div class="body">
+    <h2 class="text2">Hast du etwa Langeweile?</h2>
+</div>
+
+<div class="body">
+    <h2 class="text2">Es kommt nichts mehr</h2>
+</div>
+
+<div class="body" onmousemove="alert('Moin')" >
+    <h2 class="text2">Was machst du noch hier?</h2>
+</div>
 
 
 
 
 
     <script>
-
-        function topFunction() {
-
-        
-            setTimeout(function () {
-                
-                document.body.scrollTop = 0;
-                document.documentElement.scrollTop =0;
-                    }, 1000);
-
-                };
-
 
         
                 
