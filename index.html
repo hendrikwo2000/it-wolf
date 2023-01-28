@@ -10,143 +10,352 @@
     <title>IT Wolf - by Hendrik Wolf</title>
     <link rel="icon" href="Bilder/ico.svg">
     <link href="index.css" rel="stylesheet">
-    <script src="impressum.js"></script>
-    <link href="update.css" rel="stylesheet">
+    <link href="index.css" rel="stylesheet">
+    <link href="load.css" rel="stylesheet">
+        <script src="impressum.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
 
 <body>
 
-<div class="body">
-    <nav class="navbar" id="nav">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="index.html"><img id="it-wolf" class="Logo" src="Bilder/it-wolf-schwarz.svg"
-                alt="IT Wolf Logo"></a>
-            <form class="d-flex" role="search">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.html"><img id="it-wolf" class="Logo" src="Bilder/it-wolf-schwarz.svg" alt="IT Wolf Logo"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="mich.html">Über mich</a>
+                </li>
+               
+            </ul>
+
             <img id="mode" class="mode" onclick="switchmode()" src="Bilder/mode-moon.svg">
-            </form>
+            
         </div>
-    </nav>
+    </div>
+</nav>
 
-    
-        <h2 class="text">Seite wird verbessert</h2>
+    <div class="p-4" id="body">
+        <h1 data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="headline">Nützliche Seiten</h1><br>
 
 
-    <div class="center">
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" id="pop-head">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Dein Name</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="pop-body">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="namee" placeholder="name">
+                            <label for="floatingInput">Name</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer" id="pop-food">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                            onclick="auslesen()">Bestätigen</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p>Dies sind ein paar Webseiten die fast keiner kennt, aber unnfassbar nützlich sind.<br>
+            Es kommen noch weitere Webseiten dazu. Jede Webseite ist kostenlos.
+        </p><br>
+
+<h2>Tools</h2><br>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+
+
+    <div class="col">
+        <div id="hov" class="card h-100" onclick="window.open('https://tools.pdf24.org/de/', '_blank',)">
+            <img src="Bilder/pdf24.png" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">PDF 24</h5>
+                <p class="card-text">Mit dem PDF Tool kannt du alles mit deiner PDF machen was du willst. Das auch noch
+                    kostenlos.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div id="hov" class="card h-100" onclick="window.open('https://www.qrcode-monkey.com/de/', '_blank',)">
+            <img src="Bilder/qrmonkey.png" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">QR-Code Monkey</h5>
+                <p class="card-text">Mit der Webseite kannt du komplett individuelle QR-Codes ersellen.</p>
+            </div>
+        </div>
     </div>
 
 
-    <p class="unten">
-        3. Version der Seite bald verfügbar...<br>
-        <a onClick="location.href='v2.html'" style="cursor: pointer;">Hier kommst du zur 2. Version der Seite</a><br>
-        <a onClick="location.href='v1.html'" style="cursor: pointer;">Hier kommst du zur 1. Version der Seite</a><br>
-    </p>
-   
 
-   
-
-
+    <div class="col">
+        <div id="hov" class="card h-100" onclick="window.open('https://chat.openai.com/', '_blank',)">
+            <img src="Bilder/chatgpt.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">ChatGPT</h5>
+                <p class="card-text">Dies ist eine KI, die Texte (auch Codes) für dich schreibt.</p>
+            </div>
+        </div>
     </div>
+</div><br>
+        <h2>Grafiken</h2><br>
 
-<div class="body">
-   <h2 class="text2">Suchst du etwas?</h2>
-</div>
-<div class="body">
-    <h2 class="text2">Hast du etwa Langeweile?</h2>
-</div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            
+            <div class="col">
+                <div id="hov" class="card h-100" onclick="window.open('https://openai.com/dall-e-2/',)">
+                    <img src="Bilder/dalle.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Dall-e</h5>
+                        <p class="card-text">Dies ist eine KI die Bider mit ein paar Schlüsselworten aus dem nichts erschafft.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div id="hov" class="card h-100" onclick="window.open('https://de.freelogodesign.org/', '_blank',)">
+                    <img src="Bilder/freelogo.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Free Logo Design</h5>
+                        <p class="card-text">Mit dem Tool kannst du sehr einfach dein eigendes Logo erstellen.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div id="hov" class="card h-100" onclick="window.open('https://www.canva.com/de_de/', '_blank',)">
+                    <img src="Bilder/canva.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Canva</h5>
+                        <p class="card-text">Mit Canva beispeilsweise Flyer ersellen und noch vieles mehr.</p>
+                    </div>
+                </div>
+            </div>
 
-<div class="body">
-    <h2 class="text2">Es kommt nichts mehr</h2>
-</div>
-
-<div class="body" onmousemove="alert('Moin')" >
-    <h2 class="text2">Was machst du noch hier?</h2>
-</div>
-
-
-
-
-
-    <script>
-
-        
-                
-        
+            <div class="col">
+                <div id="hov" class="card h-100" onclick="window.open('https://www.photopea.com/', '_blank',)">
+                    <img src="Bilder/photopea.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Photopea</h5>
+                        <p class="card-text">Es handelt sich hier um eine kostenlose Alternative zu Photoshop.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div id="hov" class="card h-100" onclick="window.open('https://www.remove.bg/de', '_blank',)">
+                    <img src="Bilder/remove.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Hintergrund entfernen</h5>
+                        <p class="card-text">Mit dem Tool lässt dich der Hintergrund von jedem Bild entfernen.</p>
+                    </div>
+                </div>
+            </div>
             
 
+            <div class="col">
+                <div id="hovp" class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Kommt bald...</h5>
+                        <p class="card-text placeholder-glow">
+            
+                            <span class="placeholder col-7"></span>
+                            <span class="placeholder col-4"></span>
+                            <span class="placeholder col-4"></span>
+                            <span class="placeholder col-6"></span>
+                            <span class="placeholder col-8"></span>
+                            <span class="placeholder col-7"></span>
+                            <span class="placeholder col-4"></span>
+                            <span class="placeholder col-4"></span>
+                            <span class="placeholder col-6"></span>
+                            <span class="placeholder col-8"></span>
+                            <br><br> coming soon...
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div><br>
 
-        var kontroll = "falsch";
-        var modee = "light";
-        modee = window.localStorage.getItem("thema");
-        console.log("Thema= " + modee);
+
+       
+        
+<h2>Unmoralisches</h2><br>
+<div class="row row-cols-1 row-cols-md-3 g-4">
 
 
-        if (window.localStorage.getItem("thema") == null) {
-            console.log("Thema har er nicht");
+    <div class="col">
+        <div id="hov" class="card h-100" onclick="window.open('https://updatefaker.com/', '_blank',)">
+            <img src="Bilder/update.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Update faken</h5>
+                <p class="card-text">Du kannst hiermit ein Fake Update starten, wenn du mal wieder keine Lust auf die
+                    Arbeit hast. </p>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div id="hov" class="card h-100" onclick="window.open('https://corrupt-a-file.net/', '_blank',)">
+            <img src="Bilder/kaputt.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Dateien absichtlich beschädigen</h5>
+                <p class="card-text">Mit dem Tool lassen dich Dateine nicht mehr öffen, weil sie absichtlich beschädigt
+                    wurden.</p>
+            </div>
+        </div>
+    </div>
 
-            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                dark();
-                modee = "dark";
-                localStorage.setItem("thema", modee);
 
-            }
+
+    <div class="col">
+        <div id="hovp" class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Kommt bald...</h5>
+                <p class="card-text placeholder-glow">
+
+                    <span class="placeholder col-7"></span>
+                    <span class="placeholder col-4"></span>
+                    <span class="placeholder col-4"></span>
+                    <span class="placeholder col-6"></span>
+                    <span class="placeholder col-8"></span>
+                    <span class="placeholder col-7"></span>
+                    <span class="placeholder col-4"></span>
+                    <span class="placeholder col-4"></span>
+                    <span class="placeholder col-6"></span>
+                    <span class="placeholder col-8"></span>
+                    <br><br> coming soon...
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+<footer>
+
+
+    <p class="text-center text-muted">
+        <a class="link"  name="link" href="index.html"> &copy; IT Wolf 2023</a>
+        |
+        <a class="link" name="link" href="impressum.html">Impressum</a>
+    </p>
+
+
+</footer>
+
+
+<script>
+    var mam = "";
+    mam = window.localStorage.getItem("head");
+
+    console.log("Name: " + mam);
+
+    if (mam == null || mam == "") {
+        console.log("Kein Name");
+        document.getElementById("headline").innerHTML = "Nützliche Seiten";
+    } else {
+        document.getElementById("headline").innerHTML = "Moin " + mam + " - Nützliche Seiten";
+    };
+
+
+
+    function auslesen() {
+        var mam = document.getElementById("namee").value;
+        console.log(mam);
+
+        if (mam == "") {
+            document.getElementById("headline").innerHTML = "Nützliche Seiten";
         } else {
-            if (window.localStorage.getItem("thema") == "dark") {
-                console.log("Thema war dark");
-                dark();
+            document.getElementById("headline").innerHTML = "Moin " + mam + " - Nützliche Seiten";
+        }
+        console.log(mam);
+        localStorage.setItem("head", mam);
+        console.log(window.localStorage.getItem("head"));
 
-            }
-        };
-
-
-
-
+    };
+</script>
 
 
-        function switchmode() {
+<script>
+
+              var kontroll = "falsch";
+                var modee = "light";
+                modee = window.localStorage.getItem("thema");
+                console.log("Thema= " + modee);
 
 
-            if (modee == "dark") {
-                modee = "light";
-                light();
-            } else {
-                modee = "dark";
+                if (window.localStorage.getItem("thema") == null) {
+                    console.log("Thema har er nicht");
 
-                dark();
-            }
-            localStorage.setItem("thema", modee);
-        };
+                    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                        dark();
+                        modee = "dark";
+                        localStorage.setItem("thema", modee);
+
+                    }
+                } else {
+                    if (window.localStorage.getItem("thema") == "dark") {
+                        console.log("Thema war dark");
+                        dark();
+
+                    }
+                };
 
 
-        function dark() {
+
+
+
+
+                function switchmode() {
+
+
+                    if (modee == "dark") {
+                        modee = "light";
+                        light();
+                    } else {
+                        modee = "dark";
+
+                        dark();
+                    }
+                    localStorage.setItem("thema", modee);
+                };
+
+
+        function dark(){
             document.documentElement.setAttribute('data-bs-theme', "dark");
             document.getElementById("it-wolf").src = "Bilder/it-wolf-weis.svg";
             document.getElementById("mode").src = "Bilder/mode-sun.svg";
-
-
+            
+        
         }
 
-        function light() {
+        function light(){
             document.documentElement.setAttribute('data-bs-theme', "light");
             document.getElementById("it-wolf").src = "Bilder/it-wolf-schwarz.svg";
             document.getElementById("mode").src = "Bilder/mode-moon.svg";
-
-
+           
+            
 
         }
-
-    </script>
+   
+</script>
 
 
 
