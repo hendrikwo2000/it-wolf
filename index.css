@@ -1,115 +1,109 @@
+:root {
+    --text-light: black;
+    --back-light: white;
 
-:root{
-	--schirf: black;
-	--hintergrund: white;
+    --text-dark: white;
+    --back-dark: #202020;
 }
 
-.dark_mode{
-	--schirf: white;
-		--hintergrund: rgb(56, 56, 56);
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-
-body{
-	background-color: var(--hintergrund);
-	color: var(--schirf);
+footer {
+    margin-top: auto;
 }
 
-
-
-
-
-
-
-
-.Logo{
-
-	width: 100px;
-	height: 50px;
+.dark-mode{
+    color: white;
 }
 
-
-
-.mode{
-height: 50px;
-width: 50px;
-border-radius: 10px;
-transition: 0.5ms;
-
-
-
-float: left;
-
-margin: 20px 20px 
-
+.light-mode{
+    color: black;
 }
 
-.mode:hover{
-	background: gray;
-	transition: 0.5ms;
-
-	
-}
-	#hov:hover{
-		transition: 0.5s;
-		border-color: rgb(53, 30, 182);
-		
-	}
-
-	.mail{
-		border-style: solid;
-		border-radius: 20px;
-		border-color: gray;
-		padding: 10px;
-		margin: 20px;;
-
-	}
-
-	.mail:hover{
-		transition: 0.5s;
-		border-color: rgb(26, 14, 184);
-	}
-
-
-#link1{
-	transition: 0.5s;
-	text-decoration: none;
+.link {
+    text-decoration: none;
+    color: gray;
+    
+    
 }
 
-#link2{
-	transition: 0.5s;
-	text-decoration: none;
-}
-
-#link1:hover{
-	transition: 0.5s;
-	color: gray;
-}
-#link2:hover{
-	transition: 0.5s;
-	color: gray;
+.link:hover{
+    color: rgba(128, 128, 128, 0.527);
+    transition: 0.5s;
 }
 
 
-#navbarlight{
-	transition: 0.5s;
-	color: black;
+.Logo {
+
+    width: 100px;
+    height: 50px;
 }
 
-#navbardark{
-	transition: 0.5s;
-	color: white;
+
+
+.mode {
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    transition: 0.5s; 
 }
 
-.light-mode {
-	transition: 0.5s;
-  background-color: white;
-  color: black;
+.mode:hover {
+    background: rgba(116, 116, 116, 0.342);
+    transition: 0.5ms;
+
+
 }
 
-.dark-mode {
-  transition: 0.5s;
-  background-color: #202020;
-  color: white;
+#hov:hover {
+    transition: 0.5s;
+    border-color: blue;
+    cursor: pointer;
+
 }
+
+#hovp:hover {
+    transition: 0.5s;
+    border-color: red;
+    cursor: wait;
+    
+}
+#hovc:hover {
+    transition: 0.5s;
+    border-color: blue;
+    cursor: default;
+
+}
+
+
+.mail {
+    border-style: solid;
+    border-radius: 20px;
+    border-color: gray;
+    padding: 10px;
+    margin: 20px;
+    ;
+
+}
+
+.mail:hover {
+    transition: 0.5s;
+    border-color: rgb(26, 14, 184);
+}
+
+
+#body{
+    align-items: center;
+    margin-left: 5%;
+    margin-right: 5%;
+    
+   
+}
+
+
+
 
