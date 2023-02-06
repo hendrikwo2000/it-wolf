@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Hendrik Wolf">
+    <title>Easter Eggs - IT Wolf</title>
+    <link rel="icon" href="Bilder/ico.svg">
+    <link href="index.css" rel="stylesheet">
+    <script src="index.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"
+    defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html"><img id="it-wolf" class="Logo" src="Bilder/it-wolf-schwarz.svg"
+                    alt="IT Wolf Logo"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="mich.html">Über mich</a>
+                    </li>
+
+                </ul>
+
+                <img id="mode" class="mode" onclick="switchmode()" src="Bilder/mode-moon.svg">
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="p-4" id="body">
+        <h1 data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="headline">Features</h1><br><br>
+        <!-- Modal -->
+
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" id="pop-head">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Dein Name</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="pop-body">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="namee" placeholder="name">
+                            <label for="floatingInput">Name</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer" id="pop-food">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                            onclick="auslesen()">Bestätigen</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
+
+<p>Hier siehst du demnächst alle Easter Eggs und Features sowie kommende Easter Eggs und Features die dich auf der Seite erwarten.</p><br>
+
+
+
+
+    </div>
+
+
+    <footer>
+
+
+        <p class="text-center text-muted">
+            <a class="link" name="link" href="index.html"> &copy; IT Wolf 2023</a>
+            |
+            <a class="link" name="link" href="impressum.html">Impressum</a>
+        </p>
+
+
+    </footer>
+
+
+    <script>
+        var mam = "";
+        mam = window.localStorage.getItem("head");
+
+        console.log("Name: " + mam);
+
+        if (mam == null || mam == "") {
+            console.log("Kein Name");
+            document.getElementById("headline").innerHTML = "Features";
+        } else {
+            document.getElementById("headline").innerHTML = "Moin " + mam + " - Features";
+        };
+
+
+
+        function auslesen() {
+            var mam = document.getElementById("namee").value;
+            console.log(mam);
+
+            if (mam == "") {
+                document.getElementById("headline").innerHTML = "Features";
+            } else {
+                document.getElementById("headline").innerHTML = "Moin " + mam + " - Features";
+            }
+            console.log(mam);
+            localStorage.setItem("head", mam);
+            console.log(window.localStorage.getItem("head"));
+
+        };
+    </script>
+
+
+</body>
+
+</html>
