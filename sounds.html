@@ -9,7 +9,10 @@
     <link rel="icon" href="Bilder/ico.svg">
     <link href="index.css" rel="stylesheet">
     <script src="sound.js"></script>
- 
+    <script src="index.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"
+    defer></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
@@ -277,74 +280,7 @@
 </script>
 
 
-    <script>
-    var kontroll = "falsch";
-    var modee = "light";
-    modee = window.localStorage.getItem("thema");
-    console.log("Thema= " + modee);
-
-
-    if (window.localStorage.getItem("thema") == null) {
-        console.log("Thema har er nicht");
-
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            dark();
-            modee = "dark";
-            localStorage.setItem("thema", modee);
-
-        }
-    } else {
-        if (window.localStorage.getItem("thema") == "dark") {
-            console.log("Thema war dark");
-            dark();
-
-        }
-    };
-
-
-
-
-
-
-    function switchmode() {
-
-
-        if (modee == "dark") {
-            modee = "light";
-            light();
-        } else {
-            modee = "dark";
-
-            dark();
-        }
-        localStorage.setItem("thema", modee);
-    };
-
-
-        function dark() {
-            document.documentElement.setAttribute('data-bs-theme', "dark");
-            document.getElementById("it-wolf").src = "Bilder/it-wolf-weis.svg";
-            document.getElementById("mode").src = "Bilder/mode-sun.svg";
-
-
-        }
-
-        function light() {
-            document.documentElement.setAttribute('data-bs-theme', "light");
-            document.getElementById("it-wolf").src = "Bilder/it-wolf-schwarz.svg";
-            document.getElementById("mode").src = "Bilder/mode-moon.svg";
-
-
-
-        }
-
-    </script>
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
+    
 </body>
 
 </html>
