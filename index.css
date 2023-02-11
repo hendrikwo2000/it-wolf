@@ -20,6 +20,7 @@ footer {
     text-decoration: none;
 }
 
+
 .link {
     text-decoration: none;
     color: var(--linkc);
@@ -68,4 +69,25 @@ footer {
     margin-right: 5%;
     
    
+}
+
+.down{
+    color: var(--linkc);
+    text-decoration: none;
+}
+
+.down:hover{
+    color: blue;
+}
+
+.play{
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    color: var(--linkc);
+    text-decoration: none;
+}
+
+.play:hover{
+    color: blue;
 }
