@@ -18,7 +18,7 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html"><img id="it-wolf" class="Logo" src="Bilder/it-wolf-schwarz.svg"
                     alt="IT Wolf Logo"></a>
@@ -33,16 +33,40 @@
                     </li>
 
                 </ul>
-
-                <img id="mode" class="mode" onclick="switchmode()" src="Bilder/mode-moon.svg">
+                <div>
+                    
+                </div>
+                <img id="mode" class="mode" onclick="switchmode()" src="Bilder/sun.svg">
 
             </div>
         </div>
     </nav>
 
-    <div class="p-4" id="body">
-        <h1 data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="headline">Über mich</h1><br>
 
+    
+    <div class="p-4" id="body">
+
+        
+        <div class="alert alert-success alert-dismissible fade show" role="alert" id="namechange">
+            <strong>Geschafft!</strong> Dein Name wurde erfolgreich geändert.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        
+        
+        <div class="alert alert-info alert-dismissible fade show" role="alert" id="namedel">
+            <strong>Geschafft!</strong> Dein Name wurde erfolgreich gelöscht.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        
+        
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" id="error">
+            <strong>Fehler!</strong> Bitte gebe einen Korrekten Namen ein.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+
+
+        <h1 data-bs-toggle="modal" data-bs-target="#staticBackdrop"> <a id="headline"></a><a>Über mich</a>  </h1><br>
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -128,35 +152,6 @@
 
     </footer>
 
-
-<script>
-    var mam = "";
-    mam = window.localStorage.getItem("head");
-
-    console.log("Name: " + mam);
-
-    if (mam == null || mam == "") {
-        console.log("Kein Name");
-        document.getElementById("headline").innerHTML = "Über mich";
-    } else {
-        document.getElementById("headline").innerHTML = "Moin " + mam + " - Über mich";
-    };
-
-    function auslesen() {
-        var mam = document.getElementById("namee").value;
-        console.log(mam);
-
-        if (mam == "") {
-            document.getElementById("headline").innerHTML = "Über mich";
-        } else {
-            document.getElementById("headline").innerHTML = "Moin " + mam + " - Über mich";
-        }
-        console.log(mam);
-        localStorage.setItem("head", mam);
-        console.log(window.localStorage.getItem("head"));
-
-    };
-</script>
 
 </body>
 
