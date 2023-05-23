@@ -2,7 +2,7 @@
 
     --linkc: black;
     --hover: black;
-   
+
 }
 
 body {
@@ -15,7 +15,7 @@ footer {
     margin-top: auto;
 }
 
-.clink{
+.clink {
     color: var(--linkc);
     text-decoration: none;
 }
@@ -36,7 +36,7 @@ footer {
     height: 40px;
     width: 40px;
     border-radius: 10px;
-    transition: 0.5s; 
+    transition: 0.5s;
 }
 
 .mode:hover {
@@ -54,8 +54,9 @@ footer {
     transition: 0.5s;
     border-color: red;
     cursor: wait;
-    
+
 }
+
 #hovc:hover {
     transition: 0.5s;
     border-color: blue;
@@ -63,24 +64,24 @@ footer {
 
 }
 
-#body{
+#body {
     align-items: center;
     margin-left: 5%;
     margin-right: 5%;
-    
-   
+
+
 }
 
-.down{
+.down {
     color: var(--linkc);
     text-decoration: none;
 }
 
-.down:hover{
+.down:hover {
     color: blue;
 }
 
-.play{
+.play {
     width: 40px;
     height: 40px;
     border-radius: 10px;
@@ -88,6 +89,6 @@ footer {
     text-decoration: none;
 }
 
-.play:hover{
+.play:hover {
     color: blue;
 }
