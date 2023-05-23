@@ -1,0 +1,95 @@
+:root {
+
+    --linkc: black;
+    --hover: black;
+
+}
+
+body {
+    min-width: 100vh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto;
+}
+
+.clink {
+    color: var(--linkc);
+    text-decoration: none;
+}
+
+
+.link {
+    text-decoration: none;
+    color: var(--linkc);
+}
+
+.Logo {
+
+    width: 100px;
+    height: 50px;
+}
+
+.mode {
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    transition: 0.5s;
+}
+
+.mode:hover {
+    background: rgba(116, 116, 116, 0.342);
+    transition: 0.5ms;
+}
+
+#hov:hover {
+    transition: 0.5s;
+    border-color: blue;
+    cursor: pointer;
+}
+
+#hovp:hover {
+    transition: 0.5s;
+    border-color: red;
+    cursor: wait;
+
+}
+
+#hovc:hover {
+    transition: 0.5s;
+    border-color: blue;
+    cursor: default;
+
+}
+
+#body {
+    align-items: center;
+    margin-left: 5%;
+    margin-right: 5%;
+
+
+}
+
+.down {
+    color: var(--linkc);
+    text-decoration: none;
+}
+
+.down:hover {
+    color: blue;
+}
+
+.play {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    color: var(--linkc);
+    text-decoration: none;
+}
+
+.play:hover {
+    color: blue;
+}
