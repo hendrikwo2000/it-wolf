@@ -1,93 +1,183 @@
 :root {
+    --writ: #adb5bd;
+    --linkc: #000000;
+    --hover: #000000;
+    --back: #1e293b;
+    --backg: #ffffff;
+    --hovg: rgba(116, 116, 116, 0.342);
 
-    --linkc: black;
-    --hover: black;
-   
 }
 
 body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    
+
+}
+.bodygg{
+background-color: var(--backg);
+transition: 0.5s;
 }
 
 footer {
     margin-top: auto;
 }
 
-.clink{
+#modual{
+background-color: var(--backg);
+color: var(--linkc);
+
+}
+
+#namee{
+background-color: var(--backg);
+color: var(--linkc);
+
+}
+
+
+
+.butl{
+        white-space: nowrap;
+        color: var(--linkc);
+        border-radius: 40px;
+        padding: 20px;
+        transition: 0.5s;
+        
+        
+}
+
+.butl:hover{
+    background-color: var(--hovg);
+    transition: all;
+    transition: 0.5s;
+
+
+
+}
+
+.buts {
+    white-space: nowrap;
+    color: var(--linkc);
+    border-radius: 40px;
+    padding: 10px;
+    transition: 0.5s;
+    
+    
+
+}
+
+.buts:hover {
+    background-color: var(--hovg);
+    transition: all;
+    transition: 0.5s;
+    cursor: pointer;
+   
+
+
+}
+
+.card{
+    border-radius: 40px;
+    
+}
+
+
+.clink {
     color: var(--linkc);
     text-decoration: none;
+    transition: 0.5s;
 }
+
 
 
 .link {
     text-decoration: none;
     color: var(--linkc);
+    transition: transform 0.3s;
+    
+}
+.link:hover{
+    transform: translateY(-5px);
+    cursor: pointer;
+    
 }
 
 .Logo {
 
     width: 100px;
     height: 50px;
+    transition: 0.5s;
+    fill: var(--linkc);
 }
 
 .mode {
-    height: 40px;
-    width: 40px;
+    height: 35px;
+    width: 35px;
     border-radius: 10px;
-    transition: 0.5s; 
+    transition: 0.5s;
+    padding: 5px;
 }
 
 .mode:hover {
-    background: rgba(116, 116, 116, 0.342);
-    transition: 0.5ms;
-}
-
-#hov:hover {
+    background: var(--hovg);
     transition: 0.5s;
-    border-color: blue;
+}
+#hov{
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    background-color: var(--rgb);
+}
+#hov:hover {
+    transform: translateY(-5px);
     cursor: pointer;
+    
 }
 
+#hovp {
+    background-color: var(--rgb);
+}
 #hovp:hover {
     transition: 0.5s;
     border-color: red;
     cursor: wait;
-    
+
 }
+
+
+
+#hovc{
+background-color: var(--rgb);
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+transition: 0.5s;
+}
+
 #hovc:hover {
-    transition: 0.5s;
-    border-color: blue;
+    
+    transform: translateY(-5px);
     cursor: default;
 
 }
 
-#body{
-    align-items: center;
-    margin-left: 5%;
-    margin-right: 5%;
-    
-   
-}
 
-.down{
-    color: var(--linkc);
-    text-decoration: none;
-}
 
-.down:hover{
-    color: blue;
-}
 
-.play{
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    color: var(--linkc);
-    text-decoration: none;
-}
-
-.play:hover{
-    color: blue;
-}
+   #myBtn {
+       display: none;
+       position: fixed;
+       bottom: 20px;
+       right: 20px;
+       z-index: 99;
+       border: none;
+       outline: none;
+       cursor: pointer;
+       padding: 5px;
+       border-radius: 40px;
+       background: rgba(116, 116, 116, 0.342);
+       transition: transform 0.3s;
+   }
+   #myBtn:hover {
+    background: var(--hovg);
+    transform: translateY(-5px);
+   }
