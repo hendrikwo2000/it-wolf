@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Hendrik Wolf">
+    <title>Sounds - IT Wolf</title>
+    <link rel="icon" href="Bilder/ico.svg">
+    <link href="index.css" rel="stylesheet">
+    <script src="sound.js"></script>
+    <script src="index.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"
+    defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="v3.html"><img id="it-wolf" class="Logo" src="Bilder/it-wolf-schwarz.svg"
+                    alt="IT Wolf Logo"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="mich.html">Über mich</a>
+                    </li>
+    
+                </ul>
+                <div>
+    
+                </div>
+                <img id="mode" class="mode" onclick="switchmode()" src="Bilder/sun.svg">
+    
+            </div>
+        </div>
+    </nav>
+    
+    
+    
+    <div class="p-4" id="body">
+    
+    
+        <div class="alert alert-success alert-dismissible fade show" role="alert" id="namechange">
+            <strong>Geschafft!</strong> Dein Name wurde erfolgreich geändert.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    
+    
+        <div class="alert alert-info alert-dismissible fade show" role="alert" id="namedel">
+            <strong>Geschafft!</strong> Dein Name wurde erfolgreich gelöscht.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    
+    
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" id="error">
+            <strong>Fehler!</strong> Bitte gebe einen Korrekten Namen ein.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    
+    
+    
+        <h1 data-bs-toggle="modal" data-bs-target="#staticBackdrop"> <a id="headline"></a><a>Sounds</a> </h1><br>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" id="pop-head">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Dein Name</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="pop-body">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="namee" placeholder="name">
+                    <label for="floatingInput">Name</label>
+                </div>
+            </div>
+            <div class="modal-footer" id="pop-food">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    onclick="auslesen()">Bestätigen</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+        
+            <div class="col">
+        
+                <div id="hovc" class="card h-100">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" class="dark-mode">
+                            <div class="d-flex mb-0">
+                                <div class="p-2">
+                                    <h3>Sound</h3>
+                                </div>
+                                <div class="ms-auto p-2">
+                                    <h3></h3>
+                                </div>
+                            </div>
+                        </li>
+        
+                        <li class="list-group-item">
+                            <div class="d-flex mb-0">
+                                <div class="p-2">Deutschalnd</div>
+
+
+
+
+                                <div class="ms-auto p-2">
+                                    <a class="play"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play"
+                                        viewBox="0 0 16 16" class="sound" onclick="deutschalnd()">
+                                        <path
+                                            d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
+                                    </svg></a>
+                                     &nbsp;&nbsp;
+
+                                    <a href="Sounds/deutschland.mp3" download="Deutschland" class="down">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-download "
+                                        viewBox="0 0 16 16" class="sound">
+                                        <path
+                                            d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                        <path
+                                            d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                    </svg>
+                                    </a>
+                                    
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="d-flex mb-0">
+                                <div class="p-2">Wir haben 2022</div>
+                                <div class="ms-auto p-2">
+                                    <a class="play"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play"
+                                            viewBox="0 0 16 16" class="sound" onclick="wirhaben()">
+                                            <path
+                                                d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
+                                        </svg></a>
+                                    &nbsp;&nbsp;
+                                    
+                                    <a href="Sounds/2022.mp3" download="Wir haben 2022" class="down">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-download "
+                                            viewBox="0 0 16 16" class="sound">
+                                            <path
+                                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                            <path
+                                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="d-flex mb-0">
+                                <div class="p-2">Suiii</div>
+                                <div class="ms-auto p-2">
+                                    <a class="play"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play"
+                                        viewBox="0 0 16 16" class="sound" onclick="sui()">
+                                        <path
+                                            d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
+                                    </svg></a>
+                                     &nbsp;&nbsp;
+
+                                    <a href="Sounds/sui.mp3" download="Suiii" class="down">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-download "
+                                        viewBox="0 0 16 16" class="sound">
+                                        <path
+                                            d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                        <path
+                                            d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                    </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="d-flex mb-0">
+                                <div class="p-2">Krise</div>
+                                <div class="ms-auto p-2">
+                                    <a class="play"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play"
+                                            viewBox="0 0 16 16" class="sound" onclick="krise()">
+                                            <path
+                                                d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
+                                        </svg></a>
+                                    &nbsp;&nbsp;
+                                    
+                                    <a href="Sounds/krise.mp3" download="Krise" class="down">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-download "
+                                            viewBox="0 0 16 16" class="sound">
+                                            <path
+                                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                            <path
+                                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+        
+                    </ul>
+                </div>
+            </div>
+        
+        
+        
+        
+        
+        
+            <div class="col">
+        
+                <div id="hovc" class="card h-100">
+        
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="d-flex mb-0">
+                                <div class="p-2">
+                                    <h3>Sound</h3>
+                                </div>
+                                <div class="ms-auto p-2">
+                                    <h3></h3>
+                                </div>
+                            </div>
+                        </li>
+        
+                        <li class="list-group-item">
+                            <div class="d-flex mb-0">
+                                <div class="p-2">Schwanzwedeln</div>
+                                <div class="ms-auto p-2">
+                                    <a class="play"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play"
+                                            viewBox="0 0 16 16" class="sound" onclick="schwanz()">
+                                            <path
+                                                d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
+                                        </svg></a>
+                                    &nbsp;&nbsp;
+                                    
+                                    <a href="Sounds/schwanz.mp3" download="Schwanzwedeln" class="down">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-download "
+                                            viewBox="0 0 16 16" class="sound">
+                                            <path
+                                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                            <path
+                                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="d-flex mb-0">
+                                <div class="p-2">Das gibt eine 6</div>
+                                <div class="ms-auto p-2">
+                                <a class="play"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play"
+                                        viewBox="0 0 16 16" class="sound" onclick="n6()">
+                                        <path
+                                            d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
+                                    </svg></a>
+                                &nbsp;&nbsp;
+                                
+                                <a href="Sounds/n6.mp3" download="Das gibt eine 6" class="down">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-download "
+                                        viewBox="0 0 16 16" class="sound">
+                                        <path
+                                            d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                        <path
+                                            d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                    </svg>
+                                </a>
+                            </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="d-flex mb-0">
+                                <div class="p-2">Erika</div>
+                                <div class="ms-auto p-2">
+                                    <a class="play"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play"
+                                            viewBox="0 0 16 16" class="sound" onclick="erika()">
+                                            <path
+                                                d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
+                                        </svg></a>
+                                    &nbsp;&nbsp;
+                                    
+                                    <a href="Sounds/erika.mp3" download="Erika" class="down">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-download "
+                                            viewBox="0 0 16 16" class="sound">
+                                            <path
+                                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                            <path
+                                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                        </svg>
+                                    </a>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="d-flex mb-0">
+                                <div class="p-2">Alarm</div>
+                                <div class="ms-auto p-2">
+                            <a class="play"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play"
+                                    viewBox="0 0 16 16" class="sound" onclick="alarm()">
+                                    <path
+                                        d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
+                                </svg></a>
+                            &nbsp;&nbsp;
+                            
+                            <a href="Sounds/alarm.mp3" download="Alarm" class="down">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-download "
+                                    viewBox="0 0 16 16" class="sound">
+                                    <path
+                                        d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                    <path
+                                        d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                </svg>
+                            </a>
+                            </div>
+                            </div>
+                        </li>
+        
+                    </ul>
+                </div>
+            </div>
+        
+        
+        
+        
+        
+        
+            <div class="col">
+        
+                <div id="hovc" class="card h-100">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="d-flex mb-0">
+                                <div class="p-2">
+                                    <h3>Sound</h3>
+                                </div>
+                                <div class="ms-auto p-2">
+                                    <h3></h3>
+                                </div>
+                            </div>
+                        </li>
+        
+                        <li class="list-group-item">
+                            <div class="d-flex mb-0">
+                                <div class="p-2">Anzeige</div>
+                                <div class="ms-auto p-2">
+                                <a class="play"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play"
+                                        viewBox="0 0 16 16" class="sound" onclick="anzeige()">
+                                        <path
+                                            d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
+                                    </svg></a>
+                                &nbsp;&nbsp;
+                                
+                                <a href="Sounds/anzeige.mp3" download="Anzeige" class="down">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-download "
+                                        viewBox="0 0 16 16" class="sound">
+                                        <path
+                                            d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                        <path
+                                            d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                    </svg>
+                                </a>
+                            </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="d-flex mb-0">
+                                <div class="p-2">Hurt</div>
+                                <div class="ms-auto p-2">
+                                <a class="play"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play"
+                                        viewBox="0 0 16 16" class="sound" onclick="hurt()">
+                                        <path
+                                            d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
+                                    </svg></a>
+                                &nbsp;&nbsp;
+                                
+                                <a href="Sounds/hurt.mp3" download="Hurt" class="down">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-download "
+                                        viewBox="0 0 16 16" class="sound">
+                                        <path
+                                            d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                        <path
+                                            d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                    </svg>
+                                </a>
+                            </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="d-flex mb-0">
+                                <div class="p-2">Na hör mal</div>
+                                <div class="ms-auto p-2">
+                                    <a class="play"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play"
+                                            viewBox="0 0 16 16" class="sound" onclick="na()">
+                                            <path
+                                                d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
+                                        </svg></a>
+                                    &nbsp;&nbsp;
+                                    
+                                    <a href="Sounds/na.mp3" download="Na hör mal" class="down">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-download "
+                                            viewBox="0 0 16 16" class="sound">
+                                            <path
+                                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                            <path
+                                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                        </svg>
+                                    </a>
+                            </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="d-flex mb-0">
+                                <div class="p-2">Halt Stop</div>
+                                <div class="ms-auto p-2">
+                                    <a class="play"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play"
+                                            viewBox="0 0 16 16" class="sound" onclick="halt_stop()">
+                                            <path
+                                                d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z" />
+                                        </svg></a>
+                                    &nbsp;&nbsp;
+                                    
+                                    <a href="Sounds/halt_stop.mp3" download="Halt Stop" class="down">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-download "
+                                            viewBox="0 0 16 16" class="sound">
+                                            <path
+                                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                            <path
+                                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                        </svg>
+                                    </a>
+                            </div>
+                            </div>
+                        </li>
+        
+                    </ul>
+                </div>
+            </div>
+        
+        
+        
+        </div><br>
+
+<form class="row g-3">
+      <div class="col-auto">
+        <button id="butt" type="button" class="btn btn-outline-secondary" onclick="rick()">Klicke um 100€ zu erhalten</button>
+   
+
+    </div>
+</form>
+
+       
+
+    </div>
+
+
+
+
+    <footer>
+
+
+        <p class="text-center text-muted">
+            <a class="link" name="link" href="v3.html"> &copy; IT Wolf 2023</a>
+            |
+            <a class="link" name="link" href="impressum.html">Impressum</a>
+        </p>
+
+
+    </footer>
+
+</body>
+
+</html>
