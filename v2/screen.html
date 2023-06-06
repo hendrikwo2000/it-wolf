@@ -1,0 +1,162 @@
+
+
+<script>
+
+    // Name aus Local Storage auslesen + Überschrift ändern 
+
+
+    var name = ""; 
+    // Variable für Namen deklariert
+
+    name = window.localStorage.getItem("head"); 
+    // Den Namen auf den Wert "hard" aus dem Local Storage setzen 
+
+    if (name == null || name == "") { 
+        // Prüfen ob der Name leer oder null ist
+
+        document.getElementById("headline").innerHTML = "Easter Eggs"; 
+        //Wenn ja, dann nur "Easter Eggs als Überschrift"
+
+    } else {
+
+        document.getElementById("headline").innerHTML = "Moin " + name + " - Easter Eggs"; 
+        // Wenn nein dann "Moin 'Name' - Easter Eggs" als Überschrift
+    };
+
+
+
+    // Funktion Name Input auslesen + Name im Local Storage setzen + Überschrift ändern 
+
+    
+    function auslesen() {
+        // wird ausgeführt wenn der "Bestätigen" Button betätigt wurde
+
+        var name = document.getElementById("namee").value;
+        // Name = Input Wert
+        
+
+        if (name == "") {
+            // Prüfen ob die Eingabe leer ist
+
+            document.getElementById("headline").innerHTML = "Easter Eggs";
+            //Wenn ja, dann nur "Easter Eggs als Überschrift"
+
+        } else {
+            document.getElementById("headline").innerHTML = "Moin " + name + " - Easter Eggs";
+            // Wenn nein dann "Moin 'Name' - Easter Eggs" als Überschrift
+        }
+       
+        localStorage.setItem("head", name);
+        // Name wird im Local Storage gespeichert
+
+    };
+
+
+
+
+
+
+    // Thema aus Local Storage auslesen + ggf. Thema ändern 
+
+
+    var modee = "light"; 
+    // Variable für Thema deklariert
+
+    modee = window.localStorage.getItem("thema");
+    // Den mode auf den Wert "thema" aus dem Local Storage setzen 
+    
+    if (window.localStorage.getItem("thema") == null) {
+         // Prüfen ob der Local Storage leer ist
+        
+
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            // Wenn ja, dann prüfe ob das System Thema dark ist,
+            // wenn ja, dann führe Darkmode aus
+
+            dark();
+            // Funktion Darkmode
+
+            modee = "dark";
+            // Setze den Mode auf Dark
+
+            localStorage.setItem("thema", modee);
+            // Speichere den Mode im Local Storage
+        }
+    } else {
+        // Wenn der Local Storage nicht leer ist, dann
+
+        if (window.localStorage.getItem("thema") == "dark") {
+            // Prüfe ob im Local Storage das Thema Dark ist
+            
+            dark();
+            // Wenn ja, dann führe Darkmode Funktion aus
+
+        }
+    };
+
+
+
+
+
+    // Themenwechsel
+    // Wird via Klick auf den Mond oder auf die Sonne ausgeführt
+
+    function switchmode() {
+
+
+        if (modee == "dark") {
+            // Wenn der Mode dark ist, dann
+
+            modee = "light";
+            // Setze den Mode auf Light
+
+            light();
+            // Funktion Lightmode
+
+        } else {
+            // Wenn der Mode Light ist, dann
+            modee = "dark";
+            // Setze den Mode auf Dark
+
+            dark();
+            // Funktion Darkmode        
+        }
+        localStorage.setItem("thema", modee);
+            // Speichere den Mode im Local Storage
+
+    };
+
+
+
+
+
+    // Sound per Taste abspielen
+
+
+    const halt = new Audio('Sounds/halt_stop.mp3');
+    // Vareable für den Sound deklarieren
+
+    if (event.keyCode == 32) {
+        // Prüfe ob die Taste mit dem Code "32" gedrückt wurde
+        // Die 32 ist die Enter Taste
+
+            halt.play();
+            // Der Sound wird abgespielt
+        }
+
+
+
+    // Sound per Funktion abspielen
+    function rick() {
+        const rick = new Audio('Sounds/rick.mp3');
+        // Vareable für den Sound deklarieren
+
+        rick.play();
+        // Der Sound wird abgespielt
+    };
+
+
+
+
+
+</script>
