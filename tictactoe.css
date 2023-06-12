@@ -1,0 +1,49 @@
+  :root {
+      --writ: #adb5bd;
+      --linkc: #000000;
+      --hover: #000000;
+      --back: #1e293b;
+      --backg: #ffffff;
+      --hovg: rgba(116, 116, 116, 0.342);
+
+  }
+  
+  
+  body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+  }
+
+  h1 {
+      text-align: center;
+      margin-top: 30px;
+  }
+
+  #board {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 10px;
+      width: 300px;
+      margin: 20px auto;
+  }
+
+  .cell {
+      width: 100px;
+      height: 100px;
+      border: 1px solid var(--linkc);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 48px;
+      cursor: pointer;
+      background-color: var(--backg);
+      transition: background-color 0.3s;
+  }
+
+  .cell:hover {
+      background-color: var(--hovg);
+  }
+
