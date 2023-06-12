@@ -2,16 +2,21 @@
 <html lang="en">
 
 <head>
+    <link href="_variables-dark.scss" type="stylesheet">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="it wolf, itwolf, hendrik wolf, nützliche webseiten, nützliche internetseiten">
+    <meta name="keywords" content="it wolf, itwolf, hendrik wolf, nützliche webseiten, nützliche internetseiten, nützliche seiten">
     <meta name="author" content="Hendrik Wolf">
     <meta name="description" content="Eine Sammlung von vielen nützlichen Internet Seiten.">
-    <title>IT Wolf - by Hendrik Wolf</title>
-    <link rel="icon" href="Bilder/ico.svg"><link href="index.css" rel="stylesheet">
-    <link href="update.css" rel="stylesheet">
+    <title>Nützliche Seiten - IT Wolf</title>
+    <link rel="icon" href="Bilder/ico.svg">
+<link href="index.css" rel="stylesheet">
+<script src="index.js" defer></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
 </head>
 
 <body class="bodygg">
@@ -123,12 +128,12 @@
 
         <form class="d-flex" role="search">
 
-            <svg style="color: var(--linkc);" id="mode" class="mode" onclick="switchmode()"
-                xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16">
+            <svg style="color: var(--linkc);" id="mode" class="mode" onclick="switchmode()" xmlns="http://www.w3.org/2000/svg"
+                width="10" height="10" fill="currentColor" viewBox="0 0 16 16">
                 <path id="modee"
                     d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
                 <path id="modeee" d="" />
-
+            
             </svg>
 
 
@@ -137,130 +142,527 @@
 </nav>
 
 
+
+<div class="p-0" id="body">
+
+
     
-        <h2 class="text" style="color: var(--linkc);" >Seite wird verbessert</h2>
-     
 
 
-    <div class="center">
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
+           <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" id="modual" class="clink">
+                <div class="modal-header" id="pop-head">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Dein Name</h1>
+                    <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-lg"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                        </svg></button>
+                </div>
+                <div class="modal-body" id="pop-body">
+                    <div class="form-floating mb-0">
+                        <input type="text" class="form-control" id="namee" placeholder="name">
+                        <label for="floatingInput">Name</label>
+    
+                    </div>
+                </div>
+    
+                <div class="modal-footer" id="pop-food">
+    
+                    <a class="link" onclick="auslesen()" data-bs-dismiss="modal" id="aus">
+                        <div class="card" style="border-radius: 40px; background-color: var(--rgb);">
+                            <div class="buts">
+    
+                                Bestätigen
+                            </div>
+                        </div>
+                    </a>
+    
+    
+                </div>
+            </div>
+        </div>
     </div>
 
 
-       </div>
+        
 
 
+<section class="py-5 text-center container" style="height: 100vh;">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="clink" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> <a id="headline"></a><a>Nützliche Seiten</a> </h1>
+            <p class="lead text-body-secondary"></p><br><br><br>
 
-<br>
-<div class="text-end  p-4">
+
+                        
+
+<div class="row row-cols-1 row-cols-md-2 g-4">
     
-    <a class="clink" >4. Version bald verfügbar...</a> <br>
-    <a href="../v3/v3.html" target="_blank" class="clink">3. Version der Seite.</a><br>
-    <a href="../v2/v2.html" target="_blank" class="clink">2. Version der Seite.</a><br>
-    <a href="../v1/v1.html" target="_blank" class="clink">1. Version der Seite.</a><br>
-    <a class="link" href="https://github.com/hendrikwo2000/it-wolf" target="_blank">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-github"
-            viewBox="0 0 16 16">
+    <a class="link" href="#scrollspyHeading1" class="col">
+    <div class="card" id="ki" style="border-radius: 40px; background-color: var(--rgb);">
+    <div class="butl"><svg xmlns="http://www.w3.org/2000/svg" width="30"
+                height="30" fill="currentColor" class="bi bi-cpu" viewBox="0 0 16 16">
+                <path
+                    d="M5 0a.5.5 0 0 1 .5.5V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2A2.5 2.5 0 0 1 14 4.5h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14a2.5 2.5 0 0 1-2.5 2.5v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14A2.5 2.5 0 0 1 2 11.5H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2A2.5 2.5 0 0 1 4.5 2V.5A.5.5 0 0 1 5 0zm-.5 3A1.5 1.5 0 0 0 3 4.5v7A1.5 1.5 0 0 0 4.5 13h7a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 11.5 3h-7zM5 6.5A1.5 1.5 0 0 1 6.5 5h3A1.5 1.5 0 0 1 11 6.5v3A1.5 1.5 0 0 1 9.5 11h-3A1.5 1.5 0 0 1 5 9.5v-3zM6.5 6a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+            </svg>&nbsp;&nbsp;KI</div>
+        </div></a>
+
+    <a class="link" href="#scrollspyHeading2" class="col">  
+    <div class="card"  style="border-radius: 40px; background-color: var(--rgb);">
+    <div class="butl"><svg xmlns="http://www.w3.org/2000/svg" width="30"
+                height="30" fill="currentColor" class="bi bi-tools" viewBox="0 0 16 16">
+                <path
+                    d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814L1 0Zm9.646 10.646a.5.5 0 0 1 .708 0l2.914 2.915a.5.5 0 0 1-.707.707l-2.915-2.914a.5.5 0 0 1 0-.708ZM3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026L3 11Z" />
+            </svg>&nbsp;&nbsp;Tools</div>
+    </div></a>
+
+    <a class="link" href="#scrollspyHeading3" class="col">
+    <div class="card" style="border-radius: 40px; background-color: var(--rgb);">
+    <div class="butl"><svg xmlns="http://www.w3.org/2000/svg" width="30"
+                height="30" fill="currentColor" class="bi bi-file-earmark-image-fill" viewBox="0 0 16 16">
+                <path
+                    d="M4 0h5.293A1 1 0 0 1 10 .293L13.707 4a1 1 0 0 1 .293.707v5.586l-2.73-2.73a1 1 0 0 0-1.52.127l-1.889 2.644-1.769-1.062a1 1 0 0 0-1.222.15L2 12.292V2a2 2 0 0 1 2-2zm5.5 1.5v2a1 1 0 0 0 1 1h2l-3-3zm-1.498 4a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0z" />
+                <path
+                    d="M10.564 8.27 14 11.708V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-.293l3.578-3.577 2.56 1.536 2.426-3.395z" />
+            </svg>&nbsp;&nbsp;Grafiken</div>
+    </div></a>
+
+    <a class="link" href="#scrollspyHeading4" class="col">
+    <div class="card" style="border-radius: 40px; background-color: var(--rgb);">
+    <div class="butl"><svg xmlns="http://www.w3.org/2000/svg" width="30"
+            height="30" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
             <path
-                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
-        </svg>
-    </a><br>
+                d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z" />
+            <path
+                d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z" />
+            <path
+                d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z" />
+        </svg>&nbsp;&nbsp;Secret</div>
+    </div></a>
+    </div>
+</div>
+               
+
+
+            
+        </div>
+</section>
+
+<div class="album py-5">
+    <div class="container">
+        <h2 class="clink"><a id="scrollspyHeading1"><br>KI</a></h2><br>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">             
+        <div class="col">
+            <a href="https://chat.openai.com/" target="_blank" class="clink">
+                <div id="hov" class="card h-100">
+                    <img src="Bilder/chatgpt.svg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">ChatGPT</h5>
+                        <p class="card-text">Dies ist eine KI, die Texte (auch Codes) für dich schreibt.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+            <div class="col">
+                <a href="https://godmode.space/?ref=futuretools.io" target="_blank" class="clink">
+                    <div id="hov" class="card h-100">
+                        <img src="Bilder/godmode.svg" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">God Mode</h5>
+                            <p class="card-text">Besser als ChatGPT</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col">
+                <a href="https://www.forefront.ai/" target="_blank" class="clink">
+                    <div id="hov" class="card h-100">
+                        <img src="Bilder/forefront.svg" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Fore Front AI</h5>
+                            <p class="card-text">Laut dem Entwiklern besser als ChatGPT 4 und mehr Funktionen</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col">
+                <a href="https://www.caktus.ai/" target="_blank" class="clink">
+                    <div id="hov" class="card h-100">
+                        <img src="Bilder/kaktus.svg" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Kaktus AI</h5>
+                            <p class="card-text">Erstellt Aufsätze mit Quellenangaben und noch vieles mehr</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            
+            <div class="col">
+                <a href="https://www.chefgpt.xyz/de" target="_blank" class="clink">
+                    <div id="hov" class="card h-100">
+                        <img src="Bilder/chef.svg" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Chef GPT</h5>
+                            <p class="card-text">Gebe deine Lebensmittel und deine Küchengeräte ein und die erhälst ein Kezept</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        <div class="col">
+        <a href="https://www.futuretools.io/" target="_blank" class="clink">
+            <div id="hov" class="card h-100">
+                <img src="Bilder/future.svg" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">Futuretools</h5>
+                    <p class="card-text">Eine Sammlung von alles KIs, du du nach deinen Anforderungen filtern kannst</p>
+                </div>
+            </div>
+        </a>
+        </div>
+
+
+        </div>
+    </div>
 </div>
 
 
-
-    <script>
-
+        <div class="album py-5">
+            <div class="container">
+                <h2 class="clink"><a id="scrollspyHeading2"><br>Tools</a></h2><br>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         
+        
+        
+                    <div class="col">
+                        <a href="https://10015.io/" target="_blank" class="clink">
+                            <div id="hov" class="card h-100">
+                                <img src="Bilder/all.svg" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">All in one Tool</h5>
+                                    <p class="card-text">Sehr viele Tools, primär vor Programmierer geeignet</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col">
+                        <a href="https://uiverse.io/" target="_blank" class="clink">
+                            <div id="hov" class="card h-100">
+                                <img src="Bilder/uiverse.svg" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Uiverse</h5>
+                                    <p class="card-text">Kopiere fertige HTML und CSS Elemente</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                        <div class="col">
+                            <a href="https://www.freeconvert.com/de" target="_blank" class="clink">
+                                <div id="hov" class="card h-100">
+                                    <img src="Bilder/converter.svg" class="card-img-top">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Freeconvert</h5>
+                                        <p class="card-text">Jede Datei in verschiedene Formate convertieren und noch viel mehr</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>  
+                    <div class="col">
+                        <a href="https://123apps.com/" target="_blank" class="clink">
+                            <div id="hov" class="card h-100">
+                                <img src="Bilder/123appssvg.svg" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">123 Apps</h5>
+                                    <p class="card-text">Eine Sammlung von vielen Tools <br> (Video Tools, Audio Tools, PDF Tools und Converters)</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    
+        
+                <div class="col">
+                    <a href="https://www.ilovepdf.com/de" target="_blank" class="clink">
+                        <div id="hov" class="card h-100">
+                            <img src="Bilder/ilove.svg" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">I love PDF</h5>
+                                <p class="card-text">PDF Tool</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                    <div class="col">
+                        <a href="https://www.pdf2go.com/de" target="_blank" class="clink">
+                            <div id="hov" class="card h-100">
+                                <img src="Bilder/pdf2go.svg" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">PDF 2 go</h5>
+                                    <p class="card-text">PDF Tool</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 
-            
+                </div>
+            </div>
+        </div>
 
 
-        var kontroll = "falsch";
-        var modee = "light";
-        modee = window.localStorage.getItem("thema");
-        console.log("Thema= " + modee);
+        <div class="album py-5">
+            <div class="container">
+                
+            <h2 class="clink"><a id="scrollspyHeading3"><br>Grafiken</a></h2><br>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        
+        
+        
+                    <div class="col">
+                        <a href="https://hotpot.ai/" target="_blank" class="clink">
+                            <div id="hov" class="card h-100">
+                                <img src="Bilder/hotpot.svg" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Hotpot AI</h5>
+                                    <p class="card-text">Bider Verbesser und noch vieles mehr</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                <div class="col">
+                    <a href="https://www.vizcom.ai/" target="_blank" class="clink">
+                        <div id="hov" class="card h-100">
+                            <img src="Bilder/vizcom.svg" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">Vizvom AI</h5>
+                                <p class="card-text">Visuelle deine Zeichnung in Sekunden</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                    <div class="col">
+                        <a href="https://kaiber.ai/" target="_blank" class="clink">
+                            <div id="hov" class="card h-100">
+                                <img src="Bilder/kaiber.svg" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Kaiber Ai</h5>
+                                    <p class="card-text">Erstelle sehr einfach die besten Animationen</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+        
+                <div class="col">
+                    <a href="https://magicstudio.com/de/magiceraser" target="_blank" class="clink">
+                        <div id="hov" class="card h-100">
+                            <img src="Bilder/magicstudio.svg" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">Magiceraser</h5>
+                                <p class="card-text">Objekte aus Bilder lassen sich hiermit leicht entfernen</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                    <div class="col">
+                        <a href="https://huggingface.co/spaces/huggingface-projects/diffuse-the-rest" target="_blank" class="clink">
+                            <div id="hov" class="card h-100">
+                                <img src="Bilder/huggingface.svg" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Hugging Face</h5>
+                                    <p class="card-text">Zeichnung oder Wörter zu einem professionellen Bild</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="https://labs.openai.com/" target="_blank" class="clink">
+                            <div id="hov" class="card h-100">
+                                <img src="Bilder/dalle.svg" class="card-img-top" alt="">
+                                <div class="card-body">
+                                    <h5 class="card-title">Dalle</h5>
+                                    <p class="card-text">
+                                        Gebe Worte ein und die KI erstellt passende Bilder
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
-        if (window.localStorage.getItem("thema") == null) {
-            console.log("Thema har er nicht");
-
-            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                dark();
-                modee = "dark";
-                localStorage.setItem("thema", modee);
-
-            }
-        } else {
-            if (window.localStorage.getItem("thema") == "dark") {
-                console.log("Thema war dark");
-                dark();
-
-            }
-        };
 
 
 
+        <div class="album py-5">
+            <div class="container">
+            <h2 class="clink"><a id="scrollspyHeading4"><br>Secret</a></h2><br>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        
+        
+        
+                    <div class="col">
+                        <a href="https://12ft.io/" target="_blank" class="clink">
+                            <div id="hov" class="card h-100">
+                                <img src="Bilder/12ft.svg" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">12ft</h5>
+                                    <p class="card-text">Diese Webseite durchbricht jede Paywall</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                <div class="col">
+                <a href="https://pimeyes.com/en" target="_blank" class="clink">
+                    <div id="hov" class="card h-100">
+                        <img src="Bilder/pimeyes.svg" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Pim Eys</h5>
+                            <p class="card-text">Durchsuche das ganze Internet mit einem Bild einer Person</p>
+                        </div>
+                    </div>
+                </a>
+                </div>
+                     <div class="col">
+            <a href="http://worldbirthsanddeaths.com/" target="_blank" class="clink">
+            <div id="hov" class="card h-100">
+                <img src="Bilder/world.svg" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">World birthsand deaths</h5>
+                    <p class="card-text">Siehe die an wo aktuell Menschen sterben und geboren werden</p>
+                </div>
+            </div>
+        </a>
+    </div>
+        
+        
+        
+        
+                </div>
+            </div>
+        </div>
 
 
 
-        function switchmode() {
-
-
-                if (modee == "dark") {
-                    modee = "light";
-                    light();
-                } else {
-                    modee = "dark";
-
-                    dark();
-                }
-                localStorage.setItem("thema", modee);
-            };
-
-
-            function dark() {
-                setTimeout(function () {
-                    modee = "dark";
-                }, 100);
-                console.log("dark");
-                document.getElementById("modee").setAttribute("d", "M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278zM4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z");
-                document.getElementById('modeee').setAttribute("d", "");
-                document.documentElement.style.setProperty('--backg', '#1e293b');
-                document.documentElement.style.setProperty('--linkc', '#adb5bd');
-                localStorage.setItem("thema", "dark");
-            }
-
-            function light() {
-                 setTimeout(function () {
-                    modee = "light";
-                }, 100);
-                console.log("hell");
-                document.getElementById("modee").setAttribute("d", "M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z");
-                document.getElementById('modeee').setAttribute("d", "");
-                document.documentElement.style.setProperty('--backg', '#ffffff');
-                document.documentElement.style.setProperty('--linkc', '#000000');
-                localStorage.setItem("thema", "light");   
-            }
 
 
 
-    </script>
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a onclick="topFunction()" id="myBtn" title="Go to top" class="clink">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-up"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" />
+        </svg></a>
+
+
+
+<div class="toast-container position-fixed top-0 end-0 p-3">
+    <div id="liveToast1" class="toast  text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+
+            <strong class="me-auto">Geschafft!</strong>
+
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Dein Name wurde erfolgreich geändert.
+        </div>
+    </div>
+</div>
+
+<div class="toast-container position-fixed top-0 end-0 p-3">
+    <div id="liveToast2" class="toast text-bg-info" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+
+            <strong class="me-auto">Geschafft!</strong>
+
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Dein Name wurde erfolgreich gelöscht.
+        </div>
+    </div>
+</div>
+
+<div class="toast-container position-fixed top-0 end-0 p-3">
+    <div id="liveToast3" class="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+
+            <strong class="me-auto">Fehler</strong>
+
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Bitte gebe einen Korrekten Namen ein.
+        </div>
+    </div>
+</div>
+
+<a href="impressum.html#scrollspyHeading3">
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+    <div id="liveToast4" class="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+
+            <strong class="me-auto">Fehler</strong>
+
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+           Um den Modus zu wechseln,<br>
+           <b>Stelle</b> den individuellen Modus <b>aus</b>:<br>
+           Unter <b>Impressum</b>, <b>Funktionen</b>.
+        </div>
+    </div>
+</div>
+</a>
+
+
+
+
+</div>
+
+
+<footer>
+
+
+    <p class="text-center text-muted">
+        <a class="link"  name="link" href="index.html"> &copy; IT Wolf 2023</a>
+        <a class="clink">|</a>
+        <a class="link" name="link" href="impressum.html">Impressum</a>
+    </p>
+
+
+</footer>
+
+
 </body>
 
 </html>
