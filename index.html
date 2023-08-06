@@ -12,6 +12,7 @@
     <link rel="icon" href="Bilder/ico.svg">
 <link href="index.css" rel="stylesheet">
 <script src="index.js" defer></script>
+<script src="netz.js" defer></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
@@ -20,6 +21,12 @@
 </head>
 
 <body class="bodygg">
+
+
+<canvas id="backgroundCanvas"></canvas>
+
+
+
 
 <nav class="navbar" id="nav">
     <div class="container-fluid">
@@ -203,8 +210,8 @@
 
 <div class="row row-cols-1 row-cols-md-2 g-4">
     
-    <a class="link" href="#scrollspyHeading1" class="col">
-    <div class="card" id="ki" style="border-radius: 40px; background-color: var(--rgb);">
+    <a class="link" href="#ki" class="col">
+    <div class="card" style="border-radius: 40px; background-color: var(--rgb);">
     <div class="butl"><svg xmlns="http://www.w3.org/2000/svg" width="30"
                 height="30" fill="currentColor" class="bi bi-cpu" viewBox="0 0 16 16">
                 <path
@@ -212,7 +219,7 @@
             </svg>&nbsp;&nbsp;KI</div>
         </div></a>
 
-    <a class="link" href="#scrollspyHeading2" class="col">  
+    <a class="link" href="#tools" class="col">  
     <div class="card"  style="border-radius: 40px; background-color: var(--rgb);">
     <div class="butl"><svg xmlns="http://www.w3.org/2000/svg" width="30"
                 height="30" fill="currentColor" class="bi bi-tools" viewBox="0 0 16 16">
@@ -221,7 +228,7 @@
             </svg>&nbsp;&nbsp;Tools</div>
     </div></a>
 
-    <a class="link" href="#scrollspyHeading3" class="col">
+    <a class="link" href="#grafiken" class="col">
     <div class="card" style="border-radius: 40px; background-color: var(--rgb);">
     <div class="butl"><svg xmlns="http://www.w3.org/2000/svg" width="30"
                 height="30" fill="currentColor" class="bi bi-file-earmark-image-fill" viewBox="0 0 16 16">
@@ -232,7 +239,7 @@
             </svg>&nbsp;&nbsp;Grafiken</div>
     </div></a>
 
-    <a class="link" href="#scrollspyHeading4" class="col">
+    <a class="link" href="#secret" class="col">
     <div class="card" style="border-radius: 40px; background-color: var(--rgb);">
     <div class="butl"><svg xmlns="http://www.w3.org/2000/svg" width="30"
             height="30" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
@@ -255,7 +262,7 @@
 
 <div class="album py-5">
     <div class="container">
-        <h2 class="clink"><a id="scrollspyHeading1"><br>KI</a></h2><br>
+        <h2 class="clink"><a id="ki"><br>KI</a></h2><br>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">             
         <div class="col">
             <a href="https://chat.openai.com/" target="_blank" class="clink">
@@ -338,7 +345,7 @@
 
         <div class="album py-5">
             <div class="container">
-                <h2 class="clink"><a id="scrollspyHeading2"><br>Tools</a></h2><br>
+                <h2 class="clink"><a id="tools"><br>Tools</a></h2><br>
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         
         
@@ -422,7 +429,7 @@
         <div class="album py-5">
             <div class="container">
                 
-            <h2 class="clink"><a id="scrollspyHeading3"><br>Grafiken</a></h2><br>
+            <h2 class="clink"><a id="grafiken"><br>Grafiken</a></h2><br>
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         
         
@@ -506,7 +513,7 @@
 
         <div class="album py-5">
             <div class="container">
-            <h2 class="clink"><a id="scrollspyHeading4"><br>Secret</a></h2><br>
+            <h2 class="clink"><a id="secret"><br>Secret</a></h2><br>
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         
         
@@ -626,7 +633,7 @@
     </div>
 </div>
 
-<a href="impressum.html#scrollspyHeading3">
+<a href="impressum.html#funktionen">
     <div class="toast-container position-fixed top-0 end-0 p-3">
     <div id="liveToast4" class="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
@@ -649,7 +656,9 @@
 
 </div>
 
-
+<script>
+   
+</script>
 <footer>
 
 
