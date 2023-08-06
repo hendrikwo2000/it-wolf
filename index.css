@@ -4,9 +4,29 @@
     --hover: #000000;
     --back: #1e293b;
     --backg: #ffffff;
-    --hovg: rgba(116, 116, 116, 0.342);
+    --hovg: rgba(158, 134, 212, 0.267);
+    --krescolor: #99FFFF;
+    --circle-color: #0693e3; /* Hier änderst du die Farbe auf deine gewünschte Farbe */
+    --line-color: #0693e3; /* Hier änderst du die Farbe auf deine gewünschte Farbe */
+
 
 }
+
+  .circle {
+      fill: var(--circle-color);
+  }
+
+  .line {
+      stroke: var(--line-color);
+  }
+
+   canvas {
+       position: absolute;
+       top: 0;
+       left: 0;
+       pointer-events: none;
+   }
+   
 
 body {
     min-height: 100vh;
@@ -44,6 +64,7 @@ color: var(--linkc);
         border-radius: 40px;
         padding: 20px;
         transition: 0.5s;
+        background-color: rgba(157, 134, 212, 0.116);
         
         
 }
@@ -63,8 +84,6 @@ color: var(--linkc);
     border-radius: 40px;
     padding: 10px;
     transition: 0.5s;
-    
-    
 
 }
 
@@ -174,7 +193,7 @@ transition: 0.5s;
        cursor: pointer;
        padding: 5px;
        border-radius: 40px;
-       background: rgba(116, 116, 116, 0.342);
+       background:rgba(157, 134, 212, 0.116);
        transition: transform 0.3s;
    }
    #myBtn:hover {
