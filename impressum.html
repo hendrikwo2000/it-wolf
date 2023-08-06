@@ -10,6 +10,7 @@
     <link href="index.css" rel="stylesheet">
     <link href="tictactoe.css" rel="stylesheet">
     <script src="index.js" defer></script>
+    <script src="netz.js" defer></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
@@ -19,6 +20,8 @@
 </head>
 
 <body class="bodygg">
+
+    <canvas id="backgroundCanvas"></canvas>
 
     <nav class="navbar" id="nav">
         <div class="container-fluid">
@@ -199,7 +202,8 @@
 
                     <div class="row row-cols-1 row-cols-md-2 g-4">
 
-                        <a class="link" href="#scrollspyHeading1" class="col">
+
+                                    <a class="link" href="#über+mich" class="col">
                             <div class="card" style="border-radius: 40px; background-color: var(--rgb);">
                                 <div class="butl">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person"
@@ -211,7 +215,7 @@
                             </div>
                         </a>
 
-                        <a class="link" href="#scrollspyHeading2" class="col">
+                        <a class="link" href="#kontakt" class="col">
                             <div class="card" style="border-radius: 40px; background-color: var(--rgb);">
                                 <div class="butl">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-menu-button"
@@ -228,7 +232,7 @@
 
 
 
-                        <a class="link" href="#scrollspyHeading3" class="col">
+                        <a class="link" href="#funktionen" class="col">
                             <div class="card" style="border-radius: 40px; background-color: var(--rgb);">
                                 <div class="butl">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-gear"
@@ -242,7 +246,7 @@
                             </div>
                         </a>
 
-                        <a class="link" href="#scrollspyHeading4" class="col">
+                        <a class="link" href="#über+die+seite" class="col">
                             <div class="card" style="border-radius: 40px; background-color: var(--rgb);">
                                 <div class="butl">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-motherboard"
@@ -270,13 +274,13 @@
         <div class="album py-5" style="transition: 1s;">
             
             <div class="container" style="height: 100vh;">
-                <h2 class="clink"><a id="scrollspyHeading1"><br><br><br><br>Über mich</a></h2><br>
+                <h2 class="clink"><a id="über+mich"><br><br><br><br>Über mich</a></h2><br>
 
           
                         <p class="clink">
                         Ich bin Hendrik Wolf, der Ersteller dieser Seite.<br>
                         Das Entwickeln dieser Webseite ist nicht meine Haupttätigkeit.<br>
-                        Es ist einer meiner Hobbies und ich versuche mich stetig zu verberrern.<br><br>
+                        Es ist einer meiner Hobbies und ich versuche mich stetig zu verbessern.<br><br>
                         Ich wollte eine Seite erstellen, mit nützlichen Seiten um ein Lesezeichenkaos zu vermeiden.
                         </p>
                         <p  class="card-text"><small class="clink" class="text-body-secondary">Created by Hendrik Wolf in 2023</small></p>
@@ -290,7 +294,7 @@
 
         <div class="album py-5">
             <div class="container" style="height: 100vh;">
-                <h2 class="clink"><a id="scrollspyHeading2"><br><br><br><br>Kontakt</a></h2><br>
+                <h2 class="clink"><a id="kontakt"><br><br><br><br>Kontakt</a></h2><br>
                 <div>
                     <p class="clink">Wenn dir weiter Seiten einfallen, die auf der Seite einen Platz haben sollen, oder <br> 
                         wenn dir noch weite Features einfallen, schreibe eine E-Mail an: <br><br>
@@ -364,7 +368,7 @@
 
 <div class="album py-5">
     <div class="container" style="height: 100vh;">
-        <h2 class="clink"><a id="scrollspyHeading3"><br><br><br><br>Funktionen</a></h2><br>
+        <h2 class="clink"><a id="funktionen"><br><br><br><br>Funktionen</a></h2><br>
         <div class="row row-cols-1 row-cols-sm-1 row-cols-md-3 g-3">
             <div class="col">
                 <a target="_blank" class="clink" >
@@ -444,7 +448,7 @@
 
         <div class="album py-5">
             <div class="container" style="height: 85vh;">
-                <h2 class="clink"><a id="scrollspyHeading4"><br><br><br><br>Über die Seite</a></h2><br>
+                <h2 class="clink"><a id="über+die+seite"><br><br><br><br>Über die Seite</a></h2><br>
                 <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-2">
 
 
@@ -683,7 +687,7 @@
             </div>
         </div>
 
-        <a href="#scrollspyHeading3">
+        <a href="#funktionen">
             <div class="toast-container position-fixed top-0 end-0 p-3">
                 <div id="liveToast4" class="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="toast-header">
