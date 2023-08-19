@@ -4,13 +4,30 @@
     --hover: #000000;
     --back: #1e293b;
     --backg: #ffffff;
-    --hovg: rgba(158, 134, 212, 0.267);
+    --hovg: #0692e32a; /*Hover Farbe*/
+    --them: #0692e317;/*Normaler Cartenhintergrund*/
     --krescolor: #99FFFF;
     --circle-color: #0693e3; /* Hier änderst du die Farbe auf deine gewünschte Farbe */
     --line-color: #0693e3; /* Hier änderst du die Farbe auf deine gewünschte Farbe */
 
 
 }
+
+
+@media (max-width: 768px) {
+    #backgroundCanvas {
+        width: 100%;
+        /* Größe anpassen */
+        height: auto;
+        /* Größe anpassen */
+    }
+}
+
+#backgroundCanvas.hidden {
+    display: none;
+}
+
+
 
   .circle {
       fill: var(--circle-color);
@@ -64,8 +81,7 @@ color: var(--linkc);
         border-radius: 40px;
         padding: 20px;
         transition: 0.5s;
-        background-color: rgba(157, 134, 212, 0.116);
-        
+        background-color: var(--them)
         
 }
 
@@ -77,6 +93,7 @@ color: var(--linkc);
 
 
 }
+
 
 .buts {
     white-space: nowrap;
@@ -142,47 +159,11 @@ color: var(--linkc);
 .mode:hover {
     background: var(--hovg);
     transition: 0.5s;
-}
-#hov{
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-    background-color: var(--rgb);
-}
-#hov:hover {
-    transform: translateY(-5px);
     cursor: pointer;
-    
 }
-
-#hovp {
-    background-color: var(--rgb);
-}
-#hovp:hover {
-    transition: 0.5s;
-    border-color: red;
-    cursor: wait;
-
-}
-
-
-
-#hovc{
-background-color: var(--rgb);
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-transition: 0.5s;
-}
-
-#hovc:hover {
-    
-    transform: translateY(-5px);
-    cursor: default;
-
-}
-
-
-
 
    #myBtn {
+    color: var(--linkc);
        display: none;
        position: fixed;
        bottom: 20px;
@@ -193,10 +174,36 @@ transition: 0.5s;
        cursor: pointer;
        padding: 5px;
        border-radius: 40px;
-       background:rgba(157, 134, 212, 0.116);
+       background: var(--them);
        transition: transform 0.3s;
    }
    #myBtn:hover {
     background: var(--hovg);
     transform: translateY(-5px);
+   }
+
+   #hov {
+       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+       transition: transform 0.3s;
+       background-color: var(--them);
+   }
+
+   #hov:hover {
+    background-color: var(--hovg);
+       transform: translateY(-5px);
+       cursor: pointer;
+
+   }
+
+   #hovc {
+       background-color: var(--them);
+       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+       transition: 0.5s;
+   }
+
+   #hovc:hover {
+        background-color: var(--hovg);
+       transform: translateY(-5px);
+       cursor: default;
+
    }
