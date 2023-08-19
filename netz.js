@@ -65,7 +65,7 @@ Circle.prototype.connectWithNearestCircles = function (otherCircles) {
 
 
 function resizeCanvas() {
-    canvas.width = window.innerWidth;
+    canvas.width = window.innerWidth * 0.97;
     canvas.height = window.innerHeight;
 }
 
