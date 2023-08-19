@@ -1,17 +1,4 @@
-  :root {
---writ: #adb5bd;
-    --linkc: #000000;
-    --hover: #000000;
-    --back: #1e293b;
-    --backg: #ffffff;
-    --hovg: rgba(158, 134, 212, 0.267);
-    --krescolor: #99FFFF;
-    --circle-color: #0693e3;
-    /* Hier änderst du die Farbe auf deine gewünschte Farbe */
-    --line-color: #0693e3;
-    /* Hier änderst du die Farbe auf deine gewünschte Farbe */
 
-  }
   
   
   body {
