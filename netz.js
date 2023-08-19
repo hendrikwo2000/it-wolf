@@ -1,14 +1,40 @@
 const canvas = document.getElementById('backgroundCanvas');
 const ctx = canvas.getContext('2d');
-const circleCount = 50;
-const maxConnections = 1;
-const maxMouseConnections = 5;
+
+ctx.imageSmoothingEnabled = false; // Oder false, abhängig von deinen Anforderungen
+const devicePixelRatio = window.devicePixelRatio || 1;
+canvas.width = canvas.offsetWidth * devicePixelRatio;
+canvas.height = canvas.offsetHeight * devicePixelRatio;
+ctx.scale(devicePixelRatio, devicePixelRatio);
+const circleCount = 40; // Anzahl der Kreise
+const maxConnections = 1; // Anzahl der Verbindungen untereinander
+const maxMouseConnections = 8; // Anzahl der Verbindungen mit der Maus
 const circleSize = 3; // Ändere den Wert auf die gewünschte Größe der Kreise
 const normalLineThickness = 0; // Dicke der Linien zwischen den normalen Kreisen
 const mouseLineThickness = 0.2; // Dicke der Linien zwischen Maus und Kreisen
 let circles = [];
+const svg = document.getElementById('backgroundSvg');
+checkScreenSize();
 
 
+
+window.addEventListener('mousemove', (event) => {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+
+    // Überprüfe, ob die Maus sich über dem Canvas befindet
+    const canvasRect = canvas.getBoundingClientRect();
+    if (
+        mouseX >= canvasRect.left &&
+        mouseX <= canvasRect.right &&
+        mouseY >= canvasRect.top &&
+        mouseY <= canvasRect.bottom
+    ) {
+        mouseInsideCanvas = true;
+    } else {
+        mouseInsideCanvas = false;
+    }
+});
 
 
 Circle.prototype.connectWithNearestCircles = function (otherCircles) {
@@ -166,8 +192,28 @@ function animateCircles() {
     drawMouseLines(); // Linien zwischen Maus und Kreisen zeichnen
 }
 
-let mouseX = 0;
-let mouseY = 0;
+function animateCircles() {
+    requestAnimationFrame(animateCircles);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (const circle of circles) {
+        circle.update();
+        circle.draw();
+    }
+
+    updateConnections();
+
+    // Nur verbinden, wenn die Maus über dem Canvas ist
+    if (mouseInsideCanvas) {
+        connectMouseWithNearestCircles(mouseX, mouseY);
+        drawMouseLines();
+    }
+
+    drawNormalLines();
+}
+
+
+
 
 window.addEventListener('resize', () => {
     resizeCanvas();
@@ -175,9 +221,111 @@ window.addEventListener('resize', () => {
     createCircles();
 });
 
+
+
+
+
+function animateCircles() {
+    requestAnimationFrame(animateCircles);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (const circle of circles) {
+        circle.update();
+        circle.draw();
+    }
+
+    updateConnections();
+
+    // Nur verbinden, wenn die Maus über dem Canvas und im Fenster ist
+    if (mouseInsideCanvas && mouseInsideWindow) {
+        // Berücksichtige die Scroll-Offset-Werte für die Mausposition
+        const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+        connectMouseWithNearestCircles(mouseX + scrollX, mouseY + scrollY);
+        drawMouseLines();
+    }
+
+    drawNormalLines();
+}
+
+let mouseX = 0;
+let mouseY = 0;
+let mouseInsideCanvas = false; // Verfolgt, ob die Maus über dem Canvas ist
+let mouseInsideWindow = true; // Verfolgt, ob die Maus sich im Browserfenster befindet
+
+
+
+
 window.addEventListener('mousemove', (event) => {
     mouseX = event.clientX;
     mouseY = event.clientY;
+
+    // Überprüfe, ob die Maus sich über dem Canvas befindet
+    const canvasRect = canvas.getBoundingClientRect();
+    if (
+        mouseX >= canvasRect.left &&
+        mouseX <= canvasRect.right &&
+        mouseY >= canvasRect.top &&
+        mouseY <= canvasRect.bottom
+    ) {
+        mouseInsideCanvas = true;
+    } else {
+        mouseInsideCanvas = false;
+    }
+});
+
+// Überprüfe, ob die Maus sich im Browserfenster befindet
+window.addEventListener('mouseout', () => {
+    mouseInsideWindow = false;
+
+});
+window.addEventListener('mouseover', () => {
+    mouseInsideWindow = true;
+  
+});
+
+
+
+window.addEventListener('mousemove', (event) => {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+
+    // Überprüfe, ob die Maus sich über dem Canvas befindet
+    const canvasRect = canvas.getBoundingClientRect();
+    if (
+        mouseX >= canvasRect.left &&
+        mouseX <= canvasRect.right &&
+        mouseY >= canvasRect.top &&
+        mouseY <= canvasRect.bottom
+    ) {
+        mouseInsideCanvas = true;
+    } else {
+        mouseInsideCanvas = false;
+    }
+});
+
+
+
+window.addEventListener('mousemove', (event) => {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+});
+
+
+function checkScreenSize() {
+    if (window.innerWidth <= 768) { // Beispielgrenze für mobile Geräte
+        canvas.classList.add('hidden');
+    } else {
+        canvas.classList.remove('hidden');
+    }
+}
+
+window.addEventListener('resize', checkScreenSize);
+
+window.addEventListener('load', () => {
+    checkScreenSize();
+    createCircles();
+    animateCircles();
 });
 
 resizeCanvas();
