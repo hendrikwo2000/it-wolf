@@ -30,11 +30,11 @@ function topFunction() {
 
 var mam = "";
 mam = window.localStorage.getItem("head");
-console.log("Name: " + mam);
+//console.log("Name: " + mam);
 
 
 if (mam == null || mam == "" || mam == "null") {
-    console.log("Kein Name");
+    //console.log("Kein Name");
     document.getElementById("headline").innerHTML = "";
 } else
     if (mam.match("<")) {
@@ -85,7 +85,7 @@ function auslesen() {
         }
 
     localStorage.setItem("head", mam);
-    console.log("Name: " + window.localStorage.getItem("head"));
+    //console.log("Name: " + window.localStorage.getItem("head"));
 
 };
 
@@ -94,15 +94,15 @@ function auslesen() {
 
 var individuell_pegel = "false";
 individuell_pegel = window.localStorage.getItem("individuell_pegel");
-if (individuell_pegel == null){
+if (individuell_pegel == null) {
     individuell_pegel = "false";
-    
+
 }
-console.log("individuell_pegel: " + individuell_pegel);
+//console.log("individuell_pegel: " + individuell_pegel);
 
 var modee = "light";
 modee = window.localStorage.getItem("thema");
-console.log("Mode: " + modee);
+//console.log("Mode: " + modee);
 
 
 
@@ -110,17 +110,17 @@ let colorPicker;
 const hintergrund = window.localStorage.getItem("hintergrund");
 defaultColor = hintergrund;
 
-console.log("hintergrund: " + hintergrund);
+//console.log("hintergrund: " + hintergrund);
 
 
 let colorPicker1;
 const schrift = window.localStorage.getItem("schrift");
 defaultColor1 = schrift;
 
-console.log("schrift: " + schrift);
+//console.log("schrift: " + schrift);
 
 if (window.localStorage.getItem("thema") == null) {
-    console.log("Thema hat er nicht");
+    //console.log("Thema hat er nicht");
 
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         dark();
@@ -130,21 +130,21 @@ if (window.localStorage.getItem("thema") == null) {
     };
 };
 
-if(individuell_pegel == "false"){
+if (individuell_pegel == "false") {
 
     if (window.localStorage.getItem("thema") == "dark") {
-        console.log("Thema war dark");
+        //console.log("Thema war dark");
         dark();
 
     };
     if (window.localStorage.getItem("thema") == "light") {
-        console.log("Thema war light");
+        //console.log("Thema war light");
         light();
     }
 };
 
 if (individuell_pegel == "true") {
-    console.log("individuell");
+    //console.log("individuell");
     setTimeout(function () {
     }, 10);
     modee = "individuell";
@@ -171,116 +171,117 @@ function switchmode() {
         };
     }
 
-if(individuell_pegel == "true"){
+    if (individuell_pegel == "true") {
 
-    const fehler = new Audio('Sounds/error.mp3');
-    fehler.play();
-    const toastLiveExample = document.getElementById('liveToast4');
-    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
-    toastBootstrap.show();
-
-};   }
-
-
-
-       function dark(){
-          
-           setTimeout(function () {
-               modee = "dark";
-           }, 100);
-           console.log("dark");
-            document.getElementById("modee").setAttribute("d", "M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278zM4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z");
-            document.getElementById('modeee').setAttribute("d", "");
-           document.documentElement.style.setProperty('--backg', '#0f172a');
-            document.documentElement.style.setProperty('--linkc', '#adb5bd');
-           document.documentElement.style.setProperty('--circle-color', '#adb5bd');
-           document.documentElement.style.setProperty('--line-color', '#adb5bd');
-           localStorage.setItem("thema", "dark");
-           document.getElementById("color-picker").disabled = true;
-           document.getElementById("color-picker1").disabled = true;
-         
-            
-            
-        };
-
-
-        function light(){
-            
-            setTimeout(function () {
-                modee = "light";
-            }, 100);
-            console.log("hell");
-            document.getElementById("modee").setAttribute("d", "M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z");
-            document.getElementById('modeee').setAttribute("d", "");
-            document.documentElement.style.setProperty('--backg', '#ffffff');
-            document.documentElement.style.setProperty('--linkc', 'black');
-            document.documentElement.style.setProperty('--circle-color', '#0693e3');
-            document.documentElement.style.setProperty('--line-color', '#0693e3');
-            localStorage.setItem("thema", "light");          
-            document.getElementById("color-picker").disabled = true;
-            document.getElementById("color-picker1").disabled = true;
-          
-           
-          };
-
-
-        function individuell() {
-            setTimeout(function () {
-                
-            }, 100);
-            console.log("indi");
-            document.getElementById("modee").setAttribute("d", "M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z");
-            document.getElementById('modeee').setAttribute("d", "M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z");
-            document.documentElement.style.setProperty('--linkc', schrift);
-            document.documentElement.style.setProperty('--backg', hintergrund);
-            document.documentElement.style.setProperty('--circle-color', schrift);
-            document.documentElement.style.setProperty('--line-color', schrift);
-            document.getElementById("mode").style.cursor = "no-drop";
-            localStorage.setItem("individuell_pegel", "true");
-
-                };
-
-
-       
-
-    window.addEventListener("load", startup, false);
-    function startup() {
-        colorPicker = document.querySelector("#color-picker");
-        colorPicker.value = defaultColor;
-        colorPicker.addEventListener("input", updateFirst, false);
-        colorPicker.select();
-    };
-
-    function updateFirst(event) {
-
-        console.log("hintergrund:" + event.target.value);
-        document.documentElement.style.setProperty('--backg', event.target.value);
-        localStorage.setItem("hintergrund", event.target.value);
+        const fehler = new Audio('Sounds/error.mp3');
+        fehler.play();
+        const toastLiveExample = document.getElementById('liveToast4');
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+        toastBootstrap.show();
 
     };
+}
 
 
-    window.addEventListener("load", startup1, false);
-    function startup1() {
-        colorPicker1 = document.querySelector("#color-picker1");
-        colorPicker1.value = defaultColor1;
-        colorPicker1.addEventListener("input", updateFirst1, false);
-        colorPicker1.select();
-    };
 
-    function updateFirst1(event) {
+function dark() {
 
-        console.log("schrift" + event.target.value);
-        document.documentElement.style.setProperty('--linkc', event.target.value);
-        localStorage.setItem("schrift", event.target.value);
+    setTimeout(function () {
+        modee = "dark";
+    }, 100);
+    //console.log("dark");
+    document.getElementById("modee").setAttribute("d", "M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278zM4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z");
+    document.getElementById('modeee').setAttribute("d", "");
+    document.documentElement.style.setProperty('--backg', '#0f172a');
+    document.documentElement.style.setProperty('--linkc', '#adb5bd');
+    document.documentElement.style.setProperty('--circle-color', '#adb5bd');
+    document.documentElement.style.setProperty('--line-color', '#adb5bd');
+    localStorage.setItem("thema", "dark");
+    document.getElementById("color-picker").disabled = true;
+    document.getElementById("color-picker1").disabled = true;
 
-    };
+
+
+};
+
+
+function light() {
+
+    setTimeout(function () {
+        modee = "light";
+    }, 100);
+    //console.log("hell");
+    document.getElementById("modee").setAttribute("d", "M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z");
+    document.getElementById('modeee').setAttribute("d", "");
+    document.documentElement.style.setProperty('--backg', '#ffffff');
+    document.documentElement.style.setProperty('--linkc', 'black');
+    document.documentElement.style.setProperty('--circle-color', '#0693e3');
+    document.documentElement.style.setProperty('--line-color', '#0693e3');
+    localStorage.setItem("thema", "light");
+    document.getElementById("color-picker").disabled = true;
+    document.getElementById("color-picker1").disabled = true;
+
+
+};
+
+
+function individuell() {
+    setTimeout(function () {
+
+    }, 100);
+    //console.log("indi");
+    document.getElementById("modee").setAttribute("d", "M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z");
+    document.getElementById('modeee').setAttribute("d", "M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z");
+    document.documentElement.style.setProperty('--linkc', schrift);
+    document.documentElement.style.setProperty('--backg', hintergrund);
+    document.documentElement.style.setProperty('--circle-color', schrift);
+    document.documentElement.style.setProperty('--line-color', schrift);
+    document.getElementById("mode").style.cursor = "no-drop";
+    localStorage.setItem("individuell_pegel", "true");
+
+};
+
+
+
+
+window.addEventListener("load", startup, false);
+function startup() {
+    colorPicker = document.querySelector("#color-picker");
+    colorPicker.value = defaultColor;
+    colorPicker.addEventListener("input", updateFirst, false);
+    colorPicker.select();
+};
+
+function updateFirst(event) {
+
+   // console.log("hintergrund:" + event.target.value);
+    document.documentElement.style.setProperty('--backg', event.target.value);
+    localStorage.setItem("hintergrund", event.target.value);
+
+};
+
+
+window.addEventListener("load", startup1, false);
+function startup1() {
+    colorPicker1 = document.querySelector("#color-picker1");
+    colorPicker1.value = defaultColor1;
+    colorPicker1.addEventListener("input", updateFirst1, false);
+    colorPicker1.select();
+};
+
+function updateFirst1(event) {
+
+    //console.log("schrift" + event.target.value);
+    document.documentElement.style.setProperty('--linkc', event.target.value);
+    localStorage.setItem("schrift", event.target.value);
+
+};
 
 
 
 function activ() {
 
-    if (individuell_pegel == "false"){
+    if (individuell_pegel == "false") {
         document.getElementById("color-picker").disabled = false;
         document.getElementById("color-picker1").disabled = false;
         document.getElementById("activ").setAttribute("d", "M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z");
@@ -301,19 +302,98 @@ function activ() {
             individuell_pegel = "false";
         }, 10);
         localStorage.setItem("individuell_pegel", "false");
-        modee =window.localStorage.getItem("thema");
+        modee = window.localStorage.getItem("thema");
 
         if (modee == "dark") {
-             dark(); 
-            };
-        if (modee == "light") { 
-            light(); 
+            dark();
+        };
+        if (modee == "light") {
+            light();
         };
     };
 
-    
+
 
 };
 
 
 //------------------------------------------------------------------------------------------------------------------------
+// Netz deaktivieren und aktivieren
+
+var netzpegel = window.localStorage.getItem("netzpegel");
+if(netzpegel == "true"){
+    includeScript();
+    document.getElementById("netzon").setAttribute("d", "M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z");
+    
+}
+
+if (netzpegel == null){
+    netzpegel = "false";
+}
+
+function netzon(){
+
+    if (netzpegel == "false"){
+        document.getElementById("netzon").setAttribute("d", "M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z");
+        includeScript()
+        setTimeout(function () {
+            netzpegel = "true";
+        }, 10);
+        localStorage.setItem("netzpegel", "true");
+
+    }
+    if (netzpegel == "true") {
+        document.getElementById("netzon").setAttribute("d", "M11 4a4 4 0 0 1 0 8H8a4.992 4.992 0 0 0 2-4 4.992 4.992 0 0 0-2-4h3zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5z");
+        removeScript()
+        setTimeout(function () {
+            netzpegel = "false";
+        }, 10);
+        localStorage.setItem("netzpegel", "false");
+        location.reload()
+    }
+}
+
+
+// Funktion Ausbinden Einbinden der JavaScript-Datei
+function removeScript() {
+    const scriptElement = document.querySelector('script[src="netz.js"]');
+    if (scriptElement) {
+        scriptElement.remove();
+    }
+}
+
+// Funktion Einbinden der JavaScript-Datei
+function includeScript() {
+    const scriptElement = document.createElement('script');
+    scriptElement.src = 'netz.js'; // Passe den Dateinamen und Pfad an
+    document.body.appendChild(scriptElement);
+}
+
+
+
+
+//------------------------------------------------------------------------------------------------------------------------
+
+
+
+console.log(
+   "\n" +
+    "!@5777777777777777777777777777777777777??????7G@~     \n" +
+    "!@7                   J7!^                    Y@~   ~@@@&.P@&@@@@@&@P  \n" +
+    "!@7               7BJ?B.^JPY?7^               Y@~   ^@@@B ::.Y@@@J ..  \n" +
+    "!@7              :?&P@&~. :@@@@BJ~.           Y@~   ^@@@G    J@@@?     \n" +
+    "!@7              :?&P@&~. :@@@@BJ~.           Y@~   ^@@@G    J@@@?     \n" +
+    "!@7           5#PYYB@@@@@@@@@@#55B&@@@P~      Y@~   ~@@@B    5@@@Y\n" +
+    "!@7         :!&&B#JG@@@@@@@@@@G?:~P&@@@&?:    Y@~   7@@@#    P@@@5\n" +
+    "7@7     .^?5PP5?::~7JYYY5&@@@@#7.~~!Y#@@@B?.  Y@~   .~~~^    :~~~: \n" +
+    "7@7     5#J.   :!7!.    ^&@@@@@#J7P&&&@@@&G7. Y@~                              \n" +
+    "7@7      ..^YPGP5J7^.?PJG@@@@@#57~:!P@@@@@@&J.Y@~   ~???^  ^???^  ^???~            ?J??.  !YPB? \n" +
+    "7@7         ..          .^75B@@BJ~~GB&@@@@@@#!Y@~   5@@@7  J@@@J  ?@@@5            B@@@: 5@@@G? \n" + 
+    "!@PJJJJJJJJJJJJJJJJJJJJJJJ?J??YB@@&&@@@@@@@@@@&@~   P@@@~  ?@@@?  !@@@P  :!JYJ?~   G@@#.^#@@#~~  \n" +
+    " !@@@@@@@@@@@@@@@@@@@@@@@@@@@@@BPP#@@@@@@@@@@@@@@~   !@@@5  P@@@P  5@@@! J&@@&@@@B^ G@@B.#@@@@@&. \n" +
+    "^YYYYYYYYYYYYYYYYYYB@@@@@@@@@@BYYJYYYYYYYYYYYYYY:    7@@@Y?@@@@@JY@@@! ~@@@! .5@@B G@@B ~G@@&7~ \n" +
+    "                  J&@@@@@@@@@@&!                      7@@@@@&J@@@@@@!  ~@@@?:^G@@G G@@B  5@@&: \n" +
+    ".^^^^^^^^^^^^^^^?#@@@@@@@@@@@@@@G!^^^^^^^^^^^^^^.      7@@@@7 ?@@@@!    7B@@@@@&P: G@@#. P@@@^ \n" +
+    ":7777777777777777777777777777777?7!7777777777777.       ^!!~   ~!!^       ^!77~:   ^!!~  ^!!!. \n",
+    );
+
