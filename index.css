@@ -135,7 +135,7 @@ color: var(--linkc);
     
 }
 .link:hover{
-    transform: translateY(-5px);
+    transform: scale(1.05);
     cursor: pointer;
     
 }
@@ -160,6 +160,7 @@ color: var(--linkc);
     background: var(--hovg);
     transition: 0.5s;
     cursor: pointer;
+    transform: scale(1.1);
 }
 
    #myBtn {
@@ -179,7 +180,7 @@ color: var(--linkc);
    }
    #myBtn:hover {
     background: var(--hovg);
-    transform: translateY(-5px);
+    transform: scale(1.1);
    }
 
    #hov {
@@ -190,7 +191,7 @@ color: var(--linkc);
 
    #hov:hover {
     background-color: var(--hovg);
-       transform: translateY(-5px);
+    transform: scale(1.05);
        cursor: pointer;
 
    }
@@ -203,7 +204,7 @@ color: var(--linkc);
 
    #hovc:hover {
         background-color: var(--hovg);
-       transform: translateY(-5px);
+        transform: scale(1.02);
        cursor: default;
 
    }
