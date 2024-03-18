@@ -20,16 +20,13 @@
 </head>
 
 <body class="bodygg" id="activ">
-
-
 <canvas id="backgroundCanvas"></canvas>
 
 
 
 
-
-
-<nav class="navbar" id="nav">
+<!-- Header / Navbar Anfang-->
+<nav class=" box navbar" id="nav">
     <div class="container-fluid">
         <a class="navbar-brand" href="index.html"><svg class="Logo" xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px" height="50x"
@@ -136,7 +133,9 @@
 
         <form class="d-flex" role="search">
 
-            <svg style="color: var(--linkc);" id="mode" class="mode" onclick="switchmode()" xmlns="http://www.w3.org/2000/svg"
+            <svg 
+            
+            style="color: var(--linkc);" id="mode" class="mode" onclick="switchmode()" xmlns="http://www.w3.org/2000/svg"
                 width="10" height="10" fill="currentColor" viewBox="0 0 16 16">
                 <path id="modee"
                     d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
@@ -148,69 +147,27 @@
         </form>
     </div>
 </nav>
+<!-- Header / Navbar Ende-->
 
 
-
+<!-- Div Body Anfang-->
 <div class="p-0" id="body">
 
 
     
 
-
-           <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content" id="modual" class="clink">
-                <div class="modal-header" id="pop-head">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Dein Name</h1>
-                    <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"><svg
-                            xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-lg"
-                            viewBox="0 0 16 16">
-                            <path
-                                d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
-                        </svg></button>
-                </div>
-                <div class="modal-body" id="pop-body">
-                    <div class="form-floating mb-0">
-                        <input type="text" class="form-control" id="namee" placeholder="name">
-                        <label for="floatingInput">Name</label>
-    
-                    </div>
-                </div>
-    
-                <div class="modal-footer" id="pop-food">
-    
-                    <a class="link" onclick="auslesen()" data-bs-dismiss="modal" id="aus">
-                        <div class="card" style="border-radius: 40px; background-color: var(--rgb);">
-                            <div class="buts">
-    
-                                Bestätigen
-                            </div>
-                        </div>
-                    </a>
-    
-    
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-        
-
-
+<!-- Überschrift mit 4 Buttons Anfang-->
 <section class="py-5 text-center container" style="height: 100vh;">
    
     <div class="row py-lg-5">
         <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="clink" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> <a id="headline"></a><a>Nützliche Seiten</a> </h1>
+            <h1 class="box clink"> <a id="headline"></a><a>Nützliche Seiten</a> </h1>
             <p class="lead text-body-secondary"></p><br><br><br>
 
 
                         
 
-<div class="row row-cols-1 row-cols-md-2 g-4">
+<div class="box row row-cols-1 row-cols-md-2 g-4">
     
     <a class="link" href="#ki" class="col">
     <div class="card" style="border-radius: 40px; background-color: var(--rgb);">
@@ -258,11 +215,16 @@
             
         </div>
 </section>
+<!-- Überschrift mit 4 Buttons Ende-->
 
+
+<!-- KI Anfang -->
 <div class="album py-5">
     <div class="container">
-        <h2 class="clink"><a id="ki"><br>KI</a></h2><br>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">             
+        <h2 class="box clink"><a id="ki"><br>KI</a></h2><br>
+            <div class="box row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"> 
+                
+                <!-- ChatGPT Anfang -->
         <div class="col"  id="color-picker">
             <a href="https://chat.openai.com/" target="_blank" class="clink">
                 <div id="hov" class="card h-100">
@@ -274,44 +236,52 @@
                 </div>
             </a>
         </div>
-
+        <!-- ChatGPT Ende -->
+       
+            <!-- Powerful AI Tools Anfang -->
             <div class="col"  id="color-picker1">
-                <a href="https://godmode.space/?ref=futuretools.io" target="_blank" class="clink">
+                <a href="https://www.powerfulai.tools/" target="_blank" class="clink">
                     <div id="hov" class="card h-100">
-                        <img src="Bilder/godmode.svg" class="card-img-top">
+                        <img src="Bilder/powerfulai.svg" class="card-img-top">
                         <div class="card-body">
-                            <h5 class="card-title">God Mode</h5>
-                            <p class="card-text">Besser als ChatGPT</p>
+                            <h5 class="card-title">Powerful AI Tools</h5>
+                            <p class="card-text">Eine Sammlung von vielen KI Tools</p>
                         </div>
                     </div>
                 </a>
             </div>
+            <!-- Powerful AI Tools Ende -->
 
+            <!-- GPT GO AI Anfang -->
             <div class="col">
-                <a href="https://www.forefront.ai/" target="_blank" class="clink">
+                <a href="https://gptgo.ai/de" target="_blank" class="clink">
                     <div id="hov" class="card h-100">
-                        <img src="Bilder/forefront.svg" class="card-img-top">
+                        <img src="Bilder/gptgo.svg" class="card-img-top">
                         <div class="card-body">
-                            <h5 class="card-title">Fore Front AI</h5>
-                            <p class="card-text">Laut dem Entwiklern besser als ChatGPT 4 und mehr Funktionen</p>
+                            <h5 class="card-title">GPT GO AI</h5>
+                            <p class="card-text">Google mit GPT verknüpft</p>
                         </div>
                     </div>
                 </a>
             </div>
+            <!-- GPT GO AI Ende -->
 
+
+            <!-- Caktus AI Anfang -->
             <div class="col">
                 <a href="https://www.caktus.ai/" target="_blank" class="clink">
                     <div id="hov" class="card h-100">
                         <img src="Bilder/kaktus.svg" class="card-img-top">
                         <div class="card-body">
-                            <h5 class="card-title">Kaktus AI</h5>
+                            <h5 class="card-title">Caktus AI</h5>
                             <p class="card-text">Erstellt Aufsätze mit Quellenangaben und noch vieles mehr</p>
                         </div>
                     </div>
                 </a>
             </div>
+            <!-- Caktus AI Ende -->
 
-            
+            <!-- Chef GPT Anfang -->
             <div class="col">
                 <a href="https://www.chefgpt.xyz/de" target="_blank" class="clink">
                     <div id="hov" class="card h-100">
@@ -323,7 +293,9 @@
                     </div>
                 </a>
             </div>
+            <!-- Chef GPT Ende -->
 
+            <!-- Futuretools Anfang -->
         <div class="col">
         <a href="https://www.futuretools.io/" target="_blank" class="clink">
             <div id="hov" class="card h-100">
@@ -335,54 +307,24 @@
             </div>
         </a>
         </div>
+        <!-- Futuretools Ende -->
 
 
         </div>
     </div>
 </div>
+<!-- KI Ende -->
 
 
+<!-- Tools Anfang -->
         <div class="album py-5">
             <div class="container">
-                <h2 class="clink"><a id="tools"><br>Tools</a></h2><br>
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <h2 class="box clink" onclick="toggleEntwickler()"><a id="tools"><br>Tools</a></h2><br>
+                <div class="box row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         
         
         
-                    <div class="col">
-                        <a href="https://10015.io/" target="_blank" class="clink">
-                            <div id="hov" class="card h-100">
-                                <img src="Bilder/all.svg" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">All in one Tool</h5>
-                                    <p class="card-text">Sehr viele Tools, primär vor Programmierer geeignet</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col">
-                        <a href="https://uiverse.io/" target="_blank" class="clink">
-                            <div id="hov" class="card h-100">
-                                <img src="Bilder/uiverse.svg" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Uiverse</h5>
-                                    <p class="card-text">Kopiere fertige HTML und CSS Elemente</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                        <div class="col">
-                            <a href="https://www.freeconvert.com/de" target="_blank" class="clink">
-                                <div id="hov" class="card h-100">
-                                    <img src="Bilder/converter.svg" class="card-img-top">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Freeconvert</h5>
-                                        <p class="card-text">Jede Datei in verschiedene Formate convertieren und noch viel mehr</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>  
+                    <!-- 123 Apps Anfang -->
                     <div class="col">
                         <a href="https://123apps.com/" target="_blank" class="clink">
                             <div id="hov" class="card h-100">
@@ -394,9 +336,10 @@
                             </div>
                         </a>
                     </div>
+                    <!-- 123 Apps Ende -->
 
                     
-        
+                    <!-- I love PDF Anfang -->
                 <div class="col">
                     <a href="https://www.ilovepdf.com/de" target="_blank" class="clink">
                         <div id="hov" class="card h-100">
@@ -408,6 +351,9 @@
                         </div>
                     </a>
                 </div>
+                <!-- I love PDF Ende -->
+
+                <!-- PDF 2 go Anfang -->
                     <div class="col">
                         <a href="https://www.pdf2go.com/de" target="_blank" class="clink">
                             <div id="hov" class="card h-100">
@@ -419,20 +365,128 @@
                             </div>
                         </a>
                     </div>
+                    <!-- PDF 2 go Ende -->
+
+                    <!-- Freeconvert Anfang -->
+                        <div class="col">
+                            <a href="https://www.freeconvert.com/de" target="_blank" class="clink">
+                                <div id="hov" class="card h-100">
+                                    <img src="Bilder/converter.svg" class="card-img-top">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Freeconvert</h5>
+                                        <p class="card-text">Jede Datei in verschiedene Formate convertieren und noch viel mehr</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Freeconvert Ende -->
+
+                    <!-- Cy Math Anfang -->
+                    <div class="col">
+                        <a href="https://www.cymath.com/" target="_blank" class="clink">
+                            <div id="hov" class="card h-100">
+                                <img src="Bilder/cymath.svg" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Cy Math</h5>
+                                    <p class="card-text">Löst Komplexe Aufgaben mit Lösungsweg</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Cy Math Ende -->
+
+                    <!-- QR Code Monkey Anfang -->
+                    <div class="col">
+                        <a href="https://www.qrcode-monkey.com/de/" target="_blank" class="clink">
+                            <div id="hov" class="card h-100">
+                                <img src="Bilder/qrcodemonkey.svg" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">QR Code Monkey</h5>
+                                    <p class="card-text">Kerstelle komplett inividuelle QR Codes</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- QR Code Monkey Ende -->
+          
+
                 
                 </div>
             </div>
         </div>
+<!-- Tools Ende -->
 
 
+
+
+
+<!-- Entwickler Tools muss aktiviert werden Anfang-->
+<div class="album py-5">
+    <div class="container">
+
+        <h2 class="box clink toggleEntwickler" style="display: none;" onclick="toggleEntwickler()">Entwickler Tools</h2><br>
+        <div class="box row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+
+            <!-- Black Box AI Anfang -->
+            <div class="col toggleEntwickler" style="display: none;">
+                <a href="https://www.blackbox.ai/" target="_blank" class="clink">
+                    <div id="hov" class="card h-100">
+                        <img src="Bilder/blackbox.svg" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Black Box AI</h5>
+                            <p class="card-text">Generiert Code, zb. HTML Python, JS, Jave</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- Black Box AI Ende -->
+
+            <!-- Uiverse Anfang -->
+            <div class="col toggleEntwickler" style="display: none;">
+                <a href="https://uiverse.io/" target="_blank" class="clink">
+                    <div id="hov" class="card h-100">
+                        <img src="Bilder/uiverse.svg" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Uiverse</h5>
+                            <p class="card-text">Kopiere fertige HTML und CSS Elemente</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- Uiverse Ende -->
+
+            <!-- All Tools in one Box Anfang -->
+                <div class="col toggleEntwickler" style="display: none;">
+                    <a href="https://10015.io/" target="_blank" class="clink">
+                        <div id="hov" class="card h-100">
+                            <img src="Bilder/all.svg" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">All Tools in one Box</h5>
+                                <p class="card-text">Sehr viele Tools, primär für Programmierer geeignet</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!-- All Tools in one Box Ende -->
+
+        </div>
+    </div>
+</div>
+<!-- Entwickler muss aktiviert werden Tools Ende-->
+
+
+
+
+<!-- Grafiken Anfang-->
         <div class="album py-5">
             <div class="container">
                 
-            <h2 class="clink"><a id="grafiken"><br>Grafiken</a></h2><br>
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <h2 class="box clink"><a id="grafiken"><br>Grafiken</a></h2><br>
+                <div class="box row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         
         
-        
+                <!-- Hotpot AI Anfang -->
                     <div class="col">
                         <a href="https://hotpot.ai/" target="_blank" class="clink">
                             <div id="hov" class="card h-100">
@@ -444,6 +498,9 @@
                             </div>
                         </a>
                     </div>
+                    <!-- Hotpot AI Ende -->
+
+                    <!-- Vizvom AI Anfang -->
                 <div class="col">
                     <a href="https://www.vizcom.ai/" target="_blank" class="clink">
                         <div id="hov" class="card h-100">
@@ -455,6 +512,9 @@
                         </div>
                     </a>
                 </div>
+                <!-- Vizvom AI Ende -->
+
+                <!-- Kaiber Ai Anfang -->
                     <div class="col">
                         <a href="https://kaiber.ai/" target="_blank" class="clink">
                             <div id="hov" class="card h-100">
@@ -466,8 +526,10 @@
                             </div>
                         </a>
                     </div>
-        
-                <div class="col">
+                    <!-- Kaiber Ai Ende -->
+
+                    <!-- Magiceraser Anfang -->
+                        <div class="col">
                     <a href="https://magicstudio.com/de/magiceraser" target="_blank" class="clink">
                         <div id="hov" class="card h-100">
                             <img src="Bilder/magicstudio.svg" class="card-img-top">
@@ -478,6 +540,9 @@
                         </div>
                     </a>
                 </div>
+                <!-- Magiceraser Ende -->
+
+                <!-- Hugging Face Anfang -->
                     <div class="col">
                         <a href="https://huggingface.co/spaces/huggingface-projects/diffuse-the-rest" target="_blank" class="clink">
                             <div id="hov" class="card h-100">
@@ -489,6 +554,9 @@
                             </div>
                         </a>
                     </div>
+                    <!-- Hugging Face Ende -->
+
+                    <!-- Dalle Anfang -->
                     <div class="col">
                         <a href="https://labs.openai.com/" target="_blank" class="clink">
                             <div id="hov" class="card h-100">
@@ -502,21 +570,24 @@
                             </div>
                         </a>
                     </div>
+                    <!-- Dalle Ende -->
+
+
                 </div>
             </div>
         </div>
+<!-- Grafiken Ende-->
 
 
 
-
-
+<!-- Secret Anfang -->
         <div class="album py-5">
             <div class="container">
-            <h2 class="clink"><a id="secret"><br>Secret</a></h2><br>
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <h2 class="box clink"><a id="secret"><br><br>Secret</a></h2><br>
+                <div class="box row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         
         
-        
+                <!-- 12ft Anfang -->
                     <div class="col">
                         <a href="https://12ft.io/" target="_blank" class="clink">
                             <div id="hov" class="card h-100">
@@ -528,36 +599,94 @@
                             </div>
                         </a>
                     </div>
+                    <!-- 12ft Ende -->
+
+                    <!-- Dateien absichtlich beschädigen Anfang -->
                 <div class="col">
-                <a href="https://pimeyes.com/en" target="_blank" class="clink">
+                <a href="https://corrupt-a-file.net/" target="_blank" class="clink">
                     <div id="hov" class="card h-100">
-                        <img src="Bilder/pimeyes.svg" class="card-img-top">
+                        <img src="Bilder/file.svg" class="card-img-top">
                         <div class="card-body">
-                            <h5 class="card-title">Pim Eys</h5>
-                            <p class="card-text">Durchsuche das ganze Internet mit einem Bild einer Person</p>
+                            <h5 class="card-title">Dateien absichtlich beschädigen</h5>
+                            <p class="card-text">Mit dem Tool lassen dich Dateine nicht mehr öffen, weil sie absichtlich beschädigt werden.</p>
                         </div>
                     </div>
                 </a>
                 </div>
+                <!-- Dateien absichtlich beschädigen Ende -->
+
+                <!-- Update Faker Anfang -->
                      <div class="col">
-            <a href="http://worldbirthsanddeaths.com/" target="_blank" class="clink">
+            <a href="https://updatefaker.com/" target="_blank" class="clink">
             <div id="hov" class="card h-100">
-                <img src="Bilder/world.svg" class="card-img-top">
+                <img src="Bilder/update.svg" class="card-img-top">
                 <div class="card-body">
-                    <h5 class="card-title">World birthsand deaths</h5>
-                    <p class="card-text">Siehe die an wo aktuell Menschen sterben und geboren werden</p>
+                    <h5 class="card-title">Update Faker</h5>
+                    <p class="card-text">Du kannst hiermit ein Fake Update starten, wenn du mal wieder keine Lust auf die Arbeit hast.</p>
                 </div>
             </div>
         </a>
     </div>
+        <!-- Update Faker Ende -->
+
+        
+        <!-- Secret muss aktiviert werde Anfang -->
+
+        <!-- Cracked Games Anfang -->
+        <div class="col toggleSecret" style="display: none;">
+            <a href="https://cracked-games.org/" target="_blank" class="clink">
+                <div id="hov" class="card h-100">
+                    <img src="Bilder/crackedgames.svg" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Cracked Games</h5>
+                        <p class="card-text">Downloade verschiedende Apps kostenlos<br> z.B. Adobe, Microsoft Office</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- Cracked Games Ende -->
         
         
-        
+        <!-- Pim Eys Anfang -->
+        <div class="col toggleSecret" style="display: none;">
+            <a href="https://pimeyes.com/en" target="_blank" class="clink">
+                <div id="hov" class="card h-100">
+                    <img src="Bilder/pimeyes.svg" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Pim Eys</h5>
+                        <p class="card-text">Durchsuche das ganze Internet mit einem Bild einer Person</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- Pim Eys Ende -->        
+
+        <!-- World birthsand deaths Anfang -->
+        <div class="col toggleSecret" style="display: none;">
+            <a href="http://worldbirthsanddeaths.com/" target="_blank" class="clink">
+                <div id="hov" class="card h-100">
+                    <img src="Bilder/world.svg" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">World birthsand deaths</h5>
+                        <p class="card-text">Siehe dir an wo aktuell Menschen sterben und geboren werden</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- World birthsand deaths Ende -->
+
+        <!-- Secret muss aktiviert werde Ende -->
+
+
+
+
+
         
                 </div>
             </div>
         </div>
 
+<!-- Secret Ende -->
 
 
 
@@ -578,8 +707,7 @@
 
 
 
-
-
+<!-- Go TO Top Buttom -->
 
     <a onclick="topFunction()" id="myBtn" title="Go to top" class="clink">
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-up"
@@ -590,6 +718,7 @@
 
 
 
+<!-- Name Änderung Popup Anfang-->
 <div class="toast-container position-fixed top-0 end-0 p-3">
     <div id="liveToast1" class="toast  text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
@@ -631,7 +760,9 @@
         </div>
     </div>
 </div>
+<!-- Name Änderung Popup Ende-->
 
+<!-- Popup Individueller Modus Fehler Anfang-->
 <a href="impressum.html#funktionen">
     <div class="toast-container position-fixed top-0 end-0 p-3">
     <div id="liveToast4" class="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
@@ -649,20 +780,24 @@
     </div>
 </div>
 </a>
+<!-- Popup Individueller Modus Fehler Ende-->
 
 
 
 
 </div>
+<!-- Div Body Anfang-->
+
+
 
 <script>
-   
+
+
 </script>
 <footer>
 
-
-    <p class="text-center text-muted">
-        <a class="link"  name="link" href="index.html"> &copy; IT Wolf 2023</a>
+    <p class="box text-center text-muted">
+        <a class="link"  name="link" href="index.html"> &copy; IT Wolf 2024</a>
         <a class="clink">|</a>
         <a class="link" name="link" href="impressum.html">Impressum</a>
     </p>
