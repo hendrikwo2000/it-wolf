@@ -19,11 +19,11 @@
 </head>
 
 <body class="bodygg">
+<canvas id="backgroundCanvas"></canvas>
 
-    <canvas id="backgroundCanvas"></canvas>
     
-
-    <nav class="navbar" id="nav">
+<!-- Header / Navbar Anfang-->
+    <nav class="box navbar" id="nav">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html"><svg class="Logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                 width="100px" height="50x" viewBox="0 0 1810.4 672.6"
@@ -141,66 +141,30 @@
             </form>
         </div>
     </nav>
+<!-- Header / Navbar Ende-->
 
 
-
+<!-- Div Body Anfang-->
     <div class="p-0" id="body">
 
 
 
 
 
-        <!-- Modal -->
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content" id="modual" class="clink">
-                    <div class="modal-header" id="pop-head">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Dein Name</h1>
-                        <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-lg"
-                            viewBox="0 0 16 16">
-                            <path
-                                d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
-                        </svg></button>
-                    </div>
-                    <div class="modal-body" id="pop-body">
-                        <div class="form-floating mb-0">
-                            <input type="text" class="form-control" id="namee" placeholder="name">
-                            <label for="floatingInput">Name</label>
-                            
-                        </div>
-                    </div>
 
-                    <div class="modal-footer" id="pop-food">
-                        
-                        <a class="link"  onclick="auslesen()" data-bs-dismiss="modal" id="aus">
-                            <div class="card" style="border-radius: 40px; background-color: var(--rgb);">
-                                <div class="buts">
-                                Bestätigen
-                                </div>
-                            </div>
-                        </a>
-
-                     
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
+<!-- Überschrift mit 4 Buttons Anfang-->
 
         <section class="py-5 text-center container" style="height: 100vh;">
             <div class="row py-lg-5">
                 <div class="col-lg-6 col-md-8 mx-auto">
-                    <h1 class="clink" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> <a
-                            id="headline"></a><a>Impressum</a> </h1>
+                    <h1 class="clink box"> <a
+                            id="headline" ></a><a>Impressum</a> </h1>
                     <p class="lead text-body-secondary"></p><br><br><br>
 
 
 
 
-                    <div class="row row-cols-1 row-cols-md-2 g-4">
+                    <div class="box row row-cols-1 row-cols-md-2 g-4">
 
 
                                     <a class="link" href="#über+mich" class="col">
@@ -269,43 +233,43 @@
 
             </div>
         </section>
-        
+<!-- Überschrift mit 4 Buttons Ende-->
 
 
 
 
 
-
-
-        <div class="album py-5" style="transition: 1s;">
+<!-- Über mich Anfang-->
+       <div class="album py-5" style="transition: 1s;">
             
             <div class="container" style="height: 100vh;">
-                <h2 class="clink"><a id="über+mich"><br><br><br><br>Über mich</a></h2><br>
+                <h2 class="box clink"><a id="über+mich"><br><br><br><br>Über mich</a></h2><br>
 
           
-                        <p class="clink">
+                        <p class="box clink">
                         Ich bin Hendrik Wolf, der Ersteller dieser Seite.<br>
-                        Aktuell mache ich eine Ausbildung zum Elektroniker, <br>
+                        Derzeit bin ich ausgelernter Elektroniker, <br>
                         in meiner Freizeit bin ich sehr sportlich unterwegs und bin auch am Programmieren. <br>
                         Das Programmieren (Webentwicklung) habe ich mir selbst beigebracht, ich nutze HTML, CSS und JS.<br>
                         Als CSS-Framework benutze ich Bootstrap. <br>
                         Ich versuche mich stetig zu verbessern und meine Fähigkeiten zu erweitern.<br><br>
                         Ich wollte eine Seite erstellen, mit nützlichen Seiten um ein Lesezeichenkaos zu vermeiden.
                         </p>
-                        <p  class="card-text"><small class="clink" class="text-body-secondary">Created by Hendrik Wolf in 2023</small></p>
+                        <p  class="box card-text"><small class="clink" class="text-body-secondary">Created by Hendrik Wolf in 2024</small></p>
                     </div>
                 </div>
+<!-- Über mich Ende-->
                 
         
 
 
 
-
+<!-- Kontakt Anfang-->
         <div class="album py-5">
             <div class="container" style="height: 100vh;">
-                <h2 class="clink"><a id="kontakt"><br><br><br><br>Kontakt</a></h2><br>
+                <h2 class="box clink"><a id="kontakt"><br><br><br><br>Kontakt</a></h2><br>
                 <div>
-                    <p class="clink">Wenn dir weiter Seiten einfallen, die auf der Seite einen Platz haben sollen, oder <br> 
+                    <p class="box clink">Wenn dir weiter Seiten einfallen, die auf der Seite einen Platz haben sollen, oder <br> 
                         wenn dir noch weite Features einfallen, schreibe eine E-Mail an: <br><br>
                         it.wolf.kontakt@gmail.com <br>
                         Ansprechpartner: Hendrik Wolf</p>
@@ -314,75 +278,22 @@
                 </div>
             </div>
         </div>
+<!-- Kontakt Ende-->
 
 
 
-
-
-        <!-- Modal -->
-        <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdrop1Label" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content" id="modual" class="clink">
-                    <div class="modal-header" id="pop-head">
-                        <h1 class="modal-title fs-5" id="staticBackdrop1Label">Tic Tac Toe</h1>
-                        <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"
-                            onclick="resetGame()"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                                fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                <path
-                                    d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
-                            </svg></button>
-                    </div>
-
-                    <div class="modal-body" id="pop-body">
-        
-                        <div id="board">
-                            <div class="cell" onclick="makeMove(0)"></div>
-                            <div class="cell" onclick="makeMove(1)"></div>
-                            <div class="cell" onclick="makeMove(2)"></div>
-                            <div class="cell" onclick="makeMove(3)"></div>
-                            <div class="cell" onclick="makeMove(4)"></div>
-                            <div class="cell" onclick="makeMove(5)"></div>
-                            <div class="cell" onclick="makeMove(6)"></div>
-                            <div class="cell" onclick="makeMove(7)"></div>
-                            <div class="cell" onclick="makeMove(8)"></div>
-                        </div><br>
-        
-        
-                    </div>
-        
-                    <div class="position-relative m-4">
-        
-                        <div class="position-absolute bottom-0 start-0" id="ticinfo">
-        
-                        </div>
-        
-                        <div class="position-absolute bottom-0 end-0">
-                            <a class="link" onclick="resetGame()">
-                                <div class="card" style="border-radius: 40px; background-color: var(--rgb);">
-                                    <div class="buts">
-                                        Neues Spiel
-                                    </div>
-                                </div>
-                            </a>
-        
-                        </div>
-                    </div>
-        
-        
-                </div>
-            </div>
-        </div>
-
-
+<!-- Funktionen Anfang -->
 <div class="album py-5">
     <div class="container" style="height: 100vh;">
-        <h2 class="clink"><a id="funktionen"><br><br><br><br>Funktionen</a></h2><br>
-
+        <h2 class="box clink"><a id="funktionen"><br><br><br><br>Funktionen</a></h2><br>
 
         <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-2">
+
+
+
+<!-- individuelles Farbschema Anfang -->
             <div class="col">
-                <a target="_blank" class="clink" >
+                <a target="_blank" class="box clink" >
                     <div id="hovc" class="card h-100">
                        
                         <div class="card-body">
@@ -413,15 +324,19 @@
                     </div>
                 </a>
             </div>
+<!-- individuelles Farbschema Ende -->
+
+
+<!-- Dein Name Anfang -->
 
                             <div class="col">
-                                <a target="_blank" class="link" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                <a target="_blank" class="box link" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                     <div id="hovc" class="card h-100">
                                         <img src="" class="card-img-top">
                                         <div class="card-body">
                                             <h5 class="card-title">Dein Name</h5>
                                             <p class="card-text">
-                                                Klicke <b>hier</b> oder auf eine beliebige Seitenüberschrift und gebe deinen Namen ein.<br>
+                                                Klicke <b>hier</b> und gebe deinen Namen ein.<br>
                                                 Dein Name wird dann oben in der Überschrifft angezeigt.
                                             </p>
                                         </div>
@@ -430,10 +345,55 @@
                             </div>
 
 
+                            <!--Funktionen Name Eingabe Popup Anfang-->
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content" id="modual">
+                                        <div class="modal-header" id="pop-head"  style="border-color: var(--popupborder)">
+                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Dein Name</h1>
+                                            <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-lg"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                                                </svg></button>
+                                        </div>
+                                        <div class="modal-body" id="pop-body">
+                                            <div class="form-floating mb-0">
+                                                <input type="text" class="form-control" id="namee" placeholder="name" style="border-color: var(--popupborder)">
+                                                <label for="floatingInput">Name</label>
+                            
+                                            </div>
+                                        </div>
+                            
+                                        <div class="modal-footer" id="pop-food"  style="border-color: var(--popupborder)">
+                            
+                                            <a class="link" onclick="auslesen()" data-bs-dismiss="modal" id="aus">
+                                                <div class="card" style="border-radius: 40px; background-color: var(--rgb);">
+                                                    <div class="buts">
+                                                        Bestätigen
+                                                    </div>
+                                                </div>
+                                            </a>
+                            
+                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Funktionen Name Eingabe Popup Ende-->
+                 
+
+
+                
+<!-- Dein Name Ende -->
 
                       
+<!-- Netz Anfang -->
                             <div class="col">
-                                <a target="_blank" class="clink">
+                                <a target="_blank" class="box clink">
                                     <div id="hovc" class="card h-100">
 
                                         <div class="card-body">
@@ -459,197 +419,124 @@
                                     </div>
                                 </a>
                             </div>
+<!-- Netz Ende -->
 
 
 
-
+<!-- Tic Tac Toe (Beta) Anfang -->
             <div class="col" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
-                <a target="_blank" class="link">
+                <a target="_blank" class="box link">
                     <div id="hovc" class="card h-100">
                         <img src="" class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title">Tic Tac Toe (Beta)</h5>
                             <p class="card-text">
                                 Klicke <b>hier</b> um ein neues Tic Tac Toe Spiel zu starten.<br>
-                                Der Computer setzt Zufällig, also nach keinem speziellen Schema.
+                                Der Computer setzt zufällig, also nach keinem speziellen Schema.
                             </p>
                         </div>
                     </div>
                 </a>
             </div>
 
+
+                <!-- Funktionen TicTacToe Popup Anfang -->
+                <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                    aria-labelledby="staticBackdrop1Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content" id="modual" class="clink">
+                            <div class="modal-header" id="pop-head" style="border-color: var(--popupborder)">
+                                <h1 class="modal-title fs-5" id="staticBackdrop1Label">Tic Tac Toe</h1>
+                                <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"
+                                    onclick="resetGame()"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                        fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                        <path
+                                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                                    </svg></button>
+                            </div>
+                
+                            <div class="modal-body" id="pop-body">
+                
+                                <div id="board">
+                                    <div class="cell" onclick="makeMove(0)"></div>
+                                    <div class="cell" onclick="makeMove(1)"></div>
+                                    <div class="cell" onclick="makeMove(2)"></div>
+                                    <div class="cell" onclick="makeMove(3)"></div>
+                                    <div class="cell" onclick="makeMove(4)"></div>
+                                    <div class="cell" onclick="makeMove(5)"></div>
+                                    <div class="cell" onclick="makeMove(6)"></div>
+                                    <div class="cell" onclick="makeMove(7)"></div>
+                                    <div class="cell" onclick="makeMove(8)"></div>
+                                </div><br>
+                
+                            </div>
+                
+                            <div class="position-relative m-4">
+                
+                                <div class="position-absolute bottom-0 start-0" id="ticinfo">
+                
+                                </div>
+                
+                                <div class="position-absolute bottom-0 end-0">
+                                    <a class="link" onclick="resetGame()">
+                                        <div class="card" style="border-radius: 40px; background-color: var(--rgb);">
+                                            <div class="buts">
+                                                Neues Spiel
+                                            </div>
+                                        </div>
+                                    </a>
+                
+                                </div>
+                            </div>
+                
+                
+                        </div>
+                    </div>
+                </div>
+                <!-- Funktionen TicTacToe Popup Ende -->
+
+
+
+<!-- Tic Tac Toe (Beta) Ende -->
             
 
 
-                        
+              
+            
+           
+
+
+
             
         </div>
     </div>
 </div>
+<!-- Funktionen Ende -->
       
 
 
 
-
+<!-- Über die Seite Anfang -->
         <div class="album py-5">
             <div class="container" style="height: 85vh;">
-                <h2 class="clink"><a id="über+die+seite"><br><br><br><br>Über die Seite</a></h2><br>
+                <h2 class="box clink"><a id="über+die+seite"><br><br><br><br>Über die Seite</a></h2><br>
                 <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-2">
+                                
 
 
-
-
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="how1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                        aria-labelledby="how1" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content" id="modual" class="clink">
-                                <div class="modal-header" id="pop-head">
-                                    <h1 class="modal-title fs-5" id="how1">Name ändern</h1>
-                                    <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-lg"
-                                            viewBox="0 0 16 16">
-                                            <path
-                                                d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
-                                        </svg></button>
-                                        </div>
-                                        <div class="modal-body" id="pop-body">
-                    
-                                                    Wenn du auf eine belibiege Seitenüberschrift klickst oder unter Funktionen "Name ändern", erschent ein Pop-up Fesnter mit "Dein Name".<br>
-                                                    In das Input Feld "Name" kannst du deinen Namen eintragen.<br>
-                                                    Wenn du auf "Bestätigen" klickst, erscheint eine bestätigungs Nachricht und die Überschrift ändert sich zu<br><br>
-                                                    "Moin 'dein Name' - 'Seiten Überschrift'"<br><br><br>
-                                                    Dein Name wird im Local Storage gespeichert und bei jeder Seite wie beschrieben angezeigt.<br>
-                                                    Wenn du in dem Input Feld "Name" nichts eintippst und auf "Bestätigen" klickst,<br>
-                                                    wird die standart Seiten Überschrifft angezeigt und es erscheint eine weitere bestätigungs Nachricht.<br><br>
-                                                    Wenn du in dem Input Feld "Name" beispeilsweise ein Style Tag ein tipps und auf "Bestätigen" klickst,<br>
-                                                    erscheint eine Fehlermeldung.
- 
-                                         </div>                 
-                                     </div>
-                                </div>
-                            </div>
-
-                           
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="how2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                                aria-labelledby="how2" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content" id="modual" class="clink">
-                                        <div class="modal-header" id="pop-head">
-                                            <h1 class="modal-title fs-5" id="how2">Darkmode</h1>
-                                            <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"
-                                               ><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                                                    fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
-                                                </svg></button>
-                                        </div>
-                                        <div class="modal-body" id="pop-body">
-                            Den Darkmode kannst du mit einem Klick auf die Sonne, oben rechts, aktivierten bzw. deaktivieren.<br>
-                            Der Zusstand des Darkmodes wir im Local Storage gespeichert.<br>
-                            Er ist somit Seitenübergreifend, zudem nimmt er nach erneutem Besuch der Seite den letzen Zustand wieder an.<br>
-                            Wenn der Zustand noch unbekannt ist (erster Besuch der Seite oder Local Storage gelöscht) <br>
-                            nimmt der Darkmode den Zustand des Systems an.<br><br>
-                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="how3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                                aria-labelledby="how3" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content" id="modual" class="clink">
-                                        <div class="modal-header" id="pop-head">
-                                            <h1 class="modal-title fs-5" id="how3">Individuelles Farbschema</h1>
-                                            <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"
-                                                ><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                                                    fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
-                                                </svg></button>
-                                        </div>
-                                        <div class="modal-body" id="pop-body">
-                            Du kannst sein individuelles Farbschema erstellen indem du im Impressum und Funktionen, "Erstelle dein individuelles Farbschema" auf den Schalter klikst.<br>
-                            Jetzt sind die Eingabefelder für die Farbe freigeschaltet und du kannst eine Hintergrundfarbe und eine Schriftfarbe auswählen.<br>
-                            Mit dem Klick auf OK werden die Farben gespeichert (auch im Local Storage).<br>
-                            Das Symbol zum wechseln des Moduses ist jetzt ein Zahnrad und du kannst jeztz den Dark und Light Mode nicht aktivierten, du bekommst ein Fehlermeldung.<br>
-                            Zum deaktivieren des Individuelles Farbschemas drückst du wieder auf den Schalter und der letzte Modus wird aktiviert.
-                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                                     <!-- Modal -->
-                                    <div class="modal fade" id="how4" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                                        aria-labelledby="how4" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content" id="modual" class="clink">
-                                                <div class="modal-header" id="pop-head">
-                                                    <h1 class="modal-title fs-5" id="how4">Tic Tac Toe (Beta)</h1>
-                                                    <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"
-                                                        ><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                                                            fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                                            <path
-                                                                d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
-                                                        </svg></button>
-                                                </div>
-                                                <div class="modal-body" id="pop-body">
-                                    Um ein Tic Tac Toe Spiel zu starten klicke unter Impressum, Funktionen auf "Tic Tac Toe".<br>
-                                    Du Spiels gegen einen Comuter, es ist ziemlich einfach macht aber trotzdem Spaß.<br>
-                                    Der Code wurde mit ChatGPT geschrieben.
-                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="how5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                                        aria-labelledby="how5" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content" id="modual" class="clink">
-                                                <div class="modal-header" id="pop-head">
-                                                    <h1 class="modal-title fs-5" id="how5">Netz (Beta)</h1>
-                                                    <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"><svg
-                                                            xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-lg"
-                                                            viewBox="0 0 16 16">
-                                                            <path
-                                                                d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
-                                                        </svg></button>
-                                                </div>
-                                                <div class="modal-body" id="pop-body">
-                                                Das Netz nimmt 100% des oberen Bildschirmes ein. <br>
-                                                Die Kreise bewegen sich langsam und verbinden sich dynamisch untereinander.<br>
-                                                Wenn die Maus in dem Bereich ist verbinden sich die Kreise in der Nähe der Maus dynamisch mit der Maus.<br>
-                                                Das Feature gibt es nur für etwas größere Bildschirme. <br>Nich für Handys!<br>
-                                                Der Code wurden zum Großteil mit ChatGPT geschrieben.
-
-                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-
-
-
-<div class="col">
+<!-- Features erklärt Anfang -->
+<div class="box col">
     <a target="_blank" class="clink">
         <div id="hovc" class="card h-100">
             <div class="card-body">
                 <h5 class="card-title">Features erklärt</h5>
                 <p class="card-text">
-                <a target="_blank" class="link" data-bs-toggle="modal" data-bs-target="#how1">Name ändern</a><br>
+                <a target="_blank" class="link" data-bs-toggle="modal" data-bs-target="#how1">Dein Name</a><br>
                 <a target="_blank" class="link" data-bs-toggle="modal" data-bs-target="#how2">Darkmode</a><br>
                 <a target="_blank" class="link" data-bs-toggle="modal" data-bs-target="#how3">Individuelles Farbschema</a><br>
-                <a target="_blank" class="link" data-bs-toggle="modal" data-bs-target="#how4">Tic Tac Toe (Beta)</a><br>
-                <a target="_blank" class="link" data-bs-toggle="modal" data-bs-target="#how5">Netz (Beta)</a>
+                <a target="_blank" class="link" data-bs-toggle="modal" data-bs-target="#how4">Entwickler Tools</a><br>
+                <a target="_blank" class="link" data-bs-toggle="modal" data-bs-target="#how5">Tic Tac Toe (Beta)</a><br>
+                <a target="_blank" class="link" data-bs-toggle="modal" data-bs-target="#how6">Netz (Beta)</a>
 
 
                 </p>
@@ -658,8 +545,196 @@
     </a>
 </div>
 
+<!-- Modal Dein Name erklärt Anfang -->
+<div class="modal fade" id="how1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="how1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="modual" class="clink">
+            <div class="modal-header" id="pop-head" style="border-color: var(--popupborder)">
+                <h1 class="modal-title fs-5" id="how1">Dein Name</h1>
+                <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-lg"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                    </svg></button>
+            </div>
+            <div class="modal-body" id="pop-body">
 
-<div class="col">
+                Wenn du unter Funktionen auf "Dein Name" klickst, erschent ein
+                Pop-up Fesnter mit "Dein Name".<br>
+                In das Input Feld "Name" kannst du deinen Namen eintragen.<br>
+                Wenn du auf "Bestätigen" klickst, erscheint eine bestätigungs Nachricht und die Überschrift ändert sich
+                zu<br><br>
+                "Moin 'dein Name' - 'Seiten Überschrift'"<br><br><br>
+                Dein Name wird im Local Storage gespeichert und bei jeder Seite wie beschrieben angezeigt.<br><br>
+                Wenn du in dem Input Feld "Name" nichts eintippst und auf "Bestätigen" klickst,<br>
+                wird die standart Seiten Überschrifft angezeigt und es erscheint eine weitere bestätigungs
+                Nachricht.<br><br>
+                Wenn du in dem Input Feld "Name" beispeilsweise ein Style Tag ein tipps und auf "Bestätigen"
+                klickst,<br>
+                erscheint eine Fehlermeldung.
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Dein Name erklärt Ende -->
+
+
+
+<!-- Modal Darkmode erklärt Anfang -->
+<div class="modal fade" id="how2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="how2" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="modual" class="clink">
+            <div class="modal-header" id="pop-head" style="border-color: var(--popupborder)">
+                <h1 class="modal-title fs-5" id="how2">Darkmode</h1>
+                <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-lg"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                    </svg></button>
+            </div>
+            <div class="modal-body" id="pop-body">
+                Den Darkmode kannst du mit einem Klick auf die Sonne, oben rechts, aktivierten bzw. deaktivieren.<br><br>
+                Der Zusstand des Darkmodes wir im Local Storage gespeichert.<br>
+                Er ist somit Seitenübergreifend, zudem nimmt er nach erneutem Besuch der Seite den letzen Zustand wieder
+                an.<br><br>
+                Wenn der Zustand noch unbekannt ist (erster Besuch der Seite oder Local Storage gelöscht) <br>
+                nimmt der Darkmode den Zustand des Systems an.
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Darkmode erklärt Ende -->
+
+
+
+<!-- Modal Individuelles Farbschema erklärt Anfang -->
+<div class="modal fade" id="how3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="how3" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="modual" class="clink">
+            <div class="modal-header" id="pop-head" style="border-color: var(--popupborder)">
+                <h1 class="modal-title fs-5" id="how3">Individuelles Farbschema</h1>
+                <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-lg"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                    </svg></button>
+            </div>
+            <div class="modal-body" id="pop-body">
+                Du kannst sein individuelles Farbschema erstellen indem du im Impressum und Funktionen, "Erstelle dein
+                individuelles Farbschema" auf den Schalter klikst.<br><br>
+                Jetzt sind die Eingabefelder für die Farbe freigeschaltet und du kannst eine Hintergrundfarbe und eine
+                Schriftfarbe auswählen.<br><br>
+                Mit dem Klick auf OK werden die Farben gespeichert (auch im Local Storage).<br><br>
+                Das Symbol zum wechseln des Moduses ist jetzt ein Zahnrad und du kannst jeztz den Dark und Light Mode
+                nicht aktivierten, du bekommst ein Fehlermeldung.<br><br>
+                Zum deaktivieren des Individuelles Farbschemas drückst du wieder auf den Schalter und der letzte Modus
+                wird aktiviert.
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Individuelles Farbschema erklärt Ende -->
+
+
+<!-- Modal Entwickler Tools erklärt Anfang -->
+<div class="modal fade" id="how4" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="how4" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="modual" class="clink">
+            <div class="modal-header" id="pop-head" style="border-color: var(--popupborder)">
+                <h1 class="modal-title fs-5" id="how4">Entwickler Tools</h1>
+                <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-lg"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                    </svg></button>
+            </div>
+            <div class="modal-body" id="pop-body">
+                Du kannst die Entwickler Tools freischalten,<br>
+                indem du auf der Startseite auf<br>
+                die Unter - Überschrift "Tools" klickst.<br><br>
+                Dann erscheinen unter den Tools die Entwickler Tools.<br><br>
+                Mit einem Klick auf Tools oder Entwickler Tools<br>
+                kannst du sie wieder verschwinden lassen. <br><br>
+                Vielleicht wurden mit einem änlichen System noch andere spannende Seiten versteckt.
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Entwickler Tools erklärt Ende -->
+
+
+<!-- Modal Tic Tac Toe (Beta) erklärt Anfang -->
+<div class="modal fade" id="how5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="how5" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="modual" class="clink">
+            <div class="modal-header" id="pop-head" style="border-color: var(--popupborder)">
+                <h1 class="modal-title fs-5" id="how5">Tic Tac Toe (Beta)</h1>
+                <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-lg"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                    </svg></button>
+            </div>
+            <div class="modal-body" id="pop-body">
+                Um ein Tic Tac Toe Spiel zu starten klicke unter Impressum, Funktionen auf "Tic Tac Toe".<br><br>
+                Du Spiels gegen einen Comuter, es ist ziemlich einfach macht aber trotzdem Spaß.<br><br>
+                Der Code wurde mit ChatGPT geschrieben.
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Tic Tac Toe (Beta) erklärt Ende -->
+
+<!-- Modal Netz (Beta) erklärt Anfang -->
+<div class="modal fade" id="how6" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="how6" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="modual" class="clink">
+            <div class="modal-header" id="pop-head" style="border-color: var(--popupborder)">
+                <h1 class="modal-title fs-5" id="how6">Netz (Beta)</h1>
+                <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-lg"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                    </svg></button>
+            </div>
+            <div class="modal-body" id="pop-body">
+                Das Netz nimmt 100% des oberen Bildschirmes ein. <br><br>
+                Die Kreise bewegen sich langsam und verbinden sich dynamisch untereinander.<br>
+                Wenn die Maus in dem Bereich ist verbinden sich die Kreise in der Nähe der Maus dynamisch mit der
+                Maus.<br><br>
+                Das Feature gibt es nur für etwas größere Bildschirme. <br>
+                Nich für Handys! Siet nicht gut aus.<br><br>
+                Der Code wurden zum Großteil mit ChatGPT geschrieben.
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Netz (Beta) erklärt Ende -->
+
+
+<!-- Features erklärt Ende -->
+
+<!-- Alle Versionen und GitHub Link Anfang -->
+<div class="box col">
     <a target="_blank" class="clink">
         <div id="hovc" class="card h-100">
             <div class="card-body">
@@ -681,13 +756,14 @@
         </div>
     </a>
 </div>
-
+<!-- Alle Versionen und GitHub Link Ende -->
 
 
 
                 </div>
             </div>
         </div>
+<!-- Über die Seite Ende -->
 
 
 
@@ -708,18 +784,18 @@
 
 
 
-
-
-
-
+<!-- Go To Top Button Anfang-->
         <a onclick="topFunction()" id="myBtn" title="Go to top" class="clink">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-up"
                 viewBox="0 0 16 16">
                 <path fill-rule="evenodd"
                     d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" />
             </svg></a>
+<!-- Go To Top Button Ende-->
 
 
+
+<!-- Name Änderung Popup Anfang-->
         <div class="toast-container position-fixed top-0 end-0 p-3">
             <div id="liveToast1" class="toast  text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
@@ -761,7 +837,10 @@
                 </div>
             </div>
         </div>
+<!-- Name Änderung Popup Anfang-->
 
+
+<!-- Popup Individueller Modus Fehler Anfang-->
         <a href="#funktionen">
             <div class="toast-container position-fixed top-0 end-0 p-3">
                 <div id="liveToast4" class="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
@@ -780,32 +859,33 @@
             </div>
         </a>
 
+<!-- Popup Individueller Modus Fehler Ende-->
+
 
 
 
 
 
     </div>
+    <!-- Div Body Ende-->
 
     <script>
 
   
     </script>
-    <footer>
+
+       <footer>
 
 
-        <p class="text-center text-muted">
-            <a class="link" name="link" href="index.html"> &copy; IT Wolf 2023</a>
+        <p class="box text-center text-muted">
+            <a class="link" name="link" href="index.html"> &copy; IT Wolf 2024</a>
             <a class="clink">|</a>
             <a class="link" name="link" href="impressum.html">Impressum</a>
         </p>
 
 
     </footer>
-<script>
 
-    
-</script>
 </body>
 
 </html>
