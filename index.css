@@ -4,10 +4,11 @@
     --linkc: #000000; /*Schrift Farbe*/
     --backg: #ffffff; /*Hintergrund Farbe*/
     --hovg: #0692e32a; /*Hover Farbe*/
-    --them: #0692e317;/*Normaler Cartenhintergrund*/
+    --them: #0692e317;/*Normaler Kartenhintergrund*/
     --popupborder: #dee2e64b; /* Border Farbe für Popups*/
-    --circle-color: #0693e3; /* Hier änderst du die Farbe auf deine gewünschte Farbe */
-    --line-color: #0693e3; /* Hier änderst du die Farbe auf deine gewünschte Farbe */
+    --circle-color: #0693e3; /* Netz Kreis Farbe */
+    --line-color: #0693e3; /* Netz Linie Farbe */
+    --stern-color: rgb(255, 196, 0); /* Stern Farbe*/
 
 
 }
@@ -85,9 +86,89 @@ color: var(--linkc);
 
 
 /*---------------------------------------------------------------------*/
+/*  Button für E-Book */
+.bute{
+    position: absolute;
+  
+        bottom: 30px;
+        /* Abstand vom unteren Rand des Containers */
+        right: 30px;
+    white-space: nowrap;
+        color: var(--linkc);
+        border-radius: 40px;
+        border: none;
+        padding: 15px;
+        transition: 0.5s;
+        background-color: var(--them);
+        width: 180px;
+       
+        align-items: center;
+        text-align: center;
+
+}
+    
+.bute:hover{
+    background-color: var(--hovg);
+    transform: scale(1.1);
+        transition: all;
+        transition: 0.5s;
+        cursor: pointer;
+}
+
+.bute:active {
+    transform: scale(0.9);
+    transition: 0.25s;
+}
+
+
+.hove{
+    background-color: var(--them);
+}
+
+
+/*---------------------------------------------------------------------*/
+/*  Button für Danke */
+.butw {
+    
+
+    bottom: 30px;
+    /* Abstand vom unteren Rand des Containers */
+    right: 30px;
+    white-space: nowrap;
+    color: var(--linkc);
+    border-radius: 40px;
+    border: none;
+    padding: 15px;
+    transition: 0.5s;
+    background-color: var(--them);
+    width: 180px;
+
+    align-items: center;
+    text-align: center;
+
+}
+
+.butw:hover {
+    background-color: var(--hovg);
+    transform: scale(1.1);
+    transition: all;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.butw:active {
+    transform: scale(0.9);
+    transition: 0.25s;
+}
+
+
+
+
+/*---------------------------------------------------------------------*/
 /* 4 Buttons für die Navigation / ganz oben */
 .butl{
         white-space: nowrap;
+        text-decoration: none;
         color: var(--linkc);
         border-radius: 40px;
         padding: 20px;
@@ -111,6 +192,7 @@ color: var(--linkc);
     border-radius: 40px;
     padding: 10px;
     transition: 0.5s;
+    text-decoration: none;
 }
 
 .buts:hover {
@@ -132,10 +214,11 @@ color: var(--linkc);
     color: var(--linkc);
     text-decoration: none;
     transition: 0.5s;
+    
 }
 
 /*---------------------------------------------------------------------*/
-/* Schrift mit einem Link */
+/* Schrift mit einem Link / 4 Buttons zum navigieren*/
 .link {
     text-decoration: none;
     color: var(--linkc);
@@ -145,7 +228,10 @@ color: var(--linkc);
 .link:hover{
     transform: scale(1.05);
     cursor: pointer;
-    
+}
+
+.link:active{
+    transform: scale(0.9);
 }
 
 
@@ -178,6 +264,11 @@ color: var(--linkc);
     transform: scale(1.1);
 }
 
+
+#mode:active {
+    transform: scale(0.96);
+    transition: 0.25s;
+}
 /*---------------------------------------------------------------------*/
 /* CSS für den Go TO Top Buttom*/
    #myBtn {
@@ -200,7 +291,44 @@ color: var(--linkc);
     transform: scale(1.1);
    }
 
+   #myBtn:active {
+       transform: scale(0.9);
+       transition: 0.2s;
+   }
  
+
+   /*---------------------------------------------------------------------*/
+   /* Copy Buttom*/
+
+
+
+
+ .copy {
+     color: var(--linkc);
+    
+     border: none;
+     outline: none;
+     cursor: pointer;
+     padding: 10px;
+     border-radius: 40px;
+     background: var(--them);
+     transition: transform 0.3s;
+ }
+
+ .copy:hover {
+     background: var(--hovg);
+     transform: scale(1.1);
+ }
+
+ .copy:active {
+     transform: scale(0.9);
+     transition: 0.2s;
+ }
+
+
+
+
+
    /*---------------------------------------------------------------------*/
    /* CSS Effeckt für Karten mit Link / auf der Startseite */
    #hov {
@@ -212,10 +340,13 @@ color: var(--linkc);
    #hov:hover {
     background-color: var(--hovg);
     transform: scale(1.05);
-       cursor: pointer;
-
+    cursor: pointer;
    }
 
+    #hov:active {
+        transform: scale(0.96);
+        transition: 0.25s;
+    }
    /*---------------------------------------------------------------------*/
    /* CSS Effeckt für Karten ohne Link / im Impressum */
    #hovc {
@@ -230,6 +361,46 @@ color: var(--linkc);
         cursor: default; /* Normaler Curser */
 
    }
+   #hovc:active{
+    transform: scale(0.96);
+    transition: 0.25s;
+   }
+
+         /*---------------------------------------------------------------------*/
+         /* CSS Effeckt für Karten ohne Link / im Ebook */
+         #hovb {
+             background-color: var(--them);
+             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+             transition: 0.5s;
+         }
+    
+         #hovb:hover {
+             background-color: var(--hovg);
+             transform: scale(1.02);
+             cursor: default;
+             /* Normaler Curser */
+    
+         }
+    
+        
+  /*---------------------------------------------------------------------*/
+  /* CSS Effeckt für Karten Renzensionen */
+  #hovr {
+      background-color: var(--them);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
+  }
+
+  #hovr:hover {
+      background-color: var(--hovg);
+      transform: scale(1.05);
+      cursor: default;
+      /* Normaler Curser */
+
+  }
+
+
+
 
 /*---------------------------------------------------------------------*/
 /* ALles langsam erscheinen */
@@ -248,4 +419,87 @@ color: var(--linkc);
                      transition: opacity 3s ease;
                     
                  }
+/*---------------------------------------------------------------------*/
+/* Sterne für Bewertung */
+
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 5px;
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    font-size: 2rem;
+    color: lightgray;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.rating input:checked~label {
+    color: gold;
+}
+
+.rating input:checked+label:hover,
+.rating input:checked+label:hover~label {
+    color: darkorange;
+}
+
+.rating label:hover,
+.rating label:hover~label {
+    color: gold;
+}
+
+
+/*---------------------------------------------------------------------*/
+
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 5px;
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    cursor: pointer;
+}
+
+.rating svg {
+    width: 2rem;
+    height: 2rem;
+    color: var(--hovg);
+    transition: color 0.3s;
+}
+
+.rating input:checked~label svg,
+.rating label:hover svg,
+.rating label:hover~label svg {
+    color: var(--stern-color);
+}
+
+.rating input:checked~label:hover svg,
+.rating input:checked~label:hover~label svg {
+    color: darkorange;
+}
+
+/*---------------------------------------------------------------------*/
+/*Stern*/
+
+.stern{
+    text-decoration: none;
+    color:var(--stern-color);
+
+}
+
+
 /*---------------------------------------------------------------------*/
