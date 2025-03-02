@@ -1,4 +1,6 @@
 
+
+
 console.log(
     "\n" +
     "!@5777777777777777777777777777777777777??????7G@~     \n" +
@@ -86,11 +88,11 @@ function topFunction() {
 
 var mam = ""; // mam = Name
 mam = window.localStorage.getItem("head");
-//console.log("Name: " + mam);
+console.log("Name: " + mam);
 
 
 if (mam == null || mam == "" || mam == "null") {
-    //console.log("Kein Name");
+    console.log("Kein Name");
     document.getElementById("headline").innerHTML = "";
 } else
     if (mam.match("<")) {
@@ -167,8 +169,15 @@ modee = window.localStorage.getItem("thema");
 let colorPicker;
 const hintergrund = window.localStorage.getItem("hintergrund");
 defaultColor = hintergrund;
-
 //console.log("hintergrund: " + hintergrund);
+
+
+
+// CSS-Variable aus dem :root-Element auslesen
+const rootStyles = getComputedStyle(document.documentElement);
+const sternColor = rootStyles.getPropertyValue('--stern-color').trim();
+
+
 
 
 let colorPicker1;
@@ -255,6 +264,7 @@ function dark() {
     document.documentElement.style.setProperty('--circle-color', '#adb5bd');    // Farbe Netz Kreis Darkmode
     document.documentElement.style.setProperty('--line-color', '#adb5bd');      // Farbe Netz Linie Darkmode
     document.documentElement.style.setProperty('--popupborder', '#dee2e644');   // Farbe für Border der Popups Darkmode
+    document.documentElement.style.setProperty('--stern-color', sternColor);   // Farbe für Stern Darkmode
     localStorage.setItem("thema", "dark");
     document.getElementById("color-picker").disabled = true;
     document.getElementById("color-picker1").disabled = true;
@@ -277,6 +287,7 @@ function light() {
     document.documentElement.style.setProperty('--circle-color', '#0693e3');    // Farbe Netz Kreis Lightmode
     document.documentElement.style.setProperty('--line-color', '#0693e3');      // Farbe Netz Linie Lightmode
     document.documentElement.style.setProperty('--popupborder', '#dee2e6');     // Farbe für Border der Popups Lightmode
+    document.documentElement.style.setProperty('--stern-color', sternColor);    // Farbe für Stern Lightmode
     localStorage.setItem("thema", "light");
     document.getElementById("color-picker").disabled = true;
     document.getElementById("color-picker1").disabled = true;
@@ -297,6 +308,7 @@ function individuell() {
     document.documentElement.style.setProperty('--circle-color', schrift);    // Farbe Netz Kreis Individuell Mode  
     document.documentElement.style.setProperty('--line-color', schrift);      // Farbe Netz Linie Individuell Mode  
     document.documentElement.style.setProperty('--popupborder', schrift);     // Farbe für Border der Popups Individuell Mode
+    document.documentElement.style.setProperty('--stern-color', schrift);     // Farbe für Stern Individuell Mode
     document.getElementById("mode").style.cursor = "no-drop";
     localStorage.setItem("individuell_pegel", "true");
 
@@ -478,11 +490,104 @@ function toggleSecret() {
 // Toggle Secret Ende
 
 
+
+
+
+// Toggle Rezensionen
+function toggleRezensionen() {
+    var elements = document.querySelectorAll('.toggleRezensionen');
+    var anzeigenElement = document.getElementById('anzeigen');
+
+    elements.forEach(function (element) {
+        if (element.style.display === 'none') {
+            element.style.display = 'block';
+            if (anzeigenElement) {
+                anzeigenElement.innerHTML = 'weniger anzeigen';
+            }
+        } else {
+            element.style.display = 'none';
+            if (anzeigenElement) {
+                anzeigenElement.innerHTML = 'mehr anzeigen';
+            }
+        }
+    });
+}
+
+// Toggle Rezensionen
 //------------------------------------------------------------------------------------------------------------------------
 // Formular zurücksetzen
 
 
+function resetForm(event) {
+    
+    event.preventDefault(); // Verhindert das Standard-Absendeverhalten
+    const form = event.target; // Holt das aktuelle Formular
+    const actionUrl = form.action; // Holt die Action-URL
+    const formData = new FormData(form); // Holt die Formulardaten
 
+
+
+
+    // Senden der Formulardaten mit Fetch API
+    fetch(actionUrl, {
+        method: 'POST',
+        body: formData,
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log('Formular erfolgreich abgesendet:', form.id);
+                //alert(`Formular ${form.id} wurde erfolgreich abgeschickt.`);
+                form.reset(); // Setzt das Formular zurück
+
+                const toastLiveExample = document.getElementById('liveToast5');
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+                toastBootstrap.show();
+                
+              
+            } else {
+                console.error('Fehler beim Absenden:', form.id);
+                alert(`Es gab einen Fehler beim Absenden von Formular ${form.id}.`);
+            }
+        })
+        .catch(error => {
+            console.error('Netzwerkfehler:', error);
+            alert(`Netzwerkfehler beim Absenden von Formular ${form.id}.`);
+        });
+    
+}
+
+//-----------------------------------------
+
+function resetForm1(event) {
+    event.preventDefault(); // Verhindert das Standard-Absendeverhalten
+    const form = event.target; // Holt das aktuelle Formular
+    const actionUrl = form.action; // Holt die Action-URL
+    const formData = new FormData(form); // Holt die Formulardaten
+
+
+    // Senden der Formulardaten mit Fetch API
+    fetch(actionUrl, {
+        method: 'POST',
+        body: formData,
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log('Formular erfolgreich abgesendet:', form.id);
+                //alert(`Formular ${form.id} wurde erfolgreich abgeschickt.`);
+                form.reset(); // Setzt das Formular zurück
+
+                window.location.href = "EdankeE.html";
+            } else {
+                console.error('Fehler beim Absenden:', form.id);
+                alert(`Es gab einen Fehler beim Absenden von Formular ${form.id}.`);
+            }
+        })
+        .catch(error => {
+            console.error('Netzwerkfehler:', error);
+            alert(`Netzwerkfehler beim Absenden von Formular ${form.id}.`);
+        });
+
+}
 
 
 //------------------------------------------------------------------------------------------------------------------------
