@@ -1,7 +1,7 @@
 # IT Wolf
 
 - In erster Linie wollte ich nützliche Seiten verlinken, die ich selber nutze. Das ganze habe ich übersichtlich angeortnent. Damit ein Lesezeichenchaos vermieden wird.
-- Desweiteren wollte ich Basis Wissen in dem Gebit sammeln.
+- Desweiteren wollte ich Basis Wissen in dem Gebiet sammeln.
 
 
 ## Features
