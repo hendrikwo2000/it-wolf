@@ -8,7 +8,7 @@
     --popupborder: #dee2e64b; /* Border Farbe für Popups*/
     --circle-color: #0693e3; /* Netz Kreis Farbe */
     --line-color: #0693e3; /* Netz Linie Farbe */
-    --stern-color: rgb(255, 196, 0); /* Stern Farbe*/
+    --stern-color: #ffc400; /* Stern Farbe*/
 
 
 }
@@ -86,14 +86,18 @@ color: var(--linkc);
 
 
 /*---------------------------------------------------------------------*/
+/* CSS für das Eingabe Feld Formulare */
+#fname{
+    background-color: var(--backg);
+        color: var(--linkc);
+}
+/*---------------------------------------------------------------------*/
 /*  Button für E-Book */
 .bute{
-    position: absolute;
-  
+        position: absolute;
         bottom: 30px;
-        /* Abstand vom unteren Rand des Containers */
         right: 30px;
-    white-space: nowrap;
+        white-space: nowrap;
         color: var(--linkc);
         border-radius: 40px;
         border: none;
@@ -423,40 +427,6 @@ color: var(--linkc);
 /* Sterne für Bewertung */
 
 
-.rating {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: center;
-    gap: 5px;
-}
-
-.rating input {
-    display: none;
-}
-
-.rating label {
-    font-size: 2rem;
-    color: lightgray;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-.rating input:checked~label {
-    color: gold;
-}
-
-.rating input:checked+label:hover,
-.rating input:checked+label:hover~label {
-    color: darkorange;
-}
-
-.rating label:hover,
-.rating label:hover~label {
-    color: gold;
-}
-
-
-/*---------------------------------------------------------------------*/
 
 
 .rating {
@@ -486,11 +456,13 @@ color: var(--linkc);
 .rating label:hover~label svg {
     color: var(--stern-color);
 }
-
+/*
 .rating input:checked~label:hover svg,
 .rating input:checked~label:hover~label svg {
     color: darkorange;
 }
+*/
+
 
 /*---------------------------------------------------------------------*/
 /*Stern*/
