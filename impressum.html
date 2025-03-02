@@ -5,6 +5,9 @@
     <link href="_variables-dark.scss" type="stylesheet">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="it wolf, itwolf, hendrik wolf, wolf, it, hendrik">
+    <meta name="author" content="Hendrik Wolf">
+    <meta name="description" content="Impressum IT-Wolf">
     <title>Impressum - IT Wolf</title>
     <link rel="icon" href="Bilder/ico.svg">
     <link href="index.css" rel="stylesheet">
@@ -167,7 +170,7 @@
                     <div class="box row row-cols-1 row-cols-md-2 g-4">
 
 
-                                    <a class="link" href="#über+mich" class="col">
+                                    <a class="link" href="#über+mich" class="col" id="secret">
                             <div class="card" style="border-radius: 40px; background-color: var(--rgb);">
                                 <div class="butl">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person"
@@ -249,13 +252,15 @@
                         <p class="box clink">
                         Ich bin Hendrik Wolf, der Ersteller dieser Seite.<br>
                         Derzeit bin ich ausgelernter Elektroniker, <br>
-                        in meiner Freizeit bin ich sehr sportlich unterwegs und bin auch am Programmieren. <br>
+                        in meiner Freizeit bin ich sehr sportlich unterwegs und habe dazu auch ein E-Book geschrieben.<br>
+                        <a class="link" href="ebook.html"><b>Hier sind mehr Informationen zum kostenlosen Download.</b></a><br><br>
+                        Nebenbei programmiere ich auch etwas. <br>
                         Das Programmieren (Webentwicklung) habe ich mir selbst beigebracht, ich nutze HTML, CSS und JS.<br>
                         Als CSS-Framework benutze ich Bootstrap. <br>
                         Ich versuche mich stetig zu verbessern und meine Fähigkeiten zu erweitern.<br><br>
                         Ich wollte eine Seite erstellen, mit nützlichen Seiten um ein Lesezeichenkaos zu vermeiden.
                         </p>
-                        <p  class="box card-text"><small class="clink" class="text-body-secondary">Created by Hendrik Wolf in 2024</small></p>
+                        <p  class="box card-text"><small class="clink" class="text-body-secondary">Created by Hendrik Wolf in 2025</small></p>
                     </div>
                 </div>
 <!-- Über mich Ende-->
@@ -311,6 +316,9 @@
             </div>
             <!-- Kontakt Ende -->
 
+
+
+
             <!-- Formular Anfang -->
             <div class="box col">
                 <a target="_blank" class="clink">
@@ -319,69 +327,51 @@
                             <h5 class="card-title">Kontaktformular</h5>
                             <p class="card-text">
             
-                            <form id="form2" action="https://formsubmit.co/fe15abf088e090210d1d03807c630d3b" method="POST">
+                            <form id="form2" action="https://formsubmit.co/fe15abf088e090210d1d03807c630d3b" method="POST"  onsubmit="resetForm(event)">
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Name</label>
-                                    <input type="text" id="namee" name="name" required class="form-control" id="exampleInputEmail1"
+                                    <input type="text" id="fname" name="name" required class="form-control" id="exampleInputEmail1"
                                         aria-describedby="emailHelp"
                                         style="background-color: var(--them); border-color: var(--popupborder)">
                                     <div id="emailHelp" class="form-text"></div>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Email Adresse</label>
-                                    <input type="email" id="namee" name="email" required class="form-control"
+                                    <input type="email" id="fname" name="email" required class="form-control"
                                         style="background-color: var(--them); border-color: var(--popupborder)">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Nachricht</label>
-                                    <textarea name="massage" id="namee" required class="form-control"
+                                    <textarea name="massage" id="fname" required class="form-control"
                                         style="background-color: var(--them); border-color: var(--popupborder)"></textarea>
                                 </div>
             
-                                           
-                                <input type="hidden" name="_subject" value="Kontakt!">
+            
+                                <input type="hidden" name="_subject" value="Impressum Kontakt!">
                                 <input type="hidden" name="_next" value="https://it-wolf.org/impressum">
                                 <input type="hidden" name="_captcha" value="false">
                                 <input type="hidden" name="_template" value="table">
                                 <br style="margin-bottom: 20px;">
             
                                 <button class="bute" type="submit">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                   
+                                    <svg  xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                         class="bi bi-send" viewBox="0 0 16 16">
                                         <path
                                             d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z" />
                                     </svg>
+
+                                   
+
                                     &nbsp;&nbsp; Senden
                                 </button><br>
                             </form>
             
-                            <script>
-                                const form2 = document.getElementById('form2');
-
-                                form2.addEventListener('submit', (event) => {
-                                    setTimeout(() => {
-                                        form2.reset(); // Alle Felder und Bewertungen zurücksetzen
-                                    }, 100); // Kurze Verzögerung für das Absenden
-                                });
-
-
-
-
-                                // Funktion für das Zurücksetzen von Formularen
-                                function resetFormAfterSubmit(formId) {
-                                    const form = document.getElementById(formId);
-                                    form.addEventListener('submit', (event) => {
-                                        setTimeout(() => {
-                                            form.reset();
-                                        }, 100);
-                                    });
-                                }
-
-                                // Beide Formulare initialisieren
-                                resetFormAfterSubmit('form1');
-                                resetFormAfterSubmit('form2');
-                            </script>
             
+            <script>
+                   
+            </script>
+
                             </p>
                         </div>
                     </div>
@@ -818,7 +808,7 @@
             </div>
             <div class="modal-body" id="pop-body">
                 Um ein Tic Tac Toe Spiel zu starten klicke unter Impressum, Funktionen auf "Tic Tac Toe".<br><br>
-                Du Spiels gegen einen Comuter, es ist ziemlich einfach macht aber trotzdem Spaß.<br><br>
+                Du Spiels gegen einen Comuter, er arbeitet mit einer Logic und plaziert nicht zufällig.<br><br>
                 Der Code wurde mit ChatGPT geschrieben.
 
             </div>
@@ -869,7 +859,7 @@
                 <p class="card-text">
                     Dise Seite wird nicht von Werbung finaziert,<br>
                    daher freue ich mich über ein Spende.<br>
-                <br style="margin-bottom: 60px;">
+                <br style="margin-bottom: 60px;"><br>
 
                     <button onclick="window.open('https://www.paypal.me/1hendrik', '_blank');" class="bute">
                     
@@ -994,22 +984,39 @@
 
 
 
+<!-- Popup Formular Feedbeck Anfang-->
+<div class="toast-container position-fixed top-0 end-0 p-3">
+    <div id="liveToast5" class="toast text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+
+            <strong class="me-auto">Danke!</strong>
+
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+           Vielen Dank für das Feedbeck.
+        </div>
+    </div>
+</div>
+<!-- Popup Formular Feedbeck Ende-->
+
+
 
 
 
     </div>
     <!-- Div Body Ende-->
 
-    <script>
+    
 
   
-    </script>
+    
 
        <footer>
 
 
         <p class="box text-center text-muted">
-            <a class="link" name="link" href="index.html"> &copy; IT Wolf 2024</a>
+            <a class="link" name="link" href="index.html"> &copy; IT Wolf 2025</a>
             <a class="clink">|</a>
             <a class="link" name="link" href="impressum.html">Impressum</a>
         </p>
