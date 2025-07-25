@@ -132,6 +132,19 @@
         
             <form class="d-flex" role="search">
                 
+
+
+            <svg data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" style="display: none;" id="showadmin"
+                title="Admin-Mode ist aktiviert, Doppelklick zum deaktivieren. <br><br> 
+                        Die mit gelb hinterlegten Seiten, lassen sich nur mit den Admin-Mode anzeigen."
+                style="color: var(--stern-color);" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                class="mode bi bi-lock" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M8 0a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5v-5a2.5 2.5 0 0 1 2-2.45V4a4 4 0 0 1 4-4M4.5 7A1.5 1.5 0 0 0 3 8.5v5A1.5 1.5 0 0 0 4.5 15h7a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 11.5 7zM8 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3" />
+            </svg>
+                &nbsp;&nbsp;
+
+                
                 <svg style="color: var(--linkc);" id="mode"  class="mode" onclick="switchmode()" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor"
                     viewBox="0 0 16 16">
                     <path id="modee"
@@ -651,7 +664,7 @@
                 <a target="_blank" class="link" data-bs-toggle="modal" data-bs-target="#how1">Dein Name</a><br>
                 <a target="_blank" class="link" data-bs-toggle="modal" data-bs-target="#how2">Darkmode</a><br>
                 <a target="_blank" class="link" data-bs-toggle="modal" data-bs-target="#how3">Individuelles Farbschema</a><br>
-                <a target="_blank" class="link" data-bs-toggle="modal" data-bs-target="#how4">Entwickler Tools</a><br>
+                <a target="_blank" class="link" data-bs-toggle="modal" data-bs-target="#how4">Favoriten</a><br>
                 <a target="_blank" class="link" data-bs-toggle="modal" data-bs-target="#how5">Tic Tac Toe (Beta)</a><br>
                 <a target="_blank" class="link" data-bs-toggle="modal" data-bs-target="#how6">Netz (Beta)</a>
 
@@ -762,13 +775,13 @@
 <!-- Modal Individuelles Farbschema erklärt Ende -->
 
 
-<!-- Modal Entwickler Tools erklärt Anfang -->
+<!-- Modal Favoriten erklärt Anfang -->
 <div class="modal fade" id="how4" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="how4" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content" id="modual" class="clink">
             <div class="modal-header" id="pop-head" style="border-color: var(--popupborder)">
-                <h1 class="modal-title fs-5" id="how4">Entwickler Tools</h1>
+                <h1 class="modal-title fs-5" id="how4">Favoriten</h1>
                 <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"><svg
                         xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-lg"
                         viewBox="0 0 16 16">
@@ -777,6 +790,12 @@
                     </svg></button>
             </div>
             <div class="modal-body" id="pop-body">
+                Unter Nützliche Seiten kannst du Seiten die dir als besonders Wichtig erscheinen mit Herz markiern, daraufhin erscheint oben ein Button
+                mit "Favoriten anzeigen", die Favoriten werden angezeigt.
+
+                Wenn keine Favoriten makiert sind wird der Button ausgeblendet.
+                Die Favoriten werden im Local Storage gespeichert.
+                
                 Du kannst die Entwickler Tools freischalten,<br>
                 indem du auf der Startseite auf<br>
                 die Unter - Überschrift "Tools" klickst.<br><br>
@@ -789,7 +808,7 @@
         </div>
     </div>
 </div>
-<!-- Modal Entwickler Tools erklärt Ende -->
+<!-- Modal Favoriten erklärt Ende -->
 
 
 <!-- Modal Tic Tac Toe (Beta) erklärt Anfang -->
@@ -999,6 +1018,23 @@
     </div>
 </div>
 <!-- Popup Formular Feedbeck Ende-->
+
+<!-- Popup Admin Anfang-->
+<div class="toast-container position-fixed top-0 end-0 p-3">
+    <div id="liveToast6" class="toast text-bg-warning" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+
+            <strong class="me-auto">Admin</strong>
+
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Adminmode freigeschaltet.
+        </div>
+    </div>
+</div>
+<!-- Popup Admin Ende-->
+
 
 
 
