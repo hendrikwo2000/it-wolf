@@ -2,12 +2,16 @@
 <html lang="en">
 
 <head>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
     <link href="_variables-dark.scss" type="stylesheet">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="it wolf, itwolf, hendrik wolf, nützliche webseiten, nützliche internetseiten, nützliche seiten">
+    <meta name="keywords" content="it wolf, itwolf, hendrik wolf, nützliche webseiten, nützliche internetseiten, nützliche seiten,  tools, tool, kostenlose Tools, nützliche Webseiten, Online Tools, KI Tools, PDF Tools, Bildbearbeitung online, iLovePDF, Fake SMS, geheime Webseiten, ChatGPT Tools, Internet Werkzeuge, gratis Tools, Webtools, Tools ohne Anmeldung">
+">
     <meta name="author" content="Hendrik Wolf">
-    <meta name="description" content="Eine Sammlung von vielen nützlichen Internet Seiten.">
+    <meta name="description" content="Entdecke kostenlose Online-Tools für KI, PDFs, Bilder und mehr – gesammelt auf einer Seite. Praktisch. Schnell. Werbefrei.">
     <title>Nützliche Seiten - IT Wolf</title>
     <link rel="icon" href="Bilder/ico.svg">
 <link href="index.css" rel="stylesheet">
@@ -133,9 +137,17 @@
 
         <form class="d-flex" role="search">
 
-            <svg 
-            
-            style="color: var(--linkc);" id="mode" class="mode" onclick="switchmode()" xmlns="http://www.w3.org/2000/svg"
+
+        <svg data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" style="display: none;" id="showadmin"
+        title="Admin-Mode ist aktiviert, Doppelklick zum deaktivieren. <br><br> 
+            Die mit gelb hinterlegten Seiten, lassen sich nur mit den Admin-Mode anzeigen." style="color: var(--stern-color);"xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="mode bi bi-lock"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M8 0a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5v-5a2.5 2.5 0 0 1 2-2.45V4a4 4 0 0 1 4-4M4.5 7A1.5 1.5 0 0 0 3 8.5v5A1.5 1.5 0 0 0 4.5 15h7a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 11.5 7zM8 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3" />
+        </svg>
+        &nbsp;&nbsp;
+
+            <svg style="color: var(--linkc);" id="mode" class="mode" onclick="switchmode()" xmlns="http://www.w3.org/2000/svg"
                 width="10" height="10" fill="currentColor" viewBox="0 0 16 16">
                 <path id="modee"
                     d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
@@ -157,157 +169,511 @@
     
 
 <!-- Überschrift mit 4 Buttons Anfang-->
-<section class="py-5 text-center container" style="height: 100vh;">
-   
-    <div class="row py-lg-5">
-        <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="box clink"> <a id="headline"></a><a>Nützliche Seiten</a> </h1>
-            <p class="lead text-body-secondary"></p><br><br><br>
 
-
-                        
-
-<div class="box row row-cols-1 row-cols-md-2 g-4">
-    
-    <a class="link" href="#ki" class="col">
-    <div class="card" style="border-radius: 40px; background-color: var(--rgb);">
-    <div class="butl"><svg xmlns="http://www.w3.org/2000/svg" width="30"
-                height="30" fill="currentColor" class="bi bi-cpu" viewBox="0 0 16 16">
-                <path
-                    d="M5 0a.5.5 0 0 1 .5.5V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2A2.5 2.5 0 0 1 14 4.5h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14a2.5 2.5 0 0 1-2.5 2.5v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14A2.5 2.5 0 0 1 2 11.5H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2A2.5 2.5 0 0 1 4.5 2V.5A.5.5 0 0 1 5 0zm-.5 3A1.5 1.5 0 0 0 3 4.5v7A1.5 1.5 0 0 0 4.5 13h7a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 11.5 3h-7zM5 6.5A1.5 1.5 0 0 1 6.5 5h3A1.5 1.5 0 0 1 11 6.5v3A1.5 1.5 0 0 1 9.5 11h-3A1.5 1.5 0 0 1 5 9.5v-3zM6.5 6a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
-            </svg>&nbsp;&nbsp;KI</div>
-        </div></a>
-
-    <a class="link" href="#tools" class="col">  
-    <div class="card"  style="border-radius: 40px; background-color: var(--rgb);">
-    <div class="butl"><svg xmlns="http://www.w3.org/2000/svg" width="30"
-                height="30" fill="currentColor" class="bi bi-tools" viewBox="0 0 16 16">
-                <path
-                    d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814L1 0Zm9.646 10.646a.5.5 0 0 1 .708 0l2.914 2.915a.5.5 0 0 1-.707.707l-2.915-2.914a.5.5 0 0 1 0-.708ZM3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026L3 11Z" />
-            </svg>&nbsp;&nbsp;Tools</div>
-    </div></a>
-
-    <a class="link" href="#grafiken" class="col">
-    <div class="card" style="border-radius: 40px; background-color: var(--rgb);">
-    <div class="butl"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-file-earmark-image" viewBox="0 0 16 16">
-                 <path d="M6.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
-                 <path d="M14 14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5V14zM4 1a1 1 0 0 0-1 1v10l2.224-2.224a.5.5 0 0 1 .61-.075L8 11l2.157-3.02a.5.5 0 0 1 .76-.063L13 10V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4z"/>
-</svg>&nbsp;&nbsp;Grafiken</div>
-    </div></a>
-
-    <a class="link" href="#secret" class="col">
-    <div class="card" style="border-radius: 40px; background-color: var(--rgb);">
-    <div class="butl"><svg xmlns="http://www.w3.org/2000/svg" width="30"
-            height="30" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
-            <path
-                d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z" />
-            <path
-                d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z" />
-            <path
-                d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z" />
-        </svg>&nbsp;&nbsp;Secret</div>
-    </div></a>
-    </div>
-</div>
-               
-
-
-            
-        </div>
-</section>
 <!-- Überschrift mit 4 Buttons Ende-->
+
+<section class="py-5 text-center container d-flex flex-column justify-content-between" style="height: 100vh; position: relative;">
+
+    <div class="flex-grow-1">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="box clink">
+                    <a id="headline"></a><a>Nützliche Seiten</a>
+                </h1>
+                <br><br><br>
+
+            <div class="box row row-cols-1 row-cols-md-2 g-4">
+            
+                <a class="link" href="#ki" class="col">
+                    <div class="card" style="border-radius: 40px; background-color: var(--rgb);">
+                        <div class="butl"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-cpu" viewBox="0 0 16 16">
+                                <path
+                                    d="M5 0a.5.5 0 0 1 .5.5V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2A2.5 2.5 0 0 1 14 4.5h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14a2.5 2.5 0 0 1-2.5 2.5v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14A2.5 2.5 0 0 1 2 11.5H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2A2.5 2.5 0 0 1 4.5 2V.5A.5.5 0 0 1 5 0zm-.5 3A1.5 1.5 0 0 0 3 4.5v7A1.5 1.5 0 0 0 4.5 13h7a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 11.5 3h-7zM5 6.5A1.5 1.5 0 0 1 6.5 5h3A1.5 1.5 0 0 1 11 6.5v3A1.5 1.5 0 0 1 9.5 11h-3A1.5 1.5 0 0 1 5 9.5v-3zM6.5 6a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+                            </svg>&nbsp;&nbsp;KI</div>
+                    </div>
+                </a>
+            
+                <a class="link" href="#tools" class="col">
+                    <div class="card" style="border-radius: 40px; background-color: var(--rgb);">
+                        <div class="butl"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-tools" viewBox="0 0 16 16">
+                                <path
+                                    d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814L1 0Zm9.646 10.646a.5.5 0 0 1 .708 0l2.914 2.915a.5.5 0 0 1-.707.707l-2.915-2.914a.5.5 0 0 1 0-.708ZM3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026L3 11Z" />
+                            </svg>&nbsp;&nbsp;Tools</div>
+                    </div>
+                </a>
+            
+                <a class="link" href="#grafiken" class="col">
+                    <div class="card" style="border-radius: 40px; background-color: var(--rgb);">
+                        <div class="butl"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-file-earmark-image" viewBox="0 0 16 16">
+                                <path d="M6.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                                <path
+                                    d="M14 14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5V14zM4 1a1 1 0 0 0-1 1v10l2.224-2.224a.5.5 0 0 1 .61-.075L8 11l2.157-3.02a.5.5 0 0 1 .76-.063L13 10V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4z" />
+                            </svg>&nbsp;&nbsp;Grafiken</div>
+                    </div>
+                </a>
+            
+                <a class="link" href="#secret" class="col">
+                    <div class="card" style="border-radius: 40px; background-color: var(--rgb);">
+                        <div class="butl"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-eye-slash" viewBox="0 0 16 16">
+                                <path
+                                    d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z" />
+                                <path
+                                    d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z" />
+                                <path
+                                    d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z" />
+                            </svg>&nbsp;&nbsp;Secret</div>
+                    </div>
+                </a>
+            
+            
+            
+            
+            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Button immer unten -->
+<div id="toggle-favorites-btn-container">
+        
+    <button id="toggle-favorites-btn" class="butw" >Favoriten anzeigen</button>
+</div>
+
+
+</section>
+
+
+
+
+<!-- Favoritenbereich -->
+<div class="album py-5">
+    <div id="favorites-section" class="container" style="display: none;">
+        <h2 class="box clink"><a><br>Favoriten</a></h2><br>
+        <div id="favorites-container" class="box row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+
+
+
+
+
+
+
+
+    </div>
+    </div>
+    </div>
+
+
 
 
 <!-- KI Anfang -->
 <div class="album py-5">
     <div class="container">
         <h2 class="box clink"><a id="ki"><br>KI</a></h2><br>
-            <div class="box row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"> 
+            <div class="box row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4"> 
                 
                 <!-- ChatGPT Anfang -->
-        <div class="col"  id="color-picker">
-            <a href="https://chat.openai.com/" target="_blank" class="clink">
-                <div id="hov" class="card h-100">
-                    <img src="Bilder/chatgpt.svg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">ChatGPT</h5>
-                        <p class="card-text">Dies ist eine KI, die Texte (auch Codes) für dich schreibt.</p>
+
+                <div class="col">
+                    <div id="hov" class="card h-100 clink" data-id="chatgpt" data-category="KI">
+                        <a href="https://chat.openai.com/" target="_blank" class="image-link">
+                            <div class="image-wrapper">
+                                <img src="Bilder/chatgpt.svg" class="card-img-top" alt="ChatGPT">
+                                <div class="overlay">Öffnen</div>
+                            </div>
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                ChatGPT
+                                <div class="position-relative">
+                                    <div class="position-absolute bottom-0 end-0">
+                                        <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            fill="currentColor" viewBox="0 0 16 16">
+                                            <path
+                                                d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </h5>
+                            <p class="card-text">Dies ist eine KI, die Texte (auch Codes) für dich schreibt.</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-        </div>
+                </div>        
         <!-- ChatGPT Ende -->
        
             <!-- Powerful AI Tools Anfang -->
-            <div class="col"  id="color-picker1">
-                <a href="https://www.powerfulai.tools/" target="_blank" class="clink">
-                    <div id="hov" class="card h-100">
-                        <img src="Bilder/powerfulai.svg" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">Powerful AI Tools</h5>
-                            <p class="card-text">Eine Sammlung von vielen KI Tools</p>
+
+            <div class="col" id="color-picker1">
+                <div id="hov" class="card h-100 clink" data-id="powerfulai" data-category="KI">
+                    <a href="https://www.powerfulai.tools/" target="_blank" class="image-link">
+                        <div class="image-wrapper">
+                            <img src="Bilder/powerfulai.svg" class="card-img-top" alt="Google">
+                            <div class="overlay">Öffnen</div>
                         </div>
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            Powerful AI Tools
+                            <div class="position-relative">
+                                <div class="position-absolute bottom-0 end-0">
+                                    <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                        fill="currentColor" viewBox="0 0 16 16">
+                                        <path
+                                            d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </h5>
+                        <p class="card-text">Eine Sammlung von vielen KI Tools</p>
                     </div>
-                </a>
+                </div>
             </div>
+
+
             <!-- Powerful AI Tools Ende -->
 
             <!-- GPT GO AI Anfang -->
             <div class="col">
-                <a href="https://gptgo.ai/de" target="_blank" class="clink">
-                    <div id="hov" class="card h-100">
-                        <img src="Bilder/gptgo.svg" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">GPT GO AI</h5>
-                            <p class="card-text">Google mit GPT verknüpft</p>
+                <div id="hov" class="card h-100 clink" data-id="gptgo" data-category="KI">
+                    <a href="https://gptgo.ai/de" target="_blank" class="image-link">
+                        <div class="image-wrapper">
+                            <img src="Bilder/gptgo.svg" class="card-img-top" alt="GPT GO AI">
+                            <div class="overlay">Öffnen</div>
                         </div>
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            GPT GO AI
+                            <div class="position-relative">
+                                <div class="position-absolute bottom-0 end-0">
+                                    <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                        fill="currentColor" viewBox="0 0 16 16">
+                                        <path
+                                            d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </h5>
+                        <p class="card-text">Google mit GPT verknüpft</p>
                     </div>
-                </a>
+                </div>
             </div>
+
             <!-- GPT GO AI Ende -->
 
 
             <!-- Caktus AI Anfang -->
             <div class="col">
-                <a href="https://www.caktus.ai/" target="_blank" class="clink">
-                    <div id="hov" class="card h-100">
-                        <img src="Bilder/kaktus.svg" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">Caktus AI</h5>
-                            <p class="card-text">Erstellt Aufsätze mit Quellenangaben und noch vieles mehr</p>
+                <div id="hov" class="card h-100 clink" data-id="caktus" data-category="KI">
+                    <a href="https://www.caktus.ai/" target="_blank" class="image-link">
+                        <div class="image-wrapper">
+                            <img src="Bilder/kaktus.svg" class="card-img-top" alt="Caktus AI">
+                            <div class="overlay">Öffnen</div>
                         </div>
+                    </a>
+
+            
+
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            Caktus AI
+                            <div class="position-relative">
+                                <div class="position-absolute bottom-0 end-0">
+                                    <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                        fill="currentColor" viewBox="0 0 16 16">
+                                        <path
+                                            d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </h5>
+                        <p class="card-text">Erstellt Aufsätze mit Quellenangaben und noch vieles mehr</p>
                     </div>
-                </a>
+                </div>
             </div>
+
             <!-- Caktus AI Ende -->
 
             <!-- Chef GPT Anfang -->
             <div class="col">
-                <a href="https://www.chefgpt.xyz/de" target="_blank" class="clink">
-                    <div id="hov" class="card h-100">
-                        <img src="Bilder/chef.svg" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">Chef GPT</h5>
-                            <p class="card-text">Gebe deine Lebensmittel und deine Küchengeräte ein und die erhälst ein Kezept</p>
+                <div id="hov" class="card h-100 clink" data-id="chef" data-category="KI">
+                    <a href="https://www.chefgpt.xyz/de" target="_blank" class="image-link">
+                        <div class="image-wrapper">
+                            <img src="Bilder/chef.svg" class="card-img-top" alt="Chef GPT">
+                            <div class="overlay">Öffnen</div>
                         </div>
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            Chef GPT
+                            <div class="position-relative">
+                                <div class="position-absolute bottom-0 end-0">
+                                    <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                        fill="currentColor" viewBox="0 0 16 16">
+                                        <path
+                                            d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </h5>
+                        <p class="card-text">Deine Lebensmittel + Küchengeräte = erhalte ein Rezept</p>
                     </div>
-                </a>
+                </div>
             </div>
+
             <!-- Chef GPT Ende -->
 
             <!-- Futuretools Anfang -->
         <div class="col">
-        <a href="https://www.futuretools.io/" target="_blank" class="clink">
-            <div id="hov" class="card h-100">
-                <img src="Bilder/future.svg" class="card-img-top">
+            <div id="hov" class="card h-100 clink" data-id="futuretools" data-category="KI">
+                <a href="https://www.futuretools.io/" target="_blank" class="image-link">
+                    <div class="image-wrapper">
+                        <img src="Bilder/future.svg" class="card-img-top" alt="Futuretools">
+                        <div class="overlay">Öffnen</div>
+                    </div>
+                </a>
                 <div class="card-body">
-                    <h5 class="card-title">Futuretools</h5>
-                    <p class="card-text">Eine Sammlung von alles KIs, du du nach deinen Anforderungen filtern kannst</p>
+                    <h5 class="card-title">
+                        Futuretools
+                        <div class="position-relative">
+                            <div class="position-absolute bottom-0 end-0">
+                                <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    fill="currentColor" viewBox="0 0 16 16">
+                                    <path
+                                        d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </h5>
+                    <p class="card-text">Sammlung von KI-Tools, die du nach deinen Anforderungen filtern kannst</p>
                 </div>
             </div>
-        </a>
         </div>
+
         <!-- Futuretools Ende -->
+
+        <!-- youlearn Anfang -->
+        <div class="col">
+            <div id="hov" class="card h-100 clink" data-id="youlearn-ai" data-category="KI">
+                <a href="https://app.youlearn.ai/de" target="_blank" class="image-link">
+                    <div class="image-wrapper">
+                        <img src="Bilder/youlearn.svg" class="card-img-top" alt="YouLearn AI">
+                        <div class="overlay">Öffnen</div>
+                    </div>
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        YouLearn AI
+                        <div class="position-relative">
+                            <div class="position-absolute bottom-0 end-0">
+                                <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    fill="currentColor" viewBox="0 0 16 16">
+                                    <path
+                                        d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </h5>
+                    <p class="card-text">Fasst Inhalte zusammen und beantwortet Fragen</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- youlearn Ende -->
+
+
+        <!-- perplexity Anfang -->
+        <div class="col">
+            <div id="hov" class="card h-100 clink" data-id="perplexity" data-category="KI">
+                <a href="https://www.perplexity.ai/" target="_blank" class="image-link">
+                    <div class="image-wrapper">
+                        <img src="Bilder/perplexity.svg" class="card-img-top" alt="Perplexity">
+                        <div class="overlay">Öffnen</div>
+                    </div>
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Perplexity
+                        <div class="position-relative">
+                            <div class="position-absolute bottom-0 end-0">
+                                <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    fill="currentColor" viewBox="0 0 16 16">
+                                    <path
+                                        d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </h5>
+                    <p class="card-text">Suchmaschine mit präzisen, quellengestützten Antworten.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- perplexity Ende -->
+
+        <!-- neuroflash Anfang -->
+    <div class="col">
+        <div id="hov" class="card h-100 clink" data-id="neuroflash" data-category="KI"> 
+            <a href="https://neuroflash.com/de/" target="_blank" class="image-link">
+                <div class="image-wrapper">
+                    <img src="Bilder/neuroflash.svg" class="card-img-top" alt="Neuroflash">
+                    <div class="overlay">Öffnen</div>
+                </div>
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">
+                    Neuroflash
+                    <div class="position-relative">
+                        <div class="position-absolute bottom-0 end-0">
+                            <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                fill="currentColor" viewBox="0 0 16 16">
+                                <path
+                                    d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                            </svg>
+                        </div>
+                    </div>
+                </h5>
+                <p class="card-text">Erstellung, Optimierung und Analyse von Text- und Bildinhalten</p>
+            </div>
+        </div>
+    </div>
+
+        <!-- neuroflash Ende -->
+
+        <!-- monhai Anfang -->
+        <div class="col">
+            <div id="hov" class="card h-100 clink" data-id="monhai" data-category="KI">
+                <a href="https://monhai.com/" target="_blank" class="image-link">
+                    <div class="image-wrapper">
+                        <img src="Bilder/monhai.svg" class="card-img-top" alt="Monhai">
+                        <div class="overlay">Öffnen</div>
+                    </div>
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Monhai
+                        <div class="position-relative">
+                            <div class="position-absolute bottom-0 end-0">
+                                <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    fill="currentColor" viewBox="0 0 16 16">
+                                    <path
+                                        d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </h5>
+                    <p class="card-text">Eine Sammlung von vielen KI Tools</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- monhai Ende -->
+
+        <!-- huggingface Anfang -->
+        <div class="col">
+            <div id="hov" class="card h-100 clink" data-id="huggingface" data-category="KI">
+                <a href="https://huggingface.co/spaces" target="_blank" class="image-link">
+                    <div class="image-wrapper">
+                        <img src="Bilder/huggingface.svg" class="card-img-top" alt="Hugging Face">
+                        <div class="overlay">Öffnen</div>
+                    </div>
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Hugging Face
+                        <div class="position-relative">
+                            <div class="position-absolute bottom-0 end-0">
+                                <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    fill="currentColor" viewBox="0 0 16 16">
+                                    <path
+                                        d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </h5>
+                    <p class="card-text">Unter "Spaces" sind ganz viele KI Tools</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- huggingface Ende -->
+
+     
+
+
+        <!-- Fooocus Anfang -->
+        <div class="col toggleEntwickler" style="display: none;">
+            <div id="hovadmin" class="card h-100 clink" data-id="fooocus" data-category="KI, Admin,">
+                <a href="https://colab.research.google.com/github/lllyasviel/Fooocus/blob/main/fooocus_colab.ipynb"
+                    target="_blank" class="image-link" rel="noopener noreferrer">
+                    <div class="image-wrapper">
+                        <img src="Bilder/fooocus.svg" class="card-img-top" alt="Fooocus Logo">
+                        <div class="overlay">Öffnen</div>
+                    </div>
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Fooocus 
+                        
+                        
+                        <div class="position-relative">
+                            <div class="position-absolute bottom-0 end-0">
+                                <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    fill="currentColor" viewBox="0 0 16 16">
+                                    <path
+                                        d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </h5>
+                    <p class="card-text">
+                        Kostenloser KI-Bildgenerator direkt in Google Colab – Open Source und ohne Installation nutzbar.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fooocus Ende -->
+
+
+         <!-- Wan 2.1 Anfang -->
+    <div class="col toggleEntwickler" style="display: none;">
+        <div id="hovadmin" class="card h-100 clink" data-id="wan21" data-category="KI, Admin">
+            <a href="https://github.com/Isi-dev/Google-Colab_Notebooks" target="_blank" class="image-link"
+                rel="noopener noreferrer">
+                <div class="image-wrapper">
+                    <img src="Bilder/wan.svg" class="card-img-top" alt="Wan 2.1 Logo">
+                    <div class="overlay">Öffnen</div>
+                </div>
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">
+                    Wan 2.1
+                    <div class="position-relative">
+                        <div class="position-absolute bottom-0 end-0">
+                            <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                fill="currentColor" viewBox="0 0 16 16">
+                                <path
+                                    d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                            </svg>
+                        </div>
+                    </div>
+                </h5>
+                <p class="card-text">
+                    Kostenloser KI-Videogenerator direkt in Google Colab – Open Source und ideal für KI-Projekte.
+                </p>
+            </div>
+        </div>
+    </div>
+
+        <!-- Wan 2.1 Ende -->
+
+
+     
 
 
         </div>
@@ -319,94 +685,220 @@
 <!-- Tools Anfang -->
         <div class="album py-5">
             <div class="container">
-                <h2 class="box clink" onclick="toggleEntwickler()"><a id="tools"><br>Tools</a></h2><br>
-                <div class="box row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <h2 class="box clink"><a id="tools"><br>Tools</a></h2><br>
+                <div class="box row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
         
         
         
-                    <!-- 123 Apps Anfang -->
-                    <div class="col">
-                        <a href="https://123apps.com/" target="_blank" class="clink">
-                            <div id="hov" class="card h-100">
-                                <img src="Bilder/123appssvg.svg" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">123 Apps</h5>
-                                    <p class="card-text">Eine Sammlung von vielen Tools <br> (Video Tools, Audio Tools, PDF Tools und Converters)</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- 123 Apps Ende -->
+                   
 
                     
+                      <!-- PDF24 Anfang -->
+                <div class="col">
+                    <div id="hov" class="card h-100 clink" data-id="pdf24" data-category="Tools">
+                        <a href="https://tools.pdf24.org/de" target="_blank" class="image-link">
+                            <div class="image-wrapper">
+                                <img src="Bilder/pdf24.svg" class="card-img-top" alt="PDF24">
+                                <div class="overlay">Öffnen</div>
+                            </div>
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                PDF24 Tools
+                                <div class="position-relative">
+                                    <div class="position-absolute bottom-0 end-0">
+                                        <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            fill="currentColor" viewBox="0 0 16 16">
+                                            <path
+                                                d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </h5>
+                            <p class="card-text">PDF Tool</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PDF24 Ende -->
+
+
+
                     <!-- I love PDF Anfang -->
                 <div class="col">
-                    <a href="https://www.ilovepdf.com/de" target="_blank" class="clink">
-                        <div id="hov" class="card h-100">
-                            <img src="Bilder/ilove.svg" class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">I love PDF</h5>
-                                <p class="card-text">PDF Tool</p>
+                    <div id="hov" class="card h-100 clink" data-id="ilovepdf" data-category="Tools">
+                        <a href="https://www.ilovepdf.com/de" target="_blank" class="image-link">
+                            <div class="image-wrapper">
+                                <img src="Bilder/ilove.svg" class="card-img-top" alt="I love PDF">
+                                <div class="overlay">Öffnen</div>
                             </div>
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                I love PDF
+                                <div class="position-relative">
+                                    <div class="position-absolute bottom-0 end-0">
+                                        <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            fill="currentColor" viewBox="0 0 16 16">
+                                            <path
+                                                d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </h5>
+                            <p class="card-text">PDF Tool</p>
                         </div>
-                    </a>
+                    </div>
                 </div>
+
                 <!-- I love PDF Ende -->
 
                 <!-- PDF 2 go Anfang -->
-                    <div class="col">
-                        <a href="https://www.pdf2go.com/de" target="_blank" class="clink">
-                            <div id="hov" class="card h-100">
-                                <img src="Bilder/pdf2go.svg" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">PDF 2 go</h5>
-                                    <p class="card-text">PDF Tool</p>
-                                </div>
+                <div class="col">
+                    <div id="hov" class="card h-100 clink" data-id="pdf2go" data-category="Tools">
+                        <a href="https://www.pdf2go.com/de" target="_blank" class="image-link">
+                            <div class="image-wrapper">
+                                <img src="Bilder/pdf2go.svg" class="card-img-top" alt="PDF 2 go">
+                                <div class="overlay">Öffnen</div>
                             </div>
                         </a>
-                    </div>
-                    <!-- PDF 2 go Ende -->
-
-                    <!-- Freeconvert Anfang -->
-                        <div class="col">
-                            <a href="https://www.freeconvert.com/de" target="_blank" class="clink">
-                                <div id="hov" class="card h-100">
-                                    <img src="Bilder/converter.svg" class="card-img-top">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Freeconvert</h5>
-                                        <p class="card-text">Jede Datei in verschiedene Formate convertieren und noch viel mehr</p>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                PDF 2 go
+                                <div class="position-relative">
+                                    <div class="position-absolute bottom-0 end-0">
+                                        <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            fill="currentColor" viewBox="0 0 16 16">
+                                            <path
+                                                d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                        </svg>
                                     </div>
                                 </div>
-                            </a>
+                            </h5>
+                            <p class="card-text">PDF Tool</p>
                         </div>
+                    </div>
+                </div>
+
+                    <!-- PDF 2 go Ende -->
+
+                    <!-- 123 Apps Anfang -->
+                    <div class="col">
+                        <div id="hov" class="card h-100 clink" data-id="123apps" data-category="Tools">
+                            <a href="https://123apps.com/" target="_blank" class="image-link">
+                                <div class="image-wrapper">
+                                    <img src="Bilder/123appssvg.svg" class="card-img-top" alt="123 Apps">
+                                    <div class="overlay">Öffnen</div>
+                                </div>
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    123 Apps
+                                    <div class="position-relative">
+                                        <div class="position-absolute bottom-0 end-0">
+                                            <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                fill="currentColor" viewBox="0 0 16 16">
+                                                <path
+                                                    d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </h5>
+                                <p class="card-text">Eine Sammlung von vielen Tools <br> (Video Tools, Audio Tools, PDF Tools und
+                                    Converters)</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 123 Apps Ende -->
+
+
+
+                    <!-- Freeconvert Anfang -->
+                    <div class="col">
+                        <div id="hov" class="card h-100 clink" data-id="freeconvert" data-category="Tools">
+                            <a href="https://www.freeconvert.com/de" target="_blank" class="image-link">
+                                <div class="image-wrapper">
+                                    <img src="Bilder/converter.svg" class="card-img-top" alt="Freeconvert">
+                                    <div class="overlay">Öffnen</div>
+                                </div>
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    Freeconvert
+                                    <div class="position-relative">
+                                        <div class="position-absolute bottom-0 end-0">
+                                            <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                fill="currentColor" viewBox="0 0 16 16">
+                                                <path
+                                                    d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </h5>
+                                <p class="card-text">Jede Datei in verschiedene Formate convertieren und noch viel mehr</p>
+                            </div>
+                        </div>
+                    </div>
+
                         <!-- Freeconvert Ende -->
 
                     <!-- Cy Math Anfang -->
                     <div class="col">
-                        <a href="https://www.cymath.com/" target="_blank" class="clink">
-                            <div id="hov" class="card h-100">
-                                <img src="Bilder/cymath.svg" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Cy Math</h5>
-                                    <p class="card-text">Löst Komplexe Aufgaben mit Lösungsweg</p>
+                        <div id="hov" class="card h-100 clink" data-id="cymath" data-category="Tools">
+                            <a href="https://www.cymath.com/" target="_blank" class="image-link">
+                                <div class="image-wrapper">
+                                    <img src="Bilder/cymath.svg" class="card-img-top" alt="Cy Math">
+                                    <div class="overlay">Öffnen</div>
                                 </div>
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    Cy Math
+                                    <div class="position-relative">
+                                        <div class="position-absolute bottom-0 end-0">
+                                            <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                fill="currentColor" viewBox="0 0 16 16">
+                                                <path
+                                                    d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </h5>
+                                <p class="card-text">Löst Komplexe Aufgaben mit Lösungsweg</p>
                             </div>
-                        </a>
+                        </div>
                     </div>
+
                     <!-- Cy Math Ende -->
 
                     <!-- QR Code Monkey Anfang -->
-                    <div class="col">
-                        <a href="https://www.qrcode-monkey.com/de/" target="_blank" class="clink">
-                            <div id="hov" class="card h-100">
-                                <img src="Bilder/qrcodemonkey.svg" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">QR Code Monkey</h5>
-                                    <p class="card-text">Kerstelle komplett inividuelle QR Codes</p>
-                                </div>
+                <div class="col">
+                    <div id="hov" class="card h-100 clink" data-id="qrcode-monkey" data-category="Tools">
+                        <a href="https://www.qrcode-monkey.com/de/" target="_blank" class="image-link">
+                            <div class="image-wrapper">
+                                <img src="Bilder/qrcodemonkey.svg" class="card-img-top" alt="QR Code Monkey">
+                                <div class="overlay">Öffnen</div>
                             </div>
                         </a>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                QR Code Monkey
+                                <div class="position-relative">
+                                    <div class="position-absolute bottom-0 end-0">
+                                        <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            fill="currentColor" viewBox="0 0 16 16">
+                                            <path
+                                                d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </h5>
+                            <p class="card-text">Kerstelle komplett inividuelle QR Codes</p>
+                        </div>
                     </div>
+                </div>
+
                     <!-- QR Code Monkey Ende -->
           
 
@@ -424,50 +916,134 @@
 <div class="album py-5">
     <div class="container">
 
-        <h2 class="box clink toggleEntwickler" style="display: none;" onclick="toggleEntwickler()">Entwickler Tools</h2><br>
-        <div class="box row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <h2 class="box clink toggleEntwickler" style="display: none;">Entwickler Tools</h2><br>
+        <div class="box row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+
+
+
+            <!-- Bootstrap Anfang -->
+            <div class="col toggleEntwickler" style="display: none;">
+                <div id="hovadmin" class="card h-100 clink" data-id="bootstrap" data-category="Entwickler Tools, Admin">
+                    <a href="https://getbootstrap.com/" target="_blank" class="image-link" rel="noopener noreferrer">
+                        <div class="image-wrapper">
+                            <img src="Bilder/bootstrap.svg" class="card-img-top" alt="Bootstrap Logo">
+                            <div class="overlay">Öffnen</div>
+                        </div>
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            Bootstrap
+                            <div class="position-relative">
+                                <div class="position-absolute bottom-0 end-0">
+                                    <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                        fill="currentColor" viewBox="0 0 16 16">
+                                        <path
+                                            d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </h5>
+                        <p class="card-text">
+                            CSS Framework, ideal für Anfänger.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bootstrap Ende -->
 
 
             <!-- Black Box AI Anfang -->
-            <div class="col toggleEntwickler" style="display: none;">
-                <a href="https://www.blackbox.ai/" target="_blank" class="clink">
-                    <div id="hov" class="card h-100">
-                        <img src="Bilder/blackbox.svg" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">Black Box AI</h5>
-                            <p class="card-text">Generiert Code, zb. HTML Python, JS, Jave</p>
-                        </div>
+        <div class="col toggleEntwickler" style="display: none;">
+            <div id="hovadmin" class="card h-100 clink" data-id="blackbox" data-category="Entwickler Tools, Admin">
+                <a href="https://www.blackbox.ai/" target="_blank" class="image-link" rel="noopener noreferrer">
+                    <div class="image-wrapper">
+                        <img src="Bilder/blackbox.svg" class="card-img-top" alt="BlackBox AI Logo">
+                        <div class="overlay">Öffnen</div>
                     </div>
                 </a>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Black Box AI
+                        <div class="position-relative">
+                            <div class="position-absolute bottom-0 end-0">
+                                <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    fill="currentColor" viewBox="0 0 16 16">
+                                    <path
+                                        d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </h5>
+                    <p class="card-text">
+                        KI, die automatisch Code generiert – z.&nbsp;B. in HTML, Python, JavaScript oder Java.
+                    </p>
+                </div>
             </div>
+        </div>
+
             <!-- Black Box AI Ende -->
 
             <!-- Uiverse Anfang -->
             <div class="col toggleEntwickler" style="display: none;">
-                <a href="https://uiverse.io/" target="_blank" class="clink">
-                    <div id="hov" class="card h-100">
-                        <img src="Bilder/uiverse.svg" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">Uiverse</h5>
-                            <p class="card-text">Kopiere fertige HTML und CSS Elemente</p>
+                <div id="hovadmin" class="card h-100 clink" data-id="uiverse" data-category="Entwickler Tools, Admin">
+                    <a href="https://uiverse.io/" target="_blank" class="image-link" rel="noopener noreferrer">
+                        <div class="image-wrapper">
+                            <img src="Bilder/uiverse.svg" class="card-img-top" alt="Uiverse Logo">
+                            <div class="overlay">Öffnen</div>
                         </div>
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            Uiverse
+                            <div class="position-relative">
+                                <div class="position-absolute bottom-0 end-0">
+                                    <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                        fill="currentColor" viewBox="0 0 16 16">
+                                        <path
+                                            d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </h5>
+                        <p class="card-text">
+                            Kopiere animierte HTML- und CSS-Komponenten mit nur einem Klick – ideal für moderne Webdesigns.
+                        </p>
                     </div>
-                </a>
+                </div>
             </div>
+
             <!-- Uiverse Ende -->
 
             <!-- All Tools in one Box Anfang -->
                 <div class="col toggleEntwickler" style="display: none;">
-                    <a href="https://10015.io/" target="_blank" class="clink">
-                        <div id="hov" class="card h-100">
-                            <img src="Bilder/all.svg" class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">All Tools in one Box</h5>
-                                <p class="card-text">Sehr viele Tools, primär für Programmierer geeignet</p>
+                    <div id="hovadmin" class="card h-100 clink" data-id="alltoolsbox" data-category="Entwickler Tools">
+                        <a href="https://10015.io/" target="_blank" class="image-link" rel="noopener noreferrer">
+                            <div class="image-wrapper">
+                                <img src="Bilder/all.svg" class="card-img-top" alt="All Tools in One Box Logo">
+                                <div class="overlay">Öffnen</div>
                             </div>
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                All Tools in One Box
+                                <div class="position-relative">
+                                    <div class="position-absolute bottom-0 end-0">
+                                        <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            fill="currentColor" viewBox="0 0 16 16">
+                                            <path
+                                                d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </h5>
+                            <p class="card-text">
+                                Über 100 nützliche Tools in einer Web-App – perfekt für Entwickler, Designer und Tech-Enthusiasten.
+                            </p>
                         </div>
-                    </a>
+                    </div>
                 </div>
+
                 <!-- All Tools in one Box Ende -->
 
         </div>
@@ -483,94 +1059,265 @@
             <div class="container">
                 
             <h2 class="box clink"><a id="grafiken"><br>Grafiken</a></h2><br>
-                <div class="box row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="box row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
         
         
-                <!-- Hotpot AI Anfang -->
-                    <div class="col">
-                        <a href="https://hotpot.ai/" target="_blank" class="clink">
-                            <div id="hov" class="card h-100">
-                                <img src="Bilder/hotpot.svg" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Hotpot AI</h5>
-                                    <p class="card-text">Bider Verbesser und noch vieles mehr</p>
-                                </div>
+
+
+                    <!-- watermarkremover Anfang -->
+                <div class="col">
+                    <div id="hov" class="card h-100 clink" data-id="watermark-remover" data-category="Grafiken">
+                        <a href="https://watermarkremover.io/de/" target="_blank" class="image-link">
+                            <div class="image-wrapper">
+                                <img src="Bilder/watermarkremover.svg" class="card-img-top" alt="Watermark Remover">
+                                <div class="overlay">Öffnen</div>
                             </div>
                         </a>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                Watermark Remover
+                                <div class="position-relative">
+                                    <div class="position-absolute bottom-0 end-0">
+                                        <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            fill="currentColor" viewBox="0 0 16 16">
+                                            <path
+                                                d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </h5>
+                            <p class="card-text">Entferne kostenlos Wasserzeichen aus deinem Bild</p>
+                        </div>
                     </div>
+                </div>
+
+                    <!-- watermarkremover Ende -->
+
+
+
+                    <!-- textbehindimage Anfang -->
+                <div class="col">
+                    <div id="hov" class="card h-100 clink" data-id="text-behind-image" data-category="Grafiken">
+                        <a href="https://textbehindimage.com/" target="_blank" class="image-link" rel="noopener noreferrer">
+                            <div class="image-wrapper">
+                                <img src="Bilder/textbehindimage.svg" class="card-img-top" alt="Text Behind Image">
+                                <div class="overlay">Öffnen</div>
+                            </div>
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                Text Behind Image
+                                <div class="position-relative">
+                                    <div class="position-absolute bottom-0 end-0">
+                                        <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            fill="currentColor" viewBox="0 0 16 16">
+                                            <path
+                                                d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </h5>
+                            <p class="card-text">Fügt automatisch Text als Wasserzeichen oder Beschriftung hinter Bilder ein.</p>
+                        </div>
+                    </div>
+                </div>
+
+                    <!-- textbehindimage Ende -->
+
+
+                    <!-- upscale Anfang -->
+                <div class="col">
+                    <div id="hov" class="card h-100 clink" data-id="upscale" data-category="Grafiken">
+                        <a href="https://www.iloveimg.com/upscale-image" target="_blank" class="image-link" rel="noopener noreferrer">
+                            <div class="image-wrapper">
+                                <img src="Bilder/upscale.svg" class="card-img-top" alt="Upscale">
+                                <div class="overlay">Öffnen</div>
+                            </div>
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                Upscale
+                                <div class="position-relative">
+                                    <div class="position-absolute bottom-0 end-0">
+                                        <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            fill="currentColor" viewBox="0 0 16 16">
+                                            <path
+                                                d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </h5>
+                            <p class="card-text">Erhöht die Bildqualität der Bilder</p>
+                        </div>
+                    </div>
+                </div>
+
+                    <!-- upscale Ende -->
+
+
+
+                <!-- Hotpot AI Anfang -->
+                <div class="col">
+                    <div id="hov" class="card h-100 clink" data-id="hotpot-ai" data-category="Grafiken">
+                        <a href="https://hotpot.ai/" target="_blank" class="image-link" rel="noopener noreferrer">
+                            <div class="image-wrapper">
+                                <img src="Bilder/hotpot.svg" class="card-img-top" alt="Hotpot AI">
+                                <div class="overlay">Öffnen</div>
+                            </div>
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                Hotpot AI
+                                <div class="position-relative">
+                                    <div class="position-absolute bottom-0 end-0">
+                                        <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            fill="currentColor" viewBox="0 0 16 16">
+                                            <path
+                                                d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </h5>
+                            <p class="card-text">Bilder verbessern und noch vieles mehr</p>
+                        </div>
+                    </div>
+                </div>
+
                     <!-- Hotpot AI Ende -->
 
-                    <!-- Vizvom AI Anfang -->
-                <div class="col">
-                    <a href="https://www.vizcom.ai/" target="_blank" class="clink">
-                        <div id="hov" class="card h-100">
-                            <img src="Bilder/vizcom.svg" class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">Vizvom AI</h5>
-                                <p class="card-text">Visuelle deine Zeichnung in Sekunden</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- Vizvom AI Ende -->
+                   
 
-                <!-- Kaiber Ai Anfang -->
-                    <div class="col">
-                        <a href="https://kaiber.ai/" target="_blank" class="clink">
-                            <div id="hov" class="card h-100">
-                                <img src="Bilder/kaiber.svg" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Kaiber Ai</h5>
-                                    <p class="card-text">Erstelle sehr einfach die besten Animationen</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+
+            
                     <!-- Kaiber Ai Ende -->
 
                     <!-- Magiceraser Anfang -->
-                        <div class="col">
-                    <a href="https://magicstudio.com/de/magiceraser" target="_blank" class="clink">
-                        <div id="hov" class="card h-100">
-                            <img src="Bilder/magicstudio.svg" class="card-img-top">
+                    <div class="col">
+                        <div id="hov" class="card h-100 clink" data-id="magiceraser" data-category="Grafiken">
+                            <a href="https://magicstudio.com/de/magiceraser" target="_blank" class="image-link" rel="noopener noreferrer">
+                                <div class="image-wrapper">
+                                    <img src="Bilder/magicstudio.svg" class="card-img-top" alt="Magiceraser">
+                                    <div class="overlay">Öffnen</div>
+                                </div>
+                            </a>
                             <div class="card-body">
-                                <h5 class="card-title">Magiceraser</h5>
-                                <p class="card-text">Objekte aus Bilder lassen sich hiermit leicht entfernen</p>
+                                <h5 class="card-title">
+                                    Magiceraser
+                                    <div class="position-relative">
+                                        <div class="position-absolute bottom-0 end-0">
+                                            <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                fill="currentColor" viewBox="0 0 16 16">
+                                                <path
+                                                    d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </h5>
+                                <p class="card-text">Objekte aus Bildern lassen sich hiermit leicht entfernen</p>
                             </div>
                         </div>
-                    </a>
-                </div>
+                    </div>
+
                 <!-- Magiceraser Ende -->
 
-                <!-- Hugging Face Anfang -->
+                <!-- Diffuse Anfang -->
                     <div class="col">
-                        <a href="https://huggingface.co/spaces/huggingface-projects/diffuse-the-rest" target="_blank" class="clink">
-                            <div id="hov" class="card h-100">
-                                <img src="Bilder/huggingface.svg" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Hugging Face</h5>
-                                    <p class="card-text">Zeichnung oder Wörter zu einem professionellen Bild</p>
+                        <div id="hov" class="card h-100 clink" data-id="diffuse" data-category="Grafiken">
+                            <a href="https://huggingface.co/spaces/huggingface-projects/diffuse-the-rest" target="_blank" class="image-link"
+                                rel="noopener noreferrer">
+                                <div class="image-wrapper">
+                                    <img src="Bilder/diffuse.svg" class="card-img-top" alt="Diffuse">
+                                    <div class="overlay">Öffnen</div>
                                 </div>
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    Diffuse
+                                    <div class="position-relative">
+                                        <div class="position-absolute bottom-0 end-0">
+                                            <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                fill="currentColor" viewBox="0 0 16 16">
+                                                <path
+                                                    d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </h5>
+                                <p class="card-text">Erstellt professionelle Bilder aus Zeichnungen oder Textbeschreibungen</p>
                             </div>
-                        </a>
+                        </div>
                     </div>
-                    <!-- Hugging Face Ende -->
 
-                    <!-- Dalle Anfang -->
-                    <div class="col">
-                        <a href="https://labs.openai.com/" target="_blank" class="clink">
-                            <div id="hov" class="card h-100">
-                                <img src="Bilder/dalle.svg" class="card-img-top" alt="">
-                                <div class="card-body">
-                                    <h5 class="card-title">Dalle</h5>
-                                    <p class="card-text">
-                                        Gebe Worte ein und die KI erstellt passende Bilder
-                                    </p>
-                                </div>
+                    <!-- Diffuse Ende -->
+
+                 
+                     
+                   
+
+
+                    <!-- Remove Photos Anfang -->
+                <div class="col toggleSecret" style="display: none;">
+                    <div id="hovadmin" class="card h-100 clink" data-id="removephotos" data-category="Grafiken, Admin">
+                        <a href="https://remove.photos/" target="_blank" class="image-link" rel="noopener noreferrer">
+                            <div class="image-wrapper">
+                                <img src="Bilder/remove.svg" class="card-img-top" alt="Remove Photos Tool">
+                                <div class="overlay">Öffnen</div>
                             </div>
                         </a>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                Remove Photos
+                                <div class="position-relative">
+                                    <div class="position-absolute bottom-0 end-0">
+                                        <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            fill="currentColor" viewBox="0 0 16 16">
+                                            <path
+                                                d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </h5>
+                            <p class="card-text">
+                                Zahlreiche kostenlose Tools zur einfachen Bildbearbeitung – z. B. Hintergrund entfernen oder
+                                retuschieren.
+                            </p>
+                        </div>
                     </div>
-                    <!-- Dalle Ende -->
+                </div>
+
+                    <!-- Remove Photos Ende -->
+
+                    <!-- iloveimg Anfang -->
+                <div class="col toggleSecret" style="display: none;">
+                    <div id="hovadmin" class="card h-100 clink" data-id="iloveimg" data-category="Grafiken, Admin">
+                        <a href="https://www.iloveimg.com/" target="_blank" class="image-link" rel="noopener noreferrer">
+                            <div class="image-wrapper">
+                                <img src="Bilder/iloveimg.svg" class="card-img-top" alt="iLoveIMG Tool">
+                                <div class="overlay">Öffnen</div>
+                            </div>
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                I love IMG
+                                <div class="position-relative">
+                                    <div class="position-absolute bottom-0 end-0">
+                                        <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            fill="currentColor" viewBox="0 0 16 16">
+                                            <path
+                                                d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </h5>
+                            <p class="card-text">
+                                Umfangreiche, kostenlose Tools zur Bildbearbeitung – Bilder zuschneiden, komprimieren, konvertieren &
+                                mehr.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                    <!-- iloveimg Ende -->
 
 
                 </div>
@@ -584,98 +1331,356 @@
         <div class="album py-5">
             <div class="container">
             <h2 class="box clink"><a id="secret"><br><br>Secret</a></h2><br>
-                <div class="box row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="box row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
         
         
                 <!-- 12ft Anfang -->
                     <div class="col">
-                        <a href="https://12ft.io/" target="_blank" class="clink">
-                            <div id="hov" class="card h-100">
-                                <img src="Bilder/12ft.svg" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">12ft</h5>
-                                    <p class="card-text">Diese Webseite durchbricht jede Paywall</p>
+                        <div id="hov" class="card h-100 clink" data-id="12ft" data-category="Secret">
+                            <a href="https://12ft.io/" target="_blank" class="image-link" rel="noopener noreferrer">
+                                <div class="image-wrapper">
+                                    <img src="Bilder/12ft.svg" class="card-img-top" alt="12ft">
+                                    <div class="overlay">Öffnen</div>
                                 </div>
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    12ft
+                                    <div class="position-relative">
+                                        <div class="position-absolute bottom-0 end-0">
+                                            <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                fill="currentColor" viewBox="0 0 16 16">
+                                                <path
+                                                    d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </h5>
+                                <p class="card-text">Diese Webseite durchbricht jede Paywall</p>
                             </div>
-                        </a>
+                        </div>
                     </div>
+
                     <!-- 12ft Ende -->
 
                     <!-- Dateien absichtlich beschädigen Anfang -->
-                <div class="col">
-                <a href="https://corrupt-a-file.net/" target="_blank" class="clink">
-                    <div id="hov" class="card h-100">
-                        <img src="Bilder/file.svg" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">Dateien absichtlich beschädigen</h5>
-                            <p class="card-text">Mit dem Tool lassen dich Dateine nicht mehr öffen, weil sie absichtlich beschädigt werden.</p>
+            <div class="col">
+                <div id="hov" class="card h-100 clink" data-id="corrupt-file" data-category="Secret">
+                    <a href="https://corrupt-a-file.net/" target="_blank" class="image-link" rel="noopener noreferrer">
+                        <div class="image-wrapper">
+                            <img src="Bilder/file.svg" class="card-img-top" alt="Datei beschädigen">
+                            <div class="overlay">Öffnen</div>
                         </div>
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            Dateien absichtlich beschädigen
+                            <div class="position-relative">
+                                <div class="position-absolute bottom-0 end-0">
+                                    <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                        fill="currentColor" viewBox="0 0 16 16">
+                                        <path
+                                            d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </h5>
+                        <p class="card-text">
+                            Mit diesem Tool lassen sich Dateien absichtlich beschädigen, sodass sie nicht mehr geöffnet werden
+                            können.
+                        </p>
                     </div>
-                </a>
-                </div>
-                <!-- Dateien absichtlich beschädigen Ende -->
-
-                <!-- Update Faker Anfang -->
-                     <div class="col">
-            <a href="https://updatefaker.com/" target="_blank" class="clink">
-            <div id="hov" class="card h-100">
-                <img src="Bilder/update.svg" class="card-img-top">
-                <div class="card-body">
-                    <h5 class="card-title">Update Faker</h5>
-                    <p class="card-text">Du kannst hiermit ein Fake Update starten, wenn du mal wieder keine Lust auf die Arbeit hast.</p>
                 </div>
             </div>
-        </a>
-    </div>
-        <!-- Update Faker Ende -->
+
+                <!-- Dateien absichtlich beschädigen Ende -->
 
         
-        <!-- Secret muss aktiviert werde Anfang -->
+
+<!-- hurawatch2 Anfang -->
+<div class="col">
+    <div id="hov" class="card h-100 clink" data-id="hurawatch" data-category="Secret">
+        <a href="https://en.hurawatch2.watch/home" target="_blank" class="image-link" rel="noopener noreferrer">
+            <div class="image-wrapper">
+                <img src="Bilder/hurawatch2.svg" class="card-img-top" alt="Hurawatch">
+                <div class="overlay">Öffnen</div>
+            </div>
+        </a>
+        <div class="card-body">
+            <h5 class="card-title">
+                Hurawatch
+                <div class="position-relative">
+                    <div class="position-absolute bottom-0 end-0">
+                        <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            fill="currentColor" viewBox="0 0 16 16">
+                            <path
+                                d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                        </svg>
+                    </div>
+                </div>
+            </h5>
+            <p class="card-text">Netflix, komplett kostenlos</p>
+        </div>
+    </div>
+</div>
+
+<!-- hurawatch2 Ende -->
+
+<!-- radio Anfang -->
+<div class="col">
+    <div id="hov" class="card h-100 clink" data-id="radio-garden" data-category="Secret">
+        <a href="https://radio.garden" target="_blank" class="image-link" rel="noopener noreferrer">
+            <div class="image-wrapper">
+                <img src="Bilder/radio.svg" class="card-img-top" alt="Radio Garden">
+                <div class="overlay">Öffnen</div>
+            </div>
+        </a>
+        <div class="card-body">
+            <h5 class="card-title">
+                Radio Garden
+                <div class="position-relative">
+                    <div class="position-absolute bottom-0 end-0">
+                        <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            fill="currentColor" viewBox="0 0 16 16">
+                            <path
+                                d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                        </svg>
+                    </div>
+                </div>
+            </h5>
+            <p class="card-text">Weltweit alle Radiosender hören</p>
+        </div>
+    </div>
+</div>
+
+<!-- radio Ende -->
+
+<!-- whitescreen Anfang -->
+<div class="col">
+    <div id="hov" class="card h-100 clink" data-id="whitescreen" data-category="Secret">
+        <a href="https://www.whitescreen.online/" target="_blank" class="image-link" rel="noopener noreferrer">
+            <div class="image-wrapper">
+                <img src="Bilder/whitescreen.svg" class="card-img-top" alt="Whitescreen">
+                <div class="overlay">Öffnen</div>
+            </div>
+        </a>
+        <div class="card-body">
+            <h5 class="card-title">
+                Whitescreen
+                <div class="position-relative">
+                    <div class="position-absolute bottom-0 end-0">
+                        <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            fill="currentColor" viewBox="0 0 16 16">
+                            <path
+                                d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                        </svg>
+                    </div>
+                </div>
+            </h5>
+            <p class="card-text">Es lassen sich Prank-Screens erstellen</p>
+        </div>
+    </div>
+</div>
+
+<!-- whitescreen Ende -->
+
+
+
+
+
+        
+        <!-- Admin - Secret muss aktiviert werde Anfang -->
 
         <!-- Cracked Games Anfang -->
         <div class="col toggleSecret" style="display: none;">
-            <a href="https://cracked-games.org/" target="_blank" class="clink">
-                <div id="hov" class="card h-100">
-                    <img src="Bilder/crackedgames.svg" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">Cracked Games</h5>
-                        <p class="card-text">Downloade verschiedende Apps kostenlos<br> z.B. Adobe, Microsoft Office</p>
+            <div id="hovadmin" class="card h-100 clink" data-id="cracked-games" data-category="Secret, Admin">
+                <a href="https://cracked-games.org/" target="_blank" class="image-link" rel="noopener noreferrer">
+                    <div class="image-wrapper">
+                        <img src="Bilder/crackedgames.svg" class="card-img-top" alt="Cracked Games">
+                        <div class="overlay">Öffnen</div>
                     </div>
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Cracked Games
+                        <div class="position-relative">
+                            <div class="position-absolute bottom-0 end-0">
+                                <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    fill="currentColor" viewBox="0 0 16 16">
+                                    <path
+                                        d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </h5>
+                    <p class="card-text">
+                        Downloade verschiedene Apps kostenlos<br>z. B. Adobe, Microsoft Office
+                    </p>
                 </div>
-            </a>
+            </div>
         </div>
+
         <!-- Cracked Games Ende -->
+
+         <!-- 10 min Mail Anfang -->
+        <div class="col toggleSecret" style="display: none;">
+            <div id="hovadmin" class="card h-100 clink" data-id="mail" data-category="Secret, Admin">
+                <a href="https://10minutemail.com/" target="_blank" class="image-link" rel="noopener noreferrer">
+                    <div class="image-wrapper">
+                        <img src="Bilder/mail.svg" class="card-img-top" alt="Cracked Games">
+                        <div class="overlay">Öffnen</div>
+                    </div>
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        10 Minuten E-Mail
+                        <div class="position-relative">
+                            <div class="position-absolute bottom-0 end-0">
+                                <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    fill="currentColor" viewBox="0 0 16 16">
+                                    <path
+                                        d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </h5>
+                    <p class="card-text">
+                        Eine temporäre E-Mail Adresse
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 10 min Mail Ende -->
+
+        <!-- Receive SMS Anfang -->
+        <div class="col toggleSecret" style="display: none;">
+            <div id="hovadmin" class="card h-100 clink" data-id="nummer" data-category="Secret, Admin">
+                <a href="https://receive-smss.com/" target="_blank" class="image-link" rel="noopener noreferrer">
+                    <div class="image-wrapper">
+                        <img src="Bilder/nummer.svg" class="card-img-top" alt="Receive SMS">
+                        <div class="overlay">Öffnen</div>
+                    </div>
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Receive SMS
+                        <div class="position-relative">
+                            <div class="position-absolute bottom-0 end-0">
+                                <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    fill="currentColor" viewBox="0 0 16 16">
+                                    <path
+                                        d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </h5>
+                    <p class="card-text">
+                        Temporäre Telefonnummern für SMS-Empfang - Jedes Land
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Receive SMS Ende -->
+
         
         
         <!-- Pim Eys Anfang -->
         <div class="col toggleSecret" style="display: none;">
-            <a href="https://pimeyes.com/en" target="_blank" class="clink">
-                <div id="hov" class="card h-100">
-                    <img src="Bilder/pimeyes.svg" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">Pim Eys</h5>
-                        <p class="card-text">Durchsuche das ganze Internet mit einem Bild einer Person</p>
+            <div id="hovadmin" class="card h-100 clink" data-id="pimeyes" data-category="Secret, Admin">
+                <a href="https://pimeyes.com/en" target="_blank" class="image-link" rel="noopener noreferrer">
+                    <div class="image-wrapper">
+                        <img src="Bilder/pimeyes.svg" class="card-img-top" alt="PimEyes Logo">
+                        <div class="overlay">Öffnen</div>
                     </div>
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        PimEyes
+                        <div class="position-relative">
+                            <div class="position-absolute bottom-0 end-0">
+                                <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    fill="currentColor" viewBox="0 0 16 16">
+                                    <path
+                                        d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </h5>
+                    <p class="card-text">
+                        Durchsuche das gesamte Internet mit dem Bild einer Person.
+                    </p>
                 </div>
-            </a>
+            </div>
         </div>
+
         <!-- Pim Eys Ende -->        
 
         <!-- World birthsand deaths Anfang -->
         <div class="col toggleSecret" style="display: none;">
-            <a href="http://worldbirthsanddeaths.com/" target="_blank" class="clink">
-                <div id="hov" class="card h-100">
-                    <img src="Bilder/world.svg" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">World birthsand deaths</h5>
-                        <p class="card-text">Siehe dir an wo aktuell Menschen sterben und geboren werden</p>
+            <div id="hovadmin" class="card h-100 clink" data-id="worldbirthsdeaths" data-category="Secret, Admin">
+                <a href="http://worldbirthsanddeaths.com/" target="_blank" class="image-link" rel="noopener noreferrer">
+                    <div class="image-wrapper">
+                        <img src="Bilder/world.svg" class="card-img-top" alt="Weltweite Geburten und Todesfälle">
+                        <div class="overlay">Öffnen</div>
                     </div>
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        World Births and Deaths
+                        <div class="position-relative">
+                            <div class="position-absolute bottom-0 end-0">
+                                <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    fill="currentColor" viewBox="0 0 16 16">
+                                    <path
+                                        d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </h5>
+                    <p class="card-text">
+                        Sieh in Echtzeit, wo auf der Welt Menschen geboren werden und sterben.
+                    </p>
                 </div>
-            </a>
+            </div>
         </div>
+
         <!-- World birthsand deaths Ende -->
 
-        <!-- Secret muss aktiviert werde Ende -->
+        <!-- Fake Details Anfang -->
+    <div class="col toggleSecret" style="display: none;">
+        <div id="hovadmin" class="card h-100 clink" data-id="fakedetails" data-category="Secret, Admin">
+            <a href="https://fakedetail.com/" target="_blank" class="image-link" rel="noopener noreferrer">
+                <div class="image-wrapper">
+                    <img src="Bilder/fakedetails.svg" class="card-img-top" alt="Fake Chat erstellen">
+                    <div class="overlay">Öffnen</div>
+                </div>
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">
+                    Fake Details
+                    <div class="position-relative">
+                        <div class="position-absolute bottom-0 end-0">
+                            <svg class="heart bi bi-suit-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                fill="currentColor" viewBox="0 0 16 16">
+                                <path
+                                    d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+                            </svg>
+                        </div>
+                    </div>
+                </h5>
+                <p class="card-text">
+                    Erstelle einen täuschend echten Fake-Chat mit beliebigem Namen und Inhalt.
+                </p>
+            </div>
+        </div>
+    </div>
+
+        <!-- Fake Details Ende -->
+
+
+        <!-- Admin - Secret muss aktiviert werde Ende -->
 
 
 
