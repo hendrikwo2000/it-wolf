@@ -4,11 +4,14 @@
     --linkc: #000000; /*Schrift Farbe*/
     --backg: #ffffff; /*Hintergrund Farbe*/
     --hovg: #0692e32a; /*Hover Farbe*/
+    --hovgadmin: #ffff002a; /*Admin Hover Farbe*/
     --them: #0692e317;/*Normaler Kartenhintergrund*/
+    --themadmin: #ffff001a;;/*Admin Kartenhintergrund*/
     --popupborder: #dee2e64b; /* Border Farbe für Popups*/
     --circle-color: #0693e3; /* Netz Kreis Farbe */
     --line-color: #0693e3; /* Netz Linie Farbe */
     --stern-color: #ffc400; /* Stern Farbe*/
+    --herz-color: red;
 
 
 }
@@ -208,8 +211,59 @@ color: var(--linkc);
 
 /*---------------------------------------------------------------------*/
 /* Abgerundete Ecken für jede Karte */
-.card{
-    border-radius: 40px; 
+
+
+.card {
+    border-radius: 40px;
+    overflow: hidden;
+    background-color: var(--them);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.card.hovered {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+    background-color: var(--hovg);
+}
+
+.card.clicked {
+    transform: scale(0.96);
+    transition: transform 0.1s ease;
+}
+
+
+
+
+
+.card-img-top {
+    transition: transform 0.3s ease;
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.card.hovered .card-img-top {
+    transform: scale(1.05);
+}
+
+.card.hovered .overlay {
+    opacity: 1;
+}
+
+
+
+/* Mobiloptimierung ab max 576px (Bootstrap XS) */
+@media (max-width: 576px) {
+    .image-wrapper {
+        height: 120px;
+        overflow: hidden;
+    }
+
+    .card-img-top {
+        height: 100%;
+        object-fit: cover;
+    }
 }
 
 /*---------------------------------------------------------------------*/
@@ -257,6 +311,7 @@ color: var(--linkc);
     border-radius: 10px;
     transition: 0.5s;
     padding: 5px;
+    color:var(--linkc)
    
     
 }
@@ -335,6 +390,8 @@ color: var(--linkc);
 
    /*---------------------------------------------------------------------*/
    /* CSS Effeckt für Karten mit Link / auf der Startseite */
+
+   /*
    #hov {
        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
        transition: transform 0.3s;
@@ -351,6 +408,7 @@ color: var(--linkc);
         transform: scale(0.96);
         transition: 0.25s;
     }
+    
    /*---------------------------------------------------------------------*/
    /* CSS Effeckt für Karten ohne Link / im Impressum */
    #hovc {
@@ -386,6 +444,52 @@ color: var(--linkc);
     
          }
     
+
+   /*---------------------------------------------------------------------*/
+   /* CSS Effeckt für Karten mit Link / auf der Startseite */
+   #hovadmin {
+       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+       transition: transform 0.3s;
+       background-color: var(--themadmin);
+   }
+
+  
+
+        /* Effekt auf ganze Card (#hov), aber nur wenn a.image-link darin gehovert wird */
+        #hovadmin:has(.image-link:hover) {
+            background-color: var(--hovgadmin);
+            transform: scale(1.05);
+            transition: 0.3s ease;
+        }
+    
+        /* Klick-Effekt (active) auch nur auf Bild */
+        #hovadmin:has(.image-link:active) {
+            transform: scale(0.96);
+            transition: 0.2s;
+        }
+
+        
+            /*---------------------------------------------------------------------*/
+   /* CSS Effeckt für Karten mit Link / auf der Startseite */
+   #hov {
+       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+       transition: transform 0.3s;
+       background-color: var(--them);
+   }
+
+  /* Effekt auf ganze Card (#hov), aber nur wenn a.image-link darin gehovert wird */
+  #hov:has(.image-link:hover) {
+      background-color: var(--hovg);
+      transform: scale(1.05);
+      transition: 0.3s ease;
+  }
+
+  /* Klick-Effekt (active) auch nur auf Bild */
+  #hov:has(.image-link:active) {
+      transform: scale(0.96);
+      transition: 0.2s;
+  }
+   /*---
         
   /*---------------------------------------------------------------------*/
   /* CSS Effeckt für Karten Renzensionen */
@@ -475,3 +579,76 @@ color: var(--linkc);
 
 
 /*---------------------------------------------------------------------*/
+
+
+.heart:hover{
+transform: scale(1.2);
+transition: 0.25s;
+}
+
+.heart{
+    color: var(--herz-color);
+    user-select: none;
+}
+
+
+
+
+.image-link {
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.image-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.image-wrapper img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+           .overlay {
+               position: absolute;
+               top: 0;
+               left: 0;
+               width: 100%;
+               height: 100%;
+               background-color: rgba(0, 0, 0, 0.4);
+               color: white;
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               opacity: 0;
+               transition: opacity 0.5s ease;
+               font-size: 1.2rem;
+               font-weight: bold;
+               text-transform: uppercase;
+               letter-spacing: 1px;
+           }
+
+
+.image-wrapper:hover .overlay {
+    opacity: 1;
+    transition-delay: 0.1s;
+}
+/*---------------------------------------------------------------------*/
+
+
+
+#toggle-favorites-btn-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+
+}
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
