@@ -22,6 +22,11 @@ console.log(
     ":7777777777777777777777777777777?7!7777777777777.       ^!!~   ~!!^       ^!77~:   ^!!~  ^!!!. \n",
 );
 
+
+document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(tooltipTriggerEl => {
+    new bootstrap.Tooltip(tooltipTriggerEl);
+});
+
 //------------------------------------------------------------------------------------------------------------------------
 // Elemente langsam erscheinen 
 
@@ -81,11 +86,69 @@ function topFunction() {
 
 };
 
+//------------------------------------------------------------------------------------------------------------------------
+// Netz deaktivieren und aktivieren
+
+var netzpegel = window.localStorage.getItem("netzpegel");
+if (netzpegel == "true") {
+    includeScript();
+    const netzon = document.getElementById("netzon");
+    if (netzon) {
+        netzon.setAttribute("d", "M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z");
+    }
+
+   
+}
+
+if (netzpegel == null) {
+    netzpegel = "false";
+}
+
+function netzon() {
+
+    if (netzpegel == "false") {
+        document.getElementById("netzon").setAttribute("d", "M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z");
+        includeScript()
+        setTimeout(function () {
+            netzpegel = "true";
+        }, 10);
+        localStorage.setItem("netzpegel", "true");
+
+    }
+    if (netzpegel == "true") {
+        document.getElementById("netzon").setAttribute("d", "M11 4a4 4 0 0 1 0 8H8a4.992 4.992 0 0 0 2-4 4.992 4.992 0 0 0-2-4h3zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5z");
+        removeScript()
+        setTimeout(function () {
+            netzpegel = "false";
+        }, 10);
+        localStorage.setItem("netzpegel", "false");
+        location.reload()
+    }
+}
+
+
+// Funktion Ausbinden Einbinden der JavaScript-Datei
+function removeScript() {
+    const scriptElement = document.querySelector('script[src="netz.js"]');
+    if (scriptElement) {
+        scriptElement.remove();
+    }
+}
+
+// Funktion Einbinden der JavaScript-Datei
+function includeScript() {
+    const scriptElement = document.createElement('script');
+    scriptElement.src = 'netz.js'; // Passe den Dateinamen und Pfad an
+    document.body.appendChild(scriptElement);
+}
+
+
+
 
 //------------------------------------------------------------------------------------------------------------------------
-// Namen ändern
+// Namen ändern + admin
 
-
+var adminmode = false;
 var mam = ""; // mam = Name
 mam = window.localStorage.getItem("head");
 console.log("Name: " + mam);
@@ -99,7 +162,17 @@ if (mam == null || mam == "" || mam == "null") {
         document.getElementById("headline").innerHTML = "";
     } else {
         document.getElementById("headline").innerHTML = "Moin " + mam + " - ";
+        if (mam == "Admin"){
+            adminmode = true;
+            console.log("Admin:" + adminmode);
+            toggleSecret();
+            toggleEntwickler();
+            document.getElementById("showadmin").style.display = "block";
+            var elements = document.querySelectorAll('.toggleSecret');
+
+        }
     };
+
 
 
 document.onkeydown = function (event) {
@@ -118,14 +191,17 @@ function auslesen() {
     } else
 
         if (mam == "") {
+            adminmode = false;   
             document.getElementById("headline").innerHTML = "";
             mam = "";
             const toastLiveExample = document.getElementById('liveToast2');
             const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
             toastBootstrap.show();
+            console.log("Admin:" + adminmode);
            
 
         } else if (mam.match("<")) {
+            adminmode = false;   
             document.getElementById("headline").innerHTML = "";
             mam = "";
             const toastLiveExample = document.getElementById('liveToast3');
@@ -133,13 +209,31 @@ function auslesen() {
             toastBootstrap.show();
             const fehler = new Audio('Sounds/error.mp3'); 
             fehler.play();
+            console.log("Admin:" + adminmode);
 
 
         } else {
+            if (mam == "Admin") {
+                adminmode = true;
+                document.getElementById("headline").innerHTML = "Moin " + mam + " - ";
+                const toastLiveExample = document.getElementById('liveToast6');
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+                toggleSecret();
+                toggleEntwickler();
+                document.getElementById("showadmin").style.display = "block";
+                toastBootstrap.show(); 
+                console.log("Admin:" + adminmode);
+
+            }else{
+            adminmode = false;   
             document.getElementById("headline").innerHTML = "Moin " + mam + " - ";
             const toastLiveExample = document.getElementById('liveToast1');
             const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
-            toastBootstrap.show();
+            toastBootstrap.show(); 
+            console.log("Admin:" + adminmode);
+            }
+
+            
         }
 
     localStorage.setItem("head", mam);
@@ -147,6 +241,185 @@ function auslesen() {
 
 };
 
+//------------------------------------------------------------------------------------------------------------------------
+// Favoriten Logic
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const heartFilled = "M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1";
+    const heartEmpty = "m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z";
+
+    const cards = document.querySelectorAll(".card");
+    const favBtnContainer = document.getElementById("toggle-favorites-btn-container");
+    const favBtn = document.getElementById("toggle-favorites-btn");
+    const favSection = document.getElementById("favorites-section");
+    const favContainer = document.getElementById("favorites-container");
+
+    function isFavorite(id) {
+        return localStorage.getItem(`fav-${id}`) === "true";
+    }
+
+    function updateHeart(card, isFav) {
+        const heartPath = card.querySelector(".heart path");
+        if (heartPath) {
+            heartPath.setAttribute("d", isFav ? heartFilled : heartEmpty);
+        }
+    }
+
+
+// Admin deaktivieren
+    document.getElementById("showadmin").addEventListener("dblclick", meineFunktion);
+
+    function meineFunktion() {
+        document.getElementById("headline").innerHTML = "";
+        document.getElementById("showadmin").style.display = "none";
+        mam = "";
+        localStorage.setItem("head", mam);
+        toggleSecret();
+        toggleEntwickler();
+        updateFavoriteUI();
+    }
+
+
+    function updateFavoriteUI() {
+        let visibleFavCount = 0;
+
+        cards.forEach(card => {
+            const cardId = card.dataset.id;
+            const isFav = isFavorite(cardId);
+            updateHeart(card, isFav);
+
+            // Sichtbarkeit über das übergeordnete .col prüfen!
+            const col = card.closest(".col");
+            const isVisible = col && window.getComputedStyle(col).display !== "none";
+
+            if (isFav && isVisible) {
+                visibleFavCount++;
+            }
+        });
+
+        // Button anzeigen/verstecken
+        favBtnContainer.style.display = visibleFavCount > 0 ? "block" : "none";
+
+        if (visibleFavCount === 0) {
+            favSection.style.display = "none";
+            favContainer.innerHTML = "";
+            favBtn.innerText = "Favoriten anzeigen";
+        }
+    }
+
+
+
+
+
+
+
+    function cloneCard(card) {
+        const col = card.closest(".col");
+        const categoriesRaw = card.dataset.category || "Unbekannt";
+        const categories = categoriesRaw.split(/[,;]\s*/);
+
+        const cloneCol = col.cloneNode(true);
+        const cloneCard = cloneCol.querySelector(".card");
+        cloneCard.dataset.id = card.dataset.id;
+
+        const textElement = cloneCard.querySelector(".card-text");
+        if (textElement) {
+            textElement.innerHTML += `<br><small> ${categories.map(cat => `<span class="badge bg-secondary me-1">${cat}</span>`).join(" ")}</small>`;
+        }
+
+        // Herz-Interaktion im Favoritenbereich aktivieren
+        const favHeart = cloneCard.querySelector(".heart");
+        if (favHeart) {
+            favHeart.addEventListener("click", () => {
+                const favId = cloneCard.dataset.id || card.dataset.id;
+                localStorage.setItem(`fav-${favId}`, "false");
+
+                cloneCol.remove();
+
+                const originalCard = document.querySelector(`.card[data-id="${favId}"]`);
+                if (originalCard) updateHeart(originalCard, false);
+
+                updateFavoriteUI();
+            });
+        }
+
+        return cloneCol;
+    }
+
+
+
+    function showFavorites() {
+        favContainer.innerHTML = "";
+        cards.forEach(card => {
+            const cardId = card.dataset.id;
+            if (isFavorite(cardId)) {
+                favContainer.appendChild(cloneCard(card));
+            }
+        });
+        favSection.style.display = "block";
+        favBtn.innerText = "Favoriten ausblenden";
+
+        // Nach unten scrollen
+        document.getElementById("favorites-section").scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
+
+    function hideFavorites() {
+        favSection.style.display = "none";
+        favContainer.innerHTML = "";
+        favBtn.innerText = "Favoriten anzeigen";
+    }
+
+    favBtn.addEventListener("click", () => {
+        const visible = favSection.style.display === "block";
+        if (visible) {
+            hideFavorites();
+        } else {
+            showFavorites();
+        }
+    });
+
+
+
+    // Initialisiere alle Herzen
+    cards.forEach(card => {
+        const cardId = card.dataset.id;
+        const heart = card.querySelector(".heart");
+
+        if (!heart) return;
+
+        updateHeart(card, isFavorite(cardId));
+
+        heart.addEventListener("click", () => {
+            const currentlyFav = isFavorite(cardId);
+            const nowFav = !currentlyFav;
+
+            localStorage.setItem(`fav-${cardId}`, nowFav.toString());
+            updateHeart(card, nowFav);
+            updateFavoriteUI();
+
+            // ▶️ Live aktualisieren, wenn Favoritenbereich sichtbar
+            if (favSection.style.display === "block") {
+                const existingFavCard = favContainer.querySelector(`[data-id="${cardId}"]`);
+
+                if (nowFav && !existingFavCard) {
+                    // Karte hinzufügen
+                    favContainer.appendChild(cloneCard(card));
+                } else if (!nowFav && existingFavCard) {
+                    // Karte entfernen
+                    const parent = existingFavCard.closest(".col") || existingFavCard;
+                    parent.remove();
+                }
+            }
+        });
+
+    });
+
+    updateFavoriteUI();
+});
 
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -260,11 +533,12 @@ function dark() {
     document.getElementById("modee").setAttribute("d", "M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278zM4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z");
     document.getElementById('modeee').setAttribute("d", "");
     document.documentElement.style.setProperty('--backg', '#0f172a');           // Hintergrund Farbe Darkmode
-    document.documentElement.style.setProperty('--linkc', '#ffffff');           // Schrift Farbe Darkmode
+    document.documentElement.style.setProperty('--linkc', '#fff7f7ff');           // Schrift Farbe Darkmode
     document.documentElement.style.setProperty('--circle-color', '#adb5bd');    // Farbe Netz Kreis Darkmode
     document.documentElement.style.setProperty('--line-color', '#adb5bd');      // Farbe Netz Linie Darkmode
     document.documentElement.style.setProperty('--popupborder', '#dee2e644');   // Farbe für Border der Popups Darkmode
     document.documentElement.style.setProperty('--stern-color', sternColor);   // Farbe für Stern Darkmode
+    document.documentElement.style.setProperty('--herz-color', '#ff0000ff');   // Farbe für Herz Darkmode
     localStorage.setItem("thema", "dark");
     document.getElementById("color-picker").disabled = true;
     document.getElementById("color-picker1").disabled = true;
@@ -288,6 +562,7 @@ function light() {
     document.documentElement.style.setProperty('--line-color', '#0693e3');      // Farbe Netz Linie Lightmode
     document.documentElement.style.setProperty('--popupborder', '#dee2e6');     // Farbe für Border der Popups Lightmode
     document.documentElement.style.setProperty('--stern-color', sternColor);    // Farbe für Stern Lightmode
+    document.documentElement.style.setProperty('--herz-color', '#ff0000ff');            // Farbe für Herz Lightmode
     localStorage.setItem("thema", "light");
     document.getElementById("color-picker").disabled = true;
     document.getElementById("color-picker1").disabled = true;
@@ -309,6 +584,7 @@ function individuell() {
     document.documentElement.style.setProperty('--line-color', schrift);      // Farbe Netz Linie Individuell Mode  
     document.documentElement.style.setProperty('--popupborder', schrift);     // Farbe für Border der Popups Individuell Mode
     document.documentElement.style.setProperty('--stern-color', schrift);     // Farbe für Stern Individuell Mode
+    document.documentElement.style.setProperty('--herz-color', schrift);      // Farbe für Herz  Individuell Modee
     document.getElementById("mode").style.cursor = "no-drop";
     localStorage.setItem("individuell_pegel", "true");
 
@@ -390,58 +666,6 @@ function activ() {
 };
 
 
-//------------------------------------------------------------------------------------------------------------------------
-// Netz deaktivieren und aktivieren
-
-var netzpegel = window.localStorage.getItem("netzpegel");
-if(netzpegel == "true"){
-    includeScript();
-    document.getElementById("netzon").setAttribute("d", "M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z");
-    
-}
-
-if (netzpegel == null){
-    netzpegel = "false";
-}
-
-function netzon(){
-
-    if (netzpegel == "false"){
-        document.getElementById("netzon").setAttribute("d", "M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z");
-        includeScript()
-        setTimeout(function () {
-            netzpegel = "true";
-        }, 10);
-        localStorage.setItem("netzpegel", "true");
-
-    }
-    if (netzpegel == "true") {
-        document.getElementById("netzon").setAttribute("d", "M11 4a4 4 0 0 1 0 8H8a4.992 4.992 0 0 0 2-4 4.992 4.992 0 0 0-2-4h3zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5z");
-        removeScript()
-        setTimeout(function () {
-            netzpegel = "false";
-        }, 10);
-        localStorage.setItem("netzpegel", "false");
-        location.reload()
-    }
-}
-
-
-// Funktion Ausbinden Einbinden der JavaScript-Datei
-function removeScript() {
-    const scriptElement = document.querySelector('script[src="netz.js"]');
-    if (scriptElement) {
-        scriptElement.remove();
-    }
-}
-
-// Funktion Einbinden der JavaScript-Datei
-function includeScript() {
-    const scriptElement = document.createElement('script');
-    scriptElement.src = 'netz.js'; // Passe den Dateinamen und Pfad an
-    document.body.appendChild(scriptElement);
-}
-
 
 
 
@@ -467,15 +691,6 @@ function toggleEntwickler() {
 
 
 // Toggle Secret Anfang
-const secret = document.getElementById('secret');
-let clickCount = 0;
-secret.addEventListener('click', () => {
-    clickCount++;
-    if (clickCount === 3) { // Bei 3 Mausklicks
-        toggleSecret()
-        clickCount = 0;
-    }
-});
 
 function toggleSecret() {
     var elements = document.querySelectorAll('.toggleSecret');
@@ -513,7 +728,7 @@ function toggleRezensionen() {
     });
 }
 
-// Toggle Rezensionen
+// Toggle Rezensionen ende
 //------------------------------------------------------------------------------------------------------------------------
 // Formular zurücksetzen
 
@@ -617,8 +832,85 @@ function resetForm1(event) {
 
 
 //------------------------------------------------------------------------------------------------------------------------
+// Favoriten Aktiveren und deaktivieren
+/*
+var heatChatGPT = false;
+heatChatGPT = window.localStorage.getItem("heat");
+
+var heatChatGPT1 = false;
+heatChatGPT1 = window.localStorage.getItem("heat1");
+
+if(heatChatGPT == "true") {
+document.getElementById("heart").setAttribute("d", "M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1");
+}
+
+function ChatGPT() {;
+
+    if (heatChatGPT == true) {
+        document.getElementById("heart").setAttribute("d", "m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z");
+        heatChatGPT = false;
+        localStorage.setItem("heat", heatChatGPT);
+        console.log(heatChatGPT);
+    }
+
+    else {
+        document.getElementById("heart").setAttribute("d", "M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1");
+        heatChatGPT = true;
+        localStorage.setItem("heat", heatChatGPT);
+        console.log(heatChatGPT);
+    }
+
+}
+
+
+if (heatChatGPT1 == "true") {
+    document.getElementById("heart1").setAttribute("d", "M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1");
+}
+function ChatGPT1() {
+    
+
+    if (heatChatGPT1 == true) {
+        document.getElementById("heart1").setAttribute("d", "m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z");
+        heatChatGPT1 = false;
+        localStorage.setItem("heat1", heatChatGPT1);
+
+        console.log(heatChatGPT1);
+    }
+
+    else {
+        document.getElementById("heart1").setAttribute("d", "M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1");
+        heatChatGPT1 = true;
+        localStorage.setItem("heat1", heatChatGPT1);
+
+        console.log(heatChatGPT1);
+    }
+
+}
+
+*/
 
 
 
+//------------------------------------------------------------------------------------------------------------------------
+// Karten Link Hover effekt
 
+const card = document.querySelector('#hov');
+const imageLink = card.querySelector('.image-link');
 
+imageLink.addEventListener('mouseenter', () => {
+    card.classList.add('hovered');
+});
+
+imageLink.addEventListener('mouseleave', () => {
+    card.classList.remove('hovered');
+});
+
+imageLink.addEventListener('mousedown', () => {
+    card.classList.add('clicked');
+});
+
+imageLink.addEventListener('mouseup', () => {
+    card.classList.remove('clicked');
+});
+
+//------------------------------------------------------------------------------------------------------------------------
