@@ -58,7 +58,6 @@ Ursprünglich gestartet als Lösung gegen Lesezeichen-Chaos, hat sich die Seite 
 
 - Alle Daten wie Name, Einstellungen, Favoriten etc. werden **lokal im Browser** gespeichert
 - Kein Tracking, kein Login – volle Kontrolle beim Nutzer
-- DSGVO-konforme Grundstruktur *(Hinweis: Passwortformular für E-Book benötigt rechtlich Double-Opt-In)*
 
 ---
 
