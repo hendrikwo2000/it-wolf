@@ -652,3 +652,20 @@ transition: 0.25s;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
+
+
+/*---------------------------------------------------------------------*/
+
+
+.beta-badge {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: var(--them);
+    color: var(--linkc);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 1px 7px;
+    border-radius: 999px;
+    letter-spacing: 0.5px;
+}
