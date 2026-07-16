@@ -11,11 +11,28 @@
 #
 # Fuenf Minuten reichen als Cache voellig aus und machen Deploys verlaesslich.
 # Dank ETag ist die Nachfrage danach meist nur ein leeres 304.
-# Bilder, Sounds und das PDF bleiben absichtlich aussen vor - die aendern sich
-# so gut wie nie und sind die grossen Brocken.
+#
+# Damit das hier ueberhaupt ankommt, muss die Browser-Cache-TTL der Zone
+# it-wolf.org auf "Vorhandene Header beruecksichtigen" stehen. Stand sie auf
+# einem festen Wert (sie stand auf 4 Stunden), ueberschreibt Cloudflare diese
+# Datei stillschweigend - auf der pages.dev-URL wirkte sie, auf it-wolf.org nicht.
+#
+# Bilder, Sounds und das PDF brauchen deshalb eigene Regeln: Pages selbst sendet
+# fuer sie max-age=0, und ohne die Zeilen unten wuerden sie nach dem Umstellen
+# bei jedem Seitenaufruf neu validiert. 14400 entspricht dem, was die Zone
+# vorher pauschal gesetzt hat - fuer sie aendert sich also nichts.
 
 /*.js
   Cache-Control: public, max-age=300, must-revalidate
 
 /*.css
   Cache-Control: public, max-age=300, must-revalidate
+
+/Bilder/*
+  Cache-Control: public, max-age=14400, must-revalidate
+
+/Sounds/*
+  Cache-Control: public, max-age=14400, must-revalidate
+
+/*.pdf
+  Cache-Control: public, max-age=14400, must-revalidate
