@@ -147,11 +147,25 @@ function includeScript() {
 
 //------------------------------------------------------------------------------------------------------------------------
 // Namen ändern + admin
+//
+// Zwei Stufen, beide über das Namensfeld im Impressum:
+//   Name "Admin"               -> Stufe 1: die erweiterten Seiten bei "Nützliche Seiten"
+//   Name = Rezensions-Passwort -> Stufe 2: zusätzlich Rezensionen bearbeiten
+//
+// In beiden Fällen steht "Admin" in der Überschrift und das Schloss erscheint.
+// Das Passwort wird nie angezeigt und nie in den localStorage geschrieben - dort
+// stünde es dauerhaft im Klartext. Es liegt nur im sessionStorage und ist beim
+// Schließen des Tabs weg.
 
 var adminmode = false;
 var mam = ""; // mam = Name
 mam = window.localStorage.getItem("head");
 console.log("Name: " + mam);
+
+// Schlüssel für das Rezensions-Passwort. Steht hier statt in rezensionen.js,
+// weil der Login im Impressum sitzt, rezensionen.js aber nur auf ebook.html
+// läuft - zwei const-Deklarationen desselben Namens wären ein SyntaxError.
+const REZ_PASSWORT_KEY = "rezension-admin";
 
 
 if (mam == null || mam == "" || mam == "null") {
@@ -163,87 +177,131 @@ if (mam == null || mam == "" || mam == "null") {
     } else {
         document.getElementById("headline").innerHTML = "Moin " + mam + " - ";
         if (mam == "Admin"){
-            adminmode = true;
-            console.log("Admin:" + adminmode);
-            toggleSecret();
-            toggleEntwickler();
-            document.getElementById("showadmin").style.display = "block";
-            var elements = document.querySelectorAll('.toggleSecret');
-
+            adminAnschalten();
         }
     };
 
 
+// Schaltet Stufe 1 ein. toggleSecret und toggleEntwickler sind Umschalter, keine
+// Setzer: ein zweiter Aufruf würde die Seiten wieder verstecken. Deshalb der
+// Riegel auf adminmode - sonst blendet ein Passwort-Login die erweiterten Seiten
+// wieder aus, wenn "Admin" vorher schon aktiv war.
+function adminAnschalten() {
+    if (adminmode) return;
+    adminmode = true;
+    toggleSecret();
+    toggleEntwickler();
+    const schloss = document.getElementById("showadmin");
+    if (schloss) schloss.style.display = "block";
+    console.log("Admin:" + adminmode);
+}
 
-// Namensfeld und Bestätigen-Button gibt es nur auf impressum.html
+// Schaltet beide Stufen ab. Derselbe Riegel wie oben, nur andersherum.
+// Das Rezensions-Passwort fliegt immer mit raus - auch wenn Stufe 1 gar nicht
+// aktiv war -, sonst dürfte nach dem Verlassen weiter jemand Rezensionen ändern.
+function adminAbschalten() {
+    sessionStorage.removeItem(REZ_PASSWORT_KEY);
+    if (!adminmode) return;
+    adminmode = false;
+    toggleSecret();
+    toggleEntwickler();
+    const schloss = document.getElementById("showadmin");
+    if (schloss) schloss.style.display = "none";
+    console.log("Admin:" + adminmode);
+}
+
+// Prüft eine Eingabe gegen das Rezensions-Passwort. Die Function antwortet auf
+// { pruefen: true } mit 200, wenn das Passwort stimmt, und sonst mit 401.
+// Alles andere (kein Netz, keine API) gilt als "stimmt nicht" - im Zweifel
+// lieber keine Rechte vergeben.
+async function pruefeRezensionsPasswort(passwort) {
+    try {
+        const antwort = await fetch("/api/rezensionen", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json", "X-Admin-Passwort": passwort },
+            body: JSON.stringify({ pruefen: true }),
+        });
+        if (!antwort.ok) return false;
+        const ergebnis = await antwort.json().catch(() => ({}));
+        return ergebnis.ok === true;
+    } catch (e) {
+        console.log("Passwortprüfung nicht möglich:", e.message);
+        return false;
+    }
+}
+
+function zeigeToast(id) {
+    const kasten = document.getElementById(id);
+    if (kasten) bootstrap.Toast.getOrCreateInstance(kasten).show();
+}
+
+
+// Namensfeld und Bestätigen-Button gibt es nur auf impressum.html.
+// Nur aus.click() - der Knopf trägt selbst onclick="auslesen()", ein direkter
+// Aufruf davor hätte alles doppelt ausgeführt (und würde das Passwort zweimal
+// zur Prüfung schicken).
 document.onkeydown = function (event) {
 
     if (event.keyCode == 13) {
         const aus = document.getElementById("aus");
         if (!aus) return;
-        auslesen();
         aus.click();
     }};
 
 
-function auslesen() {
+async function auslesen() {
     const namee = document.getElementById("namee");
     if (!namee) return;
-    var mam = namee.value;
+    const eingabe = namee.value;
 
-    if (mam == window.localStorage.getItem("head")) {
+    // Unverändert: nichts tun.
+    if (eingabe == window.localStorage.getItem("head")) return;
 
-    } else
+    if (eingabe == "") {
+        adminAbschalten();
+        document.getElementById("headline").innerHTML = "";
+        localStorage.setItem("head", "");
+        zeigeToast('liveToast2');
+        return;
+    }
 
-        if (mam == "") {
-            adminmode = false;   
-            document.getElementById("headline").innerHTML = "";
-            mam = "";
-            const toastLiveExample = document.getElementById('liveToast2');
-            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
-            toastBootstrap.show();
-            console.log("Admin:" + adminmode);
-           
+    if (eingabe.match("<")) {
+        adminAbschalten();
+        document.getElementById("headline").innerHTML = "";
+        localStorage.setItem("head", "");
+        zeigeToast('liveToast3');
+        new Audio('Sounds/error.mp3').play();
+        return;
+    }
 
-        } else if (mam.match("<")) {
-            adminmode = false;   
-            document.getElementById("headline").innerHTML = "";
-            mam = "";
-            const toastLiveExample = document.getElementById('liveToast3');
-            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
-            toastBootstrap.show();
-            const fehler = new Audio('Sounds/error.mp3'); 
-            fehler.play();
-            console.log("Admin:" + adminmode);
+    if (eingabe == "Admin") {
+        adminAnschalten();
+        document.getElementById("headline").innerHTML = "Moin Admin - ";
+        localStorage.setItem("head", "Admin");
+        zeigeToast('liveToast6');
+        return;
+    }
 
+    // Kein bekannter Name - könnte das Rezensions-Passwort sein. Das schickt
+    // jeden eingetippten Namen einmal an die eigene API. Sie speichert und
+    // protokolliert ihn nicht, aber ganz "nur lokal" ist die Namenseingabe
+    // damit nicht mehr.
+    if (await pruefeRezensionsPasswort(eingabe)) {
+        sessionStorage.setItem(REZ_PASSWORT_KEY, eingabe);
+        adminAnschalten();
+        // Bewusst "Admin" und nicht die Eingabe: das Passwort gehört weder in
+        // die Überschrift noch in den localStorage.
+        document.getElementById("headline").innerHTML = "Moin Admin - ";
+        localStorage.setItem("head", "Admin");
+        zeigeToast('liveToast7');
+        return;
+    }
 
-        } else {
-            if (mam == "Admin") {
-                adminmode = true;
-                document.getElementById("headline").innerHTML = "Moin " + mam + " - ";
-                const toastLiveExample = document.getElementById('liveToast6');
-                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
-                toggleSecret();
-                toggleEntwickler();
-                document.getElementById("showadmin").style.display = "block";
-                toastBootstrap.show(); 
-                console.log("Admin:" + adminmode);
-
-            }else{
-            adminmode = false;   
-            document.getElementById("headline").innerHTML = "Moin " + mam + " - ";
-            const toastLiveExample = document.getElementById('liveToast1');
-            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
-            toastBootstrap.show(); 
-            console.log("Admin:" + adminmode);
-            }
-
-            
-        }
-
-    localStorage.setItem("head", mam);
-   
-
+    // Ganz normaler Name.
+    adminAbschalten();
+    document.getElementById("headline").innerHTML = "Moin " + eingabe + " - ";
+    localStorage.setItem("head", eingabe);
+    zeigeToast('liveToast1');
 };
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -282,11 +340,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function meineFunktion() {
         document.getElementById("headline").innerHTML = "";
-        showadmin.style.display = "none";
         mam = "";
         localStorage.setItem("head", mam);
-        toggleSecret();
-        toggleEntwickler();
+        // Kümmert sich um Schloss, beide Toggles und das Rezensions-Passwort.
+        adminAbschalten();
         updateFavoriteUI();
     }
 
@@ -728,80 +785,58 @@ function toggleSecret() {
 
 
 
-// Toggle Rezensionen
-function toggleRezensionen() {
-    var elements = document.querySelectorAll('.toggleRezensionen');
-    var anzeigenElement = document.getElementById('anzeigen');
-
-    elements.forEach(function (element) {
-        if (element.style.display === 'none') {
-            element.style.display = 'block';
-            if (anzeigenElement) {
-                anzeigenElement.innerHTML = 'weniger anzeigen';
-            }
-        } else {
-            element.style.display = 'none';
-            if (anzeigenElement) {
-                anzeigenElement.innerHTML = 'mehr anzeigen';
-            }
-        }
-    });
-}
-
-// Toggle Rezensionen ende
+// Toggle Rezensionen: umgezogen nach rezensionen.js. Die Karten stehen nicht
+// mehr fest im HTML, sondern werden dort gezeichnet - der Umschalter gehoert
+// zum selben Zustand und nur auf ebook.html.
 //------------------------------------------------------------------------------------------------------------------------
 // Formular zurücksetzen
 
 
-function resetForm(event) {
-    
-    event.preventDefault(); // Verhindert das Standard-Absendeverhalten
-    const form = event.target; // Holt das aktuelle Formular
-    const actionUrl = form.action; // Holt die Action-URL
-    const formData = new FormData(form); // Holt die Formulardaten
-    document.getElementById("sendee").innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" 
-        class="bi bi-hourglass-split" viewBox="0 0 16 16">
-            <path d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48zm1 0v3.17c2.134.181 3 1.48 3 1.48a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351z"/>
-        </svg> 
-        Bitte warten...
-    `;
+// Feedback (ebook.html) und Kontakt (impressum.html). Beide gehen jetzt an die
+// eigene Pages Function /api/feedback statt direkt an formsubmit: die
+// formsubmit-Adresse stand sonst im Klartext in zwei oeffentlichen Dateien -
+// also genau da, wo passwort.js sie schon nicht mehr haben wollte.
+//
+// Welches Formular gesendet hat, steht im versteckten Feld "formular". Den
+// Betreff waehlt die Function daraus aus; frueher stand er in _subject und war
+// damit von aussen frei setzbar.
+async function resetForm(event) {
+    event.preventDefault();
+    const form = event.target;
+    const knopf = document.getElementById("sendee");
+    const daten = new FormData(form);
 
+    if (knopf) knopf.innerHTML = WARTE_ICON;
 
-
-    // Senden der Formulardaten mit Fetch API
-    fetch(actionUrl, {
-        method: 'POST',
-        body: formData,
-    })
-        .then(response => {
-            if (response.ok) {
-                console.log('Formular erfolgreich abgesendet:', form.id);
-                //alert(`Formular ${form.id} wurde erfolgreich abgeschickt.`);
-                form.reset(); // Setzt das Formular zurück
-
-                document.getElementById("sendee").innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
-        <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z" />
-         </svg>
-        Senden
-    `;
-
-                const toastLiveExample = document.getElementById('liveToast5');
-                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
-                toastBootstrap.show();
-                
-              
-            } else {
-                console.error('Fehler beim Absenden:', form.id);
-                alert(`Es gab einen Fehler beim Absenden von Formular ${form.id}.`);
-            }
-        })
-        .catch(error => {
-            console.error('Netzwerkfehler:', error);
-            alert(`Netzwerkfehler beim Absenden von Formular ${form.id}.`);
+    try {
+        const antwort = await fetch("/api/feedback", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                formular: daten.get("formular"),
+                name: daten.get("name"),
+                email: daten.get("email"),
+                message: daten.get("message"),
+                // Sterne gibt es nur im E-Book-Formular und auch dort freiwillig.
+                rating: Number(daten.get("rating")) || undefined,
+            }),
         });
-    
+        const ergebnis = await antwort.json().catch(() => ({}));
+
+        if (!antwort.ok) {
+            alert(ergebnis.fehler || "Es gab einen Fehler beim Absenden.");
+            return;
+        }
+
+        form.reset();
+        const toast = document.getElementById("liveToast5");
+        if (toast) bootstrap.Toast.getOrCreateInstance(toast).show();
+    } catch (e) {
+        console.error("Netzwerkfehler:", e);
+        alert("Keine Verbindung zum Server. Bist du online?");
+    } finally {
+        if (knopf) knopf.innerHTML = SENDE_ICON;
+    }
 }
 
 //-----------------------------------------

@@ -336,7 +336,7 @@
                             <h5 class="card-title">Kontaktformular</h5>
                             <p class="card-text">
             
-                            <form id="form2" action="https://formsubmit.co/fe15abf088e090210d1d03807c630d3b" method="POST"  onsubmit="resetForm(event)">
+                            <form id="form2" action="/api/feedback" method="POST"  onsubmit="resetForm(event)">
                                 <div class="mb-3">
                                     <label for="kontakt-name" class="form-label">Name</label>
                                     <input type="text" id="kontakt-name" name="name" required class="form-control"
@@ -354,10 +354,9 @@
                                 </div>
             
             
-                                <input type="hidden" name="_subject" value="Impressum Kontakt!">
-                                <input type="hidden" name="_next" value="https://it-wolf.org/impressum">
-                                <input type="hidden" name="_captcha" value="false">
-                                <input type="hidden" name="_template" value="table">
+                                <!-- Betreff und Empfaenger setzt /api/feedback, damit die
+                                     formsubmit-Adresse nicht im Quelltext steht. -->
+                                <input type="hidden" name="formular" value="kontakt">
                                 <br style="margin-bottom: 20px;">
             
                                 <button class="bute" type="submit" id="sendee">
@@ -1026,6 +1025,25 @@
     </div>
 </div>
 <!-- Popup Admin Ende-->
+
+
+<!-- Popup Admin + Rezensionen Anfang-->
+<!-- Stufe 2: erscheint, wenn statt "Admin" das Rezensions-Passwort eingegeben wurde. -->
+<div class="toast-container position-fixed top-0 end-0 p-3">
+    <div id="liveToast7" class="toast text-bg-warning" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+
+            <strong class="me-auto">Admin</strong>
+
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Adminmode freigeschaltet.<br>
+            Rezensionen kannst du bearbeiten, solange dieser Tab offen ist.
+        </div>
+    </div>
+</div>
+<!-- Popup Admin + Rezensionen Ende-->
 
 
 
