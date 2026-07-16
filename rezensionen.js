@@ -5,9 +5,10 @@
    fuenf ausgeschriebenen Stern-SVGs. Jetzt kommen sie von /api/rezensionen
    und werden hier gezeichnet.
 
-   Schreiben geht nur mit dem Admin-Passwort, das die Function prueft. Das
-   Passwort liegt im sessionStorage: einmal pro Tab eingeben, beim Schliessen
-   ist es weg. Der adminmode aus index.js (Name = "Admin") blendet nur das
+   Schreiben geht nur mit dem Admin-Passwort, das die Function prueft. Es liegt
+   im localStorage und bleibt, bis man sich abmeldet - sonst fragte der
+   Rezensions-Link aus der E-Mail jedes Mal neu, weil er einen neuen Tab
+   oeffnet. Der adminmode aus index.js (Name = "Admin") blendet nur das
    Login-Feld ein - er entscheidet nichts, das kann er auch gar nicht.
    ==================================================================== */
 
@@ -35,7 +36,8 @@ let linkModus = false;
 
 // ---------- Passwort (nur fuer diesen Tab) ----------
 
-const passwortHolen = () => sessionStorage.getItem(REZ_PASSWORT_KEY) || "";
+// rezPasswortSpeicher und REZ_PASSWORT_KEY kommen aus index.js.
+const passwortHolen = () => rezPasswortSpeicher.getItem(REZ_PASSWORT_KEY) || "";
 const istAngemeldet = () => passwortHolen() !== "";
 
 // ---------- Sterne ----------
@@ -260,10 +262,10 @@ async function adminAnmelden(event) {
         adminMeldung("Passwort falsch.");
         return;
     }
-    sessionStorage.setItem(REZ_PASSWORT_KEY, passwort);
+    rezPasswortSpeicher.setItem(REZ_PASSWORT_KEY, passwort);
 
     if (feld) feld.value = "";
-    adminMeldung("Angemeldet. Das Passwort gilt, bis du den Tab schließt.", false);
+    adminMeldung("Angemeldet. Dieser Browser merkt sich das, bis du dich über das Schloss abmeldest.", false);
     formularLeeren();
     adminUiZeichnen();
     zeichneListe();
@@ -272,7 +274,7 @@ async function adminAnmelden(event) {
 }
 
 function adminAbmelden() {
-    sessionStorage.removeItem(REZ_PASSWORT_KEY);
+    rezPasswortSpeicher.removeItem(REZ_PASSWORT_KEY);
     adminMeldung("");
     adminUiZeichnen();
     zeichneListe();
@@ -407,9 +409,9 @@ async function schreibe(methode, daten) {
         const ergebnis = await antwort.json().catch(() => ({}));
 
         if (antwort.status === 401) {
-            // Passwort abgelaufen oder falsch: zurueck zum Login, sonst klickt
-            // man weiter gegen eine Wand.
-            sessionStorage.removeItem(REZ_PASSWORT_KEY);
+            // Passwort passt nicht mehr (z.B. Secret geaendert): zurueck zum
+            // Login, sonst klickt man weiter gegen eine Wand.
+            rezPasswortSpeicher.removeItem(REZ_PASSWORT_KEY);
             adminUiZeichnen();
             adminMeldung("Passwort falsch. Bitte neu anmelden.");
             return null;

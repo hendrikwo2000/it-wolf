@@ -153,9 +153,19 @@ function includeScript() {
 //   Name = Rezensions-Passwort -> Stufe 2: zusätzlich Rezensionen bearbeiten
 //
 // In beiden Fällen steht "Admin" in der Überschrift und das Schloss erscheint.
-// Das Passwort wird nie angezeigt und nie in den localStorage geschrieben - dort
-// stünde es dauerhaft im Klartext. Es liegt nur im sessionStorage und ist beim
-// Schließen des Tabs weg.
+// Das Passwort wird nie angezeigt und steht nie in der Überschrift.
+//
+// Es liegt im localStorage und bleibt dort, bis man sich per Doppelklick auf das
+// Schloss abmeldet oder einen anderen Namen einträgt. Vorher lag es im
+// sessionStorage, also pro Tab - das hiess: der Rezensions-Link aus der E-Mail
+// oeffnet immer einen neuen Tab, und der fragte jedes Mal neu nach dem Passwort.
+//
+// Der Preis ist ehrlich zu benennen: das Passwort steht damit im Klartext im
+// Browser-Profil. Wer an den entsperrten Rechner kommt, kann Rezensionen
+// aendern. Die Alternative waere, die Berechtigung an den Link zu haengen - das
+// waere deutlich schlimmer: baueRezensionsLink steht in dieser oeffentlichen
+// Datei, jeder koennte sich einen Link mit beliebigem Text bauen und damit
+// ungefragt auf der Seite veroeffentlichen.
 
 var adminmode = false;
 var mam = ""; // mam = Name
@@ -166,6 +176,9 @@ console.log("Name: " + mam);
 // weil der Login im Impressum sitzt, rezensionen.js aber nur auf ebook.html
 // läuft - zwei const-Deklarationen desselben Namens wären ein SyntaxError.
 const REZ_PASSWORT_KEY = "rezension-admin";
+// Ein eigener Speicher, damit die Umstellung von sessionStorage an genau einer
+// Stelle steht und nicht an sieben.
+const rezPasswortSpeicher = window.localStorage;
 
 
 if (mam == null || mam == "" || mam == "null") {
@@ -200,7 +213,7 @@ function adminAnschalten() {
 // Das Rezensions-Passwort fliegt immer mit raus - auch wenn Stufe 1 gar nicht
 // aktiv war -, sonst dürfte nach dem Verlassen weiter jemand Rezensionen ändern.
 function adminAbschalten() {
-    sessionStorage.removeItem(REZ_PASSWORT_KEY);
+    rezPasswortSpeicher.removeItem(REZ_PASSWORT_KEY);
     if (!adminmode) return;
     adminmode = false;
     toggleSecret();
@@ -287,7 +300,7 @@ async function auslesen() {
     // protokolliert ihn nicht, aber ganz "nur lokal" ist die Namenseingabe
     // damit nicht mehr.
     if (await pruefeRezensionsPasswort(eingabe)) {
-        sessionStorage.setItem(REZ_PASSWORT_KEY, eingabe);
+        rezPasswortSpeicher.setItem(REZ_PASSWORT_KEY, eingabe);
         adminAnschalten();
         // Bewusst "Admin" und nicht die Eingabe: das Passwort gehört weder in
         // die Überschrift noch in den localStorage.
