@@ -806,48 +806,81 @@ function resetForm(event) {
 
 //-----------------------------------------
 
-function resetForm1(event) {
-    event.preventDefault(); // Verhindert das Standard-Absendeverhalten
-    const form = event.target; // Holt das aktuelle Formular
-    const actionUrl = form.action; // Holt die Action-URL
-    const formData = new FormData(form); // Holt die Formulardaten
-    document.getElementById("sende").innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" 
-        class="bi bi-hourglass-split" viewBox="0 0 16 16">
-            <path d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48zm1 0v3.17c2.134.181 3 1.48 3 1.48a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351z"/>
-        </svg> 
-        Bitte warten...
-    `;
-
-    // Senden der Formulardaten mit Fetch API
-    fetch(actionUrl, {
-        method: 'POST',
-        body: formData,
-    })
-        .then(response => {
-            if (response.ok) {
-                console.log('Formular erfolgreich abgesendet:', form.id);
-                //alert(`Formular ${form.id} wurde erfolgreich abgeschickt.`);
-                form.reset(); // Setzt das Formular zurück
-                
-                document.getElementById("sende").innerHTML = `
+// Passwort-Anfrage. Geht an die eigene Pages Function /api/passwort, nicht mehr
+// direkt an formsubmit: das Passwort steht dadurch in keiner statischen Datei
+// mehr und die Weiterleitung auf die oeffentliche EdankeE.html entfaellt.
+const SENDE_ICON = `
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
         <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z" />
          </svg>
         Senden
     `;
+const WARTE_ICON = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+        class="bi bi-hourglass-split" viewBox="0 0 16 16">
+            <path d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48zm1 0v3.17c2.134.181 3 1.48 3 1.48a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351z"/>
+        </svg>
+        Bitte warten...
+    `;
 
-                window.location.href = "EdankeE.html";
-            } else {
-                console.error('Fehler beim Absenden:', form.id);
-                alert(`Es gab einen Fehler beim Absenden von Formular ${form.id}.`);
-            }
-        })
-        .catch(error => {
-            console.error('Netzwerkfehler:', error);
-            alert(`Netzwerkfehler beim Absenden von Formular ${form.id}.`);
+async function resetForm1(event) {
+    event.preventDefault();
+    const form = event.target;
+    const knopf = document.getElementById("sende");
+    const kasten = document.getElementById("passwort-kasten");
+    const ausgabe = document.getElementById("passwort-ausgabe");
+
+    const daten = new FormData(form);
+    if (knopf) knopf.innerHTML = WARTE_ICON;
+    // Beide Ausgaben zuruecksetzen, sonst steht bei einem Fehler noch das
+    // Passwort vom letzten Versuch daneben.
+    versteckePasswortAusgaben();
+
+    try {
+        const antwort = await fetch("/api/passwort", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: daten.get("name"), email: daten.get("email") }),
         });
+        const ergebnis = await antwort.json().catch(() => ({}));
 
+        if (!antwort.ok || !ergebnis.passwort) {
+            zeigePasswortFehler(ergebnis.fehler || "Das hat leider nicht geklappt. Bitte versuche es später erneut.");
+            return;
+        }
+
+        form.reset();
+        if (ausgabe && kasten) {
+            // textContent statt innerHTML: das Passwort ist Text, kein Markup.
+            ausgabe.textContent = ergebnis.passwort;
+            kasten.style.display = "block";
+            kasten.scrollIntoView({ behavior: "smooth", block: "center" });
+        } else {
+            alert("Dein Passwort: " + ergebnis.passwort);
+        }
+    } catch (e) {
+        console.error("Netzwerkfehler:", e);
+        zeigePasswortFehler("Keine Verbindung zum Server. Bist du online?");
+    } finally {
+        if (knopf) knopf.innerHTML = SENDE_ICON;
+    }
+}
+
+function versteckePasswortAusgaben() {
+    const kasten = document.getElementById("passwort-kasten");
+    const fehler = document.getElementById("passwort-fehler");
+    if (kasten) kasten.style.display = "none";
+    if (fehler) fehler.style.display = "none";
+}
+
+function zeigePasswortFehler(text) {
+    const feld = document.getElementById("passwort-fehler");
+    if (feld) {
+        feld.textContent = text;
+        feld.style.display = "block";
+    } else {
+        alert(text);
+    }
 }
 
 

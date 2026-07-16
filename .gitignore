@@ -1,0 +1,14 @@
+# Build- und Cache-Artefakte von "wrangler pages dev" (lokales Testen der Functions)
+.wrangler/
+
+# Lokale Secrets fuer wrangler - gehoeren NIEMALS ins Repo
+.dev.vars
+.dev.vars.*
+.env
+.env.*
+
+# Editor / OS
+.claude/
+.vscode/
+.DS_Store
+Thumbs.db

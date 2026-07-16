@@ -338,20 +338,18 @@
             
                             <form id="form2" action="https://formsubmit.co/fe15abf088e090210d1d03807c630d3b" method="POST"  onsubmit="resetForm(event)">
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Name</label>
-                                    <input type="text" id="fname" name="name" required class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp"
-                                        style="background-color: var(--them); border-color: var(--popupborder)">
-                                    <div id="emailHelp" class="form-text"></div>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">E-Mail-Adresse</label>
-                                    <input type="email" id="fname" name="email" required class="form-control"
+                                    <label for="kontakt-name" class="form-label">Name</label>
+                                    <input type="text" id="kontakt-name" name="name" required class="form-control"
                                         style="background-color: var(--them); border-color: var(--popupborder)">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Nachricht</label>
-                                    <textarea name="massage" id="fname" required class="form-control"
+                                    <label for="kontakt-email" class="form-label">E-Mail-Adresse</label>
+                                    <input type="email" id="kontakt-email" name="email" required class="form-control"
+                                        style="background-color: var(--them); border-color: var(--popupborder)">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="kontakt-nachricht" class="form-label">Nachricht</label>
+                                    <textarea name="message" id="kontakt-nachricht" required class="form-control"
                                         style="background-color: var(--them); border-color: var(--popupborder)"></textarea>
                                 </div>
             
@@ -488,7 +486,7 @@
                                         <div class="modal-body" id="pop-body">
                                             <div class="form-floating mb-0">
                                                 <input type="text" class="form-control" id="namee" placeholder="name" style="border-color: var(--popupborder)">
-                                                <label for="floatingInput">Name</label>
+                                                <label for="namee">Name</label>
                             
                                             </div>
                                         </div>
