@@ -832,12 +832,32 @@ async function sendeAnFormsubmit(inhalt) {
     return true;
 }
 
+// Baut den Link, der in der E-Book-Mail steht und das Admin-Formular auf
+// ebook.html vorausfüllt - damit aus einer Rezension kein Abtippen wird.
+//
+// Die Daten stehen im Fragment hinter dem #. Das schickt der Browser nicht an
+// den Server: der Rezensionstext taucht in keinem Zugriffslog auf und läuft
+// durch keinen Proxy. Gespeichert wird ohnehin erst beim Klick auf "anlegen".
+//
+// base64 statt encodeURIComponent, weil deutsche Texte sonst aufblähen - aus
+// jedem "ü" würden neun Zeichen (%C3%BC), und der Link ist lang genug.
+function baueRezensionsLink(rezension) {
+    const bytes = new TextEncoder().encode(JSON.stringify(rezension));
+    // btoa versteht nur Latin-1. Der Umweg über die Bytes macht daraus
+    // gültiges UTF-8 - sonst wirft schon der erste Umlaut einen Fehler.
+    let binaer = "";
+    bytes.forEach((b) => (binaer += String.fromCharCode(b)));
+    const b64 = btoa(binaer).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+    return "https://it-wolf.org/ebook#rezension=" + b64;
+}
+
 // Feedback (ebook.html) und Kontakt (impressum.html).
 async function resetForm(event) {
     event.preventDefault();
     const form = event.target;
     const knopf = document.getElementById("sendee");
     const daten = new FormData(form);
+    const formular = daten.get("formular");
 
     if (knopf) knopf.innerHTML = WARTE_ICON;
 
@@ -846,11 +866,25 @@ async function resetForm(event) {
             name: daten.get("name"),
             email: daten.get("email"),
             message: daten.get("message"),
-            _subject: BETREFF[daten.get("formular")] || "Nachricht von it-wolf.org",
+            _subject: BETREFF[formular] || "Nachricht von it-wolf.org",
         };
         // Sterne gibt es nur im E-Book-Formular und auch dort freiwillig.
         const sterne = Number(daten.get("rating"));
         if (sterne >= 1 && sterne <= 5) inhalt.rating = sterne;
+
+        if (daten.get("titel")) inhalt.titel = daten.get("titel");
+
+        // Nur beim E-Book-Feedback: der Link zum Übernehmen. Beim
+        // Kontaktformular wäre er sinnlos, daraus wird keine Rezension.
+        if (formular === "ebook") {
+            inhalt["Rezension übernehmen"] = baueRezensionsLink({
+                name: daten.get("name"),
+                titel: daten.get("titel") || "",
+                text: daten.get("message"),
+                sterne: sterne >= 1 && sterne <= 5 ? sterne : 5,
+                datum: new Date().toISOString().slice(0, 10),
+            });
+        }
 
         if (!(await sendeAnFormsubmit(inhalt))) {
             alert("Die Nachricht konnte nicht zugestellt werden. Bitte versuche es später noch einmal.");

@@ -26,6 +26,13 @@ const STERN_HALB =
 let rezensionen = [];
 let alleSichtbar = false;
 
+// Daten aus einem Rezensions-Link (#rezension=...), noch nicht übernommen.
+let ausLink = null;
+// Über so einen Link gekommen? Dann den Admin-Bereich zeigen, auch wenn der
+// adminmode aus index.js nicht an ist - sonst führt der Knopf aus der E-Mail
+// auf einem anderen Gerät ins Leere.
+let linkModus = false;
+
 // ---------- Passwort (nur fuer diesen Tab) ----------
 
 const passwortHolen = () => sessionStorage.getItem(REZ_PASSWORT_KEY) || "";
@@ -231,7 +238,9 @@ function adminUiZeichnen() {
 
     // adminmode kommt aus index.js. Das ist reine Bequemlichkeit - wer das Feld
     // auf anderem Weg oeffnet, scheitert trotzdem am Passwort in der Function.
-    const zeigen = typeof adminmode !== "undefined" && adminmode;
+    // Ein Rezensions-Link zaehlt genauso: wer ihn hat, will offensichtlich hier
+    // arbeiten, und ein sichtbares Passwortfeld verraet nichts.
+    const zeigen = (typeof adminmode !== "undefined" && adminmode) || linkModus;
     bereich.style.display = zeigen ? "block" : "none";
     if (!zeigen) return;
 
@@ -258,6 +267,8 @@ async function adminAnmelden(event) {
     formularLeeren();
     adminUiZeichnen();
     zeichneListe();
+    // Kam der Aufruf aus einer E-Mail, wartet die Rezension schon.
+    uebernehmeAusLink();
 }
 
 function adminAbmelden() {
@@ -277,6 +288,46 @@ function formularFuellen(r) {
     document.getElementById("admin-speichern").textContent = "Änderung speichern";
     adminMeldung("");
     document.getElementById("rezensionen-admin").scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+// Liest die Daten aus dem Fragment eines Rezensions-Links.
+//
+// Achtung bei der Bewertung dessen, was hier rauskommt: der Link wurde im
+// Browser des Kunden gebaut, der Inhalt ist also fremd. Er landet ausschließlich
+// als .value in Formularfeldern - nie als Markup - und wird erst gespeichert,
+// wenn im Formular auf "anlegen" geklickt wird. Was in der Mail steht, muss
+// nicht dasselbe sein wie im Link: entscheidend ist, was im Formular steht.
+function rezensionAusLink() {
+    const treffer = location.hash.match(/rezension=([^&]+)/);
+    if (!treffer) return null;
+    try {
+        const b64 = treffer[1].replace(/-/g, "+").replace(/_/g, "/");
+        const bytes = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+        const daten = JSON.parse(new TextDecoder().decode(bytes));
+        return daten && typeof daten === "object" ? daten : null;
+    } catch (e) {
+        console.error("Rezensions-Link nicht lesbar:", e);
+        return null;
+    }
+}
+
+// Trägt die Daten aus dem Link ins Formular ein. Vorausgefüllt ist nicht
+// veröffentlicht - das passiert erst beim Klick auf "Rezension anlegen".
+function uebernehmeAusLink() {
+    if (!ausLink) return;
+    const feld = (id, wert) => (document.getElementById(id).value = wert);
+
+    feld("rez-id", ""); // leer = neue Rezension, kein Ändern
+    feld("rez-name", ausLink.name || "");
+    feld("rez-titel", ausLink.titel || "");
+    feld("rez-text", ausLink.text || "");
+    feld("rez-sterne", String(ausLink.sterne || 5));
+    feld("rez-datum", ausLink.datum || new Date().toISOString().slice(0, 10));
+    document.getElementById("admin-speichern").textContent = "Rezension anlegen";
+
+    adminMeldung("Aus der E-Mail übernommen. Bitte prüfen, ggf. korrigieren – veröffentlicht wird erst mit „Rezension anlegen“.", false);
+    document.getElementById("rezensionen-admin").scrollIntoView({ behavior: "smooth", block: "center" });
+    ausLink = null; // nur einmal übernehmen
 }
 
 function formularLeeren() {
@@ -359,9 +410,19 @@ async function schreibe(methode, daten) {
 // index.js setzt adminmode beim Laden, beide Skripte haengen an defer und
 // laufen in Reihenfolge - adminmode steht hier also schon fest.
 if (document.getElementById("rezensionen-liste")) {
+    ausLink = rezensionAusLink();
+    if (ausLink) {
+        linkModus = true;
+        // Fragment sofort aus der Adresszeile nehmen: sonst füllt ein Neuladen
+        // alles wieder vor - auch nach dem Anlegen - und der Rezensionstext
+        // steht weiter sichtbar in der URL und im Verlauf.
+        history.replaceState(null, "", location.pathname + location.search);
+    }
+
     adminUiZeichnen();
     formularLeeren();
     ladeRezensionen();
+    if (ausLink && istAngemeldet()) uebernehmeAusLink();
 
     const login = document.getElementById("admin-login-formular");
     if (login) login.addEventListener("submit", adminAnmelden);
