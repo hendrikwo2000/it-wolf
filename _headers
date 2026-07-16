@@ -1,0 +1,21 @@
+# Cache-Regeln fuer Cloudflare Pages.
+#
+# Warum es das gibt: Pages liefert statische Dateien mit max-age=14400 aus, also
+# vier Stunden Browser-Cache. Das HTML wird dagegen bei jedem Aufruf neu geprueft
+# (max-age=0). Nach einem Deploy trifft dadurch bei wiederkehrenden Besuchern bis
+# zu vier Stunden lang altes JavaScript auf neues HTML.
+#
+# Das ist keine Theorie: beim Umbau der Formulare rief das gecachte alte index.js
+# einen Endpoint auf, den es nicht mehr gab - Fehlermeldung auf einer Seite, die
+# laengst repariert war.
+#
+# Fuenf Minuten reichen als Cache voellig aus und machen Deploys verlaesslich.
+# Dank ETag ist die Nachfrage danach meist nur ein leeres 304.
+# Bilder, Sounds und das PDF bleiben absichtlich aussen vor - die aendern sich
+# so gut wie nie und sind die grossen Brocken.
+
+/*.js
+  Cache-Control: public, max-age=300, must-revalidate
+
+/*.css
+  Cache-Control: public, max-age=300, must-revalidate
