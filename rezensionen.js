@@ -311,6 +311,27 @@ function rezensionAusLink() {
     }
 }
 
+// Nimmt einen gelesenen Link entgegen. Gemeinsamer Weg für beide Fälle: frisch
+// aufgerufene Seite und Fragmentwechsel in einem schon offenen Tab.
+function verarbeiteLink(daten) {
+    if (!daten) return;
+    ausLink = daten;
+    linkModus = true;
+
+    // Fragment sofort aus der Adresszeile nehmen: sonst füllt ein Neuladen alles
+    // wieder vor - auch nach dem Anlegen - und der Rezensionstext bliebe in der
+    // URL und im Verlauf stehen.
+    history.replaceState(null, "", location.pathname + location.search);
+
+    adminUiZeichnen();
+    if (istAngemeldet()) {
+        uebernehmeAusLink();
+        return;
+    }
+    adminMeldung("Eine Rezension aus der E-Mail wartet – bitte zuerst anmelden.", false);
+    document.getElementById("rezensionen-admin").scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
 // Trägt die Daten aus dem Link ins Formular ein. Vorausgefüllt ist nicht
 // veröffentlicht - das passiert erst beim Klick auf "Rezension anlegen".
 function uebernehmeAusLink() {
@@ -410,19 +431,16 @@ async function schreibe(methode, daten) {
 // index.js setzt adminmode beim Laden, beide Skripte haengen an defer und
 // laufen in Reihenfolge - adminmode steht hier also schon fest.
 if (document.getElementById("rezensionen-liste")) {
-    ausLink = rezensionAusLink();
-    if (ausLink) {
-        linkModus = true;
-        // Fragment sofort aus der Adresszeile nehmen: sonst füllt ein Neuladen
-        // alles wieder vor - auch nach dem Anlegen - und der Rezensionstext
-        // steht weiter sichtbar in der URL und im Verlauf.
-        history.replaceState(null, "", location.pathname + location.search);
-    }
-
     adminUiZeichnen();
     formularLeeren();
     ladeRezensionen();
-    if (ausLink && istAngemeldet()) uebernehmeAusLink();
+
+    // Klickt man den Link aus der E-Mail, während schon ein Tab auf /ebook
+    // offen ist, lädt der Browser die Seite nicht neu - er ändert nur das
+    // Fragment. Ohne diesen Listener passierte dann schlicht gar nichts.
+    window.addEventListener("hashchange", () => verarbeiteLink(rezensionAusLink()));
+    // Nach formularLeeren(), sonst räumt das den gerade gefüllten Editor wieder ab.
+    verarbeiteLink(rezensionAusLink());
 
     const login = document.getElementById("admin-login-formular");
     if (login) login.addEventListener("submit", adminAnmelden);
