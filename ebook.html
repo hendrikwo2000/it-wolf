@@ -1,22 +1,31 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
 
 <head>
-    <link href="_variables-dark.scss" type="stylesheet">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="it wolf, itwolf, hendrik wolf, wolf, it, hendrik, ebook, Gesundheit, sport, fittniss, Gesundheit, kostenloses E-Book, gesünder leben, Ernährungstipps, Fitness für Anfänger, Gesundheitstipps, Schlaf verbessern, Stress abbauen, gesund leben, gesunde Ernährung, Fitness Grundlagen, Lifestyle verbessern, Gesundheit E-Book">
+    <meta name="keywords" content="it wolf, itwolf, hendrik wolf, wolf, it, hendrik, ebook, Gesundheit, Sport, Fitness, Gesundheit, kostenloses E-Book, gesünder leben, Ernährungstipps, Fitness für Anfänger, Gesundheitstipps, Schlaf verbessern, Stress abbauen, gesund leben, gesunde Ernährung, Fitness Grundlagen, Lifestyle verbessern, Gesundheit E-Book">
     <meta name="author" content="Hendrik Wolf">
     <meta name="description" content='Lade dir jetzt das kostenlose E-Book "Ganzheitliche Gesundheit" herunter – mit Tipps zu Ernährung, Training, Schlaf und Stress. Ideal für Einsteiger!'>
     <title>E-Book - IT Wolf</title>
+    <link rel="canonical" href="https://it-wolf.org/ebook">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="IT Wolf">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:url" content="https://it-wolf.org/ebook">
+    <meta property="og:title" content="E-Book - IT Wolf">
+    <meta property="og:description" content="Lade dir jetzt das kostenlose E-Book &quot;Ganzheitliche Gesundheit&quot; herunter – mit Tipps zu Ernährung, Training, Schlaf und Stress. Ideal für Einsteiger!">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="E-Book - IT Wolf">
+    <meta name="twitter:description" content="Lade dir jetzt das kostenlose E-Book &quot;Ganzheitliche Gesundheit&quot; herunter – mit Tipps zu Ernährung, Training, Schlaf und Stress. Ideal für Einsteiger!">
     <link rel="icon" href="Bilder/ico.svg">
     <link href="index.css" rel="stylesheet">
     <link href="tictactoe.css" rel="stylesheet">
     <script src="index.js" defer></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="tictactoe.js"></script>
 </head>
@@ -27,7 +36,7 @@
     
 <!-- Header / Navbar Anfang-->
     <nav class="box navbar" id="nav">
-        <div class="container-fluid" id="color-picker">
+        <div class="container-fluid">
             <a class="navbar-brand" href="index.html"><svg class="Logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                 width="100px" height="50x" viewBox="0 0 1810.4 672.6"
                 style="overflow:visible;enable-background:new 0 0 1810.4 672.6;" xml:space="preserve">
@@ -131,7 +140,7 @@
             </svg></a>
         
                 <p id="showadmin"></p>
-            <p id="color-picker1"></p>
+            <p></p>
             <svg 
             
             style="color: var(--linkc);" id="mode" class="mode" onclick="switchmode()" xmlns="http://www.w3.org/2000/svg"
@@ -338,7 +347,7 @@
                                 <input type="text" id="fname" name="name" required class="form-control" aria-describedby="emailHelp" style="background-color: var(--them); border-color: var(--popupborder)">
                                 </div>
                             <div class="mb-3">
-                                <label class="form-label">Email Adresse</label>
+                                <label class="form-label">E-Mail-Adresse</label>
                                 <input type="email" id="fname" name="email" required class="form-control" style="background-color: var(--them); border-color: var(--popupborder)">
                             </div>
                             <input type="hidden" name="_subject" value="E-Book Passwort!">
@@ -413,7 +422,7 @@
                                     <div id="emailHelp" class="form-text"></div>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Email Adresse</label>
+                                    <label class="form-label">E-Mail-Adresse</label>
                                     <input type="email" id="fname" name="email" required class="form-control"
                                         style="background-color: var(--them); border-color: var(--popupborder)">
                                 </div>
@@ -466,7 +475,7 @@
                                     </label>
                                 </div>
                             
-                                <input type="hidden" name="_subject" value="E-Book Feedbeck!">
+                                <input type="hidden" name="_subject" value="E-Book Feedback!">
                                 <input type="hidden" name="_next" value="https://it-wolf.org">
                                 <input type="hidden" name="_captcha" value="false">
                                 <input type="hidden" name="_template" value="table">
@@ -506,10 +515,10 @@
                             <p class="card-text"><br>
                                 Wenn dir der Inhalt des E-Books gefallen hat,<br>
                                 lass gerne eine Spende da.<br><br><br>
-                                Dieses E-Book habe ich ohne einen monetären Gedanken geschireben, <br>
-                                ich möchte Menschen aus ihrer schlechten Lebenssituation befreinen.<br>
-                                Ich hoffe es ist mit aus gelungen.<br><br><br>
-                                Wenn dir das E-Book weiter geholfen hat freue ich micht natürlich über eine Spende.
+                                Dieses E-Book habe ich ohne einen monetären Gedanken geschrieben, <br>
+                                ich möchte Menschen aus ihrer schlechten Lebenssituation befreien.<br>
+                                Ich hoffe, es ist mir gelungen.<br><br><br>
+                                Wenn dir das E-Book weiter geholfen hat, freue ich mich natürlich über eine Spende.
 
 
                          
@@ -1024,7 +1033,7 @@
 
 <!-- Popup Individueller Modus Fehler Ende-->
 
-<!-- Popup Formular Feedbeck Anfang-->
+<!-- Popup Formular Feedback Anfang-->
 <div class="toast-container position-fixed top-0 end-0 p-3">
     <div id="liveToast5" class="toast text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
@@ -1034,11 +1043,11 @@
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body">
-            Vielen Dank für das Feedbeck.
+            Vielen Dank für das Feedback.
         </div>
     </div>
 </div>
-<!-- Popup Formular Feedbeck Ende-->
+<!-- Popup Formular Feedback Ende-->
  
 
 

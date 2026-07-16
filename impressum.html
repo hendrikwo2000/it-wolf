@@ -1,22 +1,31 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
 
 <head>
-    <link href="_variables-dark.scss" type="stylesheet">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="it wolf, itwolf, hendrik wolf, wolf, it, hendrik">
     <meta name="author" content="Hendrik Wolf">
     <meta name="description" content="Impressum IT-Wolf">
     <title>Impressum - IT Wolf</title>
+    <link rel="canonical" href="https://it-wolf.org/impressum">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="IT Wolf">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:url" content="https://it-wolf.org/impressum">
+    <meta property="og:title" content="Impressum - IT Wolf">
+    <meta property="og:description" content="Impressum IT-Wolf">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Impressum - IT Wolf">
+    <meta name="twitter:description" content="Impressum IT-Wolf">
     <link rel="icon" href="Bilder/ico.svg">
     <link href="index.css" rel="stylesheet">
     <link href="tictactoe.css" rel="stylesheet">
     <script src="index.js" defer></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
         <script src="tictactoe.js"></script>
 </head>
@@ -131,7 +140,7 @@
             </svg></a>
         
                <p id="showadmin"></p>
-            <p id="color-picker1"></p>
+            <p></p>
             <svg 
             
             style="color: var(--linkc);" id="mode" class="mode" onclick="switchmode()" xmlns="http://www.w3.org/2000/svg"
@@ -297,8 +306,8 @@
                         <div class="card-body">
                             <h5 class="card-title">Kontakt</h5>
                             <p class="card-text">
-                            <p class="box clink">Wenn dir weiter Seiten einfallen, die auf der Seite einen Platz haben sollen, oder <br>
-                                wenn dir noch weite Features einfallen oder <br>
+                            <p class="box clink">Wenn dir weitere Seiten einfallen, die auf der Seite einen Platz haben sollen, oder <br>
+                                wenn dir noch weitere Features einfallen oder <br>
                                 <b>Lob, Anregungen, Kritik</b> <br>
                                 schreibe eine E-Mail an: <br><br>
                                 kontakt@it-wolf.org <br><br>
@@ -336,7 +345,7 @@
                                     <div id="emailHelp" class="form-text"></div>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Email Adresse</label>
+                                    <label class="form-label">E-Mail-Adresse</label>
                                     <input type="email" id="fname" name="email" required class="form-control"
                                         style="background-color: var(--them); border-color: var(--popupborder)">
                                 </div>
@@ -453,8 +462,8 @@
                                         <div class="card-body">
                                             <h5 class="card-title">Dein Name</h5>
                                             <p class="card-text">
-                                                Klicke <b>hier</b> und gebe deinen Namen ein.<br>
-                                                Dein Name wird dann oben in der Überschrifft angezeigt.
+                                                Klicke <b>hier</b> und gib deinen Namen ein.<br>
+                                                Dein Name wird dann oben in der Überschrift angezeigt.
                                             </p>
                                         </div>
                                     </div>
@@ -548,8 +557,8 @@
                         <div class="card-body">
                             <h5 class="card-title">Tic Tac Toe (Beta)</h5>
                             <p class="card-text">
-                                Klicke <b>hier</b> um ein neues Tic Tac Toe Spiel zu starten.<br>
-                                Der Computer setzt zufällig, also nach keinem speziellen Schema.
+                                Klicke <b>hier</b>, um ein neues Tic Tac Toe Spiel zu starten.<br>
+                                Der Computer setzt nicht zufällig, sondern nach einer Logik.
                             </p>
                         </div>
                     </div>
@@ -678,17 +687,17 @@
             </div>
             <div class="modal-body" id="pop-body">
 
-                Wenn du unter Funktionen auf "Dein Name" klickst, erschent ein
-                Pop-up Fesnter mit "Dein Name".<br>
+                Wenn du unter Funktionen auf "Dein Name" klickst, erscheint ein
+                Pop-up-Fenster mit "Dein Name".<br>
                 In das Input Feld "Name" kannst du deinen Namen eintragen.<br>
-                Wenn du auf "Bestätigen" klickst, erscheint eine bestätigungs Nachricht und die Überschrift ändert sich
+                Wenn du auf "Bestätigen" klickst, erscheint eine Bestätigungsnachricht und die Überschrift ändert sich
                 zu<br><br>
                 "Moin 'dein Name' - 'Seiten Überschrift'"<br><br><br>
                 Dein Name wird im Local Storage gespeichert und bei jeder Seite wie beschrieben angezeigt.<br><br>
                 Wenn du in dem Input Feld "Name" nichts eintippst und auf "Bestätigen" klickst,<br>
-                wird die standart Seiten Überschrifft angezeigt und es erscheint eine weitere bestätigungs
-                Nachricht.<br><br>
-                Wenn du in dem Input Feld "Name" beispeilsweise ein Style Tag ein tipps und auf "Bestätigen"
+                wird die Standard-Seitenüberschrift angezeigt und es erscheint eine weitere
+                Bestätigungsnachricht.<br><br>
+                Wenn du in dem Input Feld "Name" beispielsweise ein Style-Tag eintippst und auf "Bestätigen"
                 klickst,<br>
                 erscheint eine Fehlermeldung.
 
@@ -715,9 +724,9 @@
                     </svg></button>
             </div>
             <div class="modal-body" id="pop-body">
-                Den Darkmode kannst du mit einem Klick auf die Sonne, oben rechts, aktivierten bzw. deaktivieren.<br><br>
-                Der Zusstand des Darkmodes wir im Local Storage gespeichert.<br>
-                Er ist somit Seitenübergreifend, zudem nimmt er nach erneutem Besuch der Seite den letzen Zustand wieder
+                Den Darkmode kannst du mit einem Klick auf die Sonne, oben rechts, aktivieren bzw. deaktivieren.<br><br>
+                Der Zustand des Darkmodes wird im Local Storage gespeichert.<br>
+                Er ist somit seitenübergreifend, zudem nimmt er nach erneutem Besuch der Seite den letzten Zustand wieder
                 an.<br><br>
                 Wenn der Zustand noch unbekannt ist (erster Besuch der Seite oder Local Storage gelöscht) <br>
                 nimmt der Darkmode den Zustand des Systems an.
@@ -745,14 +754,14 @@
                     </svg></button>
             </div>
             <div class="modal-body" id="pop-body">
-                Du kannst sein individuelles Farbschema erstellen indem du im Impressum und Funktionen, "Erstelle dein
-                individuelles Farbschema" auf den Schalter klikst.<br><br>
+                Du kannst dein individuelles Farbschema erstellen indem du im Impressum und Funktionen, "Erstelle dein
+                individuelles Farbschema" auf den Schalter klickst.<br><br>
                 Jetzt sind die Eingabefelder für die Farbe freigeschaltet und du kannst eine Hintergrundfarbe und eine
                 Schriftfarbe auswählen.<br><br>
                 Mit dem Klick auf OK werden die Farben gespeichert (auch im Local Storage).<br><br>
-                Das Symbol zum wechseln des Moduses ist jetzt ein Zahnrad und du kannst jeztz den Dark und Light Mode
-                nicht aktivierten, du bekommst ein Fehlermeldung.<br><br>
-                Zum deaktivieren des Individuelles Farbschemas drückst du wieder auf den Schalter und der letzte Modus
+                Das Symbol zum Wechseln des Modus ist jetzt ein Zahnrad und du kannst jetzt den Dark und Light Mode
+                nicht aktivieren, du bekommst eine Fehlermeldung.<br><br>
+                Zum Deaktivieren des individuellen Farbschemas drückst du wieder auf den Schalter und der letzte Modus
                 wird aktiviert.
 
             </div>
@@ -811,8 +820,8 @@
                     </svg></button>
             </div>
             <div class="modal-body" id="pop-body">
-                Um ein Tic Tac Toe Spiel zu starten klicke unter Impressum, Funktionen auf "Tic Tac Toe".<br><br>
-                Du Spiels gegen einen Comuter, er arbeitet mit einer Logic und plaziert nicht zufällig.<br><br>
+                Um ein Tic Tac Toe Spiel zu starten, klicke unter Impressum, Funktionen auf "Tic Tac Toe".<br><br>
+                Du spielst gegen einen Computer, er arbeitet mit einer Logik und platziert nicht zufällig.<br><br>
                 Der Code wurde mit ChatGPT geschrieben.
 
             </div>
@@ -841,8 +850,8 @@
                 Wenn die Maus in dem Bereich ist verbinden sich die Kreise in der Nähe der Maus dynamisch mit der
                 Maus.<br><br>
                 Das Feature gibt es nur für etwas größere Bildschirme. <br>
-                Nich für Handys! Siet nicht gut aus.<br><br>
-                Der Code wurden zum Großteil mit ChatGPT geschrieben.
+                Nicht für Handys! Sieht nicht gut aus.<br><br>
+                Der Code wurde zum Großteil mit ChatGPT geschrieben.
 
 
             </div>
@@ -861,8 +870,8 @@
             <div class="card-body">
                 <h5 class="card-title">Spenden</h5>
                 <p class="card-text">
-                    Dise Seite wird nicht von Werbung finaziert,<br>
-                   daher freue ich mich über ein Spende.<br>
+                    Diese Seite wird nicht von Werbung finanziert,<br>
+                   daher freue ich mich über eine Spende.<br>
                 <br style="margin-bottom: 60px;"><br>
 
                     <button onclick="window.open('https://www.paypal.me/1hendrik', '_blank');" class="bute">
@@ -958,7 +967,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
                 <div class="toast-body">
-                    Bitte gebe einen Korrekten Namen ein.
+                    Bitte gib einen korrekten Namen ein.
                 </div>
             </div>
         </div>
@@ -988,7 +997,7 @@
 
 
 
-<!-- Popup Formular Feedbeck Anfang-->
+<!-- Popup Formular Feedback Anfang-->
 <div class="toast-container position-fixed top-0 end-0 p-3">
     <div id="liveToast5" class="toast text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
@@ -998,11 +1007,11 @@
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body">
-           Vielen Dank für das Feedbeck.
+           Vielen Dank für das Feedback.
         </div>
     </div>
 </div>
-<!-- Popup Formular Feedbeck Ende-->
+<!-- Popup Formular Feedback Ende-->
 
 <!-- Popup Admin Anfang-->
 <div class="toast-container position-fixed top-0 end-0 p-3">

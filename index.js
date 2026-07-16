@@ -175,16 +175,21 @@ if (mam == null || mam == "" || mam == "null") {
 
 
 
+// Namensfeld und Bestätigen-Button gibt es nur auf impressum.html
 document.onkeydown = function (event) {
 
     if (event.keyCode == 13) {
+        const aus = document.getElementById("aus");
+        if (!aus) return;
         auslesen();
-        document.getElementById("aus").click();
+        aus.click();
     }};
 
 
 function auslesen() {
-    var mam = document.getElementById("namee").value;
+    const namee = document.getElementById("namee");
+    if (!namee) return;
+    var mam = namee.value;
 
     if (mam == window.localStorage.getItem("head")) {
 
@@ -255,6 +260,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const favSection = document.getElementById("favorites-section");
     const favContainer = document.getElementById("favorites-container");
 
+    // Die Favoritenoberflaeche steht nur auf seiten.html. Ohne diese Pruefung
+    // stirbt der ganze Block auf den anderen Seiten.
+    const hatFavoritenUI = !!(favBtnContainer && favBtn && favSection && favContainer);
+
     function isFavorite(id) {
         return localStorage.getItem(`fav-${id}`) === "true";
     }
@@ -268,11 +277,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // Admin deaktivieren
-    document.getElementById("showadmin").addEventListener("dblclick", meineFunktion);
+    const showadmin = document.getElementById("showadmin");
+    if (showadmin) showadmin.addEventListener("dblclick", meineFunktion);
 
     function meineFunktion() {
         document.getElementById("headline").innerHTML = "";
-        document.getElementById("showadmin").style.display = "none";
+        showadmin.style.display = "none";
         mam = "";
         localStorage.setItem("head", mam);
         toggleSecret();
@@ -297,6 +307,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 visibleFavCount++;
             }
         });
+
+        if (!hatFavoritenUI) return;
 
         // Button anzeigen/verstecken
         favBtnContainer.style.display = visibleFavCount > 0 ? "block" : "none";
@@ -373,14 +385,16 @@ document.addEventListener("DOMContentLoaded", () => {
         favBtn.innerText = "Favoriten anzeigen";
     }
 
-    favBtn.addEventListener("click", () => {
-        const visible = favSection.style.display === "block";
-        if (visible) {
-            hideFavorites();
-        } else {
-            showFavorites();
-        }
-    });
+    if (hatFavoritenUI) {
+        favBtn.addEventListener("click", () => {
+            const visible = favSection.style.display === "block";
+            if (visible) {
+                hideFavorites();
+            } else {
+                showFavorites();
+            }
+        });
+    }
 
 
 
@@ -402,7 +416,7 @@ document.addEventListener("DOMContentLoaded", () => {
             updateFavoriteUI();
 
             // ▶️ Live aktualisieren, wenn Favoritenbereich sichtbar
-            if (favSection.style.display === "block") {
+            if (hatFavoritenUI && favSection.style.display === "block") {
                 const existingFavCard = favContainer.querySelector(`[data-id="${cardId}"]`);
 
                 if (nowFav && !existingFavCard) {
@@ -451,6 +465,21 @@ const rootStyles = getComputedStyle(document.documentElement);
 const sternColor = rootStyles.getPropertyValue('--stern-color').trim();
 
 
+// Die Farbwähler stehen nur auf impressum.html, deshalb überall ohne Annahme über ihre Existenz
+function setColorPickerDisabled(disabled) {
+    document.querySelectorAll("input#color-picker, input#color-picker1").forEach(el => {
+        el.disabled = disabled;
+    });
+}
+
+// Der Umschalter für den individuellen Modus steht nur auf impressum.html.
+// Ausdrücklich path#activ, weil auf den anderen Seiten das <body> dieselbe id trägt.
+function setActivIcon(d) {
+    const icon = document.querySelector("path#activ");
+    if (icon) icon.setAttribute("d", d);
+}
+
+
 
 
 let colorPicker1;
@@ -485,13 +514,10 @@ if (individuell_pegel == "false") {
 
 if (individuell_pegel == "true") {
     //console.log("individuell");
-    setTimeout(function () {
-    }, 10);
     modee = "individuell";
     individuell();
-    document.getElementById("color-picker").disabled = false;
-    document.getElementById("color-picker1").disabled = false;
-    document.getElementById("activ").setAttribute("d", "M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z");
+    setColorPickerDisabled(false);
+    setActivIcon("M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z");
 
 }
 
@@ -540,8 +566,7 @@ function dark() {
     document.documentElement.style.setProperty('--stern-color', sternColor);   // Farbe für Stern Darkmode
     document.documentElement.style.setProperty('--herz-color', '#ff0000ff');   // Farbe für Herz Darkmode
     localStorage.setItem("thema", "dark");
-    document.getElementById("color-picker").disabled = true;
-    document.getElementById("color-picker1").disabled = true;
+    setColorPickerDisabled(true);
 
 
 
@@ -564,17 +589,13 @@ function light() {
     document.documentElement.style.setProperty('--stern-color', sternColor);    // Farbe für Stern Lightmode
     document.documentElement.style.setProperty('--herz-color', '#ff0000ff');            // Farbe für Herz Lightmode
     localStorage.setItem("thema", "light");
-    document.getElementById("color-picker").disabled = true;
-    document.getElementById("color-picker1").disabled = true;
+    setColorPickerDisabled(true);
 
 
 };
 
 // Individueller Modus
 function individuell() {
-    setTimeout(function () {
-
-    }, 100);
     //console.log("indi");
     document.getElementById("modee").setAttribute("d", "M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z");
     document.getElementById('modeee').setAttribute("d", "M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z");
@@ -593,12 +614,13 @@ function individuell() {
 
 
 
+// Die Farbwähler gibt es nur auf impressum.html
 window.addEventListener("load", startup, false);
 function startup() {
-    colorPicker = document.querySelector("#color-picker");
-    colorPicker.value = defaultColor;
+    colorPicker = document.querySelector("input#color-picker");
+    if (!colorPicker) return;
+    if (defaultColor) colorPicker.value = defaultColor;
     colorPicker.addEventListener("input", updateFirst, false);
-    colorPicker.select();
 };
 
 function updateFirst(event) {
@@ -612,10 +634,10 @@ function updateFirst(event) {
 
 window.addEventListener("load", startup1, false);
 function startup1() {
-    colorPicker1 = document.querySelector("#color-picker1");
-    colorPicker1.value = defaultColor1;
+    colorPicker1 = document.querySelector("input#color-picker1");
+    if (!colorPicker1) return;
+    if (defaultColor1) colorPicker1.value = defaultColor1;
     colorPicker1.addEventListener("input", updateFirst1, false);
-    colorPicker1.select();
 };
 
 function updateFirst1(event) {
@@ -631,9 +653,8 @@ function updateFirst1(event) {
 function activ() {
 
     if (individuell_pegel == "false") {
-        document.getElementById("color-picker").disabled = false;
-        document.getElementById("color-picker1").disabled = false;
-        document.getElementById("activ").setAttribute("d", "M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z");
+        setColorPickerDisabled(false);
+        setActivIcon("M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z");
         setTimeout(function () {
             individuell_pegel = "true";
         }, 10);
@@ -643,10 +664,9 @@ function activ() {
 
 
     if (individuell_pegel == "true") {
-        document.getElementById("color-picker").disabled = true;
-        document.getElementById("color-picker1").disabled = true;
+        setColorPickerDisabled(true);
         document.getElementById("mode").style.cursor = "default";
-        document.getElementById("activ").setAttribute("d", "M11 4a4 4 0 0 1 0 8H8a4.992 4.992 0 0 0 2-4 4.992 4.992 0 0 0-2-4h3zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5z");
+        setActivIcon("M11 4a4 4 0 0 1 0 8H8a4.992 4.992 0 0 0 2-4 4.992 4.992 0 0 0-2-4h3zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5z");
         setTimeout(function () {
             individuell_pegel = "false";
         }, 10);
@@ -832,85 +852,17 @@ function resetForm1(event) {
 
 
 //------------------------------------------------------------------------------------------------------------------------
-// Favoriten Aktiveren und deaktivieren
-/*
-var heatChatGPT = false;
-heatChatGPT = window.localStorage.getItem("heat");
 
-var heatChatGPT1 = false;
-heatChatGPT1 = window.localStorage.getItem("heat1");
-
-if(heatChatGPT == "true") {
-document.getElementById("heart").setAttribute("d", "M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1");
-}
-
-function ChatGPT() {;
-
-    if (heatChatGPT == true) {
-        document.getElementById("heart").setAttribute("d", "m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z");
-        heatChatGPT = false;
-        localStorage.setItem("heat", heatChatGPT);
-        console.log(heatChatGPT);
-    }
-
-    else {
-        document.getElementById("heart").setAttribute("d", "M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1");
-        heatChatGPT = true;
-        localStorage.setItem("heat", heatChatGPT);
-        console.log(heatChatGPT);
-    }
-
-}
-
-
-if (heatChatGPT1 == "true") {
-    document.getElementById("heart1").setAttribute("d", "M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1");
-}
-function ChatGPT1() {
-    
-
-    if (heatChatGPT1 == true) {
-        document.getElementById("heart1").setAttribute("d", "m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z");
-        heatChatGPT1 = false;
-        localStorage.setItem("heat1", heatChatGPT1);
-
-        console.log(heatChatGPT1);
-    }
-
-    else {
-        document.getElementById("heart1").setAttribute("d", "M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1");
-        heatChatGPT1 = true;
-        localStorage.setItem("heat1", heatChatGPT1);
-
-        console.log(heatChatGPT1);
-    }
-
-}
-
-*/
 
 
 
 //------------------------------------------------------------------------------------------------------------------------
 // Karten Link Hover effekt
-
-const card = document.querySelector('#hov');
-const imageLink = card.querySelector('.image-link');
-
-imageLink.addEventListener('mouseenter', () => {
-    card.classList.add('hovered');
-});
-
-imageLink.addEventListener('mouseleave', () => {
-    card.classList.remove('hovered');
-});
-
-imageLink.addEventListener('mousedown', () => {
-    card.classList.add('clicked');
-});
-
-imageLink.addEventListener('mouseup', () => {
-    card.classList.remove('clicked');
-});
+//
+// Entfernt: der Effekt laeuft komplett ueber CSS (#hov:has(.image-link:hover) in
+// index.css) und gilt damit fuer alle Karten. Das JS hier hat per
+// document.querySelector('#hov') immer nur die erste Karte erwischt - id="hov"
+// steht in seiten.html 29-mal - und dieselben .hovered/.clicked-Regeln doppelt
+// gesetzt. Auf allen anderen Seiten warf es zudem einen TypeError, weil #hov fehlt.
 
 //------------------------------------------------------------------------------------------------------------------------
