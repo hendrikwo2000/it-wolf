@@ -17,6 +17,12 @@
 
 const FORMSUBMIT = "https://formsubmit.co/ajax/fe15abf088e090210d1d03807c630d3b";
 
+// formsubmit lehnt Anfragen ohne Referer ab ("FormSubmit will not work in pages
+// browsed as HTML files") und schickt dann keine Mail. Aus dem Browser kam der
+// Header automatisch mit, ein Worker muss ihn selbst setzen - das war der Grund,
+// warum die Passwort-Anfrage funktionierte, aber nie eine Mail ankam.
+const HERKUNFT = "https://it-wolf.org/ebook";
+
 const json = (daten, status = 200) =>
     new Response(JSON.stringify(daten), {
         status,
@@ -64,9 +70,12 @@ export async function onRequestPost(context) {
     // Lead an formsubmit weiterreichen. Schlaegt das fehl, bekommt der Nutzer
     // trotzdem sein Passwort - sein Download soll nicht an meinem Postfach haengen.
     try {
-        await fetch(FORMSUBMIT, {
+        const antwort = await fetch(FORMSUBMIT, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json",
+                Referer: HERKUNFT,
+            },
             body: JSON.stringify({
                 name,
                 email,
@@ -74,6 +83,13 @@ export async function onRequestPost(context) {
                 _template: "table",
             }),
         });
+        // Achtung: formsubmit antwortet auch bei Ablehnung mit HTTP 200. Ein
+        // Check auf antwort.ok wuerde den Fehler durchwinken - die Wahrheit
+        // steht im Feld success.
+        const ergebnis = await antwort.json().catch(() => ({}));
+        if (ergebnis.success !== "true") {
+            console.log("formsubmit hat den Lead abgelehnt:", ergebnis.message);
+        }
     } catch (e) {
         console.log("formsubmit nicht erreichbar:", e.message);
     }
