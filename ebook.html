@@ -397,7 +397,7 @@
                             <h5 class="card-title">Feedback</h5>
                             <p class="card-text">
                             
-                               <form id="form2" action="/api/feedback" method="POST"
+                               <form id="form2" action="https://formsubmit.co/fe15abf088e090210d1d03807c630d3b" method="POST"
                                 onsubmit="resetForm(event)">
                                 <div class="mb-3">
                                     <label for="fb-name" class="form-label">Name</label>
@@ -458,8 +458,10 @@
                                     </label>
                                 </div>
                             
-                                <!-- Betreff und Empfaenger setzt /api/feedback, damit die
-                                     formsubmit-Adresse nicht im Quelltext steht. -->
+                                <!-- Den Betreff wählt index.js anhand dieses Feldes. Das Formular
+                                     geht direkt an formsubmit: der Umweg über eine eigene Function
+                                     scheitert daran, dass formsubmit einen Referer verlangt, den ein
+                                     Worker nicht setzen darf. -->
                                 <input type="hidden" name="formular" value="ebook">
                                 <br style="margin-bottom: 20px;">
                             

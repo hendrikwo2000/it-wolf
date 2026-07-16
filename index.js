@@ -792,14 +792,47 @@ function toggleSecret() {
 // Formular zurücksetzen
 
 
-// Feedback (ebook.html) und Kontakt (impressum.html). Beide gehen jetzt an die
-// eigene Pages Function /api/feedback statt direkt an formsubmit: die
-// formsubmit-Adresse stand sonst im Klartext in zwei oeffentlichen Dateien -
-// also genau da, wo passwort.js sie schon nicht mehr haben wollte.
+// Beide Formulare gehen direkt aus dem Browser an formsubmit.
 //
-// Welches Formular gesendet hat, steht im versteckten Feld "formular". Den
-// Betreff waehlt die Function daraus aus; frueher stand er in _subject und war
-// damit von aussen frei setzbar.
+// Der Umweg über eine eigene Pages Function ist gescheitert, und zwar
+// grundsätzlich: formsubmit lehnt jede Anfrage ohne Referer ab, und diesen
+// Header darf ein Cloudflare Worker in Produktion nicht setzen - der Versuch
+// killt die Function (blankes 502 von der Plattform). Lokal in "wrangler dev"
+// wird die Sperre nicht durchgesetzt, dort lief es; das hat den Fehler bis auf
+// die Live-Seite durchgelassen. Der Browser schickt den Referer von allein,
+// deshalb funktioniert dieser Weg seit Jahren.
+//
+// Preis: die formsubmit-Adresse steht wieder im Quelltext. Sie stand dort
+// ohnehin immer, und wer sie hat, kann mir nur Mails schicken. Das echte
+// Geheimnis - das E-Book-Passwort - bleibt in der Function.
+const FORMSUBMIT = "https://formsubmit.co/ajax/fe15abf088e090210d1d03807c630d3b";
+
+// Welches Formular gesendet hat, steht im versteckten Feld "formular".
+const BETREFF = {
+    ebook: "E-Book Feedback!",
+    kontakt: "Impressum Kontakt!",
+};
+
+// Gibt true zurück, wenn die Mail wirklich raus ist.
+//
+// Achtung: formsubmit antwortet auch bei Ablehnung mit HTTP 200 und packt die
+// Wahrheit in das Feld success. Ein Check auf response.ok winkt den Fehler
+// durch - genau daran ist die Passwort-Mail lange still gescheitert.
+async function sendeAnFormsubmit(inhalt) {
+    const antwort = await fetch(FORMSUBMIT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ _template: "table", _captcha: "false", ...inhalt }),
+    });
+    const ergebnis = await antwort.json().catch(() => ({}));
+    if (ergebnis.success !== "true") {
+        console.error("formsubmit hat abgelehnt:", ergebnis.message || "HTTP " + antwort.status);
+        return false;
+    }
+    return true;
+}
+
+// Feedback (ebook.html) und Kontakt (impressum.html).
 async function resetForm(event) {
     event.preventDefault();
     const form = event.target;
@@ -809,22 +842,18 @@ async function resetForm(event) {
     if (knopf) knopf.innerHTML = WARTE_ICON;
 
     try {
-        const antwort = await fetch("/api/feedback", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                formular: daten.get("formular"),
-                name: daten.get("name"),
-                email: daten.get("email"),
-                message: daten.get("message"),
-                // Sterne gibt es nur im E-Book-Formular und auch dort freiwillig.
-                rating: Number(daten.get("rating")) || undefined,
-            }),
-        });
-        const ergebnis = await antwort.json().catch(() => ({}));
+        const inhalt = {
+            name: daten.get("name"),
+            email: daten.get("email"),
+            message: daten.get("message"),
+            _subject: BETREFF[daten.get("formular")] || "Nachricht von it-wolf.org",
+        };
+        // Sterne gibt es nur im E-Book-Formular und auch dort freiwillig.
+        const sterne = Number(daten.get("rating"));
+        if (sterne >= 1 && sterne <= 5) inhalt.rating = sterne;
 
-        if (!antwort.ok) {
-            alert(ergebnis.fehler || "Es gab einen Fehler beim Absenden.");
+        if (!(await sendeAnFormsubmit(inhalt))) {
+            alert("Die Nachricht konnte nicht zugestellt werden. Bitte versuche es später noch einmal.");
             return;
         }
 
@@ -833,7 +862,7 @@ async function resetForm(event) {
         if (toast) bootstrap.Toast.getOrCreateInstance(toast).show();
     } catch (e) {
         console.error("Netzwerkfehler:", e);
-        alert("Keine Verbindung zum Server. Bist du online?");
+        alert("Keine Verbindung. Bist du online?");
     } finally {
         if (knopf) knopf.innerHTML = SENDE_ICON;
     }
@@ -841,9 +870,10 @@ async function resetForm(event) {
 
 //-----------------------------------------
 
-// Passwort-Anfrage. Geht an die eigene Pages Function /api/passwort, nicht mehr
-// direkt an formsubmit: das Passwort steht dadurch in keiner statischen Datei
-// mehr und die Weiterleitung auf die oeffentliche EdankeE.html entfaellt.
+// Passwort-Anfrage. Das Passwort selbst kommt aus der Function /api/passwort und
+// steht dadurch in keiner statischen Datei - das war und bleibt der Sinn der
+// Sache. Die Mail mit Name und Adresse schickt dagegen der Browser, weil die
+// Function das nicht kann (Referer, siehe oben bei FORMSUBMIT).
 const SENDE_ICON = `
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
         <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z" />
@@ -883,6 +913,15 @@ async function resetForm1(event) {
             zeigePasswortFehler(ergebnis.fehler || "Das hat leider nicht geklappt. Bitte versuche es später erneut.");
             return;
         }
+
+        // Lead an mich. Läuft bewusst nebenher und ohne await: klappt der
+        // Versand nicht, soll der Besucher trotzdem sein Passwort sehen - sein
+        // Download hängt nicht an meinem Postfach.
+        sendeAnFormsubmit({
+            name: daten.get("name"),
+            email: daten.get("email"),
+            _subject: "E-Book Passwort angefordert",
+        }).catch((e) => console.error("Lead-Mail nicht gesendet:", e));
 
         form.reset();
         if (ausgabe && kasten) {

@@ -336,7 +336,7 @@
                             <h5 class="card-title">Kontaktformular</h5>
                             <p class="card-text">
             
-                            <form id="form2" action="/api/feedback" method="POST"  onsubmit="resetForm(event)">
+                            <form id="form2" action="https://formsubmit.co/fe15abf088e090210d1d03807c630d3b" method="POST"  onsubmit="resetForm(event)">
                                 <div class="mb-3">
                                     <label for="kontakt-name" class="form-label">Name</label>
                                     <input type="text" id="kontakt-name" name="name" required class="form-control"
@@ -354,8 +354,8 @@
                                 </div>
             
             
-                                <!-- Betreff und Empfaenger setzt /api/feedback, damit die
-                                     formsubmit-Adresse nicht im Quelltext steht. -->
+                                <!-- Den Betreff wählt index.js anhand dieses Feldes. Siehe ebook.html:
+                                     der Weg über eine eigene Function scheitert am Referer. -->
                                 <input type="hidden" name="formular" value="kontakt">
                                 <br style="margin-bottom: 20px;">
             

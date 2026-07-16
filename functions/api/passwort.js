@@ -5,23 +5,20 @@
 // ein Wegweiser - wer die URL kannte, kam ohne Formular ans Passwort.
 //
 // Hier liegt das Passwort im verschluesselten Secret EBOOK_PASSWORT und wird nur
-// auf ein POST mit plausibler E-Mail hin herausgegeben. Der Lead geht dabei
-// serverseitig an formsubmit, wodurch die formsubmit-Adresse nicht mehr im
-// oeffentlichen HTML steht.
+// auf ein POST mit plausibler E-Mail hin herausgegeben.
 //
-// Ehrliche Grenze: Auch das ist keine echte Zugangskontrolle. Wer die Anfrage
+// Die Mail mit Name und Adresse verschickt der Browser (index.js), nicht diese
+// Function. Der Versuch, den Lead von hier aus an formsubmit zu geben, ist
+// gescheitert: formsubmit verlangt einen Referer, und den darf ein Worker in
+// Produktion nicht setzen - die Function stirbt daran mit einem blanken 502.
+// Lange fiel es nicht auf, weil der alte Code das Ergebnis von fetch nie
+// angesehen hat: das Passwort kam, die Mail verschwand still.
+//
+// Ehrliche Grenze: Das ist keine echte Zugangskontrolle. Wer die Anfrage
 // nachbaut, bekommt das Passwort - die E-Mail wird nicht verifiziert. Es hebt die
 // Huerde von "URL aufrufen" auf "POST nachbauen" und haelt das Passwort aus dem
 // Quelltext, dem Repo und dem Suchindex heraus. Wasserdicht waere nur Versand
 // per E-Mail an die angegebene Adresse.
-
-const FORMSUBMIT = "https://formsubmit.co/ajax/fe15abf088e090210d1d03807c630d3b";
-
-// formsubmit lehnt Anfragen ohne Referer ab ("FormSubmit will not work in pages
-// browsed as HTML files") und schickt dann keine Mail. Aus dem Browser kam der
-// Header automatisch mit, ein Worker muss ihn selbst setzen - das war der Grund,
-// warum die Passwort-Anfrage funktionierte, aber nie eine Mail ankam.
-const HERKUNFT = "https://it-wolf.org/ebook";
 
 const json = (daten, status = 200) =>
     new Response(JSON.stringify(daten), {
@@ -67,33 +64,9 @@ export async function onRequestPost(context) {
         return json({ fehler: "Bitte gib eine gültige E-Mail-Adresse ein." }, 400);
     }
 
-    // Lead an formsubmit weiterreichen. Schlaegt das fehl, bekommt der Nutzer
-    // trotzdem sein Passwort - sein Download soll nicht an meinem Postfach haengen.
-    try {
-        const antwort = await fetch(FORMSUBMIT, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Referer: HERKUNFT,
-            },
-            body: JSON.stringify({
-                name,
-                email,
-                _subject: "E-Book Passwort angefordert",
-                _template: "table",
-            }),
-        });
-        // Achtung: formsubmit antwortet auch bei Ablehnung mit HTTP 200. Ein
-        // Check auf antwort.ok wuerde den Fehler durchwinken - die Wahrheit
-        // steht im Feld success.
-        const ergebnis = await antwort.json().catch(() => ({}));
-        if (ergebnis.success !== "true") {
-            console.log("formsubmit hat den Lead abgelehnt:", ergebnis.message);
-        }
-    } catch (e) {
-        console.log("formsubmit nicht erreichbar:", e.message);
-    }
-
+    // name und email werden hier nur geprueft, nicht verschickt - das macht der
+    // Browser. Sie stehen trotzdem in der Signatur, weil eine Anfrage ohne
+    // plausible Angaben gar nicht erst ein Passwort bekommen soll.
     return json({ passwort: env.EBOOK_PASSWORT });
 }
 
