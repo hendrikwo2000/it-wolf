@@ -347,17 +347,27 @@ function zeigeToast(id) {
 }
 
 
-// Namensfeld und Bestätigen-Button gibt es nur auf impressum.html.
+// Enter im Namensfeld = Bestätigen. Namensfeld und Knopf gibt es nur auf
+// impressum.html.
+//
+// Der Riegel auf activeElement ist der Kern: vorher hing das am ganzen Dokument.
+// Ein Enter im Kontaktformular - oder ganz ohne Fokus irgendwo auf der Seite -
+// klickte "Bestätigen", während das Namensfeld im ungeöffneten Popup leer stand.
+// Leere Eingabe heißt für auslesen() aber "Name löschen": Besucher verloren so
+// ihre Begrüßung, und ich flog aus dem Admin, samt Rezensionsrechten.
+//
 // Nur aus.click() - der Knopf trägt selbst onclick="auslesen()", ein direkter
 // Aufruf davor hätte alles doppelt ausgeführt (und würde das Passwort zweimal
 // zur Prüfung schicken).
 document.onkeydown = function (event) {
+    if (event.keyCode != 13) return;
 
-    if (event.keyCode == 13) {
-        const aus = document.getElementById("aus");
-        if (!aus) return;
-        aus.click();
-    }};
+    const namee = document.getElementById("namee");
+    if (!namee || document.activeElement !== namee) return;
+
+    const aus = document.getElementById("aus");
+    if (aus) aus.click();
+};
 
 
 async function auslesen() {

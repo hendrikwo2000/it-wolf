@@ -117,6 +117,17 @@ background-color: var(--backg);
 color: var(--linkc);
 }
 
+/* Das schwebende "Name" darüber blieb im Darkmode fast schwarz auf dunklem
+   Grund. Grund: Bootstrap färbt es über --bs-body-color-rgb, die Kopplung ganz
+   oben setzt aber nur --bs-body-color - die greift hier also nicht. Ein
+   RGB-Tripel können wir nicht liefern, --linkc ist mal "black", mal ein Hex.
+   Deshalb die Regel direkt, mit Bootstraps eigenen 65% Deckkraft.
+   Doppelter Klassenselektor, weil diese Datei VOR Bootstrap lädt und bei
+   gleicher Spezifität verlieren würde - dieselbe Not wie beim :root:root oben. */
+.form-floating.form-floating > label {
+    color: color-mix(in srgb, var(--linkc) 65%, transparent);
+}
+
 
 /*---------------------------------------------------------------------*/
 /* CSS für das Eingabe Feld Formulare */
