@@ -1,23 +1,23 @@
 /* ====================================================================
-   Passwort-Anfragen - laeuft nur auf ebook.html
+   Rezensions-Anfragen - laeuft nur auf ebook.html
    ====================================================================
-   Zeigt, wer das E-Book-Passwort angefordert hat. Die Anfragen kommen aus
-   /api/leads und werden von passwort.js in KV geschrieben - unabhaengig davon,
-   ob die Benachrichtigungs-Mail durchkommt. Genau das ist der Sinn: der Browser
-   des Besuchers schickt die Mail, und jeder Adblocker kann sie verschlucken.
-   Was hier steht, ist die verlaessliche Spur.
+   Zeigt, was ueber das Feedback-Formular hereingekommen ist, und schiebt es auf
+   Knopfdruck ins Formular "Rezensionen verwalten". Die Anfragen kommen aus
+   /api/feedback, geschrieben werden sie dort beim Absenden des Formulars.
 
-   passwortHolen() und rezPasswortSpeicher kommen aus rezensionen.js bzw.
-   index.js - dieselbe Anmeldung, dasselbe Passwort. Diese Datei haengt in
-   ebook.html hinter beiden, damit sie beim Laden schon da sind.
+   Vorher fuehrte der Weg ueber die formsubmit-Mail: Mail suchen, Link klicken,
+   neuer Tab, Formular vorausgefuellt. Die Mail gibt es weiter, aber man braucht
+   sie nicht mehr.
+
+   passwortHolen(), istAngemeldet(), sterneHtml() und formularAusRohdaten()
+   kommen aus rezensionen.js - dieselbe Anmeldung, dieselbe Darstellung. Diese
+   Datei haengt in ebook.html hinter rezensionen.js, damit das beim Laden steht.
    ==================================================================== */
 
-const ANFRAGEN_API = "/api/leads";
+const ANFRAGEN_API = "/api/feedback";
 
 let anfragen = [];
 
-// Der Kasten sitzt im Admin-Bereich und wird von rezensionen.js mit ein- und
-// ausgeblendet. Hier geht es nur um den Inhalt.
 function anfragenMeldung(text, fehler = true) {
     const feld = document.getElementById("anfragen-meldung");
     if (!feld) return;
@@ -26,48 +26,77 @@ function anfragenMeldung(text, fehler = true) {
     feld.style.display = text ? "block" : "none";
 }
 
-const anfrageDatum = (iso) => {
-    const d = new Date(iso);
-    return isNaN(d) ? "" : d.toLocaleString("de-DE", { dateStyle: "short", timeStyle: "short" });
-};
+// Name, Titel und Text kommen von Fremden und gehen per textContent ins DOM,
+// nie per innerHTML - sonst stuende ein <script> aus dem Formular gleich hier
+// im Admin-Bereich. Nur die Sterne sind selbst gebautes Markup.
+function anfrageKarte(a) {
+    const kasten = document.createElement("div");
+    kasten.style.cssText = "padding: 12px 0; border-bottom: 1px solid var(--popupborder);";
 
-// Name und E-Mail kommen von Fremden und gehen per textContent ins DOM, nie per
-// innerHTML - sonst stuende ein <script> im Namen hier gleich im Admin-Bereich.
-function anfrageZeile(a) {
-    const zeile = document.createElement("div");
-    zeile.style.cssText = "display: flex; align-items: baseline; gap: 10px; padding: 6px 0; border-bottom: 1px solid var(--popupborder);";
-
-    const text = document.createElement("div");
-    text.style.flex = "1";
-
+    const kopf = document.createElement("div");
     const name = document.createElement("b");
     name.textContent = a.name || "(ohne Namen)";
+    kopf.appendChild(name);
 
-    const mail = document.createElement("a");
-    mail.className = "link";
-    mail.href = "mailto:" + (a.email || "");
-    mail.textContent = a.email || "";
+    if (a.sterne) {
+        const sterne = document.createElement("a");
+        sterne.className = "stern";
+        sterne.style.marginLeft = "10px";
+        sterne.innerHTML = sterneHtml(a.sterne);
+        kopf.appendChild(sterne);
+    }
 
     const wann = document.createElement("small");
     wann.className = "clink";
     wann.style.opacity = "0.7";
-    wann.textContent = anfrageDatum(a.datum);
+    wann.style.marginLeft = "10px";
+    wann.textContent = datumDeutsch(a.datum);
+    kopf.appendChild(wann);
 
-    text.appendChild(name);
-    text.appendChild(document.createElement("br"));
-    text.appendChild(mail);
-    text.appendChild(document.createTextNode(" – "));
-    text.appendChild(wann);
+    const inhalt = document.createElement("p");
+    inhalt.className = "clink";
+    inhalt.style.margin = "6px 0";
+    if (a.titel) {
+        const fett = document.createElement("b");
+        fett.textContent = a.titel;
+        inhalt.appendChild(fett);
+        inhalt.appendChild(document.createElement("br"));
+    }
+    inhalt.appendChild(document.createTextNode(a.text || ""));
+
+    const leiste = document.createElement("div");
+
+    const uebernehmen = document.createElement("button");
+    uebernehmen.type = "button";
+    uebernehmen.className = "btn btn-sm";
+    uebernehmen.style.cssText = "border-color: var(--popupborder); color: var(--linkc)";
+    uebernehmen.textContent = "Ins Formular übernehmen";
+    uebernehmen.onclick = () => anfrageUebernehmen(a);
 
     const weg = document.createElement("button");
     weg.type = "button";
     weg.className = "btn btn-sm text-bg-danger";
+    weg.style.marginLeft = "10px";
     weg.textContent = "Löschen";
     weg.onclick = () => anfrageLoeschen(a);
 
-    zeile.appendChild(text);
-    zeile.appendChild(weg);
-    return zeile;
+    leiste.appendChild(uebernehmen);
+    leiste.appendChild(weg);
+
+    kasten.appendChild(kopf);
+    kasten.appendChild(inhalt);
+    if (a.email) {
+        const mail = document.createElement("a");
+        mail.className = "link";
+        mail.href = "mailto:" + a.email;
+        mail.style.cssText = "font-size: 0.85em; opacity: 0.7;";
+        mail.textContent = a.email;
+        kasten.appendChild(mail);
+        kasten.appendChild(document.createElement("br"));
+        kasten.appendChild(document.createElement("br"));
+    }
+    kasten.appendChild(leiste);
+    return kasten;
 }
 
 function anfragenZeichnen() {
@@ -77,16 +106,22 @@ function anfragenZeichnen() {
     if (!liste) return;
 
     liste.replaceChildren();
-    anfragen.forEach((a) => liste.appendChild(anfrageZeile(a)));
+    anfragen.forEach((a) => liste.appendChild(anfrageKarte(a)));
 
     if (leer) leer.style.display = anfragen.length ? "none" : "block";
-    if (zahl) {
-        zahl.textContent = anfragen.length === 1 ? "1 Anfrage" : anfragen.length + " Anfragen";
-    }
+    if (zahl) zahl.textContent = anfragen.length ? "(" + anfragen.length + ")" : "";
 }
 
-// Ohne Anmeldung gar nicht erst fragen: die Function antwortet dann mit 401,
-// und eine rote Fehlermeldung im leeren Admin-Bereich waere nur verwirrend.
+// Schiebt die Anfrage ins Rezensionsformular. Bewusst ohne Loeschen: erst
+// pruefen und anlegen, dann von Hand wegraeumen - sonst waere die Anfrage weg,
+// wenn beim Anlegen etwas schiefgeht.
+function anfrageUebernehmen(a) {
+    formularAusRohdaten(a);
+    adminMeldung("Aus der Anfrage übernommen. Bitte prüfen, ggf. korrigieren – veröffentlicht wird erst mit „Rezension anlegen“.", false);
+}
+
+// Ohne Anmeldung gar nicht erst fragen: die Function antwortet mit 401, und eine
+// rote Fehlermeldung im leeren Admin-Bereich waere nur verwirrend.
 async function anfragenLaden() {
     if (typeof istAngemeldet !== "function" || !istAngemeldet()) {
         anfragen = [];
@@ -113,7 +148,7 @@ async function anfragenLaden() {
 }
 
 async function anfrageLoeschen(a) {
-    if (!confirm(`Anfrage von ${a.name || a.email} wirklich löschen?`)) return;
+    if (!confirm(`Anfrage von ${a.name} wirklich löschen?`)) return;
     try {
         const antwort = await fetch(ANFRAGEN_API, {
             method: "DELETE",

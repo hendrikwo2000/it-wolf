@@ -25,9 +25,13 @@
     <script src="rezensionen.js" defer></script>
     <!-- Hinter rezensionen.js: anfragen.js benutzt deren passwortHolen(). -->
     <script src="anfragen.js" defer></script>
-    <!-- Turnstile (Cloudflares Captcha) fuer die Passwort-Anfrage. Prueft im
-         Hintergrund, ob ein Browser und kein Skript das Formular abschickt. -->
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <!-- Turnstile (Cloudflares Captcha) fuer Passwort-Anfrage und Feedback.
+         Prueft im Hintergrund, ob ein Browser und kein Skript abschickt.
+         render=explicit: sonst zeichnet sich das Kaestchen selbst, und zwar im
+         Thema des Betriebssystems - nicht in dem, das der Besucher hier
+         eingestellt hat. turnstileZeichnen() in index.js macht es selbst. -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstile&render=explicit"
+        async defer></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
@@ -355,11 +359,10 @@
 
                             <!-- Turnstile legt hier ein verstecktes Feld cf-turnstile-response
                                  ins Formular. index.js schickt es an /api/passwort, die
-                                 Function prueft es bei Cloudflare gegen. Der Site-Schluessel
-                                 ist oeffentlich und gehoert genau hierhin - das Geheimnis ist
-                                 der Secret, und der liegt bei Pages. -->
-                            <div class="cf-turnstile" id="turnstile-passwort" style="margin-bottom: 15px;"
-                                 data-sitekey="0x4AAAAAAD3wPeCZoZf3Unrh" data-language="de" data-theme="auto"></div>
+                                 Function prueft es bei Cloudflare gegen. Gezeichnet wird es
+                                 von turnstileZeichnen() in index.js - Sitekey und Thema
+                                 stehen dort, nicht hier. -->
+                            <div id="turnstile-passwort" style="margin-bottom: 15px;"></div>
 
                             <!-- Ausgabe der Pages Function: Passwort bzw. Fehlermeldung -->
                             <div id="passwort-kasten" class="alert" role="status" aria-live="polite"
@@ -494,12 +497,18 @@
                                     </label>
                                 </div>
                             
-                                <!-- Den Betreff wählt index.js anhand dieses Feldes. Das Formular
-                                     geht direkt an formsubmit: der Umweg über eine eigene Function
+                                <!-- Den Betreff wählt index.js anhand dieses Feldes. Die Mail geht
+                                     direkt an formsubmit: der Umweg über eine eigene Function
                                      scheitert daran, dass formsubmit einen Referer verlangt, den ein
-                                     Worker nicht setzen darf. -->
+                                     Worker nicht setzen darf. Die Anfrage selbst geht zusätzlich an
+                                     /api/feedback und steht dann im Admin-Bereich. -->
                                 <input type="hidden" name="formular" value="ebook">
                                 <br style="margin-bottom: 20px;">
+
+                                <!-- Zweites Turnstile-Kästchen, gleicher Sitekey. Nötig, weil auch
+                                     dieses Formular in KV schreibt - sonst stünde der Schutz vorn
+                                     an der Tür und hinten wäre sie offen. -->
+                                <div id="turnstile-feedback" style="margin-bottom: 15px;"></div>
                             
                                 <button class="bute" type="submit" id="sendee">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-send"
@@ -610,6 +619,27 @@
              wer den Bereich auf anderem Weg aufklappt, scheitert am Passwort, das
              /api/rezensionen prueft. -->
         <div id="rezensionen-admin" style="display: none;">
+            <!-- Rezensions-Anfragen: gefuellt von anfragen.js aus /api/feedback.
+                 Steht ueber dem Formular im selben Admin-Bereich und haengt damit
+                 an derselben Anmeldung wie die Rezensionen. -->
+            <br>
+            <div class="box col">
+                <div id="hovb" class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            Rezensions-Anfragen
+                            <small class="clink" style="opacity: 0.7; font-size: 0.7em;" id="anfragen-anzahl"></small>
+                        </h5>
+                        <div class="card-text">
+                            <div id="anfragen-meldung" class="alert" role="alert" style="display: none;"></div>
+                            <p id="anfragen-leer" class="clink" style="display: none; opacity: 0.7;">
+                                Noch kein Feedback eingegangen.
+                            </p>
+                            <div id="anfragen-liste"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <br>
             <div class="box col">
                 <div id="hovb" class="card h-100">
@@ -724,27 +754,6 @@
                 </div>
             </div>
 
-            <!-- Passwort-Anfragen: gefuellt von anfragen.js aus /api/leads.
-                 Steht im selben Admin-Bereich und haengt damit an derselben
-                 Anmeldung wie die Rezensionen. -->
-            <br>
-            <div class="box col">
-                <div id="hovb" class="card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            Passwort-Anfragen
-                            <small class="clink" style="opacity: 0.7; font-size: 0.7em;" id="anfragen-anzahl"></small>
-                        </h5>
-                        <div class="card-text">
-                            <div id="anfragen-meldung" class="alert" role="alert" style="display: none;"></div>
-                            <p id="anfragen-leer" class="clink" style="display: none; opacity: 0.7;">
-                                Noch niemand hat das Passwort angefordert.
-                            </p>
-                            <div id="anfragen-liste"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <!-- Admin Rezensionen Ende -->
     </div>

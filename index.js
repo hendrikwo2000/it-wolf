@@ -287,6 +287,60 @@ async function pruefeRezensionsPasswort(passwort) {
     }
 }
 
+//------------------------------------------------------------------------------------------------------------------------
+// Turnstile (Cloudflares Captcha)
+//
+// Das Kaestchen laesst sich NICHT in die Farben dieser Seite bringen: es steckt
+// in einem iframe von Cloudflare. Anpassbar sind nur Thema (hell/dunkel), Groesse
+// und Sprache - Farben, Schrift und Rahmen gehoeren ihnen.
+//
+// Deshalb wenigstens das Thema richtig: "auto" wuerde dem Betriebssystem folgen
+// und nicht dem Umschalter dieser Seite - wer hier auf dunkel stellt, waehrend
+// Windows auf hell steht, bekaeme ein grelles Kaestchen ins dunkle Formular.
+// Also zeichnen wir selbst (render=explicit im Skript-Tag) und lesen das Thema
+// aus dem localStorage.
+
+const TURNSTILE_KEY = "0x4AAAAAAD3wPeCZoZf3Unrh";
+// Container-Id -> Widget-Id von Turnstile. Fuers Neuzeichnen und fuers
+// Zuruecksetzen nach dem Absenden.
+const turnstileWidgets = {};
+
+// Cloudflare kennt nur hell und dunkel. Beim individuellen Modus gibt es keine
+// passende Antwort - dann entscheidet, was zuletzt als Thema galt.
+const turnstileThema = () =>
+    window.localStorage.getItem("thema") === "dark" ? "dark" : "light";
+
+// Zeichnet alle vorhandenen Kaestchen neu. Ein zweiter Aufruf ist Absicht: beim
+// Moduswechsel muss das alte Widget weg, sonst bliebe es im alten Thema stehen.
+function turnstileZeichnen() {
+    if (!window.turnstile) return;
+
+    ["turnstile-passwort", "turnstile-feedback"].forEach((id) => {
+        if (!document.getElementById(id)) return;
+        if (turnstileWidgets[id] !== undefined) turnstile.remove(turnstileWidgets[id]);
+        turnstileWidgets[id] = turnstile.render("#" + id, {
+            sitekey: TURNSTILE_KEY,
+            theme: turnstileThema(),
+            // Nimmt die Breite des Formulars ein, wie die Felder darueber.
+            size: "flexible",
+            language: "de",
+        });
+    });
+}
+
+// Ruft Cloudflare auf, sobald ihr Skript geladen ist (?onload=onloadTurnstile).
+function onloadTurnstile() {
+    turnstileZeichnen();
+}
+
+// Ein Token gilt genau einmal. Ohne Reset scheitert der zweite Versuch mit
+// "timeout-or-duplicate", obwohl der Besucher nichts falsch gemacht hat.
+function turnstileZuruecksetzen(id) {
+    if (window.turnstile && turnstileWidgets[id] !== undefined) {
+        turnstile.reset(turnstileWidgets[id]);
+    }
+}
+
 function zeigeToast(id) {
     const kasten = document.getElementById(id);
     if (kasten) bootstrap.Toast.getOrCreateInstance(kasten).show();
@@ -688,6 +742,9 @@ function dark() {
     document.documentElement.style.setProperty('--stern-color', sternColor);   // Farbe für Stern Darkmode
     document.documentElement.style.setProperty('--herz-color', '#ff0000ff');   // Farbe für Herz Darkmode
     localStorage.setItem("thema", "dark");
+    // Das Turnstile-Kaestchen steckt in einem fremden iframe - CSS-Variablen
+    // erreichen es nicht. Es muss neu gezeichnet werden, sonst bliebe es hell.
+    turnstileZeichnen();
     setColorPickerDisabled(true);
 
 
@@ -711,6 +768,7 @@ function light() {
     document.documentElement.style.setProperty('--stern-color', sternColor);    // Farbe für Stern Lightmode
     document.documentElement.style.setProperty('--herz-color', '#ff0000ff');            // Farbe für Herz Lightmode
     localStorage.setItem("thema", "light");
+    turnstileZeichnen(); // siehe dark(): das iframe folgt den CSS-Variablen nicht
     setColorPickerDisabled(true);
 
 
@@ -941,6 +999,10 @@ async function resetForm(event) {
 
         // Nur beim E-Book-Feedback: der Link zum Übernehmen. Beim
         // Kontaktformular wäre er sinnlos, daraus wird keine Rezension.
+        //
+        // Der Link bleibt, obwohl die Anfrage jetzt auch im Admin-Bereich steht:
+        // er kostet nichts und hilft, wenn die Anfrage per Mail auf einem
+        // anderen Gerät ankommt.
         if (formular === "ebook") {
             inhalt["Rezension übernehmen"] = baueRezensionsLink({
                 name: daten.get("name"),
@@ -949,6 +1011,12 @@ async function resetForm(event) {
                 sterne: sterne >= 1 && sterne <= 5 ? sterne : 5,
                 datum: new Date().toISOString().slice(0, 10),
             });
+
+            // Zuerst speichern, dann mailen: die Mail hängt am Browser des
+            // Besuchers und damit an seinem Adblocker - was hier liegt, nicht.
+            // Schlägt das Speichern fehl, bricht das Formular trotzdem nicht ab;
+            // die Mail ist dann wie früher der einzige Weg.
+            await speichereAnfrage(daten, sterne);
         }
 
         if (!(await sendeAnFormsubmit(inhalt))) {
@@ -964,6 +1032,34 @@ async function resetForm(event) {
         alert("Keine Verbindung. Bist du online?");
     } finally {
         if (knopf) knopf.innerHTML = SENDE_ICON;
+        turnstileZuruecksetzen("turnstile-feedback");
+    }
+}
+
+// Legt die Rezensions-Anfrage in KV ab, damit sie im Admin-Bereich steht statt
+// nur in einer Mail. Fehler landen bewusst nur im Log: der Besucher hat sein
+// Feedback abgeschickt, das ist aus seiner Sicht erledigt - er soll deswegen
+// keine Fehlermeldung sehen. Die Mail geht gleich danach ohnehin raus.
+async function speichereAnfrage(daten, sterne) {
+    try {
+        const antwort = await fetch("/api/feedback", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                name: daten.get("name"),
+                email: daten.get("email"),
+                titel: daten.get("titel") || "",
+                text: daten.get("message"),
+                sterne: sterne >= 1 && sterne <= 5 ? sterne : null,
+                turnstile: daten.get("cf-turnstile-response") || "",
+            }),
+        });
+        if (!antwort.ok) {
+            const ergebnis = await antwort.json().catch(() => ({}));
+            console.error("Anfrage nicht gespeichert:", ergebnis.fehler || antwort.status);
+        }
+    } catch (e) {
+        console.error("Anfrage nicht gespeichert:", e.message);
     }
 }
 
@@ -1043,11 +1139,7 @@ async function resetForm1(event) {
         zeigePasswortFehler("Keine Verbindung zum Server. Bist du online?");
     } finally {
         if (knopf) knopf.innerHTML = SENDE_ICON;
-        // Ein Turnstile-Token gilt genau einmal. Ohne diesen Reset scheitert der
-        // zweite Versuch mit "timeout-or-duplicate", obwohl der Besucher nichts
-        // falsch gemacht hat - er sieht dann nur, dass es nicht geht.
-        const kaestchen = document.getElementById("turnstile-passwort");
-        if (window.turnstile && kaestchen) turnstile.reset(kaestchen);
+        turnstileZuruecksetzen("turnstile-passwort");
     }
 }
 

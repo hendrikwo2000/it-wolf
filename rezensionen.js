@@ -359,22 +359,30 @@ function verarbeiteLink(daten) {
     document.getElementById("rezensionen-admin").scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
-// Trägt die Daten aus dem Link ins Formular ein. Vorausgefüllt ist nicht
-// veröffentlicht - das passiert erst beim Klick auf "Rezension anlegen".
-function uebernehmeAusLink() {
-    if (!ausLink) return;
+// Füllt das Formular aus fremden Rohdaten. Zwei Wege enden hier: der Link aus
+// der E-Mail und der Übernehmen-Knopf an einer Anfrage (anfragen.js).
+//
+// Egal woher: der Inhalt ist von Fremden geschrieben. Er landet ausschließlich
+// als .value in Formularfeldern - nie als Markup - und ist damit noch lange
+// nicht veröffentlicht. Das passiert erst beim Klick auf "Rezension anlegen".
+function formularAusRohdaten(daten) {
     const feld = (id, wert) => (document.getElementById(id).value = wert);
 
     feld("rez-id", ""); // leer = neue Rezension, kein Ändern
-    feld("rez-name", ausLink.name || "");
-    feld("rez-titel", ausLink.titel || "");
-    feld("rez-text", ausLink.text || "");
-    sterneSetzen(ausLink.sterne || 5);
-    feld("rez-datum", ausLink.datum || new Date().toISOString().slice(0, 10));
+    feld("rez-name", daten.name || "");
+    feld("rez-titel", daten.titel || "");
+    feld("rez-text", daten.text || "");
+    sterneSetzen(daten.sterne || 5);
+    feld("rez-datum", daten.datum || new Date().toISOString().slice(0, 10));
     document.getElementById("admin-speichern").textContent = "Rezension anlegen";
-
-    adminMeldung("Aus der E-Mail übernommen. Bitte prüfen, ggf. korrigieren – veröffentlicht wird erst mit „Rezension anlegen“.", false);
     document.getElementById("rezensionen-admin").scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+// Trägt die Daten aus dem Link ins Formular ein.
+function uebernehmeAusLink() {
+    if (!ausLink) return;
+    formularAusRohdaten(ausLink);
+    adminMeldung("Aus der E-Mail übernommen. Bitte prüfen, ggf. korrigieren – veröffentlicht wird erst mit „Rezension anlegen“.", false);
     ausLink = null; // nur einmal übernehmen
 }
 
