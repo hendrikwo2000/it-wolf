@@ -47,6 +47,11 @@ function resetScore() {
 // Gespeicherten Stand anzeigen, sobald das DOM steht (Skript laeuft im <head>).
 document.addEventListener('DOMContentLoaded', updateScore);
 
+// Ist der individuelle Farbmodus aktiv? (index.js merkt sich das im Local Storage.)
+function isIndividuell() {
+    try { return localStorage.getItem('individuell_pegel') === 'true'; } catch (e) { return false; }
+}
+
 var winningCombinations = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8],
     [0, 3, 6], [1, 4, 7], [2, 5, 8],
@@ -141,7 +146,11 @@ function endGame(result) {
     setLocked(true);
 
     var info = document.getElementById('ticinfo');
-    info.classList.remove('tic-win', 'tic-lose', 'tic-draw', 'tic-show');
+    info.classList.remove('tic-win', 'tic-lose', 'tic-draw', 'tic-show', 'tic-custom');
+
+    // Im individuellen Modus (manuelle Schriftfarbe) statt Rot/Gruen die
+    // gewaehlte Textfarbe (--linkc) verwenden.
+    if (isIndividuell()) info.classList.add('tic-custom');
 
     if (result.winner === 'tie') {
         info.textContent = 'Unentschieden';
@@ -357,7 +366,7 @@ function resetGame() {
 
     var info = document.getElementById('ticinfo');
     info.textContent = '';
-    info.classList.remove('tic-win', 'tic-lose', 'tic-draw', 'tic-show');
+    info.classList.remove('tic-win', 'tic-lose', 'tic-draw', 'tic-show', 'tic-custom');
 
     var svg = document.getElementById('win-line-svg');
     if (svg && svg.parentNode) svg.parentNode.removeChild(svg);

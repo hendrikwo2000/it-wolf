@@ -108,6 +108,11 @@ h1 {
 #ticinfo.tic-lose { color: #ef4444; }
 #ticinfo.tic-draw { color: color-mix(in srgb, var(--linkc) 60%, transparent); }
 
+/* Individueller Modus: manuell gewaehlte Schriftfarbe statt Rot/Gruen.
+   Hoehere Spezifitaet (zwei Klassen) sticht die Rot/Gruen-Regeln oben. */
+#ticinfo.tic-custom.tic-win,
+#ticinfo.tic-custom.tic-lose { color: var(--linkc); }
+
 .tic-show {
     animation: ticFade 0.4s ease both;
 }
