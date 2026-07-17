@@ -63,6 +63,22 @@ function sterneHtml(wert, groesse = 16) {
     return html;
 }
 
+// Die Sterne im Admin-Formular sind dieselben anklickbaren Radio-Sterne wie beim
+// Feedback, vorher war es ein <select>. Deshalb hat das Feld keinen einzelnen
+// Wert mehr, den man lesen oder setzen koennte - das erledigen diese beiden.
+function sterneLesen() {
+    const gewaehlt = document.querySelector('#admin-formular input[name="rez-sterne"]:checked');
+    return gewaehlt ? Number(gewaehlt.value) : 0;
+}
+
+// Faellt still auf den vorigen Stand zurueck, wenn der Wert nichts taugt: die
+// Zahl aus einem Rezensions-Link ist fremd, und ein leerer Kasten waere hier
+// schlimmer als die 5 aus formularLeeren().
+function sterneSetzen(wert) {
+    const feld = document.getElementById("rez-stern" + Math.round(Number(wert)));
+    if (feld) feld.checked = true;
+}
+
 const datumDeutsch = (iso) => {
     const [j, m, t] = String(iso || "").split("-");
     return j && m && t ? `${t}.${m}.${j}` : "";
@@ -267,6 +283,9 @@ async function adminAnmelden(event) {
     if (feld) feld.value = "";
     adminMeldung("Angemeldet. Dieser Browser merkt sich das, bis du dich über das Schloss abmeldest.", false);
     formularLeeren();
+    // Überschrift ("Admin!") und Schloss oben rechts hängen an genau diesem
+    // Passwort. adminAnzeigeAktualisieren kommt aus index.js.
+    adminAnzeigeAktualisieren();
     adminUiZeichnen();
     zeichneListe();
     // Kam der Aufruf aus einer E-Mail, wartet die Rezension schon.
@@ -276,6 +295,7 @@ async function adminAnmelden(event) {
 function adminAbmelden() {
     rezPasswortSpeicher.removeItem(REZ_PASSWORT_KEY);
     adminMeldung("");
+    adminAnzeigeAktualisieren();
     adminUiZeichnen();
     zeichneListe();
 }
@@ -285,7 +305,7 @@ function formularFuellen(r) {
     document.getElementById("rez-name").value = r.name;
     document.getElementById("rez-titel").value = r.titel;
     document.getElementById("rez-text").value = r.text;
-    document.getElementById("rez-sterne").value = r.sterne;
+    sterneSetzen(r.sterne);
     document.getElementById("rez-datum").value = r.datum;
     document.getElementById("admin-speichern").textContent = "Änderung speichern";
     adminMeldung("");
@@ -344,7 +364,7 @@ function uebernehmeAusLink() {
     feld("rez-name", ausLink.name || "");
     feld("rez-titel", ausLink.titel || "");
     feld("rez-text", ausLink.text || "");
-    feld("rez-sterne", String(ausLink.sterne || 5));
+    sterneSetzen(ausLink.sterne || 5);
     feld("rez-datum", ausLink.datum || new Date().toISOString().slice(0, 10));
     document.getElementById("admin-speichern").textContent = "Rezension anlegen";
 
@@ -371,7 +391,7 @@ async function adminSpeichern(event) {
         name: document.getElementById("rez-name").value,
         titel: document.getElementById("rez-titel").value,
         text: document.getElementById("rez-text").value,
-        sterne: Number(document.getElementById("rez-sterne").value),
+        sterne: sterneLesen(),
         datum: document.getElementById("rez-datum").value,
     };
 
@@ -412,6 +432,7 @@ async function schreibe(methode, daten) {
             // Passwort passt nicht mehr (z.B. Secret geaendert): zurueck zum
             // Login, sonst klickt man weiter gegen eine Wand.
             rezPasswortSpeicher.removeItem(REZ_PASSWORT_KEY);
+            adminAnzeigeAktualisieren();
             adminUiZeichnen();
             adminMeldung("Passwort falsch. Bitte neu anmelden.");
             return null;

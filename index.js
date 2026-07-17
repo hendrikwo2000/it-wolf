@@ -152,7 +152,8 @@ function includeScript() {
 //   Name "Admin"               -> Stufe 1: die erweiterten Seiten bei "Nützliche Seiten"
 //   Name = Rezensions-Passwort -> Stufe 2: zusätzlich Rezensionen bearbeiten
 //
-// In beiden Fällen steht "Admin" in der Überschrift und das Schloss erscheint.
+// In der Überschrift steht "Admin" für Stufe 1 und "Admin!" für Stufe 2, das
+// Schloss erscheint in beiden Fällen - auf ebook.html allerdings erst ab Stufe 2.
 // Das Passwort wird nie angezeigt und steht nie in der Überschrift.
 //
 // Es liegt im localStorage und bleibt dort, bis man sich per Doppelklick auf das
@@ -187,13 +188,55 @@ if (mam == null || mam == "" || mam == "null") {
 } else
     if (mam.match("<")) {
         document.getElementById("headline").innerHTML = "";
+    } else if (mam == "Admin") {
+        document.getElementById("headline").innerHTML = adminUeberschrift();
+        adminAnschalten();
     } else {
         document.getElementById("headline").innerHTML = "Moin " + mam + " - ";
-        if (mam == "Admin"){
-            adminAnschalten();
-        }
     };
 
+// Nochmal ausserhalb: auf ebook.html haengt das Schloss an Stufe 2, und die kann
+// auch ohne den Namen "Admin" aktiv sein - naemlich nach einer Anmeldung am
+// Passwortfeld dort. Dann laeuft adminAnschalten oben nie.
+schlossAktualisieren();
+
+
+// Stufe 2 hat, wer das Rezensions-Passwort im Speicher hat. Etwas anderes
+// entscheidet das hier nicht - und die Function fragt sowieso nochmal.
+function hatRezensionsrechte() {
+    return !!rezPasswortSpeicher.getItem(REZ_PASSWORT_KEY);
+}
+
+// "Moin Admin! - " für Stufe 2, "Moin Admin - " für Stufe 1. Das Ausrufezeichen
+// wird jedes Mal aus den Rechten abgeleitet und nirgends gespeichert: im
+// localStorage steht weiter "Admin", sonst müsste jede Abfrage auf den Namen
+// zwei Schreibweisen kennen.
+function adminUeberschrift() {
+    return "Moin Admin" + (hatRezensionsrechte() ? "!" : "") + " - ";
+}
+
+// Auf seiten.html gehört das Schloss zu Stufe 1: es erklärt die gelben Karten.
+// Auf ebook.html hängt dasselbe Schloss an Stufe 2, weil es dort nur den
+// Rezensionsbereich betrifft - erkennbar am data-nur-rezension im HTML.
+function schlossAktualisieren() {
+    const schloss = document.getElementById("showadmin");
+    if (!schloss) return;
+    const zeigen = schloss.dataset.nurRezension ? hatRezensionsrechte() : adminmode;
+    schloss.style.display = zeigen ? "block" : "none";
+}
+
+// Der zweite Weg in Stufe 2 ist das Passwortfeld auf ebook.html (rezensionen.js).
+// Überschrift und Schloss hängen an denselben Rechten und müssen dort ohne
+// Neuladen nachziehen.
+function adminAnzeigeAktualisieren() {
+    const kopf = document.getElementById("headline");
+    // Nur bei "Admin": ein echter Name gehört dem Nutzer, den überschreibt ein
+    // Login nicht.
+    if (kopf && window.localStorage.getItem("head") == "Admin") {
+        kopf.innerHTML = adminUeberschrift();
+    }
+    schlossAktualisieren();
+}
 
 // Schaltet Stufe 1 ein. toggleSecret und toggleEntwickler sind Umschalter, keine
 // Setzer: ein zweiter Aufruf würde die Seiten wieder verstecken. Deshalb der
@@ -204,8 +247,7 @@ function adminAnschalten() {
     adminmode = true;
     toggleSecret();
     toggleEntwickler();
-    const schloss = document.getElementById("showadmin");
-    if (schloss) schloss.style.display = "block";
+    schlossAktualisieren();
     console.log("Admin:" + adminmode);
 }
 
@@ -214,13 +256,15 @@ function adminAnschalten() {
 // aktiv war -, sonst dürfte nach dem Verlassen weiter jemand Rezensionen ändern.
 function adminAbschalten() {
     rezPasswortSpeicher.removeItem(REZ_PASSWORT_KEY);
-    if (!adminmode) return;
-    adminmode = false;
-    toggleSecret();
-    toggleEntwickler();
-    const schloss = document.getElementById("showadmin");
-    if (schloss) schloss.style.display = "none";
-    console.log("Admin:" + adminmode);
+    if (adminmode) {
+        adminmode = false;
+        toggleSecret();
+        toggleEntwickler();
+        console.log("Admin:" + adminmode);
+    }
+    // Bewusst hinter dem Riegel: das Schloss auf ebook.html hängt an Stufe 2 und
+    // muss auch dann verschwinden, wenn Stufe 1 nie an war.
+    schlossAktualisieren();
 }
 
 // Prüft eine Eingabe gegen das Rezensions-Passwort. Die Function antwortet auf
@@ -289,7 +333,7 @@ async function auslesen() {
 
     if (eingabe == "Admin") {
         adminAnschalten();
-        document.getElementById("headline").innerHTML = "Moin Admin - ";
+        document.getElementById("headline").innerHTML = adminUeberschrift();
         localStorage.setItem("head", "Admin");
         zeigeToast('liveToast6');
         return;
@@ -303,8 +347,10 @@ async function auslesen() {
         rezPasswortSpeicher.setItem(REZ_PASSWORT_KEY, eingabe);
         adminAnschalten();
         // Bewusst "Admin" und nicht die Eingabe: das Passwort gehört weder in
-        // die Überschrift noch in den localStorage.
-        document.getElementById("headline").innerHTML = "Moin Admin - ";
+        // die Überschrift noch in den localStorage. Das Ausrufezeichen kommt aus
+        // adminUeberschrift - das Passwort liegt eine Zeile weiter oben schon im
+        // Speicher.
+        document.getElementById("headline").innerHTML = adminUeberschrift();
         localStorage.setItem("head", "Admin");
         zeigeToast('liveToast7');
         return;
@@ -358,6 +404,11 @@ document.addEventListener("DOMContentLoaded", () => {
         // Kümmert sich um Schloss, beide Toggles und das Rezensions-Passwort.
         adminAbschalten();
         updateFavoriteUI();
+        // Auf ebook.html hängt der Rezensionsbereich an denselben Rechten und
+        // muss mit verschwinden. Die beiden Funktionen kommen aus rezensionen.js
+        // und gibt es nur dort.
+        if (typeof adminUiZeichnen === "function") adminUiZeichnen();
+        if (typeof zeichneListe === "function") zeichneListe();
     }
 
 

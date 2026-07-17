@@ -140,17 +140,35 @@
                 </g>
             </svg></a>
         
-                <p id="showadmin"></p>
             <p></p>
-            <svg 
-            
+
+        <div class="d-flex align-items-center">
+
+        <!-- Dasselbe Schloss wie bei "Nützliche Seiten", hier aber erst ab Stufe 2:
+             auf dieser Seite steht es für die Rezensionsrechte. index.js blendet es
+             anhand von data-nur-rezension ein und meldet bei Doppelklick ab. -->
+        <svg data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" data-nur-rezension="true"
+            id="showadmin" style="display: none;"
+            title="Rezensionsrechte sind aktiv, Doppelklick zum abmelden. <br><br>
+            Nur damit lassen sich Rezensionen anlegen, ändern und löschen."
+            xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="mode bi bi-lock"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M8 0a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5v-5a2.5 2.5 0 0 1 2-2.45V4a4 4 0 0 1 4-4M4.5 7A1.5 1.5 0 0 0 3 8.5v5A1.5 1.5 0 0 0 4.5 15h7a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 11.5 7zM8 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3" />
+        </svg>
+        &nbsp;&nbsp;
+
+            <svg
+
             style="color: var(--linkc);" id="mode" class="mode" onclick="switchmode()" xmlns="http://www.w3.org/2000/svg"
                 width="10" height="10" fill="currentColor" viewBox="0 0 16 16">
                 <path id="modee"
                     d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
                 <path id="modeee" d="" />
-            
+
             </svg>
+
+        </div>
 
         </div>
     </nav>
@@ -620,16 +638,58 @@
                                         <textarea id="rez-text" required maxlength="2000" rows="4" class="form-control"
                                             style="background-color: var(--them); border-color: var(--popupborder)"></textarea>
                                     </div>
+                                    <!-- Dieselben anklickbaren Sterne wie im Feedback-Formular, vorher ein
+                                         <select>. Der Kasten steht in .rating auf row-reverse: im Quelltext
+                                         5 bis 1, auf dem Bildschirm 1 bis 5. Voreingestellt sind 5 Sterne -
+                                         das war beim <select> auch so, und formularLeeren() kommt über
+                                         form.reset() genau hierhin zurück.
+                                         Kein required: .rating blendet die Radios per display:none aus, und
+                                         auf ein unsichtbares Pflichtfeld kann der Browser beim Absenden nicht
+                                         zeigen - er bricht dann wortlos ab. Nötig ist es ohnehin nicht, weil
+                                         immer einer der fünf gewählt ist. -->
                                     <div class="mb-3">
-                                        <label class="form-label" for="rez-sterne">Sterne</label>
-                                        <select id="rez-sterne" required class="form-select"
-                                            style="background-color: var(--them); border-color: var(--popupborder)">
-                                            <option value="5">5 Sterne</option>
-                                            <option value="4">4 Sterne</option>
-                                            <option value="3">3 Sterne</option>
-                                            <option value="2">2 Sterne</option>
-                                            <option value="1">1 Stern</option>
-                                        </select>
+                                        <label class="form-label">Sterne</label>
+                                        <div class="rating">
+                                            <input type="radio" id="rez-stern5" name="rez-sterne" value="5" checked>
+                                            <label for="rez-stern5">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                                </svg>
+                                            </label>
+
+                                            <input type="radio" id="rez-stern4" name="rez-sterne" value="4">
+                                            <label for="rez-stern4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                                </svg>
+                                            </label>
+
+                                            <input type="radio" id="rez-stern3" name="rez-sterne" value="3">
+                                            <label for="rez-stern3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                                </svg>
+                                            </label>
+
+                                            <input type="radio" id="rez-stern2" name="rez-sterne" value="2">
+                                            <label for="rez-stern2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                                </svg>
+                                            </label>
+
+                                            <input type="radio" id="rez-stern1" name="rez-sterne" value="1">
+                                            <label for="rez-stern1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                                </svg>
+                                            </label>
+                                        </div>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="rez-datum">Datum</label>
