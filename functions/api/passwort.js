@@ -53,19 +53,27 @@ export async function onRequestPost(context) {
 
     let name = "";
     let email = "";
+    let turnstile = "";
     try {
         const typ = request.headers.get("content-type") || "";
         if (typ.includes("application/json")) {
             const b = await request.json();
             name = String(b.name || "").trim();
             email = String(b.email || "").trim();
+            turnstile = String(b.turnstile || "");
         } else {
             const f = await request.formData();
             name = String(f.get("name") || "").trim();
             email = String(f.get("email") || "").trim();
+            turnstile = String(f.get("cf-turnstile-response") || "");
         }
     } catch {
         return json({ fehler: "Anfrage konnte nicht gelesen werden." }, 400);
+    }
+
+    // Vor allem anderen: erst gar keine Arbeit fuer ein Skript machen.
+    if (!(await turnstileOk(request, env, turnstile))) {
+        return json({ fehler: "Bitte bestätige noch, dass du kein Bot bist." }, 403);
     }
 
     if (!name || name.length > 100) {
@@ -80,6 +88,53 @@ export async function onRequestPost(context) {
     await merkeLead(env, name, email);
 
     return json({ passwort: env.EBOOK_PASSWORT });
+}
+
+// Turnstile ist Cloudflares Captcha: der Browser loest im Hintergrund eine
+// Aufgabe und legt ein Token ins Formular, das hier gegengeprueft wird.
+//
+// Warum ueberhaupt: Seit die Anfragen in KV landen, kostet jeder Aufruf einen
+// Schreibvorgang - im kostenlosen Tarif sind das 1.000 pro Tag fuers ganze
+// Konto. Ein Skript in einer Schleife koennte das Kontingent leerraeumen, und
+// danach liessen sich nicht einmal mehr Rezensionen speichern.
+//
+// Zwei bewusste Entscheidungen, beide zugunsten des Besuchers:
+//
+// Ohne gesetztes Secret wird nicht geprueft. Sonst haette der Deploy dieser
+// Datei das Formular so lange totgelegt, bis das Secret im Dashboard steht. Der
+// Preis: solange TURNSTILE_SECRET fehlt, schuetzt hier nichts - und man sieht es
+// nur im Log.
+//
+// Ist Cloudflare selbst nicht erreichbar, wird ebenfalls durchgelassen. Ein
+// Ausfall dort soll nicht das E-Book sperren; das Passwort ist ohnehin keine
+// echte Zugangskontrolle, sondern eine Huerde gegen Massenabruf.
+async function turnstileOk(request, env, token) {
+    if (!env.TURNSTILE_SECRET) {
+        console.log("TURNSTILE_SECRET fehlt - Anfrage wird ungeprueft durchgelassen.");
+        return true;
+    }
+    if (!token) return false;
+
+    try {
+        const antwort = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                secret: env.TURNSTILE_SECRET,
+                response: token,
+                remoteip: request.headers.get("CF-Connecting-IP") || undefined,
+            }),
+        });
+        const ergebnis = await antwort.json().catch(() => ({}));
+        if (ergebnis.success !== true) {
+            console.log("Turnstile abgelehnt:", (ergebnis["error-codes"] || []).join(", "));
+            return false;
+        }
+        return true;
+    } catch (e) {
+        console.log("Turnstile nicht erreichbar - Anfrage durchgelassen:", e.message);
+        return true;
+    }
 }
 
 // Ein Schluessel pro Anfrage statt einer Liste unter einem Schluessel: zwei

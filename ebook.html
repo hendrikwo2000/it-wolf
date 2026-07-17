@@ -25,6 +25,9 @@
     <script src="rezensionen.js" defer></script>
     <!-- Hinter rezensionen.js: anfragen.js benutzt deren passwortHolen(). -->
     <script src="anfragen.js" defer></script>
+    <!-- Turnstile (Cloudflares Captcha) fuer die Passwort-Anfrage. Prueft im
+         Hintergrund, ob ein Browser und kein Skript das Formular abschickt. -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
@@ -349,6 +352,14 @@
                                 <label class="form-label" for="pw-email">E-Mail-Adresse</label>
                                 <input type="email" id="pw-email" name="email" required class="form-control" style="background-color: var(--them); border-color: var(--popupborder)">
                             </div>
+
+                            <!-- Turnstile legt hier ein verstecktes Feld cf-turnstile-response
+                                 ins Formular. index.js schickt es an /api/passwort, die
+                                 Function prueft es bei Cloudflare gegen. Der Site-Schluessel
+                                 ist oeffentlich und gehoert genau hierhin - das Geheimnis ist
+                                 der Secret, und der liegt bei Pages. -->
+                            <div class="cf-turnstile" id="turnstile-passwort" style="margin-bottom: 15px;"
+                                 data-sitekey="0x4AAAAAAD3wPeCZoZf3Unrh" data-language="de" data-theme="auto"></div>
 
                             <!-- Ausgabe der Pages Function: Passwort bzw. Fehlermeldung -->
                             <div id="passwort-kasten" class="alert" role="status" aria-live="polite"

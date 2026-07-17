@@ -1004,7 +1004,14 @@ async function resetForm1(event) {
         const antwort = await fetch("/api/passwort", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name: daten.get("name"), email: daten.get("email") }),
+            body: JSON.stringify({
+                name: daten.get("name"),
+                email: daten.get("email"),
+                // Legt Turnstile selbst ins Formular. Fehlt das Feld (Skript
+                // blockiert), schickt der Browser einen leeren String - die
+                // Function entscheidet, ob sie das durchgehen lässt.
+                turnstile: daten.get("cf-turnstile-response") || "",
+            }),
         });
         const ergebnis = await antwort.json().catch(() => ({}));
 
@@ -1036,6 +1043,11 @@ async function resetForm1(event) {
         zeigePasswortFehler("Keine Verbindung zum Server. Bist du online?");
     } finally {
         if (knopf) knopf.innerHTML = SENDE_ICON;
+        // Ein Turnstile-Token gilt genau einmal. Ohne diesen Reset scheitert der
+        // zweite Versuch mit "timeout-or-duplicate", obwohl der Besucher nichts
+        // falsch gemacht hat - er sieht dann nur, dass es nicht geht.
+        const kaestchen = document.getElementById("turnstile-passwort");
+        if (window.turnstile && kaestchen) turnstile.reset(kaestchen);
     }
 }
 
