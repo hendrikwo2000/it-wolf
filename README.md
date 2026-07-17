@@ -53,7 +53,7 @@ Zwei Stufen, beide über das Namensfeld im Impressum:
 ---
 
 ### 🕹️ Interaktive Features (Impressum → Funktionen)
-- `🎮 Tic Tac Toe (Beta)` – Spiele gegen eine KI
+- `🎮 Tic Tac Toe` – Spiele gegen eine KI (Schwierigkeit wählbar, mit Punktestand)
 - `🕸️ Netz (Beta)` – Dynamisches, interaktives Partikelnetz mit Maussteuerung
 - `🧪 Farbanpassung` – Live UI-Customizer
 - `🌐 „Dein Name“ Feature` – Personalisierter Einstieg in die Seite

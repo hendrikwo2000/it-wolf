@@ -19,8 +19,33 @@ var computerTimer = null;
 // 'einfach'     = Computer zieht ueberwiegend zufaellig, dadurch gewinnbar.
 var difficulty = 'unschlagbar';
 
-// Punktestand fuer die aktuelle Sitzung (bis die Seite neu geladen wird).
-var scores = { win: 0, loss: 0, draw: 0 };
+// Punktestand – wird im Local Storage gespeichert und ueberlebt so einen Reload.
+var TIC_SCORE_KEY = 'tictactoe-scores';
+var scores = loadScores();
+
+function loadScores() {
+    try {
+        var raw = localStorage.getItem(TIC_SCORE_KEY);
+        if (raw) {
+            var s = JSON.parse(raw);
+            return { win: +s.win || 0, loss: +s.loss || 0, draw: +s.draw || 0 };
+        }
+    } catch (e) { /* Local Storage nicht verfuegbar -> bei 0 anfangen */ }
+    return { win: 0, loss: 0, draw: 0 };
+}
+
+function saveScores() {
+    try { localStorage.setItem(TIC_SCORE_KEY, JSON.stringify(scores)); } catch (e) { }
+}
+
+function resetScore() {
+    scores = { win: 0, loss: 0, draw: 0 };
+    saveScores();
+    updateScore();
+}
+
+// Gespeicherten Stand anzeigen, sobald das DOM steht (Skript laeuft im <head>).
+document.addEventListener('DOMContentLoaded', updateScore);
 
 var winningCombinations = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -80,7 +105,7 @@ function makeComputerMove() {
 function placeSymbol(index, symbol) {
     board[index] = symbol;
     var cell = cells()[index];
-    cell.innerHTML = '<span class="mark">' + symbol + '</span>';
+    cell.innerHTML = '<span class="tic-mark">' + symbol + '</span>';
     cell.classList.add('placed');
 }
 
@@ -140,6 +165,7 @@ function endGame(result) {
     void info.offsetWidth;
     info.classList.add('tic-show');
     updateScore();
+    saveScores();
 }
 
 // --- Gewinner-Optik -------------------------------------------------------

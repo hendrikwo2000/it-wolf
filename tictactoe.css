@@ -22,14 +22,17 @@ h1 {
 
 .cell {
     border: 1px solid var(--linkc);
-    border-radius: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 48px;
     line-height: 1;
     cursor: pointer;
-    background-color: var(--backg);
+    /* Symbole stehen nur in der Textfarbe der Seite (folgt Light/Dark), ohne
+       weissen Kasten. color explizit setzen, weil Bootstrap sonst ein festes
+       Dunkelgrau vererbt, das im Darkmode kaum sichtbar waere. */
+    color: var(--linkc);
+    background-color: transparent;
     transition: background-color 0.3s, transform 0.15s;
     -webkit-user-select: none;
     user-select: none;
@@ -51,11 +54,12 @@ h1 {
 }
 
 #board.locked .cell:not(.placed):hover {
-    background-color: var(--backg);
+    background-color: transparent;
 }
 
-/* Pop-in beim Setzen eines Symbols. */
-.cell .mark {
+/* Pop-in beim Setzen eines Symbols. Eigener Klassenname (nicht .mark), sonst
+   greift Bootstraps .mark-Klasse mit Highlight-Hintergrund und fester Farbe. */
+.cell .tic-mark {
     display: inline-block;
     animation: ticPop 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
@@ -139,6 +143,24 @@ h1 {
 .tic-score-value {
     font-size: 20px;
     font-weight: 700;
+}
+
+/* Punktestand zuruecksetzen: dezenter Textknopf. */
+.tic-score-reset {
+    display: block;
+    margin: 0 auto 12px;
+    border: none;
+    background: transparent;
+    color: var(--linkc);
+    opacity: 0.6;
+    font-size: 13px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.tic-score-reset:hover {
+    opacity: 1;
+    text-decoration: underline;
 }
 
 /* Schwierigkeitsgrad-Umschalter. */
