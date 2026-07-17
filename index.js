@@ -310,18 +310,25 @@ const turnstileWidgets = {};
 const turnstileThema = () =>
     window.localStorage.getItem("thema") === "dark" ? "dark" : "light";
 
-// Zeichnet alle vorhandenen Kaestchen neu. Ein zweiter Aufruf ist Absicht: beim
-// Moduswechsel muss das alte Widget weg, sonst bliebe es im alten Thema stehen.
+// Zeichnet jedes Kaestchen auf der Seite neu - erkannt an der Klasse
+// js-turnstile, nicht mehr an einer festen Liste: so bekommt jedes Formular,
+// das eins braucht, seins, ohne dass diese Funktion davon wissen muss.
+// Der zweite Aufruf ist Absicht: beim Moduswechsel muss das alte Widget weg,
+// sonst bliebe es im alten Thema stehen.
 function turnstileZeichnen() {
     if (!window.turnstile) return;
 
-    ["turnstile-passwort", "turnstile-feedback"].forEach((id) => {
-        if (!document.getElementById(id)) return;
+    document.querySelectorAll(".js-turnstile").forEach((el) => {
+        const id = el.id;
         if (turnstileWidgets[id] !== undefined) turnstile.remove(turnstileWidgets[id]);
-        turnstileWidgets[id] = turnstile.render("#" + id, {
+        turnstileWidgets[id] = turnstile.render(el, {
             sitekey: TURNSTILE_KEY,
             theme: turnstileThema(),
-            // Nimmt die Breite des Formulars ein, wie die Felder darueber.
+            // interaction-only: fuer echte Besucher bleibt das Kaestchen
+            // unsichtbar und loest still im Hintergrund - nur wer verdaechtig
+            // wirkt, sieht ueberhaupt eine Aufgabe. Das war der Wunsch: es soll
+            // nicht ins Seitendesign stoeren. Die Pruefung selbst laeuft weiter.
+            appearance: "interaction-only",
             size: "flexible",
             language: "de",
         });
@@ -1007,6 +1014,15 @@ async function resetForm(event) {
 
         if (daten.get("titel")) inhalt.titel = daten.get("titel");
 
+        // Kontaktformular: hier gibt es keine Function, die die Mail selbst
+        // schickt und dabei das Token prüfen könnte. Also erst separat prüfen,
+        // dann erst an formsubmit. Beim E-Book-Feedback ist das nicht nötig -
+        // dort prüft /api/feedback beim Speichern.
+        if (formular === "kontakt" && !(await turnstileGeprueft(daten.get("cf-turnstile-response")))) {
+            alert("Bitte bestätige noch, dass du kein Bot bist, und versuche es erneut.");
+            return;
+        }
+
         // Nur beim E-Book-Feedback: der Link zum Übernehmen. Beim
         // Kontaktformular wäre er sinnlos, daraus wird keine Rezension.
         //
@@ -1042,7 +1058,28 @@ async function resetForm(event) {
         alert("Keine Verbindung. Bist du online?");
     } finally {
         if (knopf) knopf.innerHTML = SENDE_ICON;
+        // Beide zurücksetzen: das jeweils nicht vorhandene ignoriert die
+        // Funktion. resetForm bedient Feedback (ebook) und Kontakt (impressum).
         turnstileZuruecksetzen("turnstile-feedback");
+        turnstileZuruecksetzen("turnstile-kontakt");
+    }
+}
+
+// Fragt /api/pruefung, ob das Turnstile-Token gültig ist. Bei kaputter Antwort
+// oder fehlendem Netz bewusst true: der Server entscheidet im Zweifel, ob er das
+// Secret gesetzt hat - ein Aussetzer hier soll niemanden am Schreiben hindern.
+async function turnstileGeprueft(token) {
+    try {
+        const antwort = await fetch("/api/pruefung", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ turnstile: token || "" }),
+        });
+        const ergebnis = await antwort.json().catch(() => ({}));
+        return ergebnis.ok === true;
+    } catch (e) {
+        console.error("Turnstile-Prüfung nicht möglich:", e.message);
+        return true;
     }
 }
 

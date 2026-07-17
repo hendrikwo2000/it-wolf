@@ -22,6 +22,10 @@
     <link href="index.css" rel="stylesheet">
     <link href="tictactoe.css" rel="stylesheet">
     <script src="index.js" defer></script>
+    <!-- Turnstile fuer das Kontaktformular. render=explicit: index.js zeichnet
+         selbst, im Thema dieser Seite statt dem des Betriebssystems. -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstile&render=explicit"
+        async defer></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
@@ -358,6 +362,10 @@
                                      der Weg über eine eigene Function scheitert am Referer. -->
                                 <input type="hidden" name="formular" value="kontakt">
                                 <br style="margin-bottom: 20px;">
+
+                                <!-- Turnstile, für echte Besucher unsichtbar. index.js prüft das
+                                     Token bei /api/pruefung, bevor die Mail an formsubmit geht. -->
+                                <div id="turnstile-kontakt" class="js-turnstile"></div>
             
                                 <button class="bute" type="submit" id="sendee">
                                    
