@@ -1,5 +1,5 @@
 /*
-  Netz (Beta) - animiertes Partikel-Netz als Seitenhintergrund.
+  Netz - animiertes Partikel-Netz als Seitenhintergrund.
 
   Wird ueber index.js dynamisch ein- und ausgehaengt (includeScript/removeScript)
   und laeuft auf allen Seiten mit <canvas id="backgroundCanvas">.

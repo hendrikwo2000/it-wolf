@@ -141,8 +141,28 @@ h1 {
 }
 
 .tic-score-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     font-size: 12px;
+}
+
+/* Der Name bleibt dezent gedaempft (frueher lag die Deckkraft auf dem ganzen
+   Label - jetzt nur auf dem Wort, damit der X/O-Chip voll sichtbar bleibt). */
+.tic-score-name {
     opacity: 0.7;
+}
+
+/* X (Du) bzw. O (Computer): kleiner Chip im Markenblau, damit klar ist,
+   welches Symbol zu wem gehoert. */
+.tic-score-sym {
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 15px;
+    color: #0693e3;
+    border: 1px solid rgba(6, 147, 227, 0.5);
+    border-radius: 6px;
+    padding: 0 5px;
 }
 
 .tic-score-value {

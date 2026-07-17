@@ -527,11 +527,11 @@
                                     <div class="card h-100 hovb">
 
                                         <div class="card-body">
-                                            <h5 class="card-title">Netz (Beta)
+                                            <h5 class="card-title">Netz
                                             </h5>
                                             <p class="card-text">
-                                                Aktiviere die BETA Version des Netzes.<br>
-                                                Du siehst das Netz ganz oben auf der Seite.<br>
+                                                Aktiviere das Netz.<br>
+                                                Ein animierter Hintergrund über die ganze Seite.<br>
                                                 Nicht für Handys verfügbar.
 
                                             <div class="position-relative">                                            
@@ -606,11 +606,14 @@
                                 </div>
 
                                 <div class="tic-scoreboard">
-                                    <div class="tic-score"><span class="tic-score-label">Du</span><span
+                                    <div class="tic-score"><span class="tic-score-label"><span
+                                                class="tic-score-name">Du</span><span class="tic-score-sym">X</span></span><span
                                             class="tic-score-value" id="tic-score-win">0</span></div>
-                                    <div class="tic-score"><span class="tic-score-label">Remis</span><span
+                                    <div class="tic-score"><span class="tic-score-label"><span
+                                                class="tic-score-name">Remis</span></span><span
                                             class="tic-score-value" id="tic-score-draw">0</span></div>
-                                    <div class="tic-score"><span class="tic-score-label">Computer</span><span
+                                    <div class="tic-score"><span class="tic-score-label"><span
+                                                class="tic-score-name">Computer</span><span class="tic-score-sym">O</span></span><span
                                             class="tic-score-value" id="tic-score-loss">0</span></div>
                                 </div>
 
@@ -684,7 +687,7 @@
                 <a target="_blank" class="link" data-bs-toggle="modal" data-bs-target="#how3">Individuelles Farbschema</a><br>
                 <a target="_blank" class="link" data-bs-toggle="modal" data-bs-target="#how4">Favoriten</a><br>
                 <a target="_blank" class="link" data-bs-toggle="modal" data-bs-target="#how5">Tic Tac Toe</a><br>
-                <a target="_blank" class="link" data-bs-toggle="modal" data-bs-target="#how6">Netz (Beta)</a>
+                <a target="_blank" class="link" data-bs-toggle="modal" data-bs-target="#how6">Netz</a>
 
 
                 </p>
@@ -709,19 +712,14 @@
             </div>
             <div class="modal-body">
 
-                Wenn du unter Funktionen auf "Dein Name" klickst, erscheint ein
-                Pop-up-Fenster mit "Dein Name".<br>
-                In das Input Feld "Name" kannst du deinen Namen eintragen.<br>
-                Wenn du auf "Bestätigen" klickst, erscheint eine Bestätigungsnachricht und die Überschrift ändert sich
-                zu<br><br>
-                "Moin 'dein Name' - 'Seiten Überschrift'"<br><br><br>
-                Dein Name wird im Local Storage gespeichert und bei jeder Seite wie beschrieben angezeigt.<br><br>
-                Wenn du in dem Input Feld "Name" nichts eintippst und auf "Bestätigen" klickst,<br>
-                wird die Standard-Seitenüberschrift angezeigt und es erscheint eine weitere
-                Bestätigungsnachricht.<br><br>
-                Wenn du in dem Input Feld "Name" beispielsweise ein Style-Tag eintippst und auf "Bestätigen"
-                klickst,<br>
-                erscheint eine Fehlermeldung.
+                Klick unter „Funktionen" auf „Dein Name" – es öffnet sich ein kleines Fenster mit einem
+                Eingabefeld.<br><br>
+                Trägst du dort einen Namen ein und bestätigst, ändert sich die Überschrift auf jeder Seite zu:<br><br>
+                „Moin ‚dein Name' – ‚Seitenüberschrift'"<br><br>
+                Der Name wird im Local Storage deines Browsers gespeichert und bleibt so auch nach einem Neuladen oder
+                Seitenwechsel erhalten – nur auf diesem Gerät und in diesem Browser.<br><br>
+                Lässt du das Feld leer und bestätigst, erscheint wieder die Standard-Überschrift. Ungültige Eingaben
+                (z. B. HTML-Tags) werden abgelehnt.
 
             </div>
         </div>
@@ -746,12 +744,12 @@
                     </svg></button>
             </div>
             <div class="modal-body">
-                Den Darkmode kannst du mit einem Klick auf die Sonne, oben rechts, aktivieren bzw. deaktivieren.<br><br>
-                Der Zustand des Darkmodes wird im Local Storage gespeichert.<br>
-                Er ist somit seitenübergreifend, zudem nimmt er nach erneutem Besuch der Seite den letzten Zustand wieder
-                an.<br><br>
-                Wenn der Zustand noch unbekannt ist (erster Besuch der Seite oder Local Storage gelöscht) <br>
-                nimmt der Darkmode den Zustand des Systems an.
+                Mit einem Klick auf das Symbol oben rechts (Sonne bzw. Mond) schaltest du zwischen hellem und dunklem
+                Modus um.<br><br>
+                Der gewählte Modus wird im Local Storage gespeichert – er gilt seitenübergreifend und bleibt beim
+                nächsten Besuch erhalten.<br><br>
+                Beim allerersten Besuch (oder wenn der Speicher geleert wurde) übernimmt die Seite automatisch die
+                Einstellung deines Systems.
 
             </div>
         </div>
@@ -776,15 +774,14 @@
                     </svg></button>
             </div>
             <div class="modal-body">
-                Du kannst dein individuelles Farbschema erstellen indem du im Impressum und Funktionen, "Erstelle dein
-                individuelles Farbschema" auf den Schalter klickst.<br><br>
-                Jetzt sind die Eingabefelder für die Farbe freigeschaltet und du kannst eine Hintergrundfarbe und eine
-                Schriftfarbe auswählen.<br><br>
-                Mit dem Klick auf OK werden die Farben gespeichert (auch im Local Storage).<br><br>
-                Das Symbol zum Wechseln des Modus ist jetzt ein Zahnrad und du kannst jetzt den Dark und Light Mode
-                nicht aktivieren, du bekommst eine Fehlermeldung.<br><br>
-                Zum Deaktivieren des individuellen Farbschemas drückst du wieder auf den Schalter und der letzte Modus
-                wird aktiviert.
+                Unter „Erstelle dein individuelles Farbschema" aktivierst du mit dem Schalter deinen eigenen
+                Farbmodus.<br><br>
+                Danach kannst du eine Hintergrund- und eine Schriftfarbe frei wählen und mit „OK" speichern (ebenfalls
+                im Local Storage).<br><br>
+                Solange dieser Modus aktiv ist, wird das Umschalt-Symbol oben rechts zu einem Zahnrad, und der normale
+                Hell-/Dunkelmodus ist deaktiviert.<br><br>
+                Zum Beenden klickst du erneut auf den Schalter – die Seite kehrt zu deinem zuletzt genutzten
+                Hell-/Dunkelmodus zurück.
 
             </div>
         </div>
@@ -808,17 +805,12 @@
                     </svg></button>
             </div>
             <div class="modal-body">
-                Unter „Nützliche Seiten“ kannst du Seiten, die dir besonders wichtig erscheinen, mit einem Herzsymbol markieren.<br>
-                Sobald du mindestens eine Seite markiert hast, erscheint oben auf der Seite ein „Favoriten anzeigen“-Button.<br><br>
-                
-                Wenn du diesen Button klickst, werden nur deine markierten Favoriten angezeigt.<br>
-                Wenn du keine Favoriten mehr markiert hast, verschwindet der Button automatisch wieder.<br><br>
-                
-                Wichtig: Deine Favoriten werden im Local Storage deines Browsers gespeichert. Das bedeutet:
-                
-                Sie bleiben erhalten, auch wenn du die Seite neu lädst oder den Browser schließt.<br>
-                
-                Du kannst deine Favoriten jederzeit wieder aufrufen – nur auf diesem Gerät und Browser.<br>
+                Unter „Nützliche Seiten" kannst du jede Seite über das Herzsymbol als Favorit markieren.<br><br>
+                Sobald mindestens eine Seite markiert ist, erscheint oben ein „Favoriten anzeigen"-Button. Ein Klick
+                darauf blendet nur noch deine markierten Seiten ein. Entfernst du alle Markierungen, verschwindet der
+                Button automatisch wieder.<br><br>
+                Deine Favoriten liegen im Local Storage deines Browsers – sie bleiben nach Neuladen und Schließen
+                erhalten, aber nur auf diesem Gerät und in diesem Browser.<br>
 
             </div>
         </div>
@@ -842,9 +834,13 @@
                     </svg></button>
             </div>
             <div class="modal-body">
-                Um ein Tic Tac Toe Spiel zu starten, klicke unter Impressum, Funktionen auf "Tic Tac Toe".<br><br>
-                Du spielst gegen einen Computer, er arbeitet mit einer Logik und platziert nicht zufällig.<br><br>
-                Der Code wurde mit ChatGPT geschrieben.
+                Klick unter „Funktionen" auf „Tic Tac Toe", um ein Spiel zu öffnen.<br><br>
+                Du spielst mit <b>X</b> und beginnst, der Computer setzt <b>O</b>.<br><br>
+                Über die Schalter oben wählst du die Schwierigkeit: „Einfach" (der Computer zieht oft zufällig und ist
+                schlagbar) oder „Unschlagbar" (er rechnet jeden Zug durch – mehr als ein Unentschieden ist dann nicht
+                drin).<br><br>
+                Der Punktestand (Du / Remis / Computer) wird im Local Storage gespeichert und bleibt erhalten, bis du
+                ihn zurücksetzt.
 
             </div>
         </div>
@@ -852,13 +848,13 @@
 </div>
 <!-- Modal Tic Tac Toe erklärt Ende -->
 
-<!-- Modal Netz (Beta) erklärt Anfang -->
+<!-- Modal Netz erklärt Anfang -->
 <div class="modal fade" id="how6" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="how6-titel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content modual">
             <div class="modal-header" style="border-color: var(--popupborder)">
-                <h1 class="modal-title fs-5" id="how6-titel">Netz (Beta)</h1>
+                <h1 class="modal-title fs-5" id="how6-titel">Netz</h1>
                 <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"><svg
                         xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-lg"
                         viewBox="0 0 16 16">
@@ -867,20 +863,20 @@
                     </svg></button>
             </div>
             <div class="modal-body">
-                Das Netz nimmt 100% des oberen Bildschirmes ein. <br><br>
-                Die Kreise bewegen sich langsam und verbinden sich dynamisch untereinander.<br>
-                Wenn die Maus in dem Bereich ist verbinden sich die Kreise in der Nähe der Maus dynamisch mit der
-                Maus.<br><br>
-                Das Feature gibt es nur für etwas größere Bildschirme. <br>
-                Nicht für Handys! Sieht nicht gut aus.<br><br>
-                Der Code wurde zum Großteil mit ChatGPT geschrieben.
+                Über den Schalter aktivierst bzw. deaktivierst du das Netz. Es legt sich als animierter Hintergrund
+                über die gesamte Seite und bleibt beim Scrollen sichtbar.<br><br>
+                Die Punkte bewegen sich langsam und verbinden sich mit ihren Nachbarn – je näher, desto kräftiger die
+                Linie. Bewegst du die Maus über die Seite, verbinden sich die Punkte in der Nähe zusätzlich mit dem
+                Mauszeiger.<br><br>
+                Die Einstellung wird im Local Storage gespeichert. Das Netz gibt es nur auf größeren Bildschirmen – auf
+                Handys ist es ausgeblendet.
 
 
             </div>
         </div>
     </div>
 </div>
-<!-- Modal Netz (Beta) erklärt Ende -->
+<!-- Modal Netz erklärt Ende -->
 
 
 <!-- Features erklärt Ende -->

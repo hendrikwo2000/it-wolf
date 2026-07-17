@@ -12,7 +12,7 @@ Ursprünglich gestartet als Lösung gegen Lesezeichen-Chaos, hat sich die Seite 
 - 🔗 Übersichtliche Sammlung nützlicher Webseiten aus den Bereichen:
   - **Künstliche Intelligenz** (z. B. ChatGPT, Perplexity, Hugging Face)
   - **Produktivitätstools** (PDF-Tools, Developer-Tools, Grafikbearbeitung u.v.m.)
-  - **Geheime Tipps & Hacks** *(z. B. Radio Garden, 12ft.io – Admin-Modus erforderlich)*
+  - **Geheime Tipps & Hacks** *(z. B. Radio Garden, 12ft.io)*
 - 📘 **Kostenloses E-Book zum Thema Gesundheit**
   - Download mit Passwort (per Formular anfordern)
   - Feedback- und Rezensionsbereich
@@ -31,30 +31,17 @@ Ursprünglich gestartet als Lösung gegen Lesezeichen-Chaos, hat sich die Seite 
 
 ---
 
-### 🔐 Admin Mode (Easter Egg)
-
-Zwei Stufen, beide über das Namensfeld im Impressum:
-
-- **Stufe 1** – Name „`Admin`" → schaltet die erweiterten Seiten bei „Nützliche Seiten" frei (Entwickler-Tools, geheime Tipps). In der Überschrift steht dann *Moin Admin*.
-- **Stufe 2** – statt eines Namens das **Rezensions-Passwort** eintippen → zusätzlich lassen sich Rezensionen anlegen, ändern und löschen. Überschrift: *Moin Admin!* – mit Ausrufezeichen.
-- Das Schloss oben rechts zeigt den aktiven Modus, **Doppelklick meldet ab**. Auf der E-Book-Seite erscheint es erst ab Stufe 2, weil es dort nur die Rezensionsrechte betrifft.
-- Eingegangenes Feedback steht als **Rezensions-Anfrage** im Admin-Bereich und wandert per Klick ins Formular.
-
-> Das Passwort liegt in einem verschlüsselten Secret bei Cloudflare, nicht im Quelltext. Der Admin-Modus im Browser blendet nur Knöpfe ein – entschieden wird serverseitig.
-
----
-
 ### ❤️ Favoriten-System
 - Markiere beliebige Seiten mit einem Herz
 - Eigener Favoritenbereich wird automatisch angezeigt
-- Dynamisches Hinzufügen und Entfernen möglich – auch kombiniert mit Admin Mode
+- Dynamisches Hinzufügen und Entfernen möglich
 - Speicherung im Local Storage
 
 ---
 
 ### 🕹️ Interaktive Features (Impressum → Funktionen)
 - `🎮 Tic Tac Toe` – Spiele gegen eine KI (Schwierigkeit wählbar, mit Punktestand)
-- `🕸️ Netz (Beta)` – Dynamisches, interaktives Partikelnetz mit Maussteuerung
+- `🕸️ Netz` – Dynamisches, interaktives Partikelnetz über die ganze Seite, mit Maussteuerung
 - `🧪 Farbanpassung` – Live UI-Customizer
 - `🌐 „Dein Name“ Feature` – Personalisierter Einstieg in die Seite
 
@@ -69,7 +56,7 @@ Was **den Browser verlässt** – ausschließlich, wenn du ein Formular abschick
 | Was | Wohin | Warum |
 |---|---|---|
 | Name, E-Mail, Nachricht | **formsubmit.co** (US-Anbieter) | damit die Mail bei mir ankommt |
-| Feedback (Name, E-Mail, Text, Sterne) | **Cloudflare KV** | steht im Admin-Bereich, wird auf Wunsch zur Rezension |
+| Feedback (Name, E-Mail, Text, Sterne) | **Cloudflare KV** | landet bei mir, wird auf Wunsch zur Rezension |
 | Veröffentlichte Rezensionen | **Cloudflare KV** | die Karten, die jeder auf der E-Book-Seite sieht |
 | Prüfung „Mensch oder Bot?" | **Cloudflare Turnstile** | hält Skripte von den Formularen fern |
 
