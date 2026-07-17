@@ -306,7 +306,7 @@
             <!-- Kontakt Anfang -->
             <div class="box col">
                 <a target="_blank" class="clink">
-                    <div id="hovb" class="card h-100">
+                    <div class="card h-100 hovb">
                         <div class="card-body">
                             <h5 class="card-title">Kontakt</h5>
                             <p class="card-text">
@@ -335,7 +335,7 @@
             <!-- Formular Anfang -->
             <div class="box col">
                 <a target="_blank" class="clink">
-                    <div id="hovb" class="card h-100">
+                    <div class="card h-100 hovb">
                         <div class="card-body">
                             <h5 class="card-title">Kontaktformular</h5>
                             <p class="card-text">
@@ -425,7 +425,7 @@
 <!-- individuelles Farbschema Anfang -->
             <div class="col">
                 <a target="_blank" class="box clink" >
-                    <div id="hovb" class="card h-100">
+                    <div class="card h-100 hovb">
                        
                         <div class="card-body">
                             <h5 class="card-title">Erstelle dein individuelles Farbschema
@@ -462,8 +462,7 @@
 
                             <div class="col">
                                 <a target="_blank" class="box link" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                    <div id="hovc" class="card h-100">
-                                        <img src="" class="card-img-top">
+                                    <div class="card h-100 hovc">
                                         <div class="card-body">
                                             <h5 class="card-title">Dein Name</h5>
                                             <p class="card-text">
@@ -480,8 +479,8 @@
                             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog">
-                                    <div class="modal-content" id="modual">
-                                        <div class="modal-header" id="pop-head"  style="border-color: var(--popupborder)">
+                                    <div class="modal-content modual">
+                                        <div class="modal-header"  style="border-color: var(--popupborder)">
                                             <h1 class="modal-title fs-5" id="staticBackdropLabel">Dein Name</h1>
                                             <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"><svg
                                                     xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-lg"
@@ -490,7 +489,7 @@
                                                         d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
                                                 </svg></button>
                                         </div>
-                                        <div class="modal-body" id="pop-body">
+                                        <div class="modal-body">
                                             <div class="form-floating mb-0">
                                                 <input type="text" class="form-control" id="namee" placeholder="name" style="border-color: var(--popupborder)">
                                                 <label for="namee">Name</label>
@@ -525,7 +524,7 @@
 <!-- Netz Anfang -->
                             <div class="col">
                                 <a target="_blank" class="box clink">
-                                    <div id="hovb" class="card h-100">
+                                    <div class="card h-100 hovb">
 
                                         <div class="card-body">
                                             <h5 class="card-title">Netz (Beta)
@@ -557,8 +556,7 @@
 <!-- Tic Tac Toe (Beta) Anfang -->
             <div class="col" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
                 <a target="_blank" class="box link">
-                    <div id="hovc" class="card h-100">
-                        <img src="" class="card-img-top">
+                    <div class="card h-100 hovc">
                         <div class="card-body">
                             <h5 class="card-title">Tic Tac Toe (Beta)</h5>
                             <p class="card-text">
@@ -575,8 +573,8 @@
                 <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                     aria-labelledby="staticBackdrop1Label" aria-hidden="true">
                     <div class="modal-dialog">
-                        <div class="modal-content" id="modual" class="clink">
-                            <div class="modal-header" id="pop-head" style="border-color: var(--popupborder)">
+                        <div class="modal-content modual">
+                            <div class="modal-header" style="border-color: var(--popupborder)">
                                 <h1 class="modal-title fs-5" id="staticBackdrop1Label">Tic Tac Toe</h1>
                                 <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"
                                     onclick="resetGame()"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
@@ -586,7 +584,7 @@
                                     </svg></button>
                             </div>
                 
-                            <div class="modal-body" id="pop-body">
+                            <div class="modal-body">
                 
                                 <div id="board">
                                     <div class="cell" onclick="makeMove(0)"></div>
@@ -658,7 +656,7 @@
 <!-- Features erklärt Anfang -->
 <div class="box col">
     <a target="_blank" class="clink">
-        <div id="hovb" class="card h-100">
+        <div class="card h-100 hovb">
             <div class="card-body">
                 <h5 class="card-title">Features erklärt</h5>
                 <p class="card-text">
@@ -678,11 +676,11 @@
 
 <!-- Modal Dein Name erklärt Anfang -->
 <div class="modal fade" id="how1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="how1" aria-hidden="true">
+    aria-labelledby="how1-titel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content" id="modual" class="clink">
-            <div class="modal-header" id="pop-head" style="border-color: var(--popupborder)">
-                <h1 class="modal-title fs-5" id="how1">Dein Name</h1>
+        <div class="modal-content modual">
+            <div class="modal-header" style="border-color: var(--popupborder)">
+                <h1 class="modal-title fs-5" id="how1-titel">Dein Name</h1>
                 <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"><svg
                         xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-lg"
                         viewBox="0 0 16 16">
@@ -690,7 +688,7 @@
                             d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
                     </svg></button>
             </div>
-            <div class="modal-body" id="pop-body">
+            <div class="modal-body">
 
                 Wenn du unter Funktionen auf "Dein Name" klickst, erscheint ein
                 Pop-up-Fenster mit "Dein Name".<br>
@@ -716,11 +714,11 @@
 
 <!-- Modal Darkmode erklärt Anfang -->
 <div class="modal fade" id="how2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="how2" aria-hidden="true">
+    aria-labelledby="how2-titel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content" id="modual" class="clink">
-            <div class="modal-header" id="pop-head" style="border-color: var(--popupborder)">
-                <h1 class="modal-title fs-5" id="how2">Darkmode</h1>
+        <div class="modal-content modual">
+            <div class="modal-header" style="border-color: var(--popupborder)">
+                <h1 class="modal-title fs-5" id="how2-titel">Darkmode</h1>
                 <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"><svg
                         xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-lg"
                         viewBox="0 0 16 16">
@@ -728,7 +726,7 @@
                             d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
                     </svg></button>
             </div>
-            <div class="modal-body" id="pop-body">
+            <div class="modal-body">
                 Den Darkmode kannst du mit einem Klick auf die Sonne, oben rechts, aktivieren bzw. deaktivieren.<br><br>
                 Der Zustand des Darkmodes wird im Local Storage gespeichert.<br>
                 Er ist somit seitenübergreifend, zudem nimmt er nach erneutem Besuch der Seite den letzten Zustand wieder
@@ -746,11 +744,11 @@
 
 <!-- Modal Individuelles Farbschema erklärt Anfang -->
 <div class="modal fade" id="how3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="how3" aria-hidden="true">
+    aria-labelledby="how3-titel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content" id="modual" class="clink">
-            <div class="modal-header" id="pop-head" style="border-color: var(--popupborder)">
-                <h1 class="modal-title fs-5" id="how3">Individuelles Farbschema</h1>
+        <div class="modal-content modual">
+            <div class="modal-header" style="border-color: var(--popupborder)">
+                <h1 class="modal-title fs-5" id="how3-titel">Individuelles Farbschema</h1>
                 <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"><svg
                         xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-lg"
                         viewBox="0 0 16 16">
@@ -758,7 +756,7 @@
                             d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
                     </svg></button>
             </div>
-            <div class="modal-body" id="pop-body">
+            <div class="modal-body">
                 Du kannst dein individuelles Farbschema erstellen indem du im Impressum und Funktionen, "Erstelle dein
                 individuelles Farbschema" auf den Schalter klickst.<br><br>
                 Jetzt sind die Eingabefelder für die Farbe freigeschaltet und du kannst eine Hintergrundfarbe und eine
@@ -778,11 +776,11 @@
 
 <!-- Modal Favoriten erklärt Anfang -->
 <div class="modal fade" id="how4" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="how4" aria-hidden="true">
+    aria-labelledby="how4-titel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content" id="modual" class="clink">
-            <div class="modal-header" id="pop-head" style="border-color: var(--popupborder)">
-                <h1 class="modal-title fs-5" id="how4">Favoriten</h1>
+        <div class="modal-content modual">
+            <div class="modal-header" style="border-color: var(--popupborder)">
+                <h1 class="modal-title fs-5" id="how4-titel">Favoriten</h1>
                 <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"><svg
                         xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-lg"
                         viewBox="0 0 16 16">
@@ -790,7 +788,7 @@
                             d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
                     </svg></button>
             </div>
-            <div class="modal-body" id="pop-body">
+            <div class="modal-body">
                 Unter „Nützliche Seiten“ kannst du Seiten, die dir besonders wichtig erscheinen, mit einem Herzsymbol markieren.<br>
                 Sobald du mindestens eine Seite markiert hast, erscheint oben auf der Seite ein „Favoriten anzeigen“-Button.<br><br>
                 
@@ -812,11 +810,11 @@
 
 <!-- Modal Tic Tac Toe (Beta) erklärt Anfang -->
 <div class="modal fade" id="how5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="how5" aria-hidden="true">
+    aria-labelledby="how5-titel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content" id="modual" class="clink">
-            <div class="modal-header" id="pop-head" style="border-color: var(--popupborder)">
-                <h1 class="modal-title fs-5" id="how5">Tic Tac Toe (Beta)</h1>
+        <div class="modal-content modual">
+            <div class="modal-header" style="border-color: var(--popupborder)">
+                <h1 class="modal-title fs-5" id="how5-titel">Tic Tac Toe (Beta)</h1>
                 <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"><svg
                         xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-lg"
                         viewBox="0 0 16 16">
@@ -824,7 +822,7 @@
                             d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
                     </svg></button>
             </div>
-            <div class="modal-body" id="pop-body">
+            <div class="modal-body">
                 Um ein Tic Tac Toe Spiel zu starten, klicke unter Impressum, Funktionen auf "Tic Tac Toe".<br><br>
                 Du spielst gegen einen Computer, er arbeitet mit einer Logik und platziert nicht zufällig.<br><br>
                 Der Code wurde mit ChatGPT geschrieben.
@@ -837,11 +835,11 @@
 
 <!-- Modal Netz (Beta) erklärt Anfang -->
 <div class="modal fade" id="how6" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="how6" aria-hidden="true">
+    aria-labelledby="how6-titel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content" id="modual" class="clink">
-            <div class="modal-header" id="pop-head" style="border-color: var(--popupborder)">
-                <h1 class="modal-title fs-5" id="how6">Netz (Beta)</h1>
+        <div class="modal-content modual">
+            <div class="modal-header" style="border-color: var(--popupborder)">
+                <h1 class="modal-title fs-5" id="how6-titel">Netz (Beta)</h1>
                 <button style="color: var(--linkc);" type="button" class="btn" data-bs-dismiss="modal"><svg
                         xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-lg"
                         viewBox="0 0 16 16">
@@ -849,7 +847,7 @@
                             d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
                     </svg></button>
             </div>
-            <div class="modal-body" id="pop-body">
+            <div class="modal-body">
                 Das Netz nimmt 100% des oberen Bildschirmes ein. <br><br>
                 Die Kreise bewegen sich langsam und verbinden sich dynamisch untereinander.<br>
                 Wenn die Maus in dem Bereich ist verbinden sich die Kreise in der Nähe der Maus dynamisch mit der
@@ -871,7 +869,7 @@
 <!-- Spenden Anfang -->
 <div class="box col">
     <a target="_blank" class="clink">
-        <div id="hovb" class="card h-100">
+        <div class="card h-100 hovb">
             <div class="card-body">
                 <h5 class="card-title">Spenden</h5>
                 <p class="card-text">

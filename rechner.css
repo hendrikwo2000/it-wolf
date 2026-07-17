@@ -350,7 +350,7 @@ input[type="number"] {
 
 /* Progress Recher Anfang */
 
-#progress-body{
+.progress-body.progress-body{
     max-width: 700px;
     margin: 2rem auto;
     background: none;

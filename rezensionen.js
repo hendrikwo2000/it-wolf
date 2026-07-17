@@ -97,8 +97,9 @@ function karteBauen(r, versteckt) {
     huelle.className = "clink";
 
     const karte = document.createElement("div");
-    karte.id = "hovr";
-    karte.className = "card h-100";
+    // hovr ist eine Klasse, kein id: mehrere Karten teilen sich den Hover-Stil,
+    // und eine id waere hier doppelt vergeben.
+    karte.className = "card h-100 hovr";
 
     const koerper = document.createElement("div");
     koerper.className = "card-body";
