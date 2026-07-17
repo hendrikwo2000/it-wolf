@@ -23,8 +23,14 @@ console.log(
 );
 
 
-document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(tooltipTriggerEl => {
-    new bootstrap.Tooltip(tooltipTriggerEl);
+// In DOMContentLoaded gekapselt, damit Bootstrap sicher schon geladen ist: Bootstrap
+// wird jetzt ebenfalls per defer eingebunden, und index.js ist auf jeder Seite das
+// erste (deferred) Skript - liefe die Tooltip-Initialisierung auf oberster Ebene,
+// waere `bootstrap` hier noch undefined. Deferred Skripte laufen alle vor DOMContentLoaded.
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(tooltipTriggerEl => {
+        new bootstrap.Tooltip(tooltipTriggerEl);
+    });
 });
 
 //------------------------------------------------------------------------------------------------------------------------
