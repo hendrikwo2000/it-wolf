@@ -2,7 +2,8 @@
    Rezensions-Anfragen - laeuft nur auf ebook.html
    ====================================================================
    Zeigt, was ueber das Feedback-Formular hereingekommen ist, und schiebt es auf
-   Knopfdruck ins Formular "Rezensionen verwalten". Die Anfragen kommen aus
+   Knopfdruck ins Formular "Rezensionen verwalten" - die Anfrage ist damit
+   erledigt und verschwindet aus der Liste. Die Anfragen kommen aus
    /api/feedback, geschrieben werden sie dort beim Absenden des Formulars.
 
    Vorher fuehrte der Weg ueber die formsubmit-Mail: Mail suchen, Link klicken,
@@ -112,12 +113,26 @@ function anfragenZeichnen() {
     if (zahl) zahl.textContent = anfragen.length ? "(" + anfragen.length + ")" : "";
 }
 
-// Schiebt die Anfrage ins Rezensionsformular. Bewusst ohne Loeschen: erst
-// pruefen und anlegen, dann von Hand wegraeumen - sonst waere die Anfrage weg,
-// wenn beim Anlegen etwas schiefgeht.
-function anfrageUebernehmen(a) {
+// Schiebt die Anfrage ins Rezensionsformular und raeumt sie gleich weg. Der
+// Knopf bedeutet damit "erledigt", nicht "vorgemerkt" - die Liste zeigt nur
+// noch, was wirklich offen ist.
+//
+// Erst fuellen, dann loeschen: klappt das Loeschen nicht, steht die Anfrage
+// weiter in der Liste. Andersherum waere sie im Fehlerfall weg.
+//
+// Bleibt das Risiko, dass zwischen Uebernehmen und Anlegen etwas dazwischen-
+// kommt - ein Neuladen zum Beispiel - und der Text dann nirgends mehr steht.
+// Das Netz darunter ist die formsubmit-Mail: dieselbe Anfrage samt Link, der
+// das Formular wieder fuellt.
+async function anfrageUebernehmen(a) {
     formularAusRohdaten(a);
-    adminMeldung("Aus der Anfrage übernommen. Bitte prüfen, ggf. korrigieren – veröffentlicht wird erst mit „Rezension anlegen“.", false);
+    const weg = await anfrageEntfernen(a);
+    adminMeldung(
+        weg
+            ? "Übernommen, die Anfrage ist aus der Liste raus. Bitte prüfen – veröffentlicht wird erst mit „Rezension anlegen“."
+            : "Übernommen, aber die Anfrage ließ sich nicht entfernen – sie steht noch in der Liste.",
+        !weg
+    );
 }
 
 // Ohne Anmeldung gar nicht erst fragen: die Function antwortet mit 401, und eine
@@ -147,8 +162,10 @@ async function anfragenLaden() {
     }
 }
 
-async function anfrageLoeschen(a) {
-    if (!confirm(`Anfrage von ${a.name} wirklich löschen?`)) return;
+// Loescht ohne Rueckfrage und meldet, ob es geklappt hat. Zwei Wege enden hier:
+// der Loeschen-Knopf (fragt vorher) und Uebernehmen (fragt nicht - dort ist das
+// Wegraeumen ja der Sinn der Sache).
+async function anfrageEntfernen(a) {
     try {
         const antwort = await fetch(ANFRAGEN_API, {
             method: "DELETE",
@@ -158,15 +175,21 @@ async function anfrageLoeschen(a) {
         const ergebnis = await antwort.json().catch(() => ({}));
         if (!antwort.ok) {
             anfragenMeldung(ergebnis.fehler || "Das hat nicht geklappt.");
-            return;
+            return false;
         }
         anfragen = ergebnis.anfragen || [];
-        anfragenMeldung("Anfrage gelöscht.", false);
         anfragenZeichnen();
+        return true;
     } catch (e) {
         console.error("Netzwerkfehler:", e);
         anfragenMeldung("Keine Verbindung zum Server. Bist du online?");
+        return false;
     }
+}
+
+async function anfrageLoeschen(a) {
+    if (!confirm(`Anfrage von ${a.name} wirklich löschen?`)) return;
+    if (await anfrageEntfernen(a)) anfragenMeldung("Anfrage gelöscht.", false);
 }
 
 // rezensionen.js ruft anfragenLaden() beim An- und Abmelden auf. Beim Laden der
