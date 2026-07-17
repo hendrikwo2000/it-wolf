@@ -23,7 +23,10 @@ body, button{
 }
 
 
- h1 {
+ /* Auf den Rechner-Container begrenzt: als reine "h1"-Regel traf font-size:2rem
+    ungewollt die Seitenueberschrift "Tools" und machte sie kleiner als auf den
+    anderen Seiten (dort ~2,3rem responsiv von Bootstrap). */
+ #rechner-body h1 {
      text-align: center;
      color: var(--linkc);
      margin-bottom: 1.5rem;
