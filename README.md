@@ -73,6 +73,9 @@ Das E-Book-Passwort liegt in einem verschlüsselten Secret und wird nur auf eine
 - **Spamschutz**: Cloudflare Turnstile vor Passwort- und Feedback-Formular
 - **Einstellungen**: Local Storage API
 - **Mailversand**: formsubmit, direkt aus dem Browser
+- **Build**: `node build.js` hält Navbar und Footer über alle Seiten synchron – gemeinsame Teile liegen in `partials/`, kein Framework nötig
+
+> **Entwickeln:** Navbar/Footer nur in `partials/` bearbeiten, dann `node build.js` ausführen (schreibt die Blöcke in index/seiten/tools/ebook/impressum), danach wie gewohnt committen. `404.html` wird wegen ihrer absoluten Pfade von Hand gepflegt.
 
 ---
 
