@@ -405,10 +405,11 @@ document.addEventListener("DOMContentLoaded", () => {
         adminAbschalten();
         updateFavoriteUI();
         // Auf ebook.html hängt der Rezensionsbereich an denselben Rechten und
-        // muss mit verschwinden. Die beiden Funktionen kommen aus rezensionen.js
-        // und gibt es nur dort.
+        // muss mit verschwinden. Die Funktionen kommen aus rezensionen.js und
+        // anfragen.js und gibt es nur dort.
         if (typeof adminUiZeichnen === "function") adminUiZeichnen();
         if (typeof zeichneListe === "function") zeichneListe();
+        if (typeof anfragenLaden === "function") anfragenLaden();
     }
 
 

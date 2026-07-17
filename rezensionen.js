@@ -288,6 +288,8 @@ async function adminAnmelden(event) {
     adminAnzeigeAktualisieren();
     adminUiZeichnen();
     zeichneListe();
+    // Die Passwort-Anfragen haengen an derselben Anmeldung (anfragen.js).
+    anfragenLaden();
     // Kam der Aufruf aus einer E-Mail, wartet die Rezension schon.
     uebernehmeAusLink();
 }
@@ -298,6 +300,9 @@ function adminAbmelden() {
     adminAnzeigeAktualisieren();
     adminUiZeichnen();
     zeichneListe();
+    // Fremde Namen und Adressen gehoeren nach dem Abmelden nicht mehr auf den
+    // Schirm - anfragenLaden() leert die Liste, wenn kein Passwort mehr da ist.
+    anfragenLaden();
 }
 
 function formularFuellen(r) {
