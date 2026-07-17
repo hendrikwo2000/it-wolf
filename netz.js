@@ -1,333 +1,198 @@
-const canvas = document.getElementById('backgroundCanvas');
-const ctx = canvas.getContext('2d');
+/*
+  Netz (Beta) - animiertes Partikel-Netz als Seitenhintergrund.
 
-ctx.imageSmoothingEnabled = false; // Oder false, abhängig von deinen Anforderungen
-const devicePixelRatio = window.devicePixelRatio || 1;
-canvas.width = canvas.offsetWidth * devicePixelRatio;
-canvas.height = canvas.offsetHeight * devicePixelRatio;
-ctx.scale(devicePixelRatio, devicePixelRatio);
-const circleCount = 40; // Anzahl der Kreise
-const maxConnections = 1; // Anzahl der Verbindungen untereinander
-const maxMouseConnections = 8; // Anzahl der Verbindungen mit der Maus
-const circleSize = 3; // Ändere den Wert auf die gewünschte Größe der Kreise
-const normalLineThickness = 0; // Dicke der Linien zwischen den normalen Kreisen
-const mouseLineThickness = 0.2; // Dicke der Linien zwischen Maus und Kreisen
-let circles = [];
-const svg = document.getElementById('backgroundSvg');
-checkScreenSize();
+  Wird ueber index.js dynamisch ein- und ausgehaengt (includeScript/removeScript)
+  und laeuft auf allen Seiten mit <canvas id="backgroundCanvas">.
 
+  Wichtig: Das Script startet SOFORT beim Ausfuehren (in einer IIFE), nicht erst
+  bei window.load. Denn wenn man das Netz per Schalter im Impressum aktiviert, wird
+  die Datei erst nach dem load-Event nachgeladen - ein load-Listener wuerde dann nie
+  mehr feuern. Das Canvas steht ohnehin schon fest im HTML.
+*/
+(function () {
+    'use strict';
 
+    const canvas = document.getElementById('backgroundCanvas');
+    if (!canvas) return;
 
-window.addEventListener('mousemove', (event) => {
-    mouseX = event.clientX;
-    mouseY = event.clientY;
+    // Doppelstart abfangen: index.js koennte das Script theoretisch mehrfach anhaengen.
+    if (window.__netzLaeuft) return;
+    window.__netzLaeuft = true;
 
-    // Überprüfe, ob die Maus sich über dem Canvas befindet
-    const canvasRect = canvas.getBoundingClientRect();
-    if (
-        mouseX >= canvasRect.left &&
-        mouseX <= canvasRect.right &&
-        mouseY >= canvasRect.top &&
-        mouseY <= canvasRect.bottom
-    ) {
-        mouseInsideCanvas = true;
-    } else {
-        mouseInsideCanvas = false;
+    const ctx = canvas.getContext('2d');
+
+    // --- Einstellungen (alles in CSS-Pixeln gedacht) -------------------------
+    const MOBILE_BREITE = 768;   // darunter bleibt das Netz aus (Akku/Platz)
+    const DICHTE        = 26000; // ein Kreis je so vielen Pixeln Flaeche
+    const MIN_KREISE    = 24;
+    const MAX_KREISE    = 80;
+    const KREIS_RADIUS  = 2.2;   // Punktgroesse
+    const TEMPO         = 0.28;  // Driftgeschwindigkeit
+    const LINK_DISTANZ  = 150;   // ab hier verbinden sich zwei Kreise
+    const MAUS_DISTANZ  = 190;   // Reichweite der Maus
+    const LINIE_ALPHA   = 0.55;  // max. Deckkraft der Linien zwischen Kreisen
+    const MAUS_ALPHA    = 0.9;   // max. Deckkraft der Maus-Linien
+    const LINIE_BREITE  = 1;     // Strichstaerke in CSS-Pixeln
+
+    // "Weniger Bewegung": Punkte driften dann nicht, reagieren aber weiter auf die Maus.
+    const wenigerBewegung = window.matchMedia
+        && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let dpr = 1;
+    let breite = 0, hoehe = 0;      // Zeichenflaeche in CSS-Pixeln
+    let kreise = [];
+    let mausX = 0, mausY = 0, mausAktiv = false;
+    let laeuft = false, frame = 0, resizeTimer = 0;
+
+    // Farbe pro Frame aus der CSS-Variable lesen, damit ein Wechsel des Farbschemas
+    // (Darkmode / eigenes Schema) sofort durchschlaegt.
+    function farbe(name, fallback) {
+        const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+        return v || fallback;
     }
-});
 
+    function Kreis() {
+        this.x = Math.random() * breite;
+        this.y = Math.random() * hoehe;
+        const winkel = Math.random() * Math.PI * 2;
+        this.vx = Math.cos(winkel) * TEMPO;
+        this.vy = Math.sin(winkel) * TEMPO;
+    }
 
-Circle.prototype.connectWithNearestCircles = function (otherCircles) {
-    this.connections = [];
+    function kreiseErzeugen() {
+        const anzahl = Math.max(MIN_KREISE,
+            Math.min(MAX_KREISE, Math.round((breite * hoehe) / DICHTE)));
+        kreise = [];
+        for (let i = 0; i < anzahl; i++) kreise.push(new Kreis());
+    }
 
-    const distances = otherCircles
-        .filter(circle => circle !== this)
-        .map((circle) => ({
-            circle,
-            distance: Math.sqrt((circle.x - this.x) ** 2 + (circle.y - this.y) ** 2),
-        }))
-        .sort((a, b) => a.distance - b.distance);
+    // Canvas an Viewport UND Pixeldichte anpassen -> scharf auch auf HiDPI-Displays.
+    // clientWidth/Height schliessen die Scrollbar aus, deshalb entsteht kein Overflow.
+    function flaecheAnpassen() {
+        dpr = window.devicePixelRatio || 1;
+        breite = document.documentElement.clientWidth;
+        hoehe = document.documentElement.clientHeight;
+        canvas.width = Math.round(breite * dpr);
+        canvas.height = Math.round(hoehe * dpr);
+        // Ab hier wieder in CSS-Pixeln zeichnen; der Backing-Store ist dpr-fach groesser.
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
 
-    let connectionsCount = 0;
-    for (let i = 0; i < distances.length; i++) {
-        if (connectionsCount >= maxConnections) break;
+    function bewegen(k) {
+        if (wenigerBewegung) return;
+        k.x += k.vx;
+        k.y += k.vy;
+        if (k.x < 0)      { k.x = 0;      k.vx = -k.vx; }
+        if (k.x > breite) { k.x = breite; k.vx = -k.vx; }
+        if (k.y < 0)      { k.y = 0;      k.vy = -k.vy; }
+        if (k.y > hoehe)  { k.y = hoehe;  k.vy = -k.vy; }
+    }
 
-        const nearestCircle = distances[i].circle;
-        if (nearestCircle.connections.length < maxConnections && !this.connections.includes(nearestCircle)) {
-            this.connections.push(nearestCircle);
-            nearestCircle.connections.push(this);
-            connectionsCount++;
+    function zeichnen() {
+        const linienFarbe = farbe('--line-color', '#0693e3');
+        const kreisFarbe = farbe('--circle-color', '#0693e3');
+
+        ctx.clearRect(0, 0, breite, hoehe);
+        ctx.lineWidth = LINIE_BREITE;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = linienFarbe;
+
+        // Verbindungen zwischen den Kreisen; Deckkraft faellt mit der Distanz.
+        for (let i = 0; i < kreise.length; i++) {
+            const a = kreise[i];
+            for (let j = i + 1; j < kreise.length; j++) {
+                const b = kreise[j];
+                const dx = a.x - b.x, dy = a.y - b.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < LINK_DISTANZ) {
+                    ctx.globalAlpha = (1 - dist / LINK_DISTANZ) * LINIE_ALPHA;
+                    ctx.beginPath();
+                    ctx.moveTo(a.x, a.y);
+                    ctx.lineTo(b.x, b.y);
+                    ctx.stroke();
+                }
+            }
         }
-    }
-};
 
-
-
-
-function resizeCanvas() {
-    canvas.width = window.innerWidth * 0.97;
-    canvas.height = window.innerHeight;
-}
-
-function Circle(x, y) {
-    this.x = x;
-    this.y = y;
-    this.size = circleSize;
-    this.speedX = (Math.random() - 0.5) * 0.5;
-    this.speedY = (Math.random() - 0.5) * 0.5;
-    this.connections = [];
-}
-
-Circle.prototype.update = function () {
-    this.x += this.speedX;
-    this.y += this.speedY;
-
-    // Randprüfung, damit sich die Kreise innerhalb des sichtbaren Bereichs des Canvas bewegen
-    if (this.x < 0 || this.x > canvas.width) {
-        this.speedX = -this.speedX;
-    }
-    if (this.y < 0 || this.y > canvas.height) {
-        this.speedY = -this.speedY;
-    }
-};
-
-Circle.prototype.draw = function () {
-    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--circle-color');
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fill();
-};
-
-Circle.prototype.connectWithNearestCircles = function (otherCircles) {
-    this.connections = [];
-
-    const distances = otherCircles
-        .filter(circle => circle !== this)
-        .map((circle) => ({
-            circle,
-            distance: Math.sqrt((circle.x - this.x) ** 2 + (circle.y - this.y) ** 2),
-        }))
-        .sort((a, b) => a.distance - b.distance);
-
-    for (let i = 0; i < Math.min(maxConnections, distances.length); i++) {
-        this.connections.push(distances[i].circle);
-    }
-};
-
-function connectMouseWithNearestCircles(mouseX, mouseY) {
-    const distances = [];
-
-    for (const circle of circles) {
-        const distance = Math.sqrt((circle.x - mouseX) ** 2 + (circle.y - mouseY) ** 2);
-        distances.push({
-            circle,
-            distance,
-        });
-    }
-
-    const nearestCirclesToMouse = distances
-        .sort((a, b) => a.distance - b.distance)
-        .slice(0, maxMouseConnections)
-        .map(entry => entry.circle);
-
-    for (const circle of circles) {
-        if (nearestCirclesToMouse.includes(circle)) {
-            circle.connections.push({ x: mouseX, y: mouseY });
+        // Verbindungen zur Maus, etwas kraeftiger.
+        if (mausAktiv) {
+            for (let i = 0; i < kreise.length; i++) {
+                const a = kreise[i];
+                const dx = a.x - mausX, dy = a.y - mausY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < MAUS_DISTANZ) {
+                    ctx.globalAlpha = (1 - dist / MAUS_DISTANZ) * MAUS_ALPHA;
+                    ctx.beginPath();
+                    ctx.moveTo(a.x, a.y);
+                    ctx.lineTo(mausX, mausY);
+                    ctx.stroke();
+                }
+            }
         }
-    }
-}
 
-function createCircles() {
-    for (let i = 0; i < circleCount; i++) {
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height;
-        circles.push(new Circle(x, y));
-    }
-}
-
-function updateConnections() {
-    for (const circle of circles) {
-        circle.connectWithNearestCircles(circles);
-    }
-}
-
-function drawNormalLines() {
-    ctx.lineWidth = normalLineThickness;
-    ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--line-color');
-    for (const circle of circles) {
-        for (const connectedCircle of circle.connections) {
+        // Kreise zuletzt, damit sie ueber den Linien liegen.
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = kreisFarbe;
+        for (let i = 0; i < kreise.length; i++) {
+            const k = kreise[i];
             ctx.beginPath();
-            ctx.moveTo(circle.x, circle.y);
-            ctx.lineTo(connectedCircle.x, connectedCircle.y);
-            ctx.stroke();
+            ctx.arc(k.x, k.y, KREIS_RADIUS, 0, Math.PI * 2);
+            ctx.fill();
         }
     }
-}
 
-function drawMouseLines() {
-    ctx.lineWidth = mouseLineThickness;
-    ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--line-color');
-    for (const circle of circles) {
-        for (const connectedCircle of circle.connections) {
-            ctx.beginPath();
-            ctx.moveTo(circle.x, circle.y);
-            ctx.lineTo(connectedCircle.x, connectedCircle.y);
-            ctx.stroke();
-        }
-    }
-}
-
-function animateCircles() {
-    requestAnimationFrame(animateCircles);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    for (const circle of circles) {
-        circle.update();
-        circle.draw();
+    function schleife() {
+        if (!laeuft) return;
+        for (let i = 0; i < kreise.length; i++) bewegen(kreise[i]);
+        zeichnen();
+        frame = requestAnimationFrame(schleife);
     }
 
-    updateConnections();
-    connectMouseWithNearestCircles(mouseX, mouseY); // Die Maus mit den nächsten Kreisen verbinden
-    drawNormalLines(); // Linien zwischen den normalen Kreisen zeichnen
-    drawMouseLines(); // Linien zwischen Maus und Kreisen zeichnen
-}
-
-function animateCircles() {
-    requestAnimationFrame(animateCircles);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    for (const circle of circles) {
-        circle.update();
-        circle.draw();
+    function starten() {
+        if (laeuft) return;
+        laeuft = true;
+        frame = requestAnimationFrame(schleife);
     }
 
-    updateConnections();
-
-    // Nur verbinden, wenn die Maus über dem Canvas ist
-    if (mouseInsideCanvas) {
-        connectMouseWithNearestCircles(mouseX, mouseY);
-        drawMouseLines();
+    function stoppen() {
+        laeuft = false;
+        cancelAnimationFrame(frame);
     }
 
-    drawNormalLines();
-}
-
-
-
-
-window.addEventListener('resize', () => {
-    resizeCanvas();
-    circles = [];
-    createCircles();
-});
-
-
-
-
-
-function animateCircles() {
-    requestAnimationFrame(animateCircles);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    for (const circle of circles) {
-        circle.update();
-        circle.draw();
+    // Unter der mobilen Grenze bleibt das Netz aus. Die .hidden-Klasse blendet das
+    // Canvas per CSS aus, hier stoppt zusaetzlich die Rechenschleife und - beim
+    // Wechsel zurueck auf Desktop - baut sie die Flaeche neu auf.
+    function groesseAendern() {
+        const mobil = window.innerWidth <= MOBILE_BREITE;
+        canvas.classList.toggle('hidden', mobil);
+        if (mobil) { stoppen(); return; }
+        flaecheAnpassen();
+        kreiseErzeugen();
+        if (!document.hidden) starten();
     }
 
-    updateConnections();
+    // --- Events --------------------------------------------------------------
+    window.addEventListener('mousemove', (e) => {
+        // Fixes Canvas -> Viewport-Koordinaten (clientX/Y) passen direkt, ohne Scroll-Offset.
+        mausX = e.clientX;
+        mausY = e.clientY;
+        mausAktiv = true;
+    });
 
-    // Nur verbinden, wenn die Maus über dem Canvas und im Fenster ist
-    if (mouseInsideCanvas && mouseInsideWindow) {
-        // Berücksichtige die Scroll-Offset-Werte für die Mausposition
-        const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
-        const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-        connectMouseWithNearestCircles(mouseX + scrollX, mouseY + scrollY);
-        drawMouseLines();
-    }
+    // Verlaesst der Zeiger das Fenster, keine Maus-Linien mehr.
+    document.addEventListener('mouseleave', () => { mausAktiv = false; });
 
-    drawNormalLines();
-}
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(groesseAendern, 150);
+    });
 
-let mouseX = 0;
-let mouseY = 0;
-let mouseInsideCanvas = false; // Verfolgt, ob die Maus über dem Canvas ist
-let mouseInsideWindow = true; // Verfolgt, ob die Maus sich im Browserfenster befindet
+    // Im Hintergrund-Tab pausieren (spart CPU/Akku), beim Zurueckkehren weiterlaufen.
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) stoppen();
+        else if (window.innerWidth > MOBILE_BREITE) starten();
+    });
 
-
-
-
-window.addEventListener('mousemove', (event) => {
-    mouseX = event.clientX;
-    mouseY = event.clientY;
-
-    // Überprüfe, ob die Maus sich über dem Canvas befindet
-    const canvasRect = canvas.getBoundingClientRect();
-    if (
-        mouseX >= canvasRect.left &&
-        mouseX <= canvasRect.right &&
-        mouseY >= canvasRect.top &&
-        mouseY <= canvasRect.bottom
-    ) {
-        mouseInsideCanvas = true;
-    } else {
-        mouseInsideCanvas = false;
-    }
-});
-
-// Überprüfe, ob die Maus sich im Browserfenster befindet
-window.addEventListener('mouseout', () => {
-    mouseInsideWindow = false;
-
-});
-window.addEventListener('mouseover', () => {
-    mouseInsideWindow = true;
-
-});
-
-
-
-window.addEventListener('mousemove', (event) => {
-    mouseX = event.clientX;
-    mouseY = event.clientY;
-
-    // Überprüfe, ob die Maus sich über dem Canvas befindet
-    const canvasRect = canvas.getBoundingClientRect();
-    if (
-        mouseX >= canvasRect.left &&
-        mouseX <= canvasRect.right &&
-        mouseY >= canvasRect.top &&
-        mouseY <= canvasRect.bottom
-    ) {
-        mouseInsideCanvas = true;
-    } else {
-        mouseInsideCanvas = false;
-    }
-});
-
-
-
-window.addEventListener('mousemove', (event) => {
-    mouseX = event.clientX;
-    mouseY = event.clientY;
-});
-
-
-function checkScreenSize() {
-    if (window.innerWidth <= 768) { // Beispielgrenze für mobile Geräte
-        canvas.classList.add('hidden');
-    } else {
-        canvas.classList.remove('hidden');
-    }
-}
-
-window.addEventListener('resize', checkScreenSize);
-
-window.addEventListener('load', () => {
-    checkScreenSize();
-    createCircles();
-    animateCircles();
-});
-
-resizeCanvas();
-createCircles();
-animateCircles();
+    // --- Start ---------------------------------------------------------------
+    groesseAendern();
+})();

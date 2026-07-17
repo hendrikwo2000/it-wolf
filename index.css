@@ -49,34 +49,27 @@
 /*---------------------------------------------------------------------*/
 /* CSS für das Netz (Beta) */
 
-@media (max-width: 768px) {
-    #backgroundCanvas {
-        width: 100%;
-        /* Größe anpassen */
-        height: auto;
-        /* Größe anpassen */
-    }
+/* Fixiertes Vollbild-Canvas als Hintergrund:
+   - position:fixed + inset:0 + 100%/100% deckt exakt den sichtbaren Viewport,
+     ohne die Seite zu verbreitern (keine Scrollbar-Overflow-Probleme) und bleibt
+     beim Scrollen sichtbar.
+   - z-index:-1 legt es hinter den Inhalt, aber vor die (an den Viewport
+     propagierte) Hintergrundfarbe von .bodygg.
+   - pointer-events:none, damit Klicks/Hover durch das Canvas hindurchgehen.
+   Die Zeichenpuffer-Groesse (width/height-Attribute) setzt netz.js selbst,
+   dpr-skaliert - hier steht nur die Anzeigegroesse. */
+#backgroundCanvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
 }
 
 #backgroundCanvas.hidden {
     display: none;
 }
-
-
-  .circle {
-      fill: var(--circle-color);
-  }
-
-  .line {
-      stroke: var(--line-color);
-  }
-
-   canvas {
-       position: absolute;
-       top: 0;
-       left: 0;
-       pointer-events: none;
-   }
    
 
 /*---------------------------------------------------------------------*/
