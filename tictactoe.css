@@ -1,41 +1,170 @@
+/* Tic Tac Toe – nutzt die Farb-Variablen der Seite (--linkc, --backg, --hovg,
+   --popupborder), damit Light-/Dark-/Individuell-Modus automatisch passen.
+   Akzent der Gewinnlinie ist das Markenblau #0693e3. */
 
-  
-  
-  body {
-      font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
-      margin: 0;
-      padding: 0;
-  }
+h1 {
+    text-align: center;
+    margin-top: 30px;
+}
 
-  h1 {
-      text-align: center;
-      margin-top: 30px;
-  }
+/* Spielbrett: quadratisch, drei gleich grosse Reihen/Spalten.
+   position: relative traegt die absolut liegende Gewinnlinie. */
+#board {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    aspect-ratio: 1 / 1;
+    gap: 10px;
+    width: min(300px, 78vw);
+    margin: 20px auto;
+}
 
-  #board {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(3, 1fr);
-      gap: 10px;
-      width: 300px;
-      margin: 20px auto;
-  }
+.cell {
+    border: 1px solid var(--linkc);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    line-height: 1;
+    cursor: pointer;
+    background-color: var(--backg);
+    transition: background-color 0.3s, transform 0.15s;
+    -webkit-user-select: none;
+    user-select: none;
+}
 
-  .cell {
-      width: 100px;
-      height: 100px;
-      border: 1px solid var(--linkc);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 48px;
-      cursor: pointer;
-      background-color: var(--backg);
-      transition: background-color 0.3s;
-  }
+/* Hover nur auf noch spielbaren (leeren) Feldern. */
+.cell:not(.placed):hover {
+    background-color: var(--hovg);
+}
 
-  .cell:hover {
-      background-color: var(--hovg);
-  }
+/* Belegte Felder sind nicht mehr anklickbar. */
+.cell.placed {
+    cursor: default;
+}
 
+/* Waehrend der Computer zieht: keine Klick-Optik. */
+#board.locked .cell {
+    cursor: default;
+}
+
+#board.locked .cell:not(.placed):hover {
+    background-color: var(--backg);
+}
+
+/* Pop-in beim Setzen eines Symbols. */
+.cell .mark {
+    display: inline-block;
+    animation: ticPop 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes ticPop {
+    0%   { transform: scale(0);    opacity: 0; }
+    60%  { transform: scale(1.15); }
+    100% { transform: scale(1);    opacity: 1; }
+}
+
+/* Sanftes Hervorheben der drei Gewinnerfelder (Markenblau-Ton). */
+.cell--win {
+    background-color: rgba(6, 147, 227, 0.16);
+    animation: ticCellWin 0.5s ease;
+}
+
+@keyframes ticCellWin {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.06); }
+    100% { transform: scale(1); }
+}
+
+/* Langsam erscheinende Gewinnlinie ueber den drei Symbolen. */
+.win-line-svg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: visible;
+    z-index: 2;
+}
+
+.win-line {
+    stroke: #0693e3;
+    stroke-width: 8;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 3px rgba(6, 147, 227, 0.45));
+}
+
+/* Ergebnistext: farbiges Signal + sanftes Einblenden. */
+#ticinfo {
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+#ticinfo.tic-win  { color: #22c55e; }
+#ticinfo.tic-lose { color: #ef4444; }
+#ticinfo.tic-draw { color: color-mix(in srgb, var(--linkc) 60%, transparent); }
+
+.tic-show {
+    animation: ticFade 0.4s ease both;
+}
+
+@keyframes ticFade {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Punktestand. */
+.tic-scoreboard {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 2px auto 14px;
+}
+
+.tic-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 76px;
+    padding: 6px 10px;
+    border: 1px solid var(--popupborder);
+    border-radius: 16px;
+}
+
+.tic-score-label {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.tic-score-value {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* Schwierigkeitsgrad-Umschalter. */
+.tic-difficulty {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.tic-diff-btn {
+    border: 1px solid var(--popupborder);
+    background: transparent;
+    color: var(--linkc);
+    border-radius: 40px;
+    padding: 6px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.tic-diff-btn:hover {
+    background-color: var(--hovg);
+}
+
+.tic-diff-active {
+    background-color: var(--hovg);
+    font-weight: 700;
+}

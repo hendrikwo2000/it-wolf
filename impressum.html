@@ -585,7 +585,14 @@
                             </div>
                 
                             <div class="modal-body">
-                
+
+                                <div class="tic-difficulty" role="group" aria-label="Schwierigkeitsgrad">
+                                    <button type="button" class="tic-diff-btn" data-diff="einfach"
+                                        onclick="setDifficulty('einfach')">Einfach</button>
+                                    <button type="button" class="tic-diff-btn tic-diff-active" data-diff="unschlagbar"
+                                        onclick="setDifficulty('unschlagbar')">Unschlagbar</button>
+                                </div>
+
                                 <div id="board">
                                     <div class="cell" onclick="makeMove(0)"></div>
                                     <div class="cell" onclick="makeMove(1)"></div>
@@ -596,8 +603,17 @@
                                     <div class="cell" onclick="makeMove(6)"></div>
                                     <div class="cell" onclick="makeMove(7)"></div>
                                     <div class="cell" onclick="makeMove(8)"></div>
-                                </div><br>
-                
+                                </div>
+
+                                <div class="tic-scoreboard">
+                                    <div class="tic-score"><span class="tic-score-label">Du</span><span
+                                            class="tic-score-value" id="tic-score-win">0</span></div>
+                                    <div class="tic-score"><span class="tic-score-label">Remis</span><span
+                                            class="tic-score-value" id="tic-score-draw">0</span></div>
+                                    <div class="tic-score"><span class="tic-score-label">Computer</span><span
+                                            class="tic-score-value" id="tic-score-loss">0</span></div>
+                                </div>
+
                             </div>
                 
                             <div class="position-relative m-4">
