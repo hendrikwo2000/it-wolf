@@ -110,9 +110,20 @@
         for (let i = 0; i < ziel; i++) kreise.push(new Kreis());
     }
 
-    // Sanftes Angleichen (nur auffuellen/kuerzen), wenn allein die Seitenhoehe wandert -
-    // sonst wuerde jeder aufklappende Inhalt alle Punkte zuruecksetzen und es flackert.
-    function kreiseAngleichen() {
+    // Sanftes Angleichen, wenn allein die Seitenhoehe wandert - ohne alle Punkte
+    // komplett neu zu wuerfeln (das wuerde bei jedem aufklappenden Inhalt flackern).
+    //
+    // Zuerst werden die vorhandenen Punkte PROPORTIONAL mit der neuen Hoehe gedehnt.
+    // Das ist wichtig fuer lange Seiten mit lazy ladenden Bildern: die wachsen erst
+    // beim Runterscrollen, und weil die Punktzahl bei langen Seiten am Deckel klebt,
+    // koennte reines Anhaengen den neuen unteren Bereich gar nicht mehr fuellen - das
+    // Netz fehlte dann "ganz unten". Durch das Mitziehen bleiben die Punkte stets
+    // gleichmaessig ueber die GESAMTE aktuelle Hoehe verteilt.
+    function kreiseAngleichen(altHoehe) {
+        if (altHoehe > 0 && weltHoehe !== altHoehe) {
+            const f = weltHoehe / altHoehe;
+            for (let i = 0; i < kreise.length; i++) kreise[i].y *= f;
+        }
         const ziel = zielAnzahl();
         while (kreise.length < ziel) kreise.push(new Kreis());
         if (kreise.length > ziel) kreise.length = ziel;
@@ -350,8 +361,9 @@
         if (window.innerWidth <= MOBILE_BREITE) return;
         const neu = Math.max(document.documentElement.scrollHeight, hoehe);
         if (Math.abs(neu - weltHoehe) < 4) return;
+        const alt = weltHoehe;
         weltHoehe = neu;
-        kreiseAngleichen();
+        kreiseAngleichen(alt);
     }
 
     // --- Events --------------------------------------------------------------
