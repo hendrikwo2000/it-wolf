@@ -14,6 +14,22 @@
   window.load. Denn wenn man das Netz per Schalter im Impressum aktiviert, wird die
   Datei erst nach dem load-Event nachgeladen - ein load-Listener wuerde dann nie mehr
   feuern. Das Canvas steht ohnehin schon fest im HTML.
+
+  Fensteruebergreifend ("Split Screen"): Liegen zwei IT-Wolf-Fenster nebeneinander,
+  reicht das Netz ueber die Luecke hinweg von einem ins andere - als waere es ein
+  durchgehendes Netz ueber beide Bildschirme. Umsetzung:
+    - Jedes Fenster kennt seine Lage auf dem Bildschirm (window.screenX/screenY) und
+      teilt seine sichtbaren Punkte (und die Maus) in BILDSCHIRM-Koordinaten ueber
+      einen BroadcastChannel mit allen anderen Fenstern derselben Seite.
+    - Ein empfangendes Fenster rechnet diese Bildschirm-Koordinaten in seine EIGENE
+      Sicht zurueck (minus eigenes screenX/screenY). Der Chrome-Versatz (Adressleiste
+      usw.) ist bei gleichem Browser in beiden Fenstern gleich gross und kuerzt sich
+      dabei heraus - die Linien treffen sich an der Kante passgenau.
+    - Alles laeuft in CSS-Pixeln; screenX/screenY, innerWidth und die Punktkoordinaten
+      teilen dieselbe Einheit, deshalb ist keine DPR-Umrechnung noetig.
+  Das Ganze ist automatisch: bei nur einem Fenster passiert nichts (kein Nachbar da),
+  es entstehen keine spuerbaren Kosten. Funktioniert nur zwischen Fenstern DERSELBEN
+  Seite (gleiche Origin) und ab Desktop-Breite (darunter ist das Netz ohnehin aus).
 */
 (function () {
     'use strict';
@@ -40,6 +56,14 @@
     const MAUS_ALPHA    = 0.9;   // max. Deckkraft der Maus-Linien
     const LINIE_BREITE  = 1;     // Strichstaerke in CSS-Pixeln
 
+    // Fensteruebergreifend --------------------------------------------------
+    const KANAL_NAME    = 'itwolf-netz';  // BroadcastChannel-Name (pro Origin eindeutig)
+    const FREMD_TIMEOUT = 1200;  // ms ohne Lebenszeichen -> Nachbarfenster gilt als weg
+    const SENDE_TAKT    = 2;     // nur jeden n-ten Frame senden -> ~30/s statt 60/s
+    const DRIFT_DISTANZ = 240;   // ab hier zieht ein Nachbarpunkt einen Punkt leicht an
+    const DRIFT_KRAFT   = 0.0035;// Staerke der Anziehung Richtung Nachbarfenster
+    const MAX_TEMPO     = TEMPO * 2.2; // Deckel fuer die Driftgeschwindigkeit
+
     // "Weniger Bewegung": Punkte driften dann nicht, reagieren aber weiter auf die Maus.
     const wenigerBewegung = window.matchMedia
         && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -50,6 +74,14 @@
     let kreise = [];
     let mausClientX = 0, mausClientY = 0, mausAktiv = false;
     let laeuft = false, frame = 0, resizeTimer = 0;
+
+    // Zustand der Nachbarfenster.
+    const meineId = 'w' + Math.random().toString(36).slice(2);
+    let kanal = null;
+    const fremde = new Map();    // id -> { punkte:[x,y,...], maus:[x,y]|null, stand }
+    let fremdWelt = [];          // Nachbarpunkte in MEINEN Weltkoordinaten (pro Frame neu)
+    let fremdMaus = [];          // Nachbar-Maeuse in MEINEN Weltkoordinaten (pro Frame neu)
+    let tick = 0, jetzt = 0;
 
     // Farbe pro Frame aus der CSS-Variable lesen, damit ein Wechsel des Farbschemas
     // (Darkmode / eigenes Schema) sofort durchschlaegt.
@@ -108,11 +140,28 @@
         if (k.y > weltHoehe) { k.y = weltHoehe; k.vy = -k.vy; }
     }
 
-    function zeichnen() {
+    // Leichte Anziehung Richtung naechstgelegenem Nachbarpunkt: das Netz "greift"
+    // sichtbar zum Nebenfenster hinueber. Bewusst schwach + Tempo gedeckelt, damit
+    // es lebendig bleibt und die Punkte nicht an der Kante verklumpen.
+    function anziehen(k) {
+        if (wenigerBewegung || fremdWelt.length === 0) return;
+        let bx = 0, by = 0, bestD = DRIFT_DISTANZ;
+        for (let i = 0; i < fremdWelt.length; i += 2) {
+            const dx = fremdWelt[i] - k.x, dy = fremdWelt[i + 1] - k.y;
+            const d = Math.sqrt(dx * dx + dy * dy);
+            if (d < bestD && d > 0.001) { bestD = d; bx = dx / d; by = dy / d; }
+        }
+        if (bx === 0 && by === 0) return;
+        const kraft = DRIFT_KRAFT * (1 - bestD / DRIFT_DISTANZ);
+        k.vx += bx * kraft;
+        k.vy += by * kraft;
+        const v = Math.sqrt(k.vx * k.vx + k.vy * k.vy);
+        if (v > MAX_TEMPO) { k.vx = k.vx / v * MAX_TEMPO; k.vy = k.vy / v * MAX_TEMPO; }
+    }
+
+    function zeichnen(sx, sy) {
         const linienFarbe = farbe('--line-color', '#0693e3');
         const kreisFarbe = farbe('--circle-color', '#0693e3');
-        const sx = window.pageXOffset || 0;
-        const sy = window.pageYOffset || 0;
 
         // Transform: dpr-Skalierung + Scroll-Versatz. Gezeichnet wird in
         // Welt-Koordinaten (volle Seite); sichtbar ist nur das viewport-grosse
@@ -141,9 +190,45 @@
             }
         }
 
+        // Fensteruebergreifend: Verbindungen zu den Punkten der Nachbarfenster.
+        // fremdWelt liegt bereits in meinen Weltkoordinaten; Punkte jenseits meiner
+        // Kante werden von der Canvas-Grenze sauber abgeschnitten -> die Linie reicht
+        // genau bis zum Fensterrand und trifft drueben auf ihr Gegenstueck.
+        for (let i = 0; i < kreise.length; i++) {
+            const a = kreise[i];
+            for (let j = 0; j < fremdWelt.length; j += 2) {
+                const dx = a.x - fremdWelt[j], dy = a.y - fremdWelt[j + 1];
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < LINK_DISTANZ) {
+                    ctx.globalAlpha = (1 - dist / LINK_DISTANZ) * LINIE_ALPHA;
+                    ctx.beginPath();
+                    ctx.moveTo(a.x, a.y);
+                    ctx.lineTo(fremdWelt[j], fremdWelt[j + 1]);
+                    ctx.stroke();
+                }
+            }
+        }
+
         // Verbindungen zur Maus, etwas kraeftiger. clientX/Y + Scroll = Welt-Position.
         if (mausAktiv) {
             const mx = mausClientX + sx, my = mausClientY + sy;
+            for (let i = 0; i < kreise.length; i++) {
+                const a = kreise[i];
+                const dx = a.x - mx, dy = a.y - my;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < MAUS_DISTANZ) {
+                    ctx.globalAlpha = (1 - dist / MAUS_DISTANZ) * MAUS_ALPHA;
+                    ctx.beginPath();
+                    ctx.moveTo(a.x, a.y);
+                    ctx.lineTo(mx, my);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        // Fensteruebergreifende Maus: auch der Zeiger im Nachbarfenster zieht Linien.
+        for (let j = 0; j < fremdMaus.length; j += 2) {
+            const mx = fremdMaus[j], my = fremdMaus[j + 1];
             for (let i = 0; i < kreise.length; i++) {
                 const a = kreise[i];
                 const dx = a.x - mx, dy = a.y - my;
@@ -171,20 +256,80 @@
 
     function schleife() {
         if (!laeuft) return;
-        for (let i = 0; i < kreise.length; i++) bewegen(kreise[i]);
-        zeichnen();
+        tick++;
+        jetzt = (window.performance && performance.now) ? performance.now() : Date.now();
+        const sx = window.pageXOffset || 0;
+        const sy = window.pageYOffset || 0;
+
+        fremdeEinlesen(sx, sy);
+        for (let i = 0; i < kreise.length; i++) { bewegen(kreise[i]); anziehen(kreise[i]); }
+        zeichnen(sx, sy);
+        if (kanal && tick % SENDE_TAKT === 0) fremdenSenden(sx, sy);
+
         frame = requestAnimationFrame(schleife);
     }
 
     function starten() {
         if (laeuft) return;
         laeuft = true;
+        kanalStarten();
         frame = requestAnimationFrame(schleife);
     }
 
     function stoppen() {
         laeuft = false;
         cancelAnimationFrame(frame);
+    }
+
+    // --- Fensteruebergreifende Kommunikation ---------------------------------
+    function kanalStarten() {
+        if (kanal || typeof BroadcastChannel === 'undefined') return;
+        kanal = new BroadcastChannel(KANAL_NAME);
+        kanal.onmessage = (e) => {
+            const m = e.data;
+            if (!m || m.id === meineId) return;
+            if (m.t === 'weg') { fremde.delete(m.id); return; }
+            if (m.t === 'stand') {
+                fremde.set(m.id, { punkte: m.pts || [], maus: m.maus || null, stand: jetzt });
+            }
+        };
+    }
+
+    // Meine sichtbaren Punkte (und die Maus) in BILDSCHIRM-Koordinaten teilen. Weit
+    // ausserhalb des Viewports liegende Punkte koennen ohnehin keinen Nachbarn
+    // beruehren - die spart man sich, das haelt die Nachricht klein.
+    function fremdenSenden(sx, sy) {
+        const zx = window.screenX || window.screenLeft || 0;
+        const zy = window.screenY || window.screenTop || 0;
+        const pts = [];
+        for (let i = 0; i < kreise.length; i++) {
+            const k = kreise[i];
+            const vx = k.x - sx, vy = k.y - sy;   // Position im Viewport
+            if (vx < -LINK_DISTANZ || vx > breite + LINK_DISTANZ) continue;
+            if (vy < -LINK_DISTANZ || vy > hoehe + LINK_DISTANZ) continue;
+            pts.push(zx + vx, zy + vy);           // -> Bildschirm-Koordinaten
+        }
+        const maus = mausAktiv ? [zx + mausClientX, zy + mausClientY] : null;
+        try { kanal.postMessage({ t: 'stand', id: meineId, pts: pts, maus: maus }); }
+        catch (e) { /* Kanal evtl. geschlossen - ignorieren */ }
+    }
+
+    // Bildschirm-Koordinaten der Nachbarn in MEINE Weltkoordinaten umrechnen:
+    // Bildschirm -> mein Viewport (minus eigenes screenX/screenY) -> Welt (plus Scroll).
+    function fremdeEinlesen(sx, sy) {
+        fremdWelt.length = 0;
+        fremdMaus.length = 0;
+        if (fremde.size === 0) return;
+        const zx = window.screenX || window.screenLeft || 0;
+        const zy = window.screenY || window.screenTop || 0;
+        fremde.forEach((f, id) => {
+            if (jetzt - f.stand > FREMD_TIMEOUT) { fremde.delete(id); return; }
+            const p = f.punkte;
+            for (let i = 0; i < p.length; i += 2) {
+                fremdWelt.push(p[i] - zx + sx, p[i + 1] - zy + sy);
+            }
+            if (f.maus) fremdMaus.push(f.maus[0] - zx + sx, f.maus[1] - zy + sy);
+        });
     }
 
     // Unter der mobilen Grenze bleibt das Netz aus. Die .hidden-Klasse blendet das
@@ -241,6 +386,15 @@
     }
     // Nachladende Bilder aendern die Seitenhoehe oft erst nach dem Start.
     window.addEventListener('load', hoeheAktualisieren);
+
+    // Schliesst das Fenster/navigiert weg: Nachbarn sofort Bescheid geben, statt sie
+    // auf den Timeout warten zu lassen.
+    window.addEventListener('pagehide', () => {
+        if (!kanal) return;
+        try { kanal.postMessage({ t: 'weg', id: meineId }); } catch (e) { /* egal */ }
+        kanal.close();
+        kanal = null;
+    });
 
     // --- Start ---------------------------------------------------------------
     groesseAendern();
