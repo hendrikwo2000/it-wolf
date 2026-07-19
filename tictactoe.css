@@ -153,14 +153,14 @@ h1 {
     opacity: 0.7;
 }
 
-/* X (Du) bzw. O (Computer): kleiner Chip im Markenblau, damit klar ist,
-   welches Symbol zu wem gehoert. */
+/* X (Du) bzw. O (Computer): kleiner Chip in der Schriftfarbe (--linkc, folgt
+   Light/Dark/Individuell), damit klar ist, welches Symbol zu wem gehoert. */
 .tic-score-sym {
     font-weight: 700;
     font-size: 11px;
     line-height: 15px;
-    color: #0693e3;
-    border: 1px solid rgba(6, 147, 227, 0.5);
+    color: var(--linkc);
+    border: 1px solid color-mix(in srgb, var(--linkc) 45%, transparent);
     border-radius: 6px;
     padding: 0 5px;
 }
