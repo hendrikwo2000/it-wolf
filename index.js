@@ -1,5 +1,3 @@
-
-
 // In DOMContentLoaded gekapselt, damit Bootstrap sicher schon geladen ist: Bootstrap
 // wird jetzt ebenfalls per defer eingebunden, und index.js ist auf jeder Seite das
 // erste (deferred) Skript - liefe die Tooltip-Initialisierung auf oberster Ebene,
@@ -11,33 +9,23 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 //------------------------------------------------------------------------------------------------------------------------
-// Elemente langsam erscheinen 
+// Elemente langsam erscheinen
 
-
-document.addEventListener('DOMContentLoaded', function () {
-    var boxes = document.querySelectorAll('.box');
-    boxes.forEach(function (box) {
+// Derselbe Rumpf hing vorher zweimal wortgleich an DOMContentLoaded und an scroll.
+function boxenEinblenden() {
+    document.querySelectorAll('.box').forEach(function (box) {
         if (isElementPartiallyInViewport(box)) {
             box.classList.add('visible');
         }
     });
-});
+}
 
-window.addEventListener('scroll', function () {
-    var boxes = document.querySelectorAll('.box');
-    boxes.forEach(function (box) {
-        if (isElementPartiallyInViewport(box)) {
-            box.classList.add('visible');
-        }
-    });
-});
-
+document.addEventListener('DOMContentLoaded', boxenEinblenden);
+window.addEventListener('scroll', boxenEinblenden);
 
 function isElementPartiallyInViewport(el) {
     var rect = el.getBoundingClientRect();
     var windowHeight = (window.innerHeight || document.documentElement.clientHeight);
-
-    
 
     return (
         rect.bottom >= 0 &&
@@ -45,11 +33,8 @@ function isElementPartiallyInViewport(el) {
     );
 }
 
-
-
 //------------------------------------------------------------------------------------------------------------------------
 // Button -> go to Top
-
 
 let mybutton = document.getElementById("myBtn");
 
@@ -63,7 +48,7 @@ function scrollFunction() {
     }
 };
 
-function topFunction() {   
+function topFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 
@@ -80,7 +65,6 @@ if (netzpegel == "true") {
         netzon.setAttribute("d", "M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z");
     }
 
-   
 }
 
 if (netzpegel == null) {
@@ -109,7 +93,6 @@ function netzon() {
     }
 }
 
-
 // Funktion Ausbinden Einbinden der JavaScript-Datei
 function removeScript() {
     const scriptElement = document.querySelector('script[src="netz.js"]');
@@ -121,12 +104,9 @@ function removeScript() {
 // Funktion Einbinden der JavaScript-Datei
 function includeScript() {
     const scriptElement = document.createElement('script');
-    scriptElement.src = 'netz.js'; // Passe den Dateinamen und Pfad an
+    scriptElement.src = 'netz.js';
     document.body.appendChild(scriptElement);
 }
-
-
-
 
 //------------------------------------------------------------------------------------------------------------------------
 // Namen ändern + admin
@@ -164,7 +144,6 @@ const REZ_PASSWORT_KEY = "rezension-admin";
 // Stelle steht und nicht an sieben.
 const rezPasswortSpeicher = window.localStorage;
 
-
 if (mam == null || mam == "" || mam == "null") {
     console.log("Kein Name");
     document.getElementById("headline").innerHTML = "";
@@ -182,7 +161,6 @@ if (mam == null || mam == "" || mam == "null") {
 // auch ohne den Namen "Admin" aktiv sein - naemlich nach einer Anmeldung am
 // Passwortfeld dort. Dann laeuft adminAnschalten oben nie.
 schlossAktualisieren();
-
 
 // Stufe 2 hat, wer das Rezensions-Passwort im Speicher hat. Etwas anderes
 // entscheidet das hier nicht - und die Function fragt sowieso nochmal.
@@ -336,7 +314,6 @@ function zeigeToast(id) {
     if (kasten) bootstrap.Toast.getOrCreateInstance(kasten).show();
 }
 
-
 // Enter im Namensfeld = Bestätigen. Namensfeld und Knopf gibt es nur auf
 // impressum.html.
 //
@@ -358,7 +335,6 @@ document.onkeydown = function (event) {
     const aus = document.getElementById("aus");
     if (aus) aus.click();
 };
-
 
 async function auslesen() {
     const namee = document.getElementById("namee");
@@ -420,7 +396,6 @@ async function auslesen() {
 //------------------------------------------------------------------------------------------------------------------------
 // Favoriten Logic
 
-
 document.addEventListener("DOMContentLoaded", () => {
     const heartFilled = "M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1";
     const heartEmpty = "m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.6 7.6 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z";
@@ -446,7 +421,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-
 // Admin deaktivieren
     const showadmin = document.getElementById("showadmin");
     if (showadmin) showadmin.addEventListener("dblclick", meineFunktion);
@@ -465,7 +439,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (typeof zeichneListe === "function") zeichneListe();
         if (typeof anfragenLaden === "function") anfragenLaden();
     }
-
 
     function updateFavoriteUI() {
         let visibleFavCount = 0;
@@ -495,12 +468,6 @@ document.addEventListener("DOMContentLoaded", () => {
             favBtn.innerText = "Favoriten anzeigen";
         }
     }
-
-
-
-
-
-
 
     function cloneCard(card) {
         const col = card.closest(".col");
@@ -534,8 +501,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         return cloneCol;
     }
-
-
 
     function showFavorites() {
         favContainer.innerHTML = "";
@@ -571,8 +536,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-
-
 
     // Initialisiere alle Herzen
     cards.forEach(card => {
@@ -611,9 +574,8 @@ document.addEventListener("DOMContentLoaded", () => {
     updateFavoriteUI();
 });
 
-
 //------------------------------------------------------------------------------------------------------------------------
-// Dark, Light und Individuell Mode 
+// Dark, Light und Individuell Mode
 
 var individuell_pegel = "false";
 individuell_pegel = window.localStorage.getItem("individuell_pegel");
@@ -621,25 +583,17 @@ if (individuell_pegel == null) {
     individuell_pegel = "false";
 
 }
-//console.log("individuell_pegel: " + individuell_pegel);
 
 var modee = "light";
 modee = window.localStorage.getItem("thema");
-//console.log("Mode: " + modee);
-
-
 
 let colorPicker;
 const hintergrund = window.localStorage.getItem("hintergrund");
 defaultColor = hintergrund;
-//console.log("hintergrund: " + hintergrund);
-
-
 
 // CSS-Variable aus dem :root-Element auslesen
 const rootStyles = getComputedStyle(document.documentElement);
 const sternColor = rootStyles.getPropertyValue('--stern-color').trim();
-
 
 // Die Farbwähler stehen nur auf impressum.html, deshalb überall ohne Annahme über ihre Existenz
 function setColorPickerDisabled(disabled) {
@@ -655,17 +609,11 @@ function setActivIcon(d) {
     if (icon) icon.setAttribute("d", d);
 }
 
-
-
-
 let colorPicker1;
 const schrift = window.localStorage.getItem("schrift");
 defaultColor1 = schrift;
 
-//console.log("schrift: " + schrift);
-
 if (window.localStorage.getItem("thema") == null) {
-    //console.log("Thema hat er nicht");
 
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         dark();
@@ -678,18 +626,15 @@ if (window.localStorage.getItem("thema") == null) {
 if (individuell_pegel == "false") {
 
     if (window.localStorage.getItem("thema") == "dark") {
-        //console.log("Thema war dark");
         dark();
 
     };
     if (window.localStorage.getItem("thema") == "light") {
-        //console.log("Thema war light");
         light();
     }
 };
 
 if (individuell_pegel == "true") {
-    //console.log("individuell");
     modee = "individuell";
     individuell();
     setColorPickerDisabled(false);
@@ -697,9 +642,7 @@ if (individuell_pegel == "true") {
 
 }
 
-
-
-// Funktion für Mode Wechsel 
+// Funktion für Mode Wechsel
 function switchmode() {
 
     if (individuell_pegel == "false") {
@@ -724,14 +667,12 @@ function switchmode() {
     };
 }
 
-
 // Darkmode
-function dark() { 
+function dark() {
 
     setTimeout(function () {
         modee = "dark";
     }, 100);
-    //console.log("dark");
     document.getElementById("modee").setAttribute("d", "M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278zM4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z");
     document.getElementById('modeee').setAttribute("d", "");
     document.documentElement.style.setProperty('--backg', '#0f172a');           // Hintergrund Farbe Darkmode
@@ -747,8 +688,6 @@ function dark() {
     turnstileZeichnen();
     setColorPickerDisabled(true);
 
-
-
 };
 
 // Lightmode
@@ -757,7 +696,6 @@ function light() {
     setTimeout(function () {
         modee = "light";
     }, 100);
-    //console.log("hell");
     document.getElementById("modee").setAttribute("d", "M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z");
     document.getElementById('modeee').setAttribute("d", "");
     document.documentElement.style.setProperty('--backg', '#ffffff');           // Hintergrund Farbe Lightmode
@@ -771,18 +709,16 @@ function light() {
     turnstileZeichnen(); // siehe dark(): das iframe folgt den CSS-Variablen nicht
     setColorPickerDisabled(true);
 
-
 };
 
 // Individueller Modus
 function individuell() {
-    //console.log("indi");
     document.getElementById("modee").setAttribute("d", "M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z");
     document.getElementById('modeee').setAttribute("d", "M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z");
-    document.documentElement.style.setProperty('--linkc', schrift);           // Hintergrund Farbe Individuell Mode  
-    document.documentElement.style.setProperty('--backg', hintergrund);       // Schrift Farbe Individuell Mode  
-    document.documentElement.style.setProperty('--circle-color', schrift);    // Farbe Netz Kreis Individuell Mode  
-    document.documentElement.style.setProperty('--line-color', schrift);      // Farbe Netz Linie Individuell Mode  
+    document.documentElement.style.setProperty('--linkc', schrift);           // Hintergrund Farbe Individuell Mode
+    document.documentElement.style.setProperty('--backg', hintergrund);       // Schrift Farbe Individuell Mode
+    document.documentElement.style.setProperty('--circle-color', schrift);    // Farbe Netz Kreis Individuell Mode
+    document.documentElement.style.setProperty('--line-color', schrift);      // Farbe Netz Linie Individuell Mode
     document.documentElement.style.setProperty('--popupborder', schrift);     // Farbe für Border der Popups Individuell Mode
     document.documentElement.style.setProperty('--stern-color', schrift);     // Farbe für Stern Individuell Mode
     document.documentElement.style.setProperty('--herz-color', schrift);      // Farbe für Herz  Individuell Modee
@@ -790,9 +726,6 @@ function individuell() {
     localStorage.setItem("individuell_pegel", "true");
 
 };
-
-
-
 
 // Die Farbwähler gibt es nur auf impressum.html
 window.addEventListener("load", startup, false);
@@ -805,12 +738,10 @@ function startup() {
 
 function updateFirst(event) {
 
-   // console.log("hintergrund:" + event.target.value);
     document.documentElement.style.setProperty('--backg', event.target.value);
     localStorage.setItem("hintergrund", event.target.value);
 
 };
-
 
 window.addEventListener("load", startup1, false);
 function startup1() {
@@ -822,13 +753,10 @@ function startup1() {
 
 function updateFirst1(event) {
 
-    //console.log("schrift" + event.target.value);
     document.documentElement.style.setProperty('--linkc', event.target.value);
     localStorage.setItem("schrift", event.target.value);
 
 };
-
-
 
 function activ() {
 
@@ -841,7 +769,6 @@ function activ() {
         modee = "individuell";
         individuell();
     };
-
 
     if (individuell_pegel == "true") {
         setColorPickerDisabled(true);
@@ -861,20 +788,10 @@ function activ() {
         };
     };
 
-
-
 };
-
-
-
-
-
-
-
 
 //------------------------------------------------------------------------------------------------------------------------
 // Toggle Karten Entwickler Tools und Secret
-
 
 // Toggle Entwickler Tools Anfang
 function toggleEntwickler() {
@@ -888,7 +805,6 @@ function toggleEntwickler() {
     });
 }
 // Toggle Entwickler Tools Ende
-
 
 // Toggle Secret Anfang
 
@@ -904,16 +820,11 @@ function toggleSecret() {
 }
 // Toggle Secret Ende
 
-
-
-
-
 // Toggle Rezensionen: umgezogen nach rezensionen.js. Die Karten stehen nicht
 // mehr fest im HTML, sondern werden dort gezeichnet - der Umschalter gehoert
 // zum selben Zustand und nur auf ebook.html.
 //------------------------------------------------------------------------------------------------------------------------
 // Formular zurücksetzen
-
 
 // Beide Formulare gehen direkt aus dem Browser an formsubmit.
 //
@@ -1190,11 +1101,7 @@ function zeigePasswortFehler(text) {
     }
 }
 
-
 //------------------------------------------------------------------------------------------------------------------------
-
-
-
 
 //------------------------------------------------------------------------------------------------------------------------
 // Karten Link Hover effekt
