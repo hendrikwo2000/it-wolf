@@ -695,3 +695,12 @@ transition: 0.25s;
     border-radius: 999px;
     letter-spacing: 0.5px;
 }
+
+/*---------------------------------------------------------------------*/
+/* Kleinere Unterueberschriften (Bilder, Sicherheit, Entwickler Tools) */
+h2.subhead {
+    font-size: calc(1.05rem + 0.7vw);
+}
+@media (min-width: 1200px) {
+    h2.subhead { font-size: 1.55rem; }
+}
