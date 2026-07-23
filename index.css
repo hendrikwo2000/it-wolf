@@ -318,6 +318,26 @@ color: var(--linkc);
     transform: scale(0.9);
 }
 
+/*---------------------------------------------------------------------*/
+/* Klick- und Hover-Feedback fuer die Admin-Buttons (Anmelden, Abmelden,
+   Formular leeren, Bearbeiten, Loeschen, Rezension anlegen). Nacktes
+   Bootstrap-.btn gibt hier keins - gleicher Effekt wie .link.
+   Selektor bewusst .btn.hovbtn: Bootstrap setzt auf .btn selbst eine eigene
+   transition (color/background/border), die eine gleichrangige .hovbtn-Regel
+   ueberschreiben wuerde - dann spraenge der Scale statt weich zu animieren. */
+.btn.hovbtn {
+    transition: transform 0.3s;
+}
+
+.btn.hovbtn:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.btn.hovbtn:active {
+    transform: scale(0.9);
+}
+
 
 /*---------------------------------------------------------------------*/
 /* CCS für das Logo */

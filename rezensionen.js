@@ -152,14 +152,15 @@ function adminKnoepfe(r) {
 
     const bearbeiten = document.createElement("button");
     bearbeiten.type = "button";
-    bearbeiten.className = "btn btn-sm";
+    // hovbtn: Klick-/Hover-Feedback wie die uebrigen Admin-Buttons (index.css).
+    bearbeiten.className = "btn btn-sm hovbtn";
     bearbeiten.style.cssText = "border-color: var(--popupborder); color: var(--linkc)";
     bearbeiten.textContent = "Bearbeiten";
     bearbeiten.onclick = () => formularFuellen(r);
 
     const loeschen = document.createElement("button");
     loeschen.type = "button";
-    loeschen.className = "btn btn-sm text-bg-danger";
+    loeschen.className = "btn btn-sm text-bg-danger hovbtn";
     loeschen.style.marginLeft = "10px";
     loeschen.textContent = "Löschen";
     loeschen.onclick = () => rezensionLoeschen(r);
