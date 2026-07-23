@@ -232,12 +232,15 @@ function adminAbschalten() {
 // { pruefen: true } mit 200, wenn das Passwort stimmt, und sonst mit 401.
 // Alles andere (kein Netz, keine API) gilt als "stimmt nicht" - im Zweifel
 // lieber keine Rechte vergeben.
-async function pruefeRezensionsPasswort(passwort) {
+async function pruefeRezensionsPasswort(passwort, turnstileToken = "") {
     try {
         const antwort = await fetch("/api/rezensionen", {
             method: "PUT",
             headers: { "Content-Type": "application/json", "X-Admin-Passwort": passwort },
-            body: JSON.stringify({ pruefen: true }),
+            // turnstile: Token aus dem unsichtbaren Kaestchen. Ohne gueltiges
+            // Token antwortet die Function mit 403 (Bot-Schutz) - hier gilt das
+            // wie jeder andere Fehlschlag als "stimmt nicht".
+            body: JSON.stringify({ pruefen: true, turnstile: turnstileToken }),
         });
         if (!antwort.ok) return false;
         const ergebnis = await antwort.json().catch(() => ({}));
@@ -309,6 +312,30 @@ function turnstileZuruecksetzen(id) {
     }
 }
 
+// Liest das aktuelle Token eines Kaestchens. Fuers Passwortfeld im Impressum
+// noetig: das steckt in keinem <form>, aus dem man cf-turnstile-response per
+// FormData ziehen koennte. Ohne fertiges Token (Kaestchen noch am Rechnen oder
+// Turnstile nicht geladen) kommt "" zurueck - die Function laesst das dann als
+// Fehlschlag durchfallen, kein falscher Erfolg.
+function turnstileTokenLesen(id) {
+    if (window.turnstile && turnstileWidgets[id] !== undefined) {
+        try {
+            return turnstile.getResponse(turnstileWidgets[id]) || "";
+        } catch {
+            return "";
+        }
+    }
+    return "";
+}
+
+// Oeffnet sich ein Modal - etwa das Namens-Popup im Impressum, in dem das
+// Login-Kaestchen turnstile-login steckt -, Turnstile neu zeichnen. In einem noch
+// versteckten Modal legt Turnstile sonst evtl. kein iframe an, und beim Klick auf
+// "Bestaetigen" haette auslesen() kein Token zum Mitschicken. Bootstrap 5 feuert
+// shown.bs.modal als natives, aufsteigendes Event - ein Listener am document
+// genuegt, und auf Seiten ohne Modal schadet er nicht.
+document.addEventListener("shown.bs.modal", turnstileZeichnen);
+
 function zeigeToast(id) {
     const kasten = document.getElementById(id);
     if (kasten) bootstrap.Toast.getOrCreateInstance(kasten).show();
@@ -373,7 +400,15 @@ async function auslesen() {
     // jeden eingetippten Namen einmal an die eigene API. Sie speichert und
     // protokolliert ihn nicht, aber ganz "nur lokal" ist die Namenseingabe
     // damit nicht mehr.
-    if (await pruefeRezensionsPasswort(eingabe)) {
+    //
+    // Turnstile davor: das unsichtbare Kaestchen im Namens-Popup (turnstile-login)
+    // liefert das Token, das die Function seit dem Bot-Schutz verlangt. Reset
+    // danach, weil ein Token nur einmal gilt - sonst scheiterte der naechste
+    // Versuch an "timeout-or-duplicate".
+    const loginToken = turnstileTokenLesen("turnstile-login");
+    const passtAlsPasswort = await pruefeRezensionsPasswort(eingabe, loginToken);
+    turnstileZuruecksetzen("turnstile-login");
+    if (passtAlsPasswort) {
         rezPasswortSpeicher.setItem(REZ_PASSWORT_KEY, eingabe);
         adminAnschalten();
         // Bewusst "Admin" und nicht die Eingabe: das Passwort gehört weder in

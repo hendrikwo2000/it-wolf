@@ -51,6 +51,41 @@ function istAdmin(request, env) {
     return Boolean(env.REZENSION_ADMIN) && gesendet === env.REZENSION_ADMIN;
 }
 
+// Turnstile ist Cloudflares Captcha (dasselbe wie in passwort.js). Es sitzt hier
+// vor der Login-Probe und bremst automatisiertes Passwort-Raten am Anmeldefeld.
+// Zwei bewusste Weichzeichner, beide wie in den anderen Functions: ohne
+// gesetztes Secret wird nicht geprueft - sonst legte der Deploy dieser Datei den
+// Login lahm, bis das Secret im Dashboard steht. Und ist Cloudflare selbst nicht
+// erreichbar, wird durchgelassen: ein Ausfall dort soll niemanden aussperren.
+async function turnstileOk(request, env, token) {
+    if (!env.TURNSTILE_SECRET) {
+        console.log("TURNSTILE_SECRET fehlt - Login wird ungeprueft durchgelassen.");
+        return true;
+    }
+    if (!token) return false;
+
+    try {
+        const antwort = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                secret: env.TURNSTILE_SECRET,
+                response: token,
+                remoteip: request.headers.get("CF-Connecting-IP") || undefined,
+            }),
+        });
+        const ergebnis = await antwort.json().catch(() => ({}));
+        if (ergebnis.success !== true) {
+            console.log("Turnstile abgelehnt:", (ergebnis["error-codes"] || []).join(", "));
+            return false;
+        }
+        return true;
+    } catch (e) {
+        console.log("Turnstile nicht erreichbar - Login durchgelassen:", e.message);
+        return true;
+    }
+}
+
 // Prueft und normalisiert die Felder einer Rezension.
 // Gibt entweder { fehler } oder { wert } zurueck.
 function pruefeFelder(body) {
@@ -128,18 +163,29 @@ export async function onRequestPost({ request, env }) {
 
 export async function onRequestPut({ request, env }) {
     if (!env.REZENSIONEN) return json({ fehler: "Serverkonfiguration unvollständig." }, 503);
-    if (!istAdmin(request, env)) return json({ fehler: "Passwort falsch." }, 401);
 
     const body = await leseBody(request);
     if (!body) return json({ fehler: "Anfrage konnte nicht gelesen werden." }, 400);
 
-    // Passwort-Probe fuer den Login: Wer hier ankommt, ist schon an istAdmin
-    // vorbei, also stimmt das Passwort. Es gibt diesen Weg, damit der Login
-    // nicht raten muss - sonst muesste er aus einem 400er ("keine ID")
-    // schliessen, dass das Passwort stimmte, und ein 404 einer fehlenden API
-    // saehe genauso nach Erfolg aus.
-    if (body.pruefen === true) return json({ ok: true });
+    // Passwort-Probe fuer den Login (das Passwortfeld auf ebook.html und das
+    // Namensfeld im Impressum schicken sie). Hier sitzt der Bot-Schutz: erst
+    // Turnstile, dann das Passwort. Nur dieser Weg braucht ein Token - die
+    // echten Schreibzugriffe unten sind schon durchs Passwort gedeckt und laufen
+    // ohne. Der Turnstile-Check MUSS vor istAdmin stehen: sonst duerfte ein
+    // Skript beliebig viele Passwoerter raten, ohne je auf das Kaestchen zu
+    // treffen. Diesen Weg gibt es, damit der Login nicht raten muss - sonst
+    // muesste er aus einem 400er ("keine ID") schliessen, dass das Passwort
+    // stimmte, und ein 404 einer fehlenden API saehe genauso nach Erfolg aus.
+    if (body.pruefen === true) {
+        if (!(await turnstileOk(request, env, body.turnstile))) {
+            return json({ fehler: "Bitte bestätige noch, dass du kein Bot bist." }, 403);
+        }
+        return istAdmin(request, env)
+            ? json({ ok: true })
+            : json({ fehler: "Passwort falsch." }, 401);
+    }
 
+    if (!istAdmin(request, env)) return json({ fehler: "Passwort falsch." }, 401);
     if (!body.id) return json({ fehler: "Keine ID angegeben." }, 400);
 
     const geprueft = pruefeFelder(body);

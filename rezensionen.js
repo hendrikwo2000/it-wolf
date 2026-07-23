@@ -265,6 +265,14 @@ function adminUiZeichnen() {
 
     if (login) login.style.display = istAngemeldet() ? "none" : "block";
     if (editor) editor.style.display = istAngemeldet() ? "block" : "none";
+
+    // Das Login-Kaestchen (turnstile-adminlogin) steckt in diesem Bereich, der
+    // bis eben display:none war. Turnstile jetzt zeichnen lassen, solange das
+    // Login-Formular sichtbar ist: so legt es sein iframe zuverlaessig an, statt
+    // an der Lade-Reihenfolge des async geladenen Skripts zu haengen. Nach der
+    // Anmeldung ist das Kaestchen weg, dann braucht es keins. turnstileZeichnen
+    // kommt aus index.js und tut nichts, solange Turnstile noch nicht geladen ist.
+    if (!istAngemeldet() && typeof turnstileZeichnen === "function") turnstileZeichnen();
 }
 
 async function adminAnmelden(event) {
@@ -273,9 +281,18 @@ async function adminAnmelden(event) {
     const passwort = feld ? feld.value : "";
     if (!passwort) return;
 
+    // Token aus dem unsichtbaren Turnstile-Kaestchen im Login-Formular. Es steckt
+    // im Formular, also holt FormData es genau wie bei den anderen Formularen aus
+    // cf-turnstile-response.
+    const token = new FormData(event.target).get("cf-turnstile-response") || "";
+
     // Passwort-Probe gegen die Function. Ein GET wuerde nichts beweisen, das
-    // darf jeder. pruefeRezensionsPasswort kommt aus index.js.
-    if (!(await pruefeRezensionsPasswort(passwort))) {
+    // darf jeder. pruefeRezensionsPasswort kommt aus index.js und schickt das
+    // Token mit - ohne gueltiges antwortet die Function mit 403 (Bot-Schutz).
+    const angemeldet = await pruefeRezensionsPasswort(passwort, token);
+    // Token gilt nur einmal - fuers naechste Mal ein frisches zeichnen lassen.
+    turnstileZuruecksetzen("turnstile-adminlogin");
+    if (!angemeldet) {
         adminMeldung("Passwort falsch.");
         return;
     }

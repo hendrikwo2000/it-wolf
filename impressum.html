@@ -509,6 +509,11 @@
                                                 <label for="namee">Name</label>
                             
                                             </div>
+                                            <!-- Bot-Schutz fuer den Passwort-Login ueber dieses Namensfeld:
+                                                 wer hier das Rezensions-Passwort eintippt, wird angemeldet.
+                                                 Unsichtbares Kaestchen (interaction-only), turnstileZeichnen()
+                                                 findet es an js-turnstile, auslesen() schickt sein Token mit. -->
+                                            <div id="turnstile-login" class="js-turnstile"></div>
                                         </div>
                             
                                         <div class="modal-footer" id="pop-food"  style="border-color: var(--popupborder)">

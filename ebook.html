@@ -661,6 +661,11 @@
                                             autocomplete="current-password"
                                             style="background-color: var(--them); border-color: var(--popupborder)">
                                     </div>
+                                    <!-- Bot-Schutz gegen Passwort-Raten. interaction-only: fuer echte
+                                         Besucher bleibt das Kaestchen unsichtbar und loest still im
+                                         Hintergrund. turnstileZeichnen() in index.js findet es an der
+                                         Klasse js-turnstile, adminAnmelden() schickt das Token mit. -->
+                                    <div id="turnstile-adminlogin" class="js-turnstile" style="margin-bottom: 15px;"></div>
                                     <button type="submit" class="btn"
                                         style="border-color: var(--popupborder); color: var(--linkc)">Anmelden</button>
                                 </form>
