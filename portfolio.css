@@ -280,6 +280,8 @@ html {
    dadurch entstehen drei Ebenen: Ziffer (weit hinten), Symbol, Text.
    Kein transition auf translate: der Wert kommt pro Scroll-Frame neu, ein
    Uebergang wuerde nur hinterherhinken. */
+/* Die Kachel ist selbst ein Link auf das Projekt - dasselbe Ziel wie der
+   Knopf darunter, nur die groessere Trefferflaeche. */
 .projekt-symbol {
     display: grid;
     place-items: center;
@@ -288,6 +290,7 @@ html {
     border-radius: 48px;
     background: var(--them);
     color: var(--linkc);
+    text-decoration: none;
     translate: 0 calc(var(--p, 0) * var(--tiefe) * -0.32);
     transition: background-color 0.4s ease, transform 0.4s ease;
 }
@@ -297,11 +300,25 @@ html {
     height: 44%;
 }
 
-/* Hover faellt bewusst auf den ganzen Block, nicht nur auf die Kachel -
-   sonst muesste man das kleine Quadrat treffen. */
+/* Der Block als Ganzes hebt die Kachel schon leicht an - so sieht man beim
+   Ueberfahren, dass hier etwas zusammengehoert. */
 .projektblock:hover .projekt-symbol {
     background: var(--hovg);
     transform: scale(1.05);
+}
+
+/* Direkt auf der Kachel deutlicher, damit sie sich vom blossen Block-Hover
+   abhebt und als anklickbar zu erkennen ist. Reihenfolge zaehlt: alle drei
+   Regeln sind gleich spezifisch, die spaetere gewinnt. */
+.projekt-symbol:hover {
+    background: var(--hovg);
+    color: var(--linkc);
+    transform: scale(1.11);
+}
+
+.projekt-symbol:active {
+    transform: scale(0.95);
+    transition: transform 0.2s ease;
 }
 
 /*---------------------------------------------------------------------*/
