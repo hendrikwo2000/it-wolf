@@ -35,11 +35,14 @@ const rights = {
 // Seite -> Variante des rechten Navbar-Teils.
 const pages = {
     'index.html': 'base',
-    'portfolio.html': 'base',
     'tools.html': 'base',
     'impressum.html': 'base',
     'seiten.html': 'seiten',
     'ebook.html': 'ebook',
+    // Gesicherte alte Startseite: nicht verlinkt und per noindex aus der
+    // Google-Suche, aber weiter online. Bleibt hier drin, damit Navbar und
+    // Footer nicht auseinanderlaufen, falls sie wieder gebraucht wird.
+    'startseite_alt.html': 'base',
 };
 
 let fehler = 0;

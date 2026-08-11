@@ -2,6 +2,5 @@ User-agent: *
 Allow: /
 Disallow: /partials/
 Disallow: /build.js
-Disallow: /portfolio.html
 
 Sitemap: https://it-wolf.org/sitemap.xml
