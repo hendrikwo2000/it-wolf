@@ -1,0 +1,434 @@
+/*---------------------------------------------------------------------*/
+/*
+  Stil ausschliesslich fuer portfolio.html.
+
+  index.css bleibt unangetastet - die vier bestehenden Seiten sollen von
+  dieser Seite nichts merken. portfolio.html laedt index.css UND diese Datei,
+  erbt also alles (Karten, Navbar, Go-to-Top, Netz-Canvas) und legt hier nur
+  das Portfolio-Eigene obendrauf.
+
+  Harte Regel fuer alles hier drin: Farben NUR aus den Variablen, die
+  index.js setzt (--linkc, --backg) bzw. die in index.css stehen (--them,
+  --hovg). Eine einzige fest eingetragene Farbe, und der individuelle Modus
+  faerbt diese Seite nicht mehr mit.
+
+  Reihenfolge im <head>: index.css, dann Bootstrap, dann diese Datei. Sie
+  laedt also NACH Bootstrap und braucht die doppelten Selektoren nicht, mit
+  denen sich index.css gegen Bootstrap wehren muss.
+*/
+
+/*---------------------------------------------------------------------*/
+/* Grundgeruest */
+
+/* Nur diese Seite hat einen Sprungpfeil im Kopfbereich. Die Regel steht
+   deshalb hier und nicht in index.css - die anderen Seiten sollen weiter
+   hart springen. */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Die Seite arbeitet mit viel Luft. Der Wert steht einmal hier, damit
+   Abstaende zwischen Kopfbereich und Bloecken nicht auseinanderlaufen. */
+.portfolio {
+    --luft: clamp(4rem, 10vw, 9rem);
+}
+
+/* Bootstrap-Container waeren hier zu schmal fuer die zweispaltigen Bloecke. */
+.portfolio .huelle {
+    width: min(1140px, 92vw);
+    margin-inline: auto;
+}
+
+/*---------------------------------------------------------------------*/
+/* Kopfbereich (Hero) */
+
+.kopfbereich {
+    min-height: 100svh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--luft) 0 6rem;
+}
+
+.kopf-inhalt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Titel und Namensbegruessung stehen auf einer gemeinsamen Grundlinie:
+   klein "Moin Hendrik -", gross "IT Wolf". Auf schmalen Schirmen bricht die
+   Begruessung von allein in die Zeile darueber. */
+.kopf-titel {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.2em 0.5em;
+    margin: 0;
+    font-size: clamp(3.2rem, 13vw, 8.5rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--linkc);
+}
+
+/* index.js schreibt die Begruessung in #headline - ohne gesetzten Namen
+   bleibt das Element leer und wuerde sonst nur die Luecke aufziehen. */
+.kopf-titel #headline {
+    font-size: clamp(1rem, 2.6vw, 1.5rem);
+    font-weight: 500;
+    letter-spacing: 0;
+    opacity: 0.65;
+}
+
+.kopf-titel #headline:empty {
+    display: none;
+}
+
+.kopf-satz {
+    max-width: 42ch;
+    margin: 2rem auto 0;
+    font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+    line-height: 1.6;
+    color: color-mix(in srgb, var(--linkc) 72%, transparent);
+}
+
+/* Duenner Strich unter dem Satz - gibt dem Kopfbereich einen Abschluss,
+   ohne eine Farbe zu erfinden. */
+.kopf-strich {
+    width: 64px;
+    height: 2px;
+    margin: 2.5rem auto 0;
+    border-radius: 2px;
+    background: color-mix(in srgb, var(--linkc) 35%, transparent);
+}
+
+/*---------------------------------------------------------------------*/
+/* Pfeil nach unten */
+
+.scrollpfeil {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    margin-top: 3.5rem;
+    border-radius: 999px;
+    color: var(--linkc);
+    background: var(--them);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    animation: sanftHuepfen 2.4s ease-in-out infinite;
+}
+
+.scrollpfeil:hover {
+    background: var(--hovg);
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.scrollpfeil:active {
+    transform: scale(0.9);
+}
+
+@keyframes sanftHuepfen {
+    0%, 100% { translate: 0 0; }
+    50%      { translate: 0 8px; }
+}
+
+/*---------------------------------------------------------------------*/
+/* Projektbloecke */
+
+.projektblock {
+    position: relative;
+    overflow: hidden;
+    padding: var(--luft) 0;
+}
+
+/* Grosse Ziffer im Hintergrund. Steht bewusst VOR dem Inhalt im HTML und
+   bekommt kein z-index: so malt der Browser sie von allein darunter. Ein
+   negatives z-index waere hier gefaehrlich - auf dieser Hoehe liegt schon
+   das Netz-Canvas (#backgroundCanvas, z-index -1). */
+.blocknummer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(11rem, 32vw, 26rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    color: var(--linkc);
+    opacity: 0.05;
+    pointer-events: none;
+    user-select: none;
+}
+
+.projekt-inhalt {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: clamp(2rem, 6vw, 5rem);
+}
+
+/* Jeder zweite Block spiegelt sich - das Auge bekommt beim Scrollen einen
+   Rhythmus statt fünf gleicher Zeilen. */
+.projektblock.gedreht .projekt-inhalt {
+    flex-direction: row-reverse;
+}
+
+/*---------------------------------------------------------------------*/
+/* Symbol links/rechts */
+
+/* Zwei Ebenen: aussen der weiche Schein, innen die Kachel. Der Schein liegt
+   auf einem eigenen Element statt auf ::before, damit hier ebenfalls kein
+   negatives z-index noetig ist (siehe .blocknummer). */
+.symbol-huelle {
+    flex: 0 0 auto;
+    padding: clamp(0.8rem, 2vw, 1.6rem);
+    border-radius: 64px;
+    background: radial-gradient(circle at 30% 25%,
+                color-mix(in srgb, var(--linkc) 11%, transparent),
+                transparent 70%);
+}
+
+.projekt-symbol {
+    display: grid;
+    place-items: center;
+    width: clamp(130px, 20vw, 210px);
+    aspect-ratio: 1;
+    border-radius: 48px;
+    background: var(--them);
+    color: var(--linkc);
+    transition: background-color 0.4s ease, transform 0.4s ease;
+}
+
+.projekt-symbol svg {
+    width: 44%;
+    height: 44%;
+}
+
+/* Hover faellt bewusst auf den ganzen Block, nicht nur auf die Kachel -
+   sonst muesste man das kleine Quadrat treffen. */
+.projektblock:hover .projekt-symbol {
+    background: var(--hovg);
+    transform: scale(1.05);
+}
+
+/*---------------------------------------------------------------------*/
+/* Textspalte */
+
+.projekt-text {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+.projekt-nummer {
+    margin: 0 0 0.9rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--linkc) 50%, transparent);
+}
+
+.projekt-titel {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.7rem;
+    margin: 0 0 1.1rem;
+    font-size: clamp(1.9rem, 5vw, 3.1rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--linkc);
+}
+
+/* Gleiche Marke wie die .beta-badge auf der Startseite, nur nicht absolut
+   positioniert - hier sitzt sie im Textfluss neben der Ueberschrift. */
+.neu-marke {
+    padding: 2px 9px;
+    border-radius: 999px;
+    background: var(--them);
+    color: var(--linkc);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.projekt-beschreibung {
+    max-width: 56ch;
+    margin: 0 0 1.6rem;
+    font-size: clamp(1rem, 1.6vw, 1.12rem);
+    line-height: 1.7;
+    color: color-mix(in srgb, var(--linkc) 78%, transparent);
+}
+
+/*---------------------------------------------------------------------*/
+/* Stichworte */
+
+.stichworte {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0 0 2rem;
+    padding: 0;
+    list-style: none;
+}
+
+.stichworte li {
+    padding: 5px 13px;
+    border-radius: 999px;
+    background: var(--them);
+    color: color-mix(in srgb, var(--linkc) 80%, transparent);
+    font-size: 0.86rem;
+    white-space: nowrap;
+}
+
+/*---------------------------------------------------------------------*/
+/* Knopf */
+
+.projekt-knopf {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 13px 26px;
+    border-radius: 999px;
+    background: var(--them);
+    color: var(--linkc);
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.projekt-knopf:hover {
+    background: var(--hovg);
+    color: var(--linkc);
+    transform: scale(1.05);
+}
+
+.projekt-knopf:active {
+    transform: scale(0.94);
+}
+
+/* Der Pfeil wandert beim Hover ein Stueck mit. */
+.projekt-knopf svg {
+    transition: translate 0.3s ease;
+}
+
+.projekt-knopf:hover svg {
+    translate: 4px 0;
+}
+
+/*---------------------------------------------------------------------*/
+/* Abschluss unter dem letzten Projekt */
+
+.ausklang {
+    padding: var(--luft) 0 calc(var(--luft) / 1.5);
+    text-align: center;
+}
+
+.ausklang p {
+    max-width: 46ch;
+    margin: 0 auto 2rem;
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    line-height: 1.7;
+    color: color-mix(in srgb, var(--linkc) 72%, transparent);
+}
+
+/*---------------------------------------------------------------------*/
+/* Scroll-Animation
+   Startzustand hier, Endzustand unter .sichtbar. portfolio.js haengt
+   .sichtbar an, sobald ein Block in den Blick kommt.
+
+   Wichtig: greift nur unter .js-an. Diese Klasse setzt portfolio.js ganz
+   oben selbst - ohne JavaScript bleibt sie aus und die Seite ist einfach
+   sofort vollstaendig da, statt unsichtbar zu bleiben. */
+
+/* Der Abschnitt selbst blendet nur auf. Die Fahrt von unten machen die
+   Zeilen darin (.stufen) - beides gleichzeitig waere die doppelte Strecke
+   und wirkt traege. */
+.js-an .enthuellen > * {
+    opacity: 0;
+    transition: opacity 0.7s ease;
+}
+
+.js-an .enthuellen.sichtbar > * {
+    opacity: 1;
+}
+
+/* Die grosse Hintergrundziffer bleibt auch sichtbar sehr blass. */
+.js-an .enthuellen.sichtbar > .blocknummer {
+    opacity: 0.05;
+}
+
+/* Innerhalb eines Blocks laufen die Zeilen versetzt ein, 80 ms Abstand.
+   .stufen sitzt immer auf einem NACHFAHREN von .enthuellen, nie auf
+   demselben Element - sonst greift der Nachfahren-Selektor unten nicht. */
+.js-an .stufen > * {
+    opacity: 0;
+    translate: 0 26px;
+    transition: opacity 0.6s ease, translate 0.6s ease;
+}
+
+.js-an .sichtbar .stufen > * {
+    opacity: 1;
+    translate: 0 0;
+}
+
+.js-an .sichtbar .stufen > *:nth-child(1) { transition-delay: 0ms; }
+.js-an .sichtbar .stufen > *:nth-child(2) { transition-delay: 80ms; }
+.js-an .sichtbar .stufen > *:nth-child(3) { transition-delay: 160ms; }
+.js-an .sichtbar .stufen > *:nth-child(4) { transition-delay: 240ms; }
+.js-an .sichtbar .stufen > *:nth-child(5) { transition-delay: 320ms; }
+.js-an .sichtbar .stufen > *:nth-child(6) { transition-delay: 400ms; }
+
+/*---------------------------------------------------------------------*/
+/* Schmale Schirme */
+
+@media (max-width: 767.98px) {
+    .projekt-inhalt,
+    .projektblock.gedreht .projekt-inhalt {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .symbol-huelle {
+        align-self: center;
+    }
+
+    .blocknummer {
+        font-size: 40vw;
+    }
+}
+
+/*---------------------------------------------------------------------*/
+/* Wer im Betriebssystem weniger Bewegung eingestellt hat, bekommt alles
+   sofort und ohne Fahrt zu sehen. portfolio.js setzt .sichtbar dann
+   ebenfalls direkt, damit nichts unsichtbar haengen bleibt. */
+
+@media (prefers-reduced-motion: reduce) {
+    .js-an .enthuellen > *,
+    .js-an .stufen > * {
+        opacity: 1;
+        translate: 0 0;
+        transition: none;
+        transition-delay: 0ms;
+    }
+
+    .js-an .enthuellen > .blocknummer {
+        opacity: 0.05;
+    }
+
+    .scrollpfeil {
+        animation: none;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+}

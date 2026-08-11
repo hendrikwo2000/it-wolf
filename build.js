@@ -35,6 +35,7 @@ const rights = {
 // Seite -> Variante des rechten Navbar-Teils.
 const pages = {
     'index.html': 'base',
+    'portfolio.html': 'base',
     'tools.html': 'base',
     'impressum.html': 'base',
     'seiten.html': 'seiten',
