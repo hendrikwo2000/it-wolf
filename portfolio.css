@@ -28,9 +28,36 @@ html {
 }
 
 /* Die Seite arbeitet mit viel Luft. Der Wert steht einmal hier, damit
-   Abstaende zwischen Kopfbereich und Bloecken nicht auseinanderlaufen. */
+   Abstaende zwischen Kopfbereich und Bloecken nicht auseinanderlaufen.
+   --tiefe ist der Ausschlag des Parallax-Effekts; auf schmalen Schirmen
+   weiter unten kleiner. */
 .portfolio {
     --luft: clamp(4rem, 10vw, 9rem);
+    --tiefe: 70px;
+}
+
+/*---------------------------------------------------------------------*/
+/* Scroll-Fortschritt am oberen Rand.
+   scaleX statt width: das laeuft im Compositor und zwingt den Browser nicht
+   bei jedem Scroll-Pixel zu einem neuen Layout. */
+.fortschritt {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.fortschritt span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--linkc);
+    opacity: 0.5;
+    transform: scaleX(var(--fortschritt, 0));
+    transform-origin: left center;
 }
 
 /* Bootstrap-Container waeren hier zu schmal fuer die zweispaltigen Bloecke. */
@@ -42,12 +69,20 @@ html {
 /*---------------------------------------------------------------------*/
 /* Kopfbereich (Hero) */
 
+/* --weg zaehlt beim Runterscrollen von 0 auf 1 hoch (gesetzt von
+   portfolio.js). Der Kopfbereich blendet dabei aus und wandert leicht nach
+   oben, statt einfach aus dem Bild zu rutschen. translate veraendert das
+   Layout nicht - darunter bleibt alles, wo es ist.
+   Die Opacity liegt hier auf dem <section>, nicht auf .kopf-inhalt: dessen
+   Opacity gehoert schon der Einblend-Animation. */
 .kopfbereich {
     min-height: 100svh;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: var(--luft) 0 6rem;
+    opacity: calc(1 - var(--weg, 0));
+    translate: 0 calc(var(--weg, 0) * -70px);
 }
 
 .kopf-inhalt {
@@ -87,22 +122,63 @@ html {
     display: none;
 }
 
-.kopf-satz {
-    max-width: 42ch;
-    margin: 2rem auto 0;
-    font-size: clamp(1.05rem, 2.2vw, 1.3rem);
-    line-height: 1.6;
-    color: color-mix(in srgb, var(--linkc) 72%, transparent);
-}
-
-/* Duenner Strich unter dem Satz - gibt dem Kopfbereich einen Abschluss,
-   ohne eine Farbe zu erfinden. */
+/* Duenner Strich unter dem Titel - trennt Name und Projektliste, ohne eine
+   Farbe zu erfinden. */
 .kopf-strich {
     width: 64px;
     height: 2px;
     margin: 2.5rem auto 0;
     border-radius: 2px;
     background: color-mix(in srgb, var(--linkc) 35%, transparent);
+}
+
+/*---------------------------------------------------------------------*/
+/* Projektliste im Kopfbereich (Sprungmarken) */
+
+.projektliste {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.7rem;
+    margin-top: 2.5rem;
+    max-width: 760px;
+}
+
+.projektpille {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: var(--them);
+    color: var(--linkc);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.projektpille:hover {
+    background: var(--hovg);
+    color: var(--linkc);
+    transform: scale(1.06);
+}
+
+.projektpille:active {
+    transform: scale(0.94);
+}
+
+/* Das gerade sichtbare Projekt. Faellt beim Runterscrollen nicht auf - der
+   Kopfbereich ist dann weg - hilft aber beim Zurueckscrollen. */
+.projektpille.aktiv {
+    background: var(--hovg);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--linkc) 30%, transparent);
+}
+
+.projektpille svg {
+    flex: 0 0 auto;
+    opacity: 0.75;
 }
 
 /*---------------------------------------------------------------------*/
@@ -150,11 +226,18 @@ html {
    bekommt kein z-index: so malt der Browser sie von allein darunter. Ein
    negatives z-index waere hier gefaehrlich - auf dieser Hoehe liegt schon
    das Netz-Canvas (#backgroundCanvas, z-index -1). */
+/* --p setzt portfolio.js je Block auf -1 (Block noch unten) bis +1 (Block
+   schon oben). Die Ziffer wandert dadurch gegenlaeufig zum Scrollen und
+   liegt scheinbar tiefer als der Text.
+   Zentriert wird ueber transform, verschoben ueber die eigenstaendige
+   translate-Eigenschaft - die beiden ueberschreiben sich nicht, der Browser
+   rechnet erst translate, dann transform. */
 .blocknummer {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    translate: 0 calc(var(--p, 0) * var(--tiefe) * -1);
     font-size: clamp(11rem, 32vw, 26rem);
     font-weight: 800;
     line-height: 1;
@@ -193,6 +276,10 @@ html {
                 transparent 70%);
 }
 
+/* Das Symbol wandert ebenfalls mit --p, aber schwaecher als die Ziffer -
+   dadurch entstehen drei Ebenen: Ziffer (weit hinten), Symbol, Text.
+   Kein transition auf translate: der Wert kommt pro Scroll-Frame neu, ein
+   Uebergang wuerde nur hinterherhinken. */
 .projekt-symbol {
     display: grid;
     place-items: center;
@@ -201,6 +288,7 @@ html {
     border-radius: 48px;
     background: var(--them);
     color: var(--linkc);
+    translate: 0 calc(var(--p, 0) * var(--tiefe) * -0.32);
     transition: background-color 0.4s ease, transform 0.4s ease;
 }
 
@@ -387,9 +475,86 @@ html {
 .js-an .sichtbar .stufen > *:nth-child(6) { transition-delay: 400ms; }
 
 /*---------------------------------------------------------------------*/
+/* Einflug aus der Seite
+
+   Das Symbol kommt von aussen herein und waechst dabei auf, der Text von der
+   Gegenseite - bei jedem zweiten Block spiegelverkehrt. Die Kurve
+   (0.16, 1, 0.3, 1) startet schnell und laeuft weich aus; ein lineares oder
+   ease-Ende wirkt bei so langen Wegen zaeh. */
+
+.js-an .projektblock .symbol-huelle {
+    opacity: 0;
+    translate: -70px 0;
+    scale: 0.85;
+    transition: opacity 0.8s ease,
+                translate 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                scale 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.js-an .projektblock.gedreht .symbol-huelle {
+    translate: 70px 0;
+}
+
+.js-an .projektblock.sichtbar .symbol-huelle {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+}
+
+/* Die Textzeilen ueberschreiben nur die Richtung - Dauer, Staffelung und
+   Deckkraft kommen weiter von .stufen oben. */
+.js-an .projektblock .projekt-text > * {
+    translate: 34px 16px;
+    transition: opacity 0.6s ease,
+                translate 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.js-an .projektblock.gedreht .projekt-text > * {
+    translate: -34px 16px;
+}
+
+.js-an .projektblock.sichtbar .projekt-text > * {
+    translate: 0 0;
+}
+
+/*---------------------------------------------------------------------*/
+/* Kopfbereich: eigene Staffelung, weil die fuenf Pillen einzeln einfliegen
+   sollen. Die Liste selbst ist Stufe 3 (160 ms), die Pillen setzen ab
+   200 ms nach - und der Pfeil kommt ganz zum Schluss. */
+
+.js-an .projektliste > * {
+    opacity: 0;
+    translate: 0 14px;
+    scale: 0.94;
+    transition: opacity 0.5s ease,
+                translate 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                scale 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.js-an .sichtbar .projektliste > * {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+}
+
+.js-an .sichtbar .projektliste > *:nth-child(1) { transition-delay: 200ms; }
+.js-an .sichtbar .projektliste > *:nth-child(2) { transition-delay: 265ms; }
+.js-an .sichtbar .projektliste > *:nth-child(3) { transition-delay: 330ms; }
+.js-an .sichtbar .projektliste > *:nth-child(4) { transition-delay: 395ms; }
+.js-an .sichtbar .projektliste > *:nth-child(5) { transition-delay: 460ms; }
+
+.js-an .sichtbar .kopf-inhalt > .scrollpfeil { transition-delay: 580ms; }
+
+/*---------------------------------------------------------------------*/
 /* Schmale Schirme */
 
 @media (max-width: 767.98px) {
+    .portfolio {
+        /* Weniger Tiefe: auf kleinen Schirmen faellt ein grosser Versatz eher
+           als Wackeln auf denn als Ebene. */
+        --tiefe: 26px;
+    }
+
     .projekt-inhalt,
     .projektblock.gedreht .projekt-inhalt {
         flex-direction: column;
@@ -399,6 +564,28 @@ html {
 
     .symbol-huelle {
         align-self: center;
+    }
+
+    /* Gestapelt gibt es kein "aussen" mehr - Symbol und Text kommen beide
+       von unten, sonst schoebe der Einflug die Seite in die Breite. */
+    .js-an .projektblock .symbol-huelle,
+    .js-an .projektblock.gedreht .symbol-huelle {
+        translate: 0 34px;
+    }
+
+    .js-an .projektblock .projekt-text > *,
+    .js-an .projektblock.gedreht .projekt-text > * {
+        translate: 0 22px;
+    }
+
+    .js-an .projektblock.sichtbar .symbol-huelle,
+    .js-an .projektblock.sichtbar .projekt-text > * {
+        translate: 0 0;
+    }
+
+    .projektpille {
+        font-size: 0.88rem;
+        padding: 9px 16px;
     }
 
     .blocknummer {
@@ -413,15 +600,34 @@ html {
 
 @media (prefers-reduced-motion: reduce) {
     .js-an .enthuellen > *,
-    .js-an .stufen > * {
+    .js-an .stufen > *,
+    .js-an .projektliste > *,
+    .js-an .projektblock .symbol-huelle,
+    .js-an .projektblock.gedreht .symbol-huelle,
+    .js-an .projektblock .projekt-text > *,
+    .js-an .projektblock.gedreht .projekt-text > * {
         opacity: 1;
         translate: 0 0;
+        scale: 1;
         transition: none;
         transition-delay: 0ms;
     }
 
     .js-an .enthuellen > .blocknummer {
         opacity: 0.05;
+    }
+
+    /* Parallax und Ausblenden des Kopfbereichs setzt portfolio.js hier gar
+       nicht erst - diese Regeln fangen nur den Fall ab, dass die Einstellung
+       erst nach dem Laden umgestellt wird. */
+    .blocknummer,
+    .projekt-symbol {
+        translate: 0 0;
+    }
+
+    .kopfbereich {
+        opacity: 1;
+        translate: 0 0;
     }
 
     .scrollpfeil {

@@ -62,10 +62,104 @@
         });
     }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', beobachterStarten);
-    } else {
+    /*
+      Zweiter Teil: alles, was sich WAEHREND des Scrollens veraendert.
+      Der Beobachter oben schaltet nur einmal um; hier laufen Werte
+      fortlaufend mit.
+
+        --fortschritt  Balken am oberen Rand (0 bis 1)
+        --weg          Kopfbereich blendet aus (0 bis 1)
+        --p            je Block: +1 noch unten, 0 mittig, -1 schon oben
+                       -> Ziffer und Symbol wandern gegenlaeufig mit
+
+      Gerechnet wird nur einmal pro Bild (requestAnimationFrame). Ein
+      Scroll-Ereignis feuert deutlich oefter als der Bildschirm neu zeichnet;
+      ohne die Bremse wuerde dieselbe Rechnung mehrfach pro Bild laufen.
+    */
+    function scrollWirkungBinden() {
+        var bloecke = Array.prototype.slice.call(document.querySelectorAll('.projektblock'));
+        var pillen = Array.prototype.slice.call(document.querySelectorAll('.projektpille'));
+        var kopf = document.querySelector('.kopfbereich');
+        var balken = document.querySelector('.fortschritt');
+
+        var wartet = false;
+        var letzteAktive;
+
+        function rechnen() {
+            wartet = false;
+            var hoehe = window.innerHeight;
+            var mitte = hoehe / 2;
+
+            if (balken) {
+                var scrollbar = document.documentElement.scrollHeight - hoehe;
+                var anteil = scrollbar > 0 ? window.scrollY / scrollbar : 0;
+                balken.style.setProperty('--fortschritt',
+                    Math.max(0, Math.min(1, anteil)).toFixed(4));
+            }
+
+            // Der Kopfbereich ist nach drei Vierteln einer Bildschirmhoehe weg.
+            if (kopf && !wenigerBewegung) {
+                kopf.style.setProperty('--weg',
+                    Math.min(1, window.scrollY / (hoehe * 0.75)).toFixed(4));
+            }
+
+            var naechster;
+            var kuerzesterAbstand = Infinity;
+
+            bloecke.forEach(function (block, i) {
+                var r = block.getBoundingClientRect();
+                var blockMitte = r.top + r.height / 2;
+
+                // Welcher Block liegt der Bildschirmmitte am naechsten?
+                if (r.bottom > 0 && r.top < hoehe) {
+                    var abstand = Math.abs(blockMitte - mitte);
+                    if (abstand < kuerzesterAbstand) {
+                        kuerzesterAbstand = abstand;
+                        naechster = i;
+                    }
+                }
+
+                // Bewusst ohne "nur wenn sichtbar"-Abkuerzung: die wuerde nur
+                // einen Setter sparen, dafuer bliebe --p bei weggescrolltem
+                // Block auf einem Zwischenwert stehen und spraenge beim
+                // Zurueckscrollen. Das Rechteck liegt oben ohnehin schon vor.
+                if (!wenigerBewegung) {
+                    var p = (blockMitte - mitte) / (mitte + r.height / 2);
+                    block.style.setProperty('--p', Math.max(-1, Math.min(1, p)).toFixed(4));
+                }
+            });
+
+            // Klassen nur anfassen, wenn sich wirklich etwas geaendert hat.
+            if (naechster !== letzteAktive) {
+                pillen.forEach(function (pille, i) {
+                    pille.classList.toggle('aktiv', i === naechster);
+                });
+                letzteAktive = naechster;
+            }
+        }
+
+        function anstossen() {
+            if (wartet) return;
+            wartet = true;
+            window.requestAnimationFrame(rechnen);
+        }
+
+        // addEventListener, nicht window.onscroll: index.js belegt die
+        // onscroll-Eigenschaft bereits fuer den Go-to-Top-Knopf.
+        window.addEventListener('scroll', anstossen, { passive: true });
+        window.addEventListener('resize', anstossen);
+        rechnen();
+    }
+
+    function alleStarten() {
         beobachterStarten();
+        scrollWirkungBinden();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', alleStarten);
+    } else {
+        alleStarten();
     }
 
     // Notnagel: falls der Beobachter aus irgendeinem Grund nicht greift,
