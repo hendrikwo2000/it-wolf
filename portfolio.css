@@ -313,15 +313,23 @@ html {
 }
 
 /* Der Block als Ganzes hebt die Kachel schon leicht an - so sieht man beim
-   Ueberfahren, dass hier etwas zusammengehoert. */
-.projektblock:hover .projekt-symbol {
+   Ueberfahren, dass hier etwas zusammengehoert.
+
+   Das :not(:hover) ist der Kern der Sache und darf nicht weg: ohne es hat
+   dieser Selektor DREI Bestandteile (.projektblock, :hover, .projekt-symbol)
+   und schlaegt damit .projekt-symbol:hover mit zweien - die Kachel bliebe
+   auch beim direkten Ueberfahren auf 1.05 stehen. Weil der Block die volle
+   Breite hat, waere sie da laengst gewachsen, und auf der Kachel selbst
+   passierte gar nichts mehr. Genauso beim Klick.
+   So gelesen: der Block hebt die Kachel nur an, solange der Zeiger NEBEN
+   ihr steht - steht er drauf, gehoert sie den beiden Regeln darunter. */
+.projektblock:hover .projekt-symbol:not(:hover) {
     background: var(--hovg);
     transform: scale(1.05);
 }
 
 /* Direkt auf der Kachel deutlicher, damit sie sich vom blossen Block-Hover
-   abhebt und als anklickbar zu erkennen ist. Reihenfolge zaehlt: alle drei
-   Regeln sind gleich spezifisch, die spaetere gewinnt. */
+   abhebt und als anklickbar zu erkennen ist. */
 .projekt-symbol:hover {
     background: var(--hovg);
     color: var(--linkc);
