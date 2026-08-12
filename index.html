@@ -219,6 +219,16 @@
                 Regelkreis-Simulator
             </a>
 
+            <!-- Sechste Pille: nur fuer Super-Admin, siehe Projekt 06 unten.
+                 Startzustand versteckt, index.js blendet sie ein. -->
+            <a class="projektpille nur-superadmin" href="#projekt-06" style="display: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mortarboard" viewBox="0 0 16 16">
+                    <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917zM8 8.46 1.758 5.965 8 3.052l6.242 2.913z"/>
+                    <path d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466zm-.068 1.873.22-.748 3.496 1.311a.5.5 0 0 0 .352 0l3.496-1.311.22.748L8 12.46z"/>
+                </svg>
+                Schul-Dashboard
+            </a>
+
         </nav>
 
         <a class="scrollpfeil" href="#projekt-01" aria-label="Zu den Projekten">
@@ -441,6 +451,57 @@
     </div>
 </section>
 <!-- Projekt 05 Ende-->
+
+
+<!-- Projekt 06: Schul-Dashboard Anfang-->
+<!-- Der einzige Block, der nicht fuer alle da ist: sichtbar erst mit Stufe 2
+     (Rezensions-Passwort im Namensfeld, Ueberschrift "Moin Admin! - ").
+     Ein- und ausgeblendet wird er in index.js, superadminAktualisieren().
+
+     Ehrlich dazugesagt: das ist Sichtbarkeit, kein Schutz. Der Block steht im
+     Quelltext dieser Seite, wer ihn liest, findet Name und Adresse. Geschuetzt
+     ist das Dashboard selbst durch seinen eigenen Login. -->
+<section class="projektblock gedreht enthuellen nur-superadmin" id="projekt-06" style="display: none;">
+    <span class="blocknummer" aria-hidden="true">06</span>
+    <div class="huelle">
+        <div class="projekt-inhalt">
+
+            <div class="symbol-huelle">
+                <a class="projekt-symbol" href="https://schule.it-wolf.org/" target="_blank" rel="noopener" aria-label="Schul-Dashboard öffnen">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-mortarboard" viewBox="0 0 16 16">
+                        <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917zM8 8.46 1.758 5.965 8 3.052l6.242 2.913z"/>
+                        <path d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466zm-.068 1.873.22-.748 3.496 1.311a.5.5 0 0 0 .352 0l3.496-1.311.22.748L8 12.46z"/>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="projekt-text stufen">
+                <p class="projekt-nummer">Projekt 06</p>
+                <h2 class="projekt-titel">Schul-Dashboard</h2>
+                <p class="projekt-beschreibung">
+                    Alles für die Technikerschule auf einer Seite: der Stundenplan aus Untis,
+                    die Termine aus dem Google Kalender, die fälligen Aufgaben aus der ToDo-Liste,
+                    die heutigen Gewohnheiten aus dem Fokus-Tracker und die neuesten Nachrichten
+                    von IServ. Entstanden, weil ich morgens sonst fünf Seiten hintereinander
+                    aufgemacht habe.
+                </p>
+                <ul class="stichworte">
+                    <li>Stundenplan</li>
+                    <li>Kalender</li>
+                    <li>IServ</li>
+                </ul>
+                <a class="projekt-knopf" href="https://schule.it-wolf.org/" target="_blank" rel="noopener">
+                    Öffnen
+                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+                    </svg>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- Projekt 06 Ende-->
 
 
 <!-- Ausklang Anfang-->

@@ -602,6 +602,9 @@ html {
 .js-an .sichtbar .projektliste > *:nth-child(3) { --einflug: 330ms; }
 .js-an .sichtbar .projektliste > *:nth-child(4) { --einflug: 395ms; }
 .js-an .sichtbar .projektliste > *:nth-child(5) { --einflug: 460ms; }
+/* Die sechste Pille gibt es nur als Super-Admin. Ohne diese Zeile fiele sie
+   auf --einflug: 0ms zurueck und floege als erste ein statt als letzte. */
+.js-an .sichtbar .projektliste > *:nth-child(6) { --einflug: 525ms; }
 
 .js-an .sichtbar .kopf-inhalt > .scrollpfeil { --einflug: 580ms; }
 

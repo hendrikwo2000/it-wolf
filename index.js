@@ -179,11 +179,36 @@ function adminUeberschrift() {
 // Auf seiten.html gehört das Schloss zu Stufe 1: es erklärt die gelben Karten.
 // Auf ebook.html hängt dasselbe Schloss an Stufe 2, weil es dort nur den
 // Rezensionsbereich betrifft - erkennbar am data-nur-rezension im HTML.
+//
+// Der Aufruf von superadminAktualisieren steht bewusst hier drin und nicht an
+// vier einzelnen Stellen: schlossAktualisieren läuft schon heute überall, wo
+// sich die Rechte ändern können - beim Laden, beim An- und Abmelden und beim
+// Nachziehen ohne Neuladen. Er steht VOR dem Riegel unten, weil Projekt 06
+// nicht davon abhängt, ob die Seite ein Schloss hat.
 function schlossAktualisieren() {
+    superadminAktualisieren();
     const schloss = document.getElementById("showadmin");
     if (!schloss) return;
     const zeigen = schloss.dataset.nurRezension ? hatRezensionsrechte() : adminmode;
     schloss.style.display = zeigen ? "block" : "none";
+}
+
+// Projekt 06 auf der Startseite (Schul-Dashboard) - Block und Pille im
+// Kopfbereich. Beide stehen in index.html, aber auf display:none, und
+// erscheinen nur mit Stufe 2. Auf allen anderen Seiten findet die Abfrage
+// nichts und die Schleife läuft leer.
+//
+// Das ist Sichtbarkeit, kein Schutz: der Block steht im Quelltext der
+// Startseite. Geschützt ist das Dashboard durch seinen eigenen Login.
+//
+// Leerer String statt "block": die Pille ist inline-flex, ein hartes "block"
+// würde sie aus der Reihe kippen. Leer heißt "wieder das, was portfolio.css
+// sagt".
+function superadminAktualisieren() {
+    const zeigen = hatRezensionsrechte();
+    document.querySelectorAll(".nur-superadmin").forEach(function (element) {
+        element.style.display = zeigen ? "" : "none";
+    });
 }
 
 // Der zweite Weg in Stufe 2 ist das Passwortfeld auf ebook.html (rezensionen.js).
