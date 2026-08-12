@@ -34,6 +34,16 @@ html {
 .portfolio {
     --luft: clamp(4rem, 10vw, 9rem);
     --tiefe: 70px;
+
+    /* Tempo beim Ueberfahren. Steht einmal hier, weil vier verschiedene
+       Dinge gleich schnell reagieren sollen: die Pillen oben, die Knoepfe,
+       der Pfeil und die grossen Symbolkacheln.
+       Jede :active-Regel setzt --tempo fuer sich selbst kurz herunter - ein
+       Klick soll sofort quittiert werden und nicht traege nachgeben. Ueber
+       eine Variable statt ueber ein zweites transition, weil die
+       Einblende-Regeln weiter unten spezifischer sind und ein transition auf
+       :active schlicht verlieren wuerde. */
+    --tempo: 0.45s;
 }
 
 /*---------------------------------------------------------------------*/
@@ -156,7 +166,7 @@ html {
     font-weight: 600;
     text-decoration: none;
     white-space: nowrap;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color var(--tempo) ease, transform var(--tempo) ease;
 }
 
 .projektpille:hover {
@@ -166,6 +176,7 @@ html {
 }
 
 .projektpille:active {
+    --tempo: 0.2s;
     transform: scale(0.94);
 }
 
@@ -194,7 +205,7 @@ html {
     border-radius: 999px;
     color: var(--linkc);
     background: var(--them);
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color var(--tempo) ease, transform var(--tempo) ease;
     animation: sanftHuepfen 2.4s ease-in-out infinite;
 }
 
@@ -205,6 +216,7 @@ html {
 }
 
 .scrollpfeil:active {
+    --tempo: 0.2s;
     transform: scale(0.9);
 }
 
@@ -292,7 +304,7 @@ html {
     color: var(--linkc);
     text-decoration: none;
     translate: 0 calc(var(--p, 0) * var(--tiefe) * -0.32);
-    transition: background-color 0.4s ease, transform 0.4s ease;
+    transition: background-color var(--tempo) ease, transform var(--tempo) ease;
 }
 
 .projekt-symbol svg {
@@ -317,8 +329,8 @@ html {
 }
 
 .projekt-symbol:active {
+    --tempo: 0.2s;
     transform: scale(0.95);
-    transition: transform 0.2s ease;
 }
 
 /*---------------------------------------------------------------------*/
@@ -406,7 +418,7 @@ html {
     color: var(--linkc);
     font-weight: 600;
     text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color var(--tempo) ease, transform var(--tempo) ease;
 }
 
 .projekt-knopf:hover {
@@ -416,12 +428,14 @@ html {
 }
 
 .projekt-knopf:active {
+    --tempo: 0.2s;
     transform: scale(0.94);
 }
 
-/* Der Pfeil wandert beim Hover ein Stueck mit. */
+/* Der Pfeil wandert beim Hover ein Stueck mit - im selben Tempo wie der
+   Knopf waechst, sonst laufen die beiden Bewegungen auseinander. */
 .projekt-knopf svg {
-    transition: translate 0.3s ease;
+    transition: translate var(--tempo) ease;
 }
 
 .projekt-knopf:hover svg {
@@ -472,11 +486,22 @@ html {
 
 /* Innerhalb eines Blocks laufen die Zeilen versetzt ein, 80 ms Abstand.
    .stufen sitzt immer auf einem NACHFAHREN von .enthuellen, nie auf
-   demselben Element - sonst greift der Nachfahren-Selektor unten nicht. */
+   demselben Element - sonst greift der Nachfahren-Selektor unten nicht.
+
+   Die Hover-Eigenschaften stehen hier mit drin, obwohl sie mit dem Einfliegen
+   nichts zu tun haben: Diese Regel ist spezifischer als .projekt-knopf oder
+   .scrollpfeil und wuerde deren transition sonst komplett ersetzen - der
+   Hover spraenge dann hart um, statt weich zu laufen.
+   Die Staffelung laeuft ueber --einflug statt ueber transition-delay, weil
+   ein Delay fuer ALLE Eigenschaften gilt: der Knopf haette sonst dauerhaft
+   eine Verzoegerung von bis zu 400 ms, bevor er auf den Zeiger reagiert. */
 .js-an .stufen > * {
     opacity: 0;
     translate: 0 26px;
-    transition: opacity 0.6s ease, translate 0.6s ease;
+    transition: opacity 0.6s ease var(--einflug, 0ms),
+                translate 0.6s ease var(--einflug, 0ms),
+                background-color var(--tempo) ease,
+                transform var(--tempo) ease;
 }
 
 .js-an .sichtbar .stufen > * {
@@ -484,12 +509,12 @@ html {
     translate: 0 0;
 }
 
-.js-an .sichtbar .stufen > *:nth-child(1) { transition-delay: 0ms; }
-.js-an .sichtbar .stufen > *:nth-child(2) { transition-delay: 80ms; }
-.js-an .sichtbar .stufen > *:nth-child(3) { transition-delay: 160ms; }
-.js-an .sichtbar .stufen > *:nth-child(4) { transition-delay: 240ms; }
-.js-an .sichtbar .stufen > *:nth-child(5) { transition-delay: 320ms; }
-.js-an .sichtbar .stufen > *:nth-child(6) { transition-delay: 400ms; }
+.js-an .sichtbar .stufen > *:nth-child(1) { --einflug: 0ms; }
+.js-an .sichtbar .stufen > *:nth-child(2) { --einflug: 80ms; }
+.js-an .sichtbar .stufen > *:nth-child(3) { --einflug: 160ms; }
+.js-an .sichtbar .stufen > *:nth-child(4) { --einflug: 240ms; }
+.js-an .sichtbar .stufen > *:nth-child(5) { --einflug: 320ms; }
+.js-an .sichtbar .stufen > *:nth-child(6) { --einflug: 400ms; }
 
 /*---------------------------------------------------------------------*/
 /* Einflug aus der Seite
@@ -518,12 +543,15 @@ html {
     scale: 1;
 }
 
-/* Die Textzeilen ueberschreiben nur die Richtung - Dauer, Staffelung und
-   Deckkraft kommen weiter von .stufen oben. */
+/* Die Textzeilen ueberschreiben nur die Richtung - Staffelung und Deckkraft
+   kommen weiter von .stufen oben. Der Hover muss hier nochmal mit rein: die
+   Regel ist wieder spezifischer als .projekt-knopf (siehe .stufen). */
 .js-an .projektblock .projekt-text > * {
     translate: 34px 16px;
-    transition: opacity 0.6s ease,
-                translate 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.6s ease var(--einflug, 0ms),
+                translate 0.7s cubic-bezier(0.16, 1, 0.3, 1) var(--einflug, 0ms),
+                background-color var(--tempo) ease,
+                transform var(--tempo) ease;
 }
 
 .js-an .projektblock.gedreht .projekt-text > * {
@@ -539,13 +567,20 @@ html {
    sollen. Die Liste selbst ist Stufe 3 (160 ms), die Pillen setzen ab
    200 ms nach - und der Pfeil kommt ganz zum Schluss. */
 
+/* Auch hier Einfliegen und Hover in einer Liste, sonst haetten die fuenf
+   Pillen gar keinen weichen Uebergang beim Ueberfahren (siehe .stufen).
+   Das Einfliegen benutzt die eigenstaendige scale-Eigenschaft, der Hover
+   transform: scale() - zwei getrennte Eigenschaften, die sich deshalb nicht
+   in die Quere kommen. */
 .js-an .projektliste > * {
     opacity: 0;
     translate: 0 14px;
     scale: 0.94;
-    transition: opacity 0.5s ease,
-                translate 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                scale 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.5s ease var(--einflug, 0ms),
+                translate 0.5s cubic-bezier(0.16, 1, 0.3, 1) var(--einflug, 0ms),
+                scale 0.5s cubic-bezier(0.16, 1, 0.3, 1) var(--einflug, 0ms),
+                background-color var(--tempo) ease,
+                transform var(--tempo) ease;
 }
 
 .js-an .sichtbar .projektliste > * {
@@ -554,13 +589,13 @@ html {
     scale: 1;
 }
 
-.js-an .sichtbar .projektliste > *:nth-child(1) { transition-delay: 200ms; }
-.js-an .sichtbar .projektliste > *:nth-child(2) { transition-delay: 265ms; }
-.js-an .sichtbar .projektliste > *:nth-child(3) { transition-delay: 330ms; }
-.js-an .sichtbar .projektliste > *:nth-child(4) { transition-delay: 395ms; }
-.js-an .sichtbar .projektliste > *:nth-child(5) { transition-delay: 460ms; }
+.js-an .sichtbar .projektliste > *:nth-child(1) { --einflug: 200ms; }
+.js-an .sichtbar .projektliste > *:nth-child(2) { --einflug: 265ms; }
+.js-an .sichtbar .projektliste > *:nth-child(3) { --einflug: 330ms; }
+.js-an .sichtbar .projektliste > *:nth-child(4) { --einflug: 395ms; }
+.js-an .sichtbar .projektliste > *:nth-child(5) { --einflug: 460ms; }
 
-.js-an .sichtbar .kopf-inhalt > .scrollpfeil { transition-delay: 580ms; }
+.js-an .sichtbar .kopf-inhalt > .scrollpfeil { --einflug: 580ms; }
 
 /*---------------------------------------------------------------------*/
 /* Schmale Schirme */
@@ -627,7 +662,7 @@ html {
         translate: 0 0;
         scale: 1;
         transition: none;
-        transition-delay: 0ms;
+        --einflug: 0ms;
     }
 
     .js-an .enthuellen > .blocknummer {

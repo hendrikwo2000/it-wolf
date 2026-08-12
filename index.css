@@ -389,7 +389,7 @@ color: var(--linkc);
        padding: 5px;
        border-radius: 40px;
        background: var(--them);
-       transition: transform 0.3s;
+       transition: transform 0.45s; /* gleiches Tempo wie --tempo in portfolio.css */
    }
    #myBtn:hover {
     background: var(--hovg);
